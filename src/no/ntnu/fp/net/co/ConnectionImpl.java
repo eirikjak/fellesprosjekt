@@ -91,6 +91,41 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void connect(InetAddress remoteAddress, int remotePort) throws IOException,
             SocketTimeoutException {
+    	
+    	
+    	
+    	this.remoteAddress = remoteAddress.getHostAddress();
+    	this.remotePort = remotePort;
+    	KtnDatagram response = null;
+       
+        try {
+			simplySendPacket( constructInternalPacket(Flag.SYN));
+		} catch (ClException e) {
+			e.printStackTrace();
+		}
+       
+        
+        while (response == null){
+        	
+        	response = receivePacket(true);
+        }
+        
+        if(response.getFlag() == Flag.SYN_ACK){
+        	
+        	response = constructInternalPacket(Flag.ACK);
+        	try {
+				simplySendPacket(response);
+			} catch (ClException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        }else{
+        	
+        }
+        
+        this.state = State.ESTABLISHED;
+    	
         
     }
 
@@ -158,6 +193,26 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void send(String msg) throws ConnectException, IOException {
     
+    	
+    	KtnDatagram packet = constructDataPacket(msg);
+    	KtnDatagram response = null;
+    	packet.setFlag(Flag.NONE);
+    	packet.setChecksum(packet.getChecksum() + Flag.NONE.ordinal());
+    	boolean receivedAck = false;
+    
+    	
+    	while(!receivedAck){
+    		response = sendDataPacketWithRetransmit(packet);
+
+         	if(response != null && response.getFlag() == Flag.ACK){
+         		if(packet.getSeq_nr() == response.getAck())
+         			receivedAck = true;
+         		
+         	}
+         	
+    	}
+    	
+    	
     	
     	
     	
