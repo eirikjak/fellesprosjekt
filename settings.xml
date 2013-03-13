@@ -7,7 +7,7 @@
 	<payload>0.0</payload>
 	<header>0.9</header>
 	<onlydata>true</onlydata>
-	<serverAddress>169.254.5.178</serverAddress>
+	<serverAddress>169.254.17.72</serverAddress>
 	<serverport>23893</serverport>
 	<simpleConnection>false</simpleConnection>
 </root>
