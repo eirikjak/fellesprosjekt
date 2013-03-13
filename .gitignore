@@ -3,6 +3,8 @@
 .project
 .metadata
 bin/**
+Log/
+log/
 tmp/**
 tmp/**/*
 *.tmp
@@ -21,8 +23,10 @@ local.properties
 *.launch
 
 # CDT-specific
+
 .cproject
 
 # PDT-specific
 .buildpath
 bin/
+
