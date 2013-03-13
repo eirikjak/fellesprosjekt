@@ -197,7 +197,7 @@ public class ConnectionImpl extends AbstractConnection {
     	KtnDatagram packet = constructDataPacket(msg);
     	KtnDatagram response = null;
     	packet.setFlag(Flag.NONE);
-    	packet.setChecksum(packet.getChecksum() + Flag.NONE.ordinal());
+    	packet.setChecksum(packet.getChecksum() | Flag.NONE.ordinal());
     	boolean receivedAck = false;
     
     	
@@ -328,7 +328,7 @@ public class ConnectionImpl extends AbstractConnection {
         	System.out.println("System.out.println(lastDataPacketSent.getSeq_nr());" + lastDataPacketSent.getSeq_nr());
         	int prevSeq = Math.max(lastValidPacketReceived.getSeq_nr(), lastDataPacketSent.getSeq_nr());
         	System.out.println("___________PREV SEQ___________" + prevSeq);
-        	if(!(p != null && p.getSeq_nr() == (prevSeq +1) && p.getChecksum() == p.calculateChecksum()+p.getFlag().ordinal())){
+        	if(!(p != null && p.getSeq_nr() == (prevSeq +1) && p.getChecksum() == (p.calculateChecksum() | p.getFlag().ordinal()))){
         		return false;
         	}
         	else{
