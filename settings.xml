@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<errors>true</errors>
-	<loss>0.9</loss>
-	<delay>0.9</delay>
-	<ghost>0.9</ghost>
-	<payload>0.9</payload>
+	<errors>false</errors>
+	<loss>0.0</loss>
+	<delay>0.0</delay>
+	<ghost>0.0</ghost>
+	<payload>0.0</payload>
 	<header>0.9</header>
 	<onlydata>true</onlydata>
-	<serverAddress>169.254.5.178</serverAddress>
+	<serverAddress>169.254.17.72</serverAddress>
 	<serverport>23893</serverport>
-	<simpleConnection>true</simpleConnection>
+	<simpleConnection>false</simpleConnection>
 </root>
 

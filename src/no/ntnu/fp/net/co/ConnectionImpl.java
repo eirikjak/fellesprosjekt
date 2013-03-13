@@ -42,7 +42,7 @@ public class ConnectionImpl extends AbstractConnection {
 
     /** Keeps track of the used ports for each server port. */
     private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
-    private static ArrayList<KtnDatagram> rcvdPackets = new ArrayList();
+//    private static ArrayList<KtnDatagram> rcvdPackets = new ArrayList();
     /**
      * Initialise initial sequence number and setup state machine.
      * 
@@ -59,12 +59,18 @@ public class ConnectionImpl extends AbstractConnection {
     }
     
     public static void main(String[] args) throws SocketTimeoutException, IOException {
-    	Connection conn = new ConnectionImpl(23893);
-    	conn.connect(new InetSocketAddress("169.254.5.178",23893).getAddress(), 23893);
-    	
-    	conn.close();
-    	
-    	
+
+    	ConnectionImpl c = (ConnectionImpl) new ConnectionImpl(23893).accept();
+    	try{
+    		for(int i=0; i<1000; i++){
+    			System.out.println(c.receive());
+    		}
+    	}
+    	catch(IOException e){
+    		
+    	}
+ //   	System.out.println(rcvdPackets);
+
 	
 	}
 
@@ -162,7 +168,6 @@ public class ConnectionImpl extends AbstractConnection {
     	}
     	
     	if(p.getFlag() == Flag.ACK){
-    		this.state = State.ESTABLISHED;
     		ConnectionImpl c = new ConnectionImpl(p.getSrc_port());
     		c.remoteAddress = p.getSrc_addr();
     		c.remotePort = p.getSrc_port();
@@ -170,6 +175,7 @@ public class ConnectionImpl extends AbstractConnection {
     		c.lastValidPacketReceived = p;
     		c.lastDataPacketSent = p;
     		usedPorts.put(myPort, true);
+    		c.state = State.ESTABLISHED;
     		return c;
     	}
     	else{
@@ -231,7 +237,15 @@ public class ConnectionImpl extends AbstractConnection {
     	KtnDatagram p = null;
     	//System.out.println(prevSeq + "QQQQQQQQQQQQQQQQQQQ");
     	while(p == null){
-    		p = receivePacket(false);
+    		try{
+    			p = receivePacket(false);
+    		}
+    		catch (EOFException e){
+    			internalClose();
+
+    			throw new IOException("Connection Closed while recieving packets");
+    		}
+
     		System.out.println("_________CALCULATE CHECKSUM______________" + p.calculateChecksum());
     		if(!isValid(p)){
     			if(lastValidPacketReceived.getSeq_nr() <= p.getSeq_nr()){
@@ -239,11 +253,8 @@ public class ConnectionImpl extends AbstractConnection {
     			}
     			p = null;
     		}
-    		else{
-    			if(!rcvdPackets.contains(p)){
-    				rcvdPackets.add(p);
-    			}
-    		}
+    		
+    		
     		//if(!(p != null && p.getSeq_nr() == (prevSeq +1) && p.getChecksum() == p.calculateChecksum())){
     			//p = null;
     		//}
@@ -264,8 +275,7 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
-        
-    	
+
     	KtnDatagram packet = constructInternalPacket(Flag.FIN);
     	KtnDatagram ack = null;
     	int tries = 3;
@@ -337,5 +347,65 @@ public class ConnectionImpl extends AbstractConnection {
         }
         return false;
         
+    }
+    
+    private void internalClose() throws ConnectException, IOException{
+    	/*
+    	// Number of tries to send FIN
+    	int tries = 3;
+    	
+    	//Want to ACK the received FIN flag
+    	sendAck(this.disconnectRequest, false);
+    	System.out.println("+-+-+-++-+ SENDT ACK +-+-+-+-+-++-+-+");
+    	this.state = State.CLOSE_WAIT;
+    	
+    	KtnDatagram fin = constructInternalPacket(Flag.FIN);
+		KtnDatagram finack=null;
+
+    	
+    	//Want to send FIN flag
+		while(!isValid(finack) ){
+			try {
+				simplySendPacket(fin);
+				this.state = State.LAST_ACK;
+			} catch (ClException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finack = receiveAck();
+		}
+		this.state = State.TIME_WAIT;
+    	this.state = State.CLOSED;
+    	this.disconnectRequest = null;
+    	
+    	System.out.println("+-+-+-++-+ SLUTTEN +-+-+-+-+-++-+-+");
+    	
+*/
+    	disconnectRequest.setChecksum(disconnectRequest.calculateChecksum() | Flag.FIN.ordinal());
+    	sendAck(disconnectRequest, false);
+		state = State.CLOSE_WAIT;
+
+		KtnDatagram fin = constructInternalPacket(Flag.FIN);
+		KtnDatagram finack=null;
+		
+
+		//        	Send FIN til server og vent pŒ bekreftelse
+		while(finack == null){
+			try {
+				fin.setChecksum(fin.calculateChecksum() | Flag.FIN.ordinal());
+				simplySendPacket(fin);
+				state = State.LAST_ACK;
+			} catch (ClException e) {
+				//e.printStackTrace();
+			}
+			finack = receiveAck();
+			System.out.println("Heloo");
+		}
+		
+		System.out.println("UT AV LOOP");
+
+		//        	Lukk tilkoblingen
+		state = State.CLOSED;
+		disconnectRequest = null;
     }
 }
