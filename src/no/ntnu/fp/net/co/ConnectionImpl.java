@@ -231,7 +231,16 @@ public class ConnectionImpl extends AbstractConnection {
     	KtnDatagram p = null;
     	//System.out.println(prevSeq + "QQQQQQQQQQQQQQQQQQQ");
     	while(p == null){
-    		p = receivePacket(false);
+    		try{
+    			p = receivePacket(false);
+    		}
+    		catch (EOFException e){
+    			internalClose();
+    			throw new IOException("Connection Closed While Receiving Packets");
+    		}
+    		
+    		
+    		
     		System.out.println("_________CALCULATE CHECKSUM______________" + p.calculateChecksum());
     		if(!isValid(p)){
     			if(lastValidPacketReceived.getSeq_nr() <= p.getSeq_nr()){
@@ -337,5 +346,37 @@ public class ConnectionImpl extends AbstractConnection {
         }
         return false;
         
+    }
+    
+    private void internalClose() throws ConnectException, IOException{
+        // Number of tries to send FIN
+        int tries = 3;
+       
+        //Want to ACK the received FIN flag
+        sendAck(this.disconnectRequest, false);
+        System.out.println("+-+-+-++-+ SENDT ACK +-+-+-+-+-++-+-+");
+        this.state = State.CLOSE_WAIT;
+       
+        KtnDatagram fin = constructInternalPacket(Flag.FIN);
+                KtnDatagram finack=null;
+ 
+       
+        //Want to send FIN flag
+                while(!isValid(finack) ){
+                        try {
+                                simplySendPacket(fin);
+                                this.state = State.LAST_ACK;
+                        } catch (ClException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                        }
+                        finack = receiveAck();
+                }
+                this.state = State.TIME_WAIT;
+        this.state = State.CLOSED;
+        this.disconnectRequest = null;
+       
+        System.out.println("+-+-+-++-+ SLUTTEN +-+-+-+-+-++-+-+");
+       
     }
 }
