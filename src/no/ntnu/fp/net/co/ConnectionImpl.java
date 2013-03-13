@@ -41,7 +41,7 @@ public class ConnectionImpl extends AbstractConnection {
 
     /** Keeps track of the used ports for each server port. */
     private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
-    private static ArrayList<KtnDatagram> rcvdPackets = new ArrayList();
+//    private static ArrayList<KtnDatagram> rcvdPackets = new ArrayList();
     /**
      * Initialise initial sequence number and setup state machine.
      * 
@@ -67,7 +67,7 @@ public class ConnectionImpl extends AbstractConnection {
     	catch(IOException e){
     		
     	}
-    	System.out.println(rcvdPackets);
+ //   	System.out.println(rcvdPackets);
 	
 	}
 
@@ -249,11 +249,8 @@ public class ConnectionImpl extends AbstractConnection {
     			}
     			p = null;
     		}
-    		else{
-    			if(!rcvdPackets.contains(p)){
-    				rcvdPackets.add(p);
-    			}
-    		}
+    		
+    		
     		//if(!(p != null && p.getSeq_nr() == (prevSeq +1) && p.getChecksum() == p.calculateChecksum())){
     			//p = null;
     		//}
