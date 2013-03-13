@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.SocketAddress;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.cl.ClException;
@@ -60,9 +61,10 @@ public class ConnectionImpl extends AbstractConnection {
     
     public static void main(String[] args) throws SocketTimeoutException, IOException {
     	Connection conn = new ConnectionImpl(23893);
-    	conn.connect(new InetSocketAddress("169.254.5.178",23893).getAddress(), 23893);
+    	conn.connect(new InetSocketAddress("169.254.138.145",23893).getAddress(), 23893);
     	
     	conn.close();
+    	
     	
     	
 	
@@ -109,6 +111,7 @@ public class ConnectionImpl extends AbstractConnection {
         	
         	response = receivePacket(true);
         }
+        this.lastValidPacketReceived = response;
         
         if(response.getFlag() == Flag.SYN_ACK){
         	
@@ -125,6 +128,7 @@ public class ConnectionImpl extends AbstractConnection {
         }
         
         this.state = State.ESTABLISHED;
+       
     	
         
     }
@@ -273,51 +277,43 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
-        
-    	
-    	KtnDatagram packet = constructInternalPacket(Flag.FIN);
-    	KtnDatagram ack = null;
-    	int tries = 3;
-    	while (ack == null  ||  ack.getAck() != packet.getSeq_nr()){
-    		
-    		tries = 3;
-	    	try {
-				simplySendPacket(packet);
+    	KtnDatagram closeRequest = constructInternalPacket(Flag.FIN);
+    	closeRequest.setChecksum(closeRequest.calculateChecksum() | Flag.FIN.ordinal());
+		KtnDatagram ack = null;
+		KtnDatagram fin = null;
+
+		//        	  Fortsette å sende FIN til vi får bekreftelse på at det er mottatt
+		while(ack == null) {
+			try {
+				simplySendPacket(closeRequest);
 				this.state = State.FIN_WAIT_1;
+				ack = receiveAck();
 			} catch (ClException e) {
-				continue;
-			}
-	    
-	    	while(tries >= 0){
-	    		tries--;
-	    		ack = receiveAck();
-	    		
-	    		break;
-	    	}
-	    	
-	   	
-    	}
-    	this.lastValidPacketReceived = ack;
-    	
-    	this.state = State.FIN_WAIT_2;
-    	System.out.println("fikk ack");
-    	KtnDatagram finPacket = null;
-    	while (finPacket == null) {
-			finPacket =  receivePacket(true);
-			System.out.println("FINNPACKETNNNNN" + (finPacket == null));
-			System.out.println("halp");
-			if(finPacket != null){
-				break;
+			
 			}
 		}
-    	
-    	
-    	System.out.println("fikk finn");
-    	
-    	sendAck(finPacket, false);
-    	this.state = State.TIME_WAIT;
-    	
-    	this.disconnectRequest = null;
+		
+		System.out.println("fikk akk");
+		lastValidPacketReceived = ack;
+
+		this.state = State.FIN_WAIT_2;
+
+		//        	  Vente på FIN fra klient
+		while(fin == null){
+			try{
+				fin = receivePacket(true);
+			}catch (Exception e) {
+			}
+		}
+
+		System.out.println("fikk finn");
+		lastValidPacketReceived = fin;
+
+		//        	  Send bekreftelse på at vi har mottatt FIN, og lukk tilkoblingen.
+		fin.setChecksum(fin.calculateChecksum() | Flag.FIN.ordinal());
+		sendAck(fin, false);
+		this.state = State.TIME_WAIT;
+		this.state = State.CLOSED;
     	
     }
 
@@ -330,21 +326,20 @@ public class ConnectionImpl extends AbstractConnection {
      * @return true if packet is free of errors, false otherwise.
      */
     protected boolean isValid(KtnDatagram p) {
-    	
-    	
-        if(this.state == State.ESTABLISHED){
-        	System.out.println("System.out.println(lastValidPacketReceived.getSeq_nr());" + lastValidPacketReceived.getSeq_nr());
-        	System.out.println("System.out.println(lastDataPacketSent.getSeq_nr());" + lastDataPacketSent.getSeq_nr());
-        	int prevSeq = Math.max(lastValidPacketReceived.getSeq_nr(), lastDataPacketSent.getSeq_nr());
+
+        	int prevSeq = lastValidPacketReceived.getSeq_nr();
         	System.out.println("___________PREV SEQ___________" + prevSeq);
         	if(!(p != null && p.getSeq_nr() == (prevSeq +1) && p.getChecksum() == (p.calculateChecksum() | p.getFlag().ordinal()))){
+        		System.out.println("hello");
         		return false;
+        		
         	}
         	else{
+        		
         		return true;
         	}
-        }
-        return false;
+        
+     
         
     }
     
