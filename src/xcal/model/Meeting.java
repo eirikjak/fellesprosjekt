@@ -1,4 +1,4 @@
-package no.ntnu.fp.model;
+package xcal.model;
 
 public class Meeting {
 
