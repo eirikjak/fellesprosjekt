@@ -1,5 +1,8 @@
 package no.ntnu.fp.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -36,6 +39,20 @@ public class Login extends JPanel {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(280, 329, 117, 29);
 		add(btnLogin);
+		btnLogin.addActionListener(new LoginButtonListener());
+		
+		
+	}
+	
+	private class LoginButtonListener implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//to login stuff
+			RootFrame.clearAll();
+			RootFrame.addPanel(new Mainpage());
+
+		}
+		
 	}
 }

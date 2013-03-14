@@ -14,6 +14,9 @@ import java.net.Socket;
 
 import javax.swing.*;
 
+import no.ntnu.fp.gui.Login;
+import no.ntnu.fp.gui.RootFrame;
+
 import xcal.core.Settings;
 
 
@@ -30,7 +33,7 @@ public class Client
 	
 	public Client()
 	{
-		connect();
+		/*connect();
 		
 		panel1=new JPanel();
 		panel2=new JPanel(new FlowLayout());
@@ -56,7 +59,10 @@ public class Client
 		frame.setLayout(new FlowLayout());
 		frame.setSize(400,150);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		frame.setVisible(true);*/
+		
+		RootFrame.init(1000, 700);
+		RootFrame.addPanel(new Login());
 		
 		
 	}
