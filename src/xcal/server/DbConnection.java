@@ -26,15 +26,11 @@ import java.sql.*;//jconnector
 	        public static void main (String args []) throws Exception{
 	        	DbConnection dc = new DbConnection("jdbc:mysql://84.48.49.149/fellesprosjekt", "felles", "felles");
 	        	dc.connect();
-	        	System.out.println(dc.getNameFromEmail("Albert.Gates.220@xcal.com"));
+	        	System.out.println(dc.getPasswordFromEmail("Albert.Gates.220@xcal.com"));
 	        	dc.closeConnection();
 	        }
-	        private String getNameFromEmail(String email) throws Exception{
-	  	       String sql = "SELECT * FROM Person WHERE email = '" + email + "'"; 
-	  	       ResultSet resultSet = statement.executeQuery(sql);
-	  	       resultSet.next();
-	  	       return resultSet.getString("name");
-	         }
+	   
+	         
 	        public DbConnection(String url, String user, String password){
 	        	this.url = url;
 	        	this.user = user;
@@ -88,6 +84,24 @@ import java.sql.*;//jconnector
 	        	}
 	        }
 	      
+	        
+	        private String getNameFromEmail(String email) throws Exception{
+		  	       String sql = "SELECT * FROM Person WHERE email = '" + email + "'"; 
+		  	       ResultSet resultSet = statement.executeQuery(sql);
+		  	       resultSet.next();
+		  	       return resultSet.getString("name"); 
+		  	       
+	        }
+	        
+	        private String getPasswordFromEmail (String email) throws SQLException{
+	        	String sql = "SELECT * FROM Person WHERE email = '" + email + "'";
+	        	ResultSet resultset = statement.executeQuery(sql);
+	        	resultset.next();
+	        	return resultset.getString("password");
+	        }
+	        
+	        
+	        
 	}
 	
 
