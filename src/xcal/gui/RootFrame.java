@@ -1,4 +1,4 @@
-package no.ntnu.fp.gui;
+package xcal.gui;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.ArrayList;

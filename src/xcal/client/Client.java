@@ -14,10 +14,10 @@ import java.net.Socket;
 
 import javax.swing.*;
 
-import no.ntnu.fp.gui.Login;
-import no.ntnu.fp.gui.RootFrame;
 
 import xcal.core.Settings;
+import xcal.gui.Login;
+import xcal.gui.RootFrame;
 
 
 public class Client 
