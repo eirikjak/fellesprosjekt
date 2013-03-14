@@ -1,4 +1,4 @@
-package no.ntnu.fp.gui;
+package xcal.gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
