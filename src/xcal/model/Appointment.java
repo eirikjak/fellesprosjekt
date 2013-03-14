@@ -14,7 +14,7 @@ public class Appointment
 	private Timestamp to_time;
 	private String name;
 	private String description;
-	//private Timestamp notification;
+	private Timestamp notification;
 	
 	public Appointment()
 	{
@@ -32,6 +32,7 @@ public class Appointment
 	public Timestamp getToTime(){return to_time;}
 	
 	public String getLocation(){return location;}
+
 	
 	
 }
