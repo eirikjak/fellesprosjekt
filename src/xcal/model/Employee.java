@@ -22,5 +22,4 @@ public class Employee extends Person
 	public Appointment createAppointment(String time,Room place){return null;}
 	public Meeting createMeeting(String time,Room place, Vector<Employee> participants){return null;}
 	
-	public void sendInvite(Appointment app){}
 }

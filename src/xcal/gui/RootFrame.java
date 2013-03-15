@@ -22,6 +22,7 @@ public class RootFrame {
 		
 		internalFrame.setPreferredSize(new Dimension(width,height));
 		internalFrame.setVisible(true);
+		internalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		internalFrame.pack();
 		contentPane = internalFrame.getLayeredPane();
 		contentPane.setLayout(null);

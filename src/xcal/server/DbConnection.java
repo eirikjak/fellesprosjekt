@@ -1,7 +1,7 @@
 package xcal.server;
 
 import java.sql.*;//jconnector
-
+import xcal.server.Room;
 
 	/**
 	 * DBConnection lets you connect to a SQL Database
@@ -24,10 +24,13 @@ import java.sql.*;//jconnector
 			 */
 	      
 	        public static void main (String args []) throws Exception{
-	        	DbConnection dc = new DbConnection("jdbc:mysql://84.48.49.149/fellesprosjekt", "felles", "felles");
+	        	/*DbConnection dc = new DbConnection("jdbc:mysql://84.48.49.149/fellesprosjekt", "felles", "felles");
 	        	dc.connect();
 	        	System.out.println(dc.getPasswordFromEmail("Albert.Gates.220@xcal.com"));
-	        	dc.closeConnection();
+	        	dc.closeConnection();*/
+	        	
+
+	        	System.out.println(sqlstr);
 	        }
 	   
 	         
@@ -101,6 +104,37 @@ import java.sql.*;//jconnector
 	        }
 	        
 	        
+	        //TODO add parameters for datetime starttime and datetime
+	        
+	        
+	        private Room[] availablebleRooms () throws Exception{
+	        	
+	        	
+	    	    String sqlstr = "SELECT R.name"+
+	    	    		"FROM Room R"+
+				    	"WHERE R.id NOT IN("+
+				    	"SELECT R.id"+
+				    	"FROM Room R, Appointment A"+
+				    	"WHERE ((('"startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
+				    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
+				    	"OR (('"startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
+				    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
+				       
+	    	    ResultSet resultset = statement.executeQuery(sqlstr);
+	    	    resultset.last();
+	    	    Room [] rooms = new Room [resultset.getRow()];
+	    	    resultset.beforeFirst();
+	    	    int roomCount = 0;
+	    	    while(resultset.next()){
+	    	    	int id = resultset.getInt("id");
+	    	    	String name = resultset.getString("name");
+	    	    	int capacity = resultset.getInt("capacity");
+	    	    	
+	    	    	rooms[roomCount] = new Room(id, name, capacity); 
+	    	    	roomCount++	;
+	    	    }
+	    	    return rooms;
+	       }
 	        
 	}
 	
