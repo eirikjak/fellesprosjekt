@@ -31,8 +31,8 @@ public class Mainpage extends JPanel {
 		setBounds(0, 0, 1000, 700);
 		
 		JLabel lblTrerg = new JLabel("");
-		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere.png")));
-		lblTrerg.setBounds(323, 19, 173, 134);
+		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
+		lblTrerg.setBounds(428, 44, 66, 76);
 		add(lblTrerg);
 		
 		
@@ -198,7 +198,7 @@ public class Mainpage extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			RootFrame.addPanel(new Avtale());
+			new Avtale();
 			
 			
 			

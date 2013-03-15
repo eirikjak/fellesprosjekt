@@ -40,10 +40,6 @@ public class RootFrame {
 		
 		contentPane.add(panel,new Integer(panels.size()));
 		panels.add(panel);
-		contentPane.paintImmediately(new Rectangle(0, 0, 1000, 720));
-		
-		
-		
 		
 		
 	}
