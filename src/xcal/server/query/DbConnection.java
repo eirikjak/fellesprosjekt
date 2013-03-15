@@ -9,7 +9,7 @@ import structs.*;
 import sun.security.action.GetIntegerAction;
 
 import xcal.model.Appointment;
-import xcal.model.Person;
+import xcal.model.Employee;
 
 	/**
 	 * DBConnection lets you connect to a SQL Database
@@ -197,7 +197,7 @@ import xcal.model.Person;
     								"leader='"+email+"',"+
     								"place='"+place+"',"+
     								"room='"+room+
-    										"WHERE id= "+ AppointmentIdid;
+    										"WHERE id= "+ AppointmentId;
     				statement.executeUpdate(sql);
     	}
 	    	public void createMeeting(int EmployeeId){
@@ -224,7 +224,7 @@ import xcal.model.Person;
 	    		
 	    	}
 	    	
-	    	private void sendInvites(ArrayList<Person> participants, int app_id){
+	    	private void sendInvites(ArrayList<Employee> participants, int app_id){
 	    		
 	    	}
 	    	

@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import xcal.model.*;
 
-public class AppointmentsQ extends DbConnection
+public class AppointmentsQ
 {
-	
+	private DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
 	 */
 	
-	public AppointmentsQ(String url, String user, String password) {
-		super(url, user, password);
+	public AppointmentsQ(DbConnection connection) {
+		this.connection=connection;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,7 +29,7 @@ public class AppointmentsQ extends DbConnection
  	   
  	   try 
  	   {
- 		   Statement stat = connection.createStatement();
+ 		   Statement stat = connection.getConnection().createStatement();
  		   ResultSet result=stat.executeQuery(query);
  		   result.next();
 

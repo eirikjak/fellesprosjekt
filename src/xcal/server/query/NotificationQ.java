@@ -6,18 +6,19 @@ import java.sql.Statement;
 
 import xcal.model.Notification;
  
-public class NotificationQ extends DbConnection
+public class NotificationQ
 {
 	private AppointmentsQ appointments_query;
 	private EmployeeQ employee_query;
+	private DbConnection connection;
 	
 	
 	
-	public NotificationQ(String url, String user, String password) 
+	public NotificationQ(DbConnection connection) 
 	{
-		super(url, user, password);
-		appointments_query=new AppointmentsQ(url, user, password);
-		employee_query=new EmployeeQ(url, user, password);
+		this.connection=connection;
+		appointments_query=new AppointmentsQ(this.connection);
+		employee_query=new EmployeeQ(this.connection);
 
 	}
 
@@ -41,7 +42,7 @@ public class NotificationQ extends DbConnection
  	   try 
  	   {
  		   
- 		   Statement stat=connection.createStatement();
+ 		   Statement stat=connection.getConnection().createStatement();
  		   ResultSet result=stat.executeQuery(query);
  		   
  		   result.last();

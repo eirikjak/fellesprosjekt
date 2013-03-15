@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import xcal.model.*;
 
 
-public class EmployeeQ extends DbConnection
+public class EmployeeQ
 {
-	
+	private DbConnection connection;
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
 	
 
-	public EmployeeQ(String url, String user, String password) {
-		super(url, user, password);
+	public EmployeeQ(DbConnection connection) {
+		this.connection=connection;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,7 +39,7 @@ public class EmployeeQ extends DbConnection
  	   
  	   try 
  	   {
- 		   Statement stat = connection.createStatement();
+ 		   Statement stat = connection.getConnection().createStatement();
  		   ResultSet result=stat.executeQuery(query);
  		   
  		   result.next();
