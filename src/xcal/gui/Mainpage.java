@@ -52,12 +52,13 @@ public class Mainpage extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(Mainpage.class.getResource("/images/appointmentAdd3.png")));
 		
 		JButton btnOpprettAvtale = new JButton("New Appointment");
-		btnOpprettAvtale.addActionListener(new AvtaleButtonListener());
+		btnOpprettAvtale.addActionListener(new NewAppointmentListener());
 		btnOpprettAvtale.setBounds(89, 47, 164, 35);
 		panel.add(btnOpprettAvtale);
 		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JButton btnNewButton = new JButton("New Meeting");
+		btnNewButton.addActionListener(new NewMeetingListener());
 		btnNewButton.setBounds(104, 8, 133, 35);
 		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -192,17 +193,27 @@ public class Mainpage extends JPanel {
 
 	}
 	
-	private class AvtaleButtonListener implements ActionListener{
+	private class NewAppointmentListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			
-			new Avtale();
-			
-			
+
+			new AppointmentMenu();
 			
 		}
 		
 	}
+	
+	private class NewMeetingListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			new MeetingMenu();
+			
+		}
+		
+		
+	}
+	
 }
