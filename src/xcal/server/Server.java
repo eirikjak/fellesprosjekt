@@ -83,7 +83,7 @@ public class Server
 	
 	
 	//write to client connected
-	public void writeClient(String text,int index) 
+	/*public void writeClient(String text,int index) 
 	{
 		clients.get(index).WriteToClient(text);
 		
@@ -93,7 +93,7 @@ public class Server
 	public String readClient(int index)
 	{
 		return clients.get(index).readFromClient();
-	}
+	}*/
 	
 	public void disconnect() throws IOException
 	{
@@ -117,7 +117,7 @@ public class Server
 				
 				System.out.println("CLient connected");
 				
-				server.writeClient("Welcome!",server.getSize()-1);
+				//server.writeClient("Welcome!",server.getSize()-1);
 				//System.out.println(server.readClient(server.getSize()-1));
 				//System.out.println("client accepted");
 				

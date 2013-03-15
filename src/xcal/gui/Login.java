@@ -19,14 +19,21 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import xcal.client.Client;
+import xcal.model.Authentication;
+
 public class Login extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
+	
+	private Client client;
 
 	/**
 	 * Create the panel.
 	 */
-	public Login() {
+	public Login(Client client) {
+		
+		this.client=client;
 		setLayout(null);
 		
 		setBounds(0,0,1000,700);
@@ -77,9 +84,29 @@ public class Login extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//do login stuff
-			RootFrame.clearAll();
-			RootFrame.addPanel(new Mainpage());
+			//to login stuff
+			
+			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
+			{
+				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
+				client.sendObject(auth);
+				Object check=client.recieveObject();
+				
+				
+				if(check==null)
+					System.out.println("Wrong username/password");
+				else
+				{
+					RootFrame.clearAll();
+					RootFrame.addPanel(new Mainpage());
+					System.out.println("Welcome" + check);
+				}
+				
+			}
+			
+			
+			
+
 
 		}
 		
