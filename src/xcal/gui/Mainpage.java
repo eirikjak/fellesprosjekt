@@ -1,5 +1,8 @@
 package xcal.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -20,6 +23,11 @@ public class Mainpage extends JPanel {
 	 */
 	public Mainpage() {
 		setLayout(null);
+
+		setBounds(0, 0, 1000, 700);
+		
+		
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -33,6 +41,7 @@ public class Mainpage extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(Mainpage.class.getResource("/images/appointmentAdd3.png")));
 		
 		JButton btnOpprettAvtale = new JButton("New Appointment");
+		btnOpprettAvtale.addActionListener(new AvtaleButtonListener());
 		btnOpprettAvtale.setBounds(89, 47, 164, 35);
 		panel.add(btnOpprettAvtale);
 		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -157,5 +166,28 @@ public class Mainpage extends JPanel {
 			}
 		});
 
+	
+		
+		
+
 	}
+	
+	private class AvtaleButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			RootFrame.addPanel(new Avtale());
+			
+			
+			
+		}
+		
+	}
+
+
+		
+
+
 }
