@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,6 +30,11 @@ public class Mainpage extends JPanel {
 
 		setBounds(0, 0, 1000, 700);
 		
+		JLabel lblTrerg = new JLabel("");
+		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere.png")));
+		lblTrerg.setBounds(323, 19, 173, 134);
+		add(lblTrerg);
+		
 		
 		
 		
@@ -36,6 +43,8 @@ public class Mainpage extends JPanel {
 		panel.setBounds(32, 34, 279, 95);
 		add(panel);
 		panel.setLayout(null);
+		
+
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(12, 6, 90, 83);
@@ -172,11 +181,6 @@ public class Mainpage extends JPanel {
 		});
 		btnNewButton_1.setBounds(508, 55, 109, 58);
 		add(btnNewButton_1);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere.png")));
-		lblNewLabel_3.setBounds(425, 34, 73, 112);
-		add(lblNewLabel_3);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
