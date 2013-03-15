@@ -85,7 +85,7 @@ public class Login extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//to login stuff
-		
+			RootFrame.addPanel(new Mainpage());
 			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 			{
 				Authentication auth=new Authentication(textField.getText(),passwordField.getText());

@@ -127,7 +127,7 @@ public class Mainpage extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1, 47, 940, 72);
 		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender bar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
 		
 		JButton btnLastWeek = new JButton("Last Week");
 		btnLastWeek.setBounds(2, 5, 117, 39);
@@ -176,23 +176,28 @@ public class Mainpage extends JPanel {
 		
 		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
 		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		btnNewButton_1.setBounds(508, 55, 109, 58);
 		add(btnNewButton_1);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
+		
 	
 		
 		
 
 	}
 	
+	
+	private class OtherCalendarsListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new OtherCallendarsMenu();
+			
+		}
+			
+		
+		
+	}
 	private class NewAppointmentListener implements ActionListener{
 
 		@Override

@@ -31,7 +31,7 @@ public class Client
 	{
 
 		//connect();
-		RootFrame.init(1000, 700);
+		RootFrame.init(1015, 720);
 		RootFrame.addPanel(new Login(this));
 
 	}

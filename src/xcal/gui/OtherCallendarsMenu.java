@@ -40,7 +40,8 @@ public class OtherCallendarsMenu extends JFrame {
 	 */
 	public OtherCallendarsMenu() {
 		setTitle("Add other calendars");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	
 		setBounds(0, 0, 570, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
