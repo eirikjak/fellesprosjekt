@@ -4,6 +4,6 @@
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/ktn_admin_and_a2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/nemanjaa/Documents/xCal/fellesprosjekt/lib/mysql-connector-java-5.1.24-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/problem/Dropbox/Systemutvikling gruppe22/code/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
