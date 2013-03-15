@@ -15,6 +15,8 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JList;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class Mainpage extends JPanel {
 
@@ -161,6 +163,15 @@ public class Mainpage extends JPanel {
 		JList list_7 = new JList();
 		list_7.setBounds(407, 122, 126, 365);
 		panel_1.add(list_7);
+		
+		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
+		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(508, 55, 109, 58);
+		add(btnNewButton_1);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -185,9 +196,4 @@ public class Mainpage extends JPanel {
 		}
 		
 	}
-
-
-		
-
-
 }
