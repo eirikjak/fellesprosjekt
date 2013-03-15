@@ -7,7 +7,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.swingx.JXDatePicker;
@@ -22,6 +25,8 @@ import org.jdesktop.swingx.JXDatePicker;
 import xcal.model.Person;
 
 import javax.swing.JList;
+import javax.swing.JTabbedPane;
+import javax.swing.JToggleButton;
 
 
 
@@ -33,11 +38,10 @@ public class MeetingMenu extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_5;
 
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private DefaultListModel<Person> model;
+	private DefaultListModel model;
 	/**
 	 * Launch the application.
 	 */
@@ -59,137 +63,198 @@ public class MeetingMenu extends JFrame {
 	 */
 	public MeetingMenu() {
 		super();
-		setPreferredSize(new Dimension(570, 700));
+		setPreferredSize(new Dimension(710, 700));
 		setVisible(true);
 		
 		getContentPane().setLayout(null);
 		setBounds(0,0,570,666);
 		
+
 		textField = new JTextField();
-		textField.setBounds(97, 40, 417, 31);
+		textField.setBounds(182, 40, 469, 31);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(99, 93, 57, 31);
+		textField_1.setBounds(181, 93, 57, 31);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(175, 93, 57, 31);
+		textField_2.setBounds(245, 93, 57, 31);
 		getContentPane().add(textField_2);
 		
 		JXDatePicker datePicker = new JXDatePicker();
-		datePicker.setBounds(446, 93, 68, 31);
+		datePicker.setBounds(547, 93, 104, 31);
 		getContentPane().add(datePicker);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(97, 154, 417, 31);
-		getContentPane().add(textField_5);
-		
 		JLabel lblVarsel = new JLabel("Notification:");
-		lblVarsel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblVarsel.setBounds(4, 581, 91, 14);
+		lblVarsel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblVarsel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblVarsel.setBounds(70, 576, 92, 14);
 		getContentPane().add(lblVarsel);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(97, 581, 116, 20);
+		comboBox.setBounds(174, 569, 178, 31);
 		getContentPane().add(comboBox);
 		
-		JButton btnNewButton = new JButton("Lagre");
+		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new OkButtonListener());
-		btnNewButton.setBounds(97, 628, 181, 23);
+		btnNewButton.setBounds(172, 612, 181, 23);
 		getContentPane().add(btnNewButton);
 		
-		JButton btnAvbryt = new JButton("Avbryt");
+		JButton btnAvbryt = new JButton("Cancel");
 		btnAvbryt.addActionListener(new CancelButtonListener());
-		btnAvbryt.setBounds(301, 628, 181, 23);
+		btnAvbryt.setBounds(393, 612, 181, 23);
 		getContentPane().add(btnAvbryt);
 		
 		JLabel lblNavn = new JLabel("Name:");
-		lblNavn.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblNavn.setBounds(4, 46, 57, 14);
+		lblNavn.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNavn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblNavn.setBounds(70, 48, 92, 14);
 		getContentPane().add(lblNavn);
 		
 		JLabel lblTidspunkt = new JLabel("Time:");
-		lblTidspunkt.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblTidspunkt.setBounds(4, 99, 77, 14);
+		lblTidspunkt.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTidspunkt.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblTidspunkt.setBounds(70, 104, 92, 14);
 		getContentPane().add(lblTidspunkt);
 		
 		JLabel lblSted = new JLabel("Location:");
-		lblSted.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblSted.setBounds(4, 162, 77, 14);
+		lblSted.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSted.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+		lblSted.setBounds(70, 161, 92, 14);
 		getContentPane().add(lblSted);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(97, 219, 417, 127);
+		textArea.setBounds(181, 219, 470, 127);
 		getContentPane().add(textArea);
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
-		lblBeskrivelse.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblBeskrivelse.setBounds(4, 219, 91, 14);
+		lblBeskrivelse.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblBeskrivelse.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblBeskrivelse.setBounds(70, 221, 94, 14);
 		getContentPane().add(lblBeskrivelse);
 		
 		JLabel label = new JLabel(":");
-		label.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		label.setBounds(159, 75, 102, 56);
+		label.setFont(new Font("Times New Roman", Font.BOLD, 26));
+		label.setBounds(237, 82, 12, 49);
 		getContentPane().add(label);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(257, 93, 57, 31);
+		textField_3.setBounds(324, 93, 57, 31);
 		getContentPane().add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(333, 93, 57, 31);
+		textField_4.setBounds(388, 93, 57, 31);
 		getContentPane().add(textField_4);
 		
 		JLabel label_1 = new JLabel(":");
-		label_1.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		label_1.setBounds(317, 75, 102, 56);
+		label_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
+		label_1.setBounds(380, 78, 21, 56);
 		getContentPane().add(label_1);
 		
-		JLabel label_2 = new JLabel("-");
-		label_2.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		label_2.setBounds(239, 76, 102, 56);
-		getContentPane().add(label_2);
+		JLabel lblTo = new JLabel("to");
+		lblTo.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblTo.setBounds(306, 93, 21, 31);
+		getContentPane().add(lblTo);
 		
 		JLabel lblDate = new JLabel("Date:");
-		lblDate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblDate.setBounds(400, 101, 46, 14);
+		lblDate.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblDate.setBounds(504, 101, 46, 14);
 		getContentPane().add(lblDate);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363368791_sticky-notes.png")));
+		lblNewLabel.setBounds(39, 211, 40, 37);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363368940_bell.png")));
+		lblNewLabel_1.setBounds(40, 568, 40, 32);
+		getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363369079_Time.png")));
+		lblNewLabel_2.setBounds(80, 82, 40, 49);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370152_door.png")));
+		lblNewLabel_3.setBounds(67, 151, 32, 37);
+		getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363369311_diagram-02.png")));
+		lblNewLabel_4.setBounds(73, 29, 40, 42);
+		getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363369435_event.png")));
+		lblNewLabel_5.setBounds(463, 87, 40, 42);
+		getContentPane().add(lblNewLabel_5);
 		
 		JList list = new JList();
 		list.setBounds(183, 406, -148, 78);
 		getContentPane().add(list);
 		
-		JButton button = new JButton("->");
-		button.setBounds(270, 426, 68, 23);
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
+		button.setBounds(377, 411, 68, 35);
 		getContentPane().add(button);
 		
 		JList list_2 = new JList();
-		list_2.setBounds(351, 386, 163, 133);
+		list_2.setBounds(463, 392, 185, 133);
 		getContentPane().add(list_2);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(97, 386, 163, 133);
+		list_1.setBounds(180, 392, 178, 133);
 		getContentPane().add(list_1);
 		
-		JButton button_1 = new JButton("<-");
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button_1.setBounds(270, 455, 68, 23);
+		button_1.setBounds(377, 467, 68, 35);
 		getContentPane().add(button_1);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(181, 156, 178, 31);
+		getContentPane().add(comboBox_1);
+		
+		JLabel lblNewLabel_6 = new JLabel("Select:");
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_6.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblNewLabel_6.setBounds(101, 371, 61, 16);
+		getContentPane().add(lblNewLabel_6);
+		
+		ButtonGroup buttonGrioup = new ButtonGroup();
+		
+		JToggleButton tglbtnPersons = new JToggleButton("Persons");
+		tglbtnPersons.setBounds(176, 365, 100, 31);
+		getContentPane().add(tglbtnPersons);
+		buttonGrioup.add(tglbtnPersons);
+		tglbtnPersons.setSelected(true);
+		
+		JToggleButton tglbtnGroups = new JToggleButton("Groups");
+		tglbtnGroups.setBounds(263, 365, 100, 31);
+		getContentPane().add(tglbtnGroups);
+		buttonGrioup.add(tglbtnGroups);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363371142_Person_Undefined_Male_Light.png")));
+		lblNewLabel_7.setBounds(73, 355, 32, 38);
+		getContentPane().add(lblNewLabel_7);
 		
 		pack();
 	}
 	
-	public void setModel(DefaultListModel<Person> model){
+	public void setModel(DefaultListModel model){
 		
 	}
 	
