@@ -172,6 +172,11 @@ public class Mainpage extends JPanel {
 		});
 		btnNewButton_1.setBounds(508, 55, 109, 58);
 		add(btnNewButton_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere.png")));
+		lblNewLabel_3.setBounds(425, 34, 73, 112);
+		add(lblNewLabel_3);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}

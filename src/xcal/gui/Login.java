@@ -49,7 +49,7 @@ public class Login extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//to login stuff
+			//do login stuff
 			RootFrame.clearAll();
 			RootFrame.addPanel(new Mainpage());
 

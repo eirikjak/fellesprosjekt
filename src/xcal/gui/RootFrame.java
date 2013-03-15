@@ -2,6 +2,7 @@ package xcal.gui;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -39,10 +40,9 @@ public class RootFrame {
 		
 		contentPane.add(panel,new Integer(panels.size()));
 		panels.add(panel);
-		internalFrame.pack();
-	
-		internalFrame.paintComponents(internalFrame.getGraphics());
-		panel.paintComponents(panel.getGraphics());
+		contentPane.paintImmediately(new Rectangle(0, 0, 1000, 720));
+		
+		
 		
 		
 		

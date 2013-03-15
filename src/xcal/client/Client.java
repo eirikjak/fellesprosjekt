@@ -61,8 +61,8 @@ public class Client
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);*/
 
-		connect();
-		RootFrame.init(1000, 700);
+		//connect();
+		RootFrame.init(1015, 720);
 		RootFrame.addPanel(new Login());
 		
 		
