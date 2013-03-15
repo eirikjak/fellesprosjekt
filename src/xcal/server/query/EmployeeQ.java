@@ -1,30 +1,59 @@
 package xcal.server.query;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import xcal.model.*;
 
 
-public class EmployeeQ {
+public class EmployeeQ extends DbConnection
+{
 	
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
 	
-	public void createPerson(Person p){
+
+	public EmployeeQ(String url, String user, String password) {
+		super(url, user, password);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void createPerson(Employee p){
 		
 	}
 	
-	public void updatePerson(Person p){
+	public void updatePerson(Employee p){
 		
 	}
 	
-	public Person selectPerson(int EmployeeId){
+	public Employee selectPerson(int EmployeeId){
 		return null;
 	}
 	
-	public Person selectPersonWithEmail(String email){
-		return null;
+	public Employee selectPersonWithEmail(String mail)
+	{
+		String query="select * from Person where email='"+mail+"'";
+ 	   
+ 	   try 
+ 	   {
+ 		   Statement stat = connection.createStatement();
+ 		   ResultSet result=stat.executeQuery(query);
+ 		   
+ 		   result.next();
+ 		   
+ 		   Employee e=new Employee(result.getString("name"),result.getString("email"));
+ 		   return e;
+ 	   } 
+ 	   catch (SQLException e) 
+ 	   {
+			//couldn't get from db
+			e.printStackTrace();
+ 	   }
+ 	   
+ 	   return null;
 	}
 	
 	public void deletePerson(int EmployeeId){
