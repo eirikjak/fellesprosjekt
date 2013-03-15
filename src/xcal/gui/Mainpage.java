@@ -194,7 +194,7 @@ public class Mainpage extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			RootFrame.addPanel(new Avtale());
+			new Avtale();
 			
 			
 			

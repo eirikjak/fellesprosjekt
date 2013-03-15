@@ -39,7 +39,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 
-public class Avtale extends JPanel {
+public class Avtale extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -51,11 +51,13 @@ public class Avtale extends JPanel {
 	 * Create the panel.
 	 */
 	public Avtale() {
-		
+		super();
+		setPreferredSize(new Dimension(570,513));
+		setVisible(true);
 		
 		setLayout(null);
 		setBounds(0,0,570,513);
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		
 		textField = new JTextField();
 		textField.setBounds(97, 40, 417, 31);
 		add(textField);
@@ -90,18 +92,12 @@ public class Avtale extends JPanel {
 		add(comboBox);
 		
 		JButton btnNewButton = new JButton("Lagre");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnNewButton.addActionListener(new OkButtonListener());
 		btnNewButton.setBounds(97, 404, 181, 23);
 		add(btnNewButton);
 		
 		JButton btnAvbryt = new JButton("Avbryt");
-		btnAvbryt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnAvbryt.addActionListener(new CancelButtonListener());
 		btnAvbryt.setBounds(301, 404, 181, 23);
 		add(btnAvbryt);
 		
@@ -158,7 +154,34 @@ public class Avtale extends JPanel {
 		lblDate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblDate.setBounds(400, 101, 46, 14);
 		add(lblDate);
+		
+		pack();
 
+	}
+	
+	
+	private class CancelButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+	}
+	
+	private class OkButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//send stuff til server
+			//lukk vindu når ferdig
+			
+			
+			
+		}
+		
 	}
 	
 }
