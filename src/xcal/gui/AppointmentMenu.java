@@ -55,6 +55,7 @@ public class AppointmentMenu extends JFrame {
 	 */
 	public AppointmentMenu() {
 		super();
+		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
 		

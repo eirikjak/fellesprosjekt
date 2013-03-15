@@ -63,6 +63,7 @@ public class MeetingMenu extends JFrame {
 	 */
 	public MeetingMenu() {
 		super();
+		setTitle("New meeting");
 		setPreferredSize(new Dimension(710, 700));
 		setVisible(true);
 		
