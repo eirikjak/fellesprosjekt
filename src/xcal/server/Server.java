@@ -73,6 +73,15 @@ public class Server
 		return false;
 	}
 	
+	public void sendObject(Object o){
+		
+	}
+	
+	public Object recieveObject(Object o){
+		return null;
+	}
+	
+	
 	//write to client connected
 	/*public void writeClient(String text,int index) 
 	{
