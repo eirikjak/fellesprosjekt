@@ -1,4 +1,4 @@
-package xcal.server;
+package structs;
 
 import java.io.Serializable;
 
