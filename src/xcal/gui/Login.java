@@ -19,6 +19,7 @@ public class Login extends JPanel {
 	public Login() {
 		setLayout(null);
 		
+		setBounds(0,0,1000,700);
 		JLabel lblEmail = new JLabel("email:");
 		lblEmail.setBounds(214, 267, 61, 16);
 		add(lblEmail);
