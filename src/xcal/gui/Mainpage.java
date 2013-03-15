@@ -127,7 +127,7 @@ public class Mainpage extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1, 47, 940, 72);
 		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender bar.png")));
 		
 		JButton btnLastWeek = new JButton("Last Week");
 		btnLastWeek.setBounds(2, 5, 117, 39);
@@ -215,5 +215,4 @@ public class Mainpage extends JPanel {
 		
 		
 	}
-	
 }

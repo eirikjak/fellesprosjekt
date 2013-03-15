@@ -65,7 +65,7 @@ public class Login extends JPanel {
 		add(btnLogin);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/xcal.png")));
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/xcalbig.png")));
 		lblNewLabel.setBounds(318, 92, 300, 154);
 		add(lblNewLabel);
 		

@@ -203,15 +203,15 @@ public class MeetingMenu extends JFrame {
 		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
-		button.setBounds(377, 411, 68, 35);
+		button.setBounds(379, 413, 68, 35);
 		getContentPane().add(button);
 		
 		JList list_2 = new JList();
-		list_2.setBounds(463, 392, 185, 133);
+		list_2.setBounds(465, 397, 185, 133);
 		getContentPane().add(list_2);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(180, 392, 178, 133);
+		list_1.setBounds(182, 397, 178, 133);
 		getContentPane().add(list_1);
 		
 		JButton button_1 = new JButton("");
@@ -220,7 +220,7 @@ public class MeetingMenu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button_1.setBounds(377, 467, 68, 35);
+		button_1.setBounds(379, 469, 68, 35);
 		getContentPane().add(button_1);
 		
 		JComboBox comboBox_1 = new JComboBox();
