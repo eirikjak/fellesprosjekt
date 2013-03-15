@@ -5,21 +5,25 @@
  */
 package xcal.server;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;//to use with classes?
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import com.sun.xml.internal.ws.encoding.soap.SerializationException;
+
+import xcal.core.ObjectCheck;
 import xcal.model.Employee;
 
 public class ClientThread extends Thread
 {
 	private Socket client;
-	//private DataInputStream input;
-	private BufferedReader input;
-	private PrintStream print;
+	
+	private ObjectInputStream input;
+	private ObjectOutputStream output;
+	
+
 	private int id;
 	
 	private xcal.model.Employee person;
@@ -29,70 +33,77 @@ public class ClientThread extends Thread
 		this.client=client;
 		person=new Employee(); 
 		id=i;
-		
-		try 
-		{
-			//input=new DataInputStream(this.client.getInputStream());
-			input=new BufferedReader(new InputStreamReader(this.client.getInputStream()));//open reader
-			print=new PrintStream(this.client.getOutputStream());//and printer
-		} 
-		catch (IOException e)
-		{
-			System.out.println("error"+e.getMessage());
-		}
 	}
 	
-	public void WriteToClient(String msg)
+	/**
+	 * Object to recieve from client
+	 * 
+	 * 
+	 * @return Object - the object recieved
+	 */
+	public Object recieveObject() 
 	{
-		print.println(msg);
-	}
-	
-	public String readFromClient()
-	{
-		String msg;
-		
-		try 
+		try
 		{
-			msg=input.readLine();
-			return msg;
-		} 
-		catch (IOException e) 
-		{
-			System.out.println(e.getMessage());
+			input=new ObjectInputStream(client.getInputStream());
+			
+			Object o = input.readObject();
+			
+			return o;
+			//return input.readObject();
+			
 		}
+		catch(ClassNotFoundException e){} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
-	public boolean checkUser()//authenticate user
+	/**Object to send to client
+	 * 
+	 * 
+	 * @param send - object to send
+	 * @return boolean - if send was successful or not
+	 */	
+	public boolean sendObject(Object send)
 	{
-		String username=readFromClient();//get input from user
-		String pw=readFromClient();
-		
-		System.out.println(username);
-		System.out.println(pw);
-		
-		if(username.equals("jonas") && pw.equals("123"))
+		try
 		{
-			
-			person.setName("Jonas");
-			person.setDateOfBirth("150491");
-			person.setEmail("jonas@jonastn.com");
+			output=new ObjectOutputStream(client.getOutputStream());
+			output.writeObject(send);
+			output.flush();
 			return true;
 		}
-		
-		System.out.println("wrong username||password");
+		catch(IOException e){}
 		return false;
 	}
 	
+
 	public void run()
 	{
+		
+		try
+		{
+			System.out.println("Client nr "+id+" running");
+			while(true)
+			{
+				Object object=ObjectCheck.handleObject(recieveObject());
+				System.out.println("recieved object");
+				sendObject(object);
+				System.out.println("object sent");
+			}
+		}
+		catch(SerializationException e){}
+		
+		
 		//check user before continue
-		while(!checkUser());
+		//while(!checkUser());
 			
-		System.out.println("User authenticated");
+		/*System.out.println("User authenticated");
 		System.out.println("Welcome "+person);
 		//what to do when client connected and thread run
-		String msg;
+		String msg;*/
 		
 		/*try
 		{
