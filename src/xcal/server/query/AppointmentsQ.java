@@ -41,6 +41,16 @@ public class AppointmentsQ {
 		return false;
 	}
 	
-	public void createI
+	public void removePersonFromMeetign (int app_id, int EmployeeId){
+		
+	}
+	
+	private void sendInvites(ArrayList<Person> participants, int app_id){
+		
+	}
+	
+	public boolean getAnswer(int app_id, int EmployeeId){
+		return false;
+	}
 	
 }
