@@ -14,24 +14,27 @@ public class Appointment
 	private Timestamp to_time;
 	private String name;
 	private String description;
-	private Timestamp notification;
 	
 	public Appointment()
 	{
 		location=null;
 	}
 	
-	
+
 	
 	public void setFromTime(Timestamp from){from_time=from;}
 	public void setToTime(Timestamp to){to_time=to;}
-	
 	public void setLocation(String location){this.location=location;}
+	public void setName(String name){this.name=name;}
+	public void setDescription(String desc){this.description=desc;}
+
 	
 	public Timestamp getFromTime(){return from_time;}
 	public Timestamp getToTime(){return to_time;}
-	
 	public String getLocation(){return location;}
+	public String getName(){return name;}
+	public String getDescription(){return description;}
+	
 
 	
 	

@@ -1,6 +1,12 @@
 package xcal.server;
 
+import java.io.IOException;
 import java.sql.*;//jconnector
+
+import xcal.model.Appointment;
+import xcal.model.Employee;
+import xcal.model.Meeting;
+import xcal.model.Notification;
 import xcal.server.Room;
 
 	/**
@@ -24,13 +30,28 @@ import xcal.server.Room;
 			 */
 	      
 	        public static void main (String args []) throws Exception{
-	        	/*DbConnection dc = new DbConnection("jdbc:mysql://84.48.49.149/fellesprosjekt", "felles", "felles");
+	        	DbConnection dc = new DbConnection("jdbc:mysql://10.0.0.111/fellesprosjekt", "felles", "felles");
 	        	dc.connect();
-	        	System.out.println(dc.getPasswordFromEmail("Albert.Gates.220@xcal.com"));
-	        	dc.closeConnection();*/
+	        	
+	        	//System.out.println(dc.getPasswordFromEmail("Albert.Gates.220@xcal.com"));
+	        	
+	        	Notification[] not=dc.checkNotification();
+	        	
+	        	for(int i=0;i<not.length;++i)
+	        	{
+	        		System.out.println(not[i].getEmployee().getName());
+	        	}
+	        	
+	        	
+	        	dc.closeConnection();
+	        	
+	        	
+	        	
+	        	
+	        	
 	        	
 
-	        	System.out.println(sqlstr);
+	        	//System.out.println(sqlstr);
 	        }
 	   
 	         
@@ -135,6 +156,138 @@ import xcal.server.Room;
 	    	    }
 	    	    return rooms;
 	       }
+	        
+	       /**
+	        * check if any notifications need to be executed
+	        * 
+	        * check with current time with notification time in db
+	        * 
+	        * @return array of notifications that need to be run
+	        */
+	       public Notification[] checkNotification()
+	       {
+	    	  // java.util.Date date=new java.util.Date();
+	    	   //Timestamp now=new Timestamp(date.getTime());
+	    	   
+	    	   //check if current time went passed notifiedAt
+	    	   String query="select * from Notification where NOW() >=  notifiedAt";
+	    	   
+	    	   try 
+	    	   {
+	    		   
+	    		   Statement stat=connection.createStatement();
+	    		   ResultSet result=stat.executeQuery(query);
+	    		   
+	    		   result.last();
+	    		   Notification[] notification=new Notification[result.getRow()];
+	    		   result.beforeFirst();
+	    		   
+	    		   int size=0;
+	    		   
+	    		   while(result.next())
+	    		   {
+
+
+	    			   notification[size]=new Notification
+	    			   			(getAppointment(result.getInt("app_id")),
+	    			   					getEmployee(result.getString(("person"))));
+	    			 
+	    			 ++size;
+	    		   }
+	    			   
+	    		   return notification;
+				
+	    	   } 
+	    	   catch (SQLException e) 
+	    	   {
+				//couldn't get from db
+				e.printStackTrace();
+	    	   }
+	    	   
+	    	   return null;
+	       }
+	       
+	       
+	       
+	       /**
+	        * returns an employee from email info
+	        * 
+	        * @param mail - email to get person from
+	        * @return - employee object
+			**/
+	       public Employee getEmployee(String mail)
+	       {
+	    	   String query="select * from Person where email='"+mail+"'";
+	    	   
+	    	   try 
+	    	   {
+	    		   Statement stat = connection.createStatement();
+	    		   ResultSet result=stat.executeQuery(query);
+	    		   
+	    		   result.next();
+	    		   
+	    		   Employee e=new Employee(result.getString("name"),result.getString("email"));
+	    		   return e;
+	    	   } 
+	    	   catch (SQLException e) 
+	    	   {
+				//couldn't get from db
+				e.printStackTrace();
+	    	   }
+	    	   
+	    	   return null;
+	       }
+	       
+	       
+	       /**
+	        * 
+	        * @param id - id of appointment/meeting to get from db
+	        * @return - appointment/meeting with input id
+	        */
+	       public Appointment getAppointment(int id)
+	       {
+	    	   String query="select * from Appointment where id='"+id+"'";
+	    	   
+	    	   try 
+	    	   {
+	    		   Statement stat = connection.createStatement();
+	    		   ResultSet result=stat.executeQuery(query);
+	    		   result.next();
+
+	    		   
+	    		   if(result.getString("leader").isEmpty())
+	    		   {
+	    			   Appointment app=new Appointment();
+	    			  //app.setLocation(result.getString("Location"));
+	    			   app.setDescription(result.getString("description"));
+	    			   //app.setName(result.getString("name"));
+	    			   app.setFromTime(result.getTimestamp("start_date"));
+	    			   app.setToTime(result.getTimestamp("end_date"));
+	    			   return app;
+	    		   }
+	    		   
+	    		   Appointment meeting=new Meeting();
+	    		   meeting.setDescription(result.getString("description"));
+	    		   meeting.setFromTime(result.getTimestamp("start_date"));
+	    		   meeting.setToTime(result.getTimestamp("end_date"));
+	    		   
+	    		   return meeting;   		   
+	    		   
+
+	    	   } 
+	    	   catch (SQLException e) 
+	    	   {
+				//couldn't get from db
+				e.printStackTrace();
+	    	   }
+	    	   
+	    	   
+	    	   return null;
+	       }
+	       
+	       
+
+	       
 	        
 	}
 	
