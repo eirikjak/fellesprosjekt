@@ -21,6 +21,7 @@ import java.util.Vector;
 import xcal.core.Settings;
 
 
+
 public class Server 
 {
 	private ServerSocket socket;
@@ -84,7 +85,11 @@ public class Server
 	}
 	
 	public Object recieveObject(Object o){
-		return null;
+		
+		
+		
+		
+		
 	}
 	
 	
