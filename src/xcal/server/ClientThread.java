@@ -35,6 +35,10 @@ public class ClientThread extends Thread
 		id=i;
 	}
 	
+	public Employee getUser(){return person;}//use for notifications, get which user is running thread to check if sendmsg is nec.
+	public int getID(){return id;}
+	
+	
 	/**
 	 * Object to recieve from client
 	 * 

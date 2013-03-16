@@ -31,9 +31,14 @@ public class Server
 	
 	private PrintWriter print;
 	
+	private NotifyThread notify;
+	
 	public Server()
 	{
 		clients=new Vector<ClientThread>();
+		notify=new NotifyThread(clients);
+		notify.start();
+		
 		size=0;//hold how many clients added
 		//clients=null;
 		try
@@ -60,6 +65,7 @@ public class Server
 			Socket client=socket.accept();//wait for connection
 			clients.add(new ClientThread(client,size));
 			clients.get(size).start();
+			
 			++size;
 			
 			return true;
@@ -124,6 +130,8 @@ public class Server
 			}
 			else
 				System.out.println("client NOT accepted");
+			
+			
 			
 		
 		}

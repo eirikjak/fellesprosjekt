@@ -34,7 +34,33 @@ public class NotificationQ
 	 * @return
 	 */
 	
-	public Notification[] checkNotification()
+	public boolean notificationReady()
+	{
+		String query="select * from Notification where NOW() >=  notifiedAt";
+		
+		 
+		try 
+		{
+			Statement stat = connection.getConnection().createStatement();
+			ResultSet result=stat.executeQuery(query);
+			
+			result.last();
+			if(result.getRow()>0)
+				return true;
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+		 
+	}
+	
+	
+	
+	public Notification[] getNotifications()
     {
 
  	   String query="select * from Notification where NOW() >=  notifiedAt";
