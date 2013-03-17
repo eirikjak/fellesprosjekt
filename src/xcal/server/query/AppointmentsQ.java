@@ -4,6 +4,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import xcal.model.*;
 
 public class AppointmentsQ
@@ -19,7 +23,14 @@ public class AppointmentsQ
 	}
 
 	public static Appointment createAppointment(Appointment app){
-		return app;
+		
+		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+		
+		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place')";
+			
+				
+		
+		return null;
 	
 	}
 	

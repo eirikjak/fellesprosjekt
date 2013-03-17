@@ -26,6 +26,7 @@ public class NotifyThread extends Thread
 	public NotifyThread(Vector<ClientThread> c)
 	{
 		connection=new DbConnection(Settings.db_host,Settings.db_user,Settings.db_pw);
+		connection.connect();
 		notification_query=new NotificationQ(connection);
 		people_connected=c;
 		

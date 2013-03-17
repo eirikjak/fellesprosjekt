@@ -53,6 +53,10 @@ public class AppointmentMenu extends JFrame {
 	/**
 	 * Create the panel.
 	 */
+	
+	public static void main(String[] args) {
+		new AppointmentMenu();
+	}
 	public AppointmentMenu() {
 		super();
 		setTitle("New appointment");
@@ -201,7 +205,8 @@ public class AppointmentMenu extends JFrame {
 	
 	
 	private void Close(){
-		
+		setVisible(false);
+		dispose();
 	}
 	private class CancelButtonListener implements ActionListener{
 
@@ -220,6 +225,7 @@ public class AppointmentMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
+			
 			
 			Close();
 			
