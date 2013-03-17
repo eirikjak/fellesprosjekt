@@ -56,6 +56,33 @@ public class Client
 	 * @param send - object to send
 	 * @return boolean - if send was successful or not
 	 */
+	
+	public Wrapper sendObject(Object o, Status s){
+		Wrapper sentObj = new Wrapper(s,o);
+	
+		try {
+			output = new ObjectOutputStream(socket.getOutputStream());
+			output.writeObject(sentObj);
+			output.flush();
+			input = new ObjectInputStream(socket.getInputStream());
+			try {
+				Wrapper response = (Wrapper) input.readObject();
+				return response;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+		
+	}
+	/*
 	public Object sendObject(Object send)
 	{
 		try
@@ -77,6 +104,7 @@ public class Client
 		catch(IOException e){}
 		return null;
 	}
+	*/
 	
 	/**
 	 * Object to recieve from server
@@ -84,12 +112,12 @@ public class Client
 	 * 
 	 * @return Object - the object recieved
 	 */
-	public Object recieveObject() 
+	public Wrapper recieveObject() 
 	{
 		try
 		{
 			input=new ObjectInputStream(socket.getInputStream());
-			return (Object) input.readObject();
+			return (Wrapper) input.readObject();
 			
 		}
 		catch(ClassNotFoundException e){} catch (IOException e) {

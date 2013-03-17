@@ -1,5 +1,7 @@
 package xcal.server;
 
+import java.util.ArrayList;
+
 import xcal.client.Wrapper;
 import xcal.client.Status;
 
@@ -77,8 +79,13 @@ public class ObjectManagers {
 			case LOGIN:
 				return EmployeeQ.checkPassword(e.getEmail());
 				
+			}
 		}
-		
+		else if(content instanceof String){
+			System.out.println("Recieved String");
+			if(flag == Status.SELECT){
+				return (ArrayList<Room>)RoomQ.findAvailableRooms();
+			}
 		}
 		return null;
 		

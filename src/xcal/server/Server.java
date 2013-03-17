@@ -18,6 +18,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.core.Settings;
 
 
@@ -80,14 +82,12 @@ public class Server
 		return false;
 	}
 	
-	public void sendObject(Object o){
-		
-	}
 	
-	public Object recieveObject(Object o){
-		
-		
-		
+	
+	public Object recieveObject(Wrapper o){
+		ObjectManagers om = new ObjectManagers();
+		Object obj = om.manage(o);
+		return obj;
 		
 		
 	}

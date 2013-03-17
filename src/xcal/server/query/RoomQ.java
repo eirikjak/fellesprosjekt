@@ -2,6 +2,7 @@ package xcal.server.query;
 
 import xcal.model.*;
 import java.sql.*;
+import java.util.ArrayList;
 public class RoomQ {
 	
 	;
@@ -18,6 +19,10 @@ public class RoomQ {
 	}
 	
 	public Room selectRoom(int romId){
+		return null;
+	}
+
+	public static ArrayList<Room> findAvailableRooms() {
 		return null;
 	}
 	
