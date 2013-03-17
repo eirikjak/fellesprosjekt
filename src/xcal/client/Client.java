@@ -62,7 +62,7 @@ public class Client
 	 * @return boolean - if send was successful or not
 	 */
 	
-	public Wrapper sendObject(Object o, Status s){
+	public  synchronized Wrapper sendObject(Object o, Status s){
 		Wrapper sentObj = new Wrapper(s,o);
 	
 		try {
