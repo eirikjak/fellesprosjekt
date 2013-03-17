@@ -14,8 +14,12 @@ import java.util.Vector;
 
 public class Employee extends Person
 {
+	private int empId;
 	
-	
+	public int getEmpId() {
+		return empId;
+	}
+
 	public Employee(String name,String mail)
 	{
 		setName(name);

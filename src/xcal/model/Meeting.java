@@ -15,7 +15,14 @@ public class Meeting extends Appointment
 	private Vector<Employee> participants;
 	private Employee manager;
 	private Room room;
+	private int appId;
 	
+	public int getAppId() {
+		return appId;
+	}
+
+
+
 	public Meeting(){}
 	
 

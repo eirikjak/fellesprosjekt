@@ -8,7 +8,7 @@ import xcal.model.*;
 
 public class AppointmentsQ
 {
-	private DbConnection connection;
+	private static DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
 	 */
@@ -18,12 +18,13 @@ public class AppointmentsQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createAppointment(int EmployeeId){
+	public static Appointment createAppointment(Appointment app){
+		return app;
 	
 	}
 	
 	
-	public Appointment selectAppointment(int AppointmentId)
+	public static Appointment selectAppointment(int AppointmentId)
 	{
 		String query="select * from Appointment where id='"+AppointmentId+"'";
  	   
@@ -64,23 +65,24 @@ public class AppointmentsQ
  	   return null;
 	}
 	
-	public void updateAppointment(int AppointmentId){
+	public static void updateAppointment(Appointment a){
 		
 	}
 	
-	public void createMeeting(int EmployeeId){
+	public static Meeting createMeeting(Meeting m){
+		return m;
+	}
+	
+	public static Meeting selectMeeting(int appId){
+		return null;
 		
 	}
 	
-	public void selectMeeting(int MeetingId){
+	public static void updateMeeting(Meeting m){
 		
 	}
 	
-	public void updateMeeting(int MeetingId){
-		
-	}
-	
-	public void deleteEvent(int id){
+	public static void deleteEvent(int id){
 		
 	}
 	

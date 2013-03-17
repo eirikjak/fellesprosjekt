@@ -10,7 +10,7 @@ import xcal.model.*;
 
 public class EmployeeQ
 {
-	private DbConnection connection;
+	private static DbConnection connection;
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
@@ -21,19 +21,19 @@ public class EmployeeQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createPerson(Employee p){
-		
-	}
-	
-	public void updatePerson(Employee p){
-		
-	}
-	
-	public Employee selectPerson(int EmployeeId){
+	public static Object createPerson(Employee p){
 		return null;
 	}
 	
-	public Employee selectPersonWithEmail(String mail)
+	public static void updatePerson(Employee p){
+		
+	}
+	
+	public static Employee selectPerson(int EmployeeId){
+		return null;
+	}
+	
+	public static Employee selectPersonWithEmail(String mail)
 	{
 		String query="select * from Person where email='"+mail+"'";
  	   
@@ -56,7 +56,7 @@ public class EmployeeQ
  	   return null;
 	}
 	
-	public void deletePerson(int EmployeeId){
+	public static void deletePerson(int EmployeeId){
 		
 	}
 	
@@ -68,7 +68,7 @@ public class EmployeeQ
 		return null;
 	}
 	
-	public boolean checkPassword(String loginInfo){
+	public static boolean checkPassword(String email){
 		return false;
 	}
 	

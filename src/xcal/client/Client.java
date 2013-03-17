@@ -56,18 +56,26 @@ public class Client
 	 * @param send - object to send
 	 * @return boolean - if send was successful or not
 	 */
-	public boolean sendObject(Object send)
+	public Object sendObject(Object send)
 	{
 		try
 		{
 			output=new ObjectOutputStream(socket.getOutputStream());
+			input = new ObjectInputStream(socket.getInputStream());
 			output.writeObject(send);
 			output.flush();
 			//output.close();
-			return true;
+			try {
+				Object response = input.readObject();
+				return response;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 		}
 		catch(IOException e){}
-		return false;
+		return null;
 	}
 	
 	/**

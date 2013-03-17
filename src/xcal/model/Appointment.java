@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 
 public class Appointment
 {
+	private int appId;
+	
 	private String location;
 	private Timestamp from_time;
 	private Timestamp to_time;
@@ -34,7 +36,9 @@ public class Appointment
 	public String getLocation(){return location;}
 	public String getName(){return name;}
 	public String getDescription(){return description;}
-	
+	public int getAppId() {
+		return appId;
+	}
 
 	
 	
