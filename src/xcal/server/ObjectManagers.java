@@ -81,6 +81,13 @@ public class ObjectManagers {
 				
 			}
 		}
+		else if(content instanceof Authentication){
+			if(flag == Status.LOGIN){
+				Authentication auth=(Authentication)o;
+				if(ServerLogic.login(auth))
+					return new Employee();
+			}
+		}
 		else if(content instanceof String){
 			System.out.println("Recieved String");
 			if(flag == Status.SELECT){

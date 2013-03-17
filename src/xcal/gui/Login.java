@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import xcal.client.Client;
+import xcal.client.Status;
 import xcal.model.Authentication;
 
 public class Login extends JPanel {
@@ -89,7 +90,7 @@ public class Login extends JPanel {
 			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 			{
 				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
-				client.sendObject(auth);
+				client.sendObject(auth, Status.LOGIN);
 				Object check=client.recieveObject();
 				
 				
