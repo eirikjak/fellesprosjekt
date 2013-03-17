@@ -23,6 +23,7 @@ public class Employee extends Person implements Serializable
 
 	public Employee(String name,String mail, String password)
 	{
+		super();
 		setName(name);
 		setEmail(mail);
 		this.password = password;
@@ -35,5 +36,9 @@ public class Employee extends Person implements Serializable
 	}
 	public Appointment createAppointment(String time,Room place){return null;}
 	public Meeting createMeeting(String time,Room place, Vector<Employee> participants){return null;}
+	
+	public String toString(){
+		return this.getName();
+	}
 	
 }

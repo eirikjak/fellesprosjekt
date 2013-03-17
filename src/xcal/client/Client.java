@@ -117,12 +117,12 @@ public class Client
 	 * 
 	 * @return Object - the object recieved
 	 */
-	public Wrapper recieveObject() 
+	public Object recieveObject() 
 	{
 		try
 		{
 			input=new ObjectInputStream(socket.getInputStream());
-			return (Wrapper) input.readObject();
+			return input.readObject();
 			
 		}
 		catch(ClassNotFoundException e){} catch (IOException e) {

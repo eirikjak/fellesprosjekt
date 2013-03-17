@@ -29,6 +29,7 @@ import xcal.client.Client;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Authentication;
+import xcal.model.Employee;
 
 public class Login extends JPanel {
 	private JTextField textField;
@@ -110,6 +111,7 @@ public class Login extends JPanel {
 			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 			{
 				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
+
 				Wrapper response = client.sendObject(auth, Status.LOGIN);
 				
 				if(response.getFlag() != Status.SUCCESS){
@@ -122,7 +124,7 @@ public class Login extends JPanel {
 				{
 					RootFrame.clearAll();
 					RootFrame.addPanel(new Mainpage());
-					System.out.println("Welcome" + response.getContent());
+					System.out.println("Welcome" + (Employee)response.getContent());
 				}
 				
 			}

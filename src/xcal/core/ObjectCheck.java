@@ -13,10 +13,7 @@ public class ObjectCheck
 		{
 			Employee e=(Employee)o;
 		}
-		else if(o instanceof Authentication)
-		{
-			
-		}
+		
 		else if(o instanceof Authentication)
 		{
 			System.out.println("checking auth..");
