@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import xcal.client.Client;
 import xcal.client.Status;
 import xcal.model.Authentication;
+import xcal.model.Employee;
 
 public class Login extends JPanel {
 	private JTextField textField;
@@ -91,7 +92,7 @@ public class Login extends JPanel {
 			{
 				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
 				client.sendObject(auth, Status.LOGIN);
-				Object check=client.recieveObject();
+				Employee check =(Employee)client.recieveObject();
 				
 				
 				if(check==null)
