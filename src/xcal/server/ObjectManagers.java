@@ -11,7 +11,7 @@ import xcal.model.*;
 
 public class ObjectManagers {
 	
-	public Object manage(Object o){
+	public static Object manage(Object o){
 		
 		Wrapper w = (Wrapper) o;
 		Object content = w.getContent();
@@ -83,9 +83,13 @@ public class ObjectManagers {
 		}
 		else if(content instanceof Authentication){
 			if(flag == Status.LOGIN){
-				Authentication auth=(Authentication)o;
+				Authentication auth=(Authentication)content;
 				if(ServerLogic.login(auth))
-					return new Employee();
+					
+					return new Wrapper(Status.SUCCESS,new Employee());
+				else{
+					return new Wrapper(Status.ERROR,new Employee());
+				}
 			}
 		}
 		else if(content instanceof String){

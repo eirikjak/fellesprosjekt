@@ -11,6 +11,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 
 
 import xcal.core.Settings;
@@ -30,7 +34,7 @@ public class Client
 	public Client()
 	{
 
-		//connect();
+		connect();
 		RootFrame.init(1015, 720);
 		RootFrame.addPanel(new Login(this));
 
@@ -41,6 +45,7 @@ public class Client
 		try
 		{
 			socket=new Socket(Settings.server_ip,Settings.port);
+		
 		}
 		catch(IOException e)
 		{
@@ -133,6 +138,9 @@ public class Client
 	
 	public static void main(String[] args)
 	{
+		
+		
+		
 		new Client();
 	}
 	

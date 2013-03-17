@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.sql.*;//jconnector
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 import structs.*;
-import sun.security.action.GetIntegerAction;
+
 
 import xcal.model.Appointment;
 import xcal.model.Employee;
@@ -159,13 +161,14 @@ import xcal.model.Employee;
 	    	    return rooms;
 	    	}
 	    	
-	    	public void createAppointment(int EmployeeId, datetime startDate, datetime endDate, String description, String email, int roomid){
+	    	public void createAppointment(int EmployeeId, DateTime startDate, DateTime endDate, String description, String email, int roomid) throws SQLException{
 	    		statement = connection.createStatement();
 	    		String sql = "INSERT INTO Appointment (start_date, end_date, description, leader,place, room) VALUES ("+startDate+","+endDate+","+description+","+email+","+roomid+");";
 	    		statement.executeUpdate(sql);
 	    		
 	    	}
-	    	/** no need to return array, since appointments have unique id **/
+	    	/** no need to return array, since appointments have unique id 
+	    	 * @throws SQLException **/
 	    	/*public Appointment[] selectAppointment(int AppointmentId){
 	    		String sql = "SELECT * FROM Room WHERE id ='"+AppointmentId+"'";
 	    	    ResultSet resultset = statement.executeQuery(sql);
@@ -188,7 +191,7 @@ import xcal.model.Employee;
 	    	    return appointments;
 	    	}*/
 	    	
-	    	public void updateAppointment(int AppointmentId, datetime startDate, datetime endDate, String description, String email,int place, int room ){
+	    	public void updateAppointment(int AppointmentId, DateTime startDate, DateTime endDate, String description, String email,int place, int room ) throws SQLException{
 	    		
     				String sql = "UPDATE Appointment "+
     								"SET start_date='"+startDate+"',"+
@@ -234,7 +237,7 @@ import xcal.model.Employee;
 	        //TODO add parameters for datetime starttime and datetime endtime
 	        
 	        
-	        public Room[] getAvailableRooms () throws Exception{
+	        public Room[] getAvailableRooms (DateTime startDate, DateTime endDate) throws Exception{
 	        	
 	        	
 	    	    String sqlstr = "SELECT R.name"+
@@ -242,9 +245,9 @@ import xcal.model.Employee;
 				    	"WHERE R.id NOT IN("+
 				    	"SELECT R.id"+
 				    	"FROM Room R, Appointment A"+
-				    	"WHERE ((('"startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
+				    	"WHERE ((('"+startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
 				    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
-				    	"OR (('"startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
+				    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
 				    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
 				       
 	    	    ResultSet resultset = statement.executeQuery(sqlstr);

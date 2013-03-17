@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
-import com.sun.xml.internal.ws.encoding.soap.SerializationException;
 
 import xcal.core.ObjectCheck;
 import xcal.model.Employee;
@@ -49,17 +49,26 @@ public class ClientThread extends Thread
 	{
 		try
 		{
-			input=new ObjectInputStream(client.getInputStream());
 			
-			Object o = input.readObject();
-			
-			return o;
-			//return input.readObject();
+				input=new ObjectInputStream(client.getInputStream());
+				
+				Object o = input.readObject();
+				
+				return o;
+				//return input.readObject();
 			
 		}
 		catch(ClassNotFoundException e){} catch (IOException e) {
 			e.printStackTrace();
+			try {
+				client.close();
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
+		
 		
 		return null;
 	}
@@ -79,7 +88,10 @@ public class ClientThread extends Thread
 			output.flush();
 			return true;
 		}
-		catch(IOException e){}
+		catch(IOException e){
+			
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
@@ -87,18 +99,16 @@ public class ClientThread extends Thread
 	public void run()
 	{
 		
-		try
-		{
+		
 			System.out.println("Client nr "+id+" running");
-			while(true)
+			while(!client.isClosed())
 			{
-				Object object=ObjectCheck.handleObject(recieveObject());
+				Object object= ObjectManagers.manage(recieveObject());
 				System.out.println("recieved object");
 				sendObject(object);
 				System.out.println("object sent");
 			}
-		}
-		catch(SerializationException e){}
+		
 		
 		
 		//check user before continue

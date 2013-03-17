@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 
 import xcal.client.Client;
 import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.model.Authentication;
 
 public class Login extends JPanel {
@@ -86,21 +87,22 @@ public class Login extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//to login stuff
-			RootFrame.addPanel(new Mainpage());
+		
 			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 			{
 				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
-				client.sendObject(auth, Status.LOGIN);
-				Object check=client.recieveObject();
+				Wrapper response = client.sendObject(auth, Status.LOGIN);
 				
 				
-				if(check==null)
+				System.out.println("hello");
+				
+				if(response.getFlag() != Status.SUCCESS)
 					System.out.println("Wrong username/password");
 				else
 				{
 					RootFrame.clearAll();
 					RootFrame.addPanel(new Mainpage());
-					System.out.println("Welcome" + check);
+					System.out.println("Welcome" + response.getContent());
 				}
 				
 			}

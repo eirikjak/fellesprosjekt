@@ -44,7 +44,7 @@ public class EmployeeQ
  		   
  		   result.next();
  		   
- 		   Employee e=new Employee(result.getString("name"),result.getString("email"));
+ 		   Employee e=new Employee(result.getString("name"),result.getString("email"), result.getString("password"));
  		   return e;
  	   } 
  	   catch (SQLException e) 
