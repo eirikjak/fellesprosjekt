@@ -237,33 +237,33 @@ public class CalendarPanel extends JPanel {
 				lblMars.setBounds(334, 5, 233, 39);
 				panel.add(lblMars);
 				
-				JList list = new JList();
-				list.setBounds(8, 122, 126, 365);
-				panel.add(list);
+				JList monday = new JList();
+				monday.setBounds(8, 122, 126, 365);
+				panel.add(monday);
 				
-				JList list_8 = new JList();
-				list_8.setBounds(141, 122, 126, 365);
-				panel.add(list_8);
+				JList tuesday = new JList();
+				tuesday.setBounds(141, 122, 126, 365);
+				panel.add(tuesday);
 				
-				JList list_9 = new JList();
-				list_9.setBounds(274, 122, 126, 365);
-				panel.add(list_9);
+				JList wednesday = new JList();
+				wednesday.setBounds(274, 122, 126, 365);
+				panel.add(wednesday);
 				
-				JList list_10 = new JList();
-				list_10.setBounds(540, 122, 126, 365);
-				panel.add(list_10);
+				JList thursday = new JList();
+				thursday.setBounds(540, 122, 126, 365);
+				panel.add(thursday);
 				
-				JList list_11 = new JList();
-				list_11.setBounds(806, 122, 126, 365);
-				panel.add(list_11);
+				JList friday = new JList();
+				friday.setBounds(806, 122, 126, 365);
+				panel.add(friday);
 				
-				JList list_12 = new JList();
-				list_12.setBounds(673, 122, 126, 365);
-				panel.add(list_12);
+				JList saturday = new JList();
+				saturday.setBounds(673, 122, 126, 365);
+				panel.add(saturday);
 				
-				JList list_13 = new JList();
-				list_13.setBounds(407, 122, 126, 365);
-				panel.add(list_13);
+				JList sunday = new JList();
+				sunday.setBounds(407, 122, 126, 365);
+				panel.add(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
 		
