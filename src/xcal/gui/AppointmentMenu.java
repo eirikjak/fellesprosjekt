@@ -64,12 +64,12 @@ import javax.swing.border.TitledBorder;
 
 public class AppointmentMenu extends JFrame {
 	private JTextField name;
-	private JTextField fromHour;
-	private JTextField fromMinute;
+	private JTextField startHour;
+	private JTextField startMinute;
 	private JTextField location;
 	private JXDatePicker datePicker;
-	private JTextField toHour;
-	private JTextField toMinute;
+	private JTextField endHour;
+	private JTextField endMinute;
 	private JTextArea description;
 	private JComboBox notificationBox;
 	private HashMap<String, Integer> notificationMap;
@@ -93,16 +93,16 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(name);
 		name.setColumns(10);
 		
-		fromHour = new JTextField();
-		((AbstractDocument)fromHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		fromHour.setBounds(181, 93, 57, 31);
-		getContentPane().add(fromHour);
-		fromHour.setColumns(10);
-		fromMinute = new JTextField();
-		((AbstractDocument)fromMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		fromMinute.setColumns(10);
-		fromMinute.setBounds(245, 93, 57, 31);
-		getContentPane().add(fromMinute);
+		startHour = new JTextField();
+		((AbstractDocument)startHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		startHour.setBounds(181, 93, 57, 31);
+		getContentPane().add(startHour);
+		startHour.setColumns(10);
+		startMinute = new JTextField();
+		((AbstractDocument)startMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		startMinute.setColumns(10);
+		startMinute.setBounds(245, 93, 57, 31);
+		getContentPane().add(startMinute);
 		
 		datePicker = new JXDatePicker();
 		datePicker.setBounds(547, 93, 104, 31);
@@ -181,17 +181,17 @@ public class AppointmentMenu extends JFrame {
 		label.setBounds(237, 82, 12, 49);
 		getContentPane().add(label);
 		
-		toHour = new JTextField();
-		((AbstractDocument)toHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		toHour.setColumns(10);
-		toHour.setBounds(324, 93, 57, 31);
-		getContentPane().add(toHour);
+		endHour = new JTextField();
+		((AbstractDocument)endHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		endHour.setColumns(10);
+		endHour.setBounds(324, 93, 57, 31);
+		getContentPane().add(endHour);
 		
-		toMinute = new JTextField();
-		((AbstractDocument)toMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		toMinute.setColumns(10);
-		toMinute.setBounds(388, 93, 57, 31);
-		getContentPane().add(toMinute);
+		endMinute = new JTextField();
+		((AbstractDocument)endMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		endMinute.setColumns(10);
+		endMinute.setBounds(388, 93, 57, 31);
+		getContentPane().add(endMinute);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -279,19 +279,19 @@ public class AppointmentMenu extends JFrame {
 			int toMinuteDate = 0;
 			try{
 				
-				fromHourDate = Integer.parseInt(fromHour.getText());
+				fromHourDate = Integer.parseInt(startHour.getText());
 				if(!(fromHourDate >= 0 &&  fromHourDate <24)){
 					valid = false;
 				}
-				fromMinuteDate = Integer.parseInt(fromMinute.getText());
+				fromMinuteDate = Integer.parseInt(startMinute.getText());
 				if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
 					valid = false;
 				}
-				toHourDate = Integer.parseInt(toHour.getText());
+				toHourDate = Integer.parseInt(endHour.getText());
 				if(!(toHourDate >= 0 &&  toHourDate <24)){
 					valid = false;
 				}
-				toMinuteDate = Integer.parseInt(toMinute.getText());
+				toMinuteDate = Integer.parseInt(endMinute.getText());
 				if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
 					valid = false;
 				}

@@ -22,7 +22,7 @@ import xcal.client.*;
 import xcal.model.Employee;
 import xcal.server.query.EmployeeQ;
 
-public class OtherCallendarsMenu extends JFrame {
+public class OtherCalendarsMenu extends JFrame {
 
 	private JPanel contentPane;
 
@@ -33,7 +33,7 @@ public class OtherCallendarsMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OtherCallendarsMenu frame = new OtherCallendarsMenu();
+					OtherCalendarsMenu frame = new OtherCalendarsMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class OtherCallendarsMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OtherCallendarsMenu() {
+	public OtherCalendarsMenu() {
 		Client client = Client.getClient();
 		setTitle("Add other calendars");
 		this.setVisible(true);
@@ -81,10 +81,10 @@ public class OtherCallendarsMenu extends JFrame {
 		list_2.setBounds(336, 153, 185, 133);
 		getContentPane().add(list_2);
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
-		button.setBounds(250, 173, 68, 35);
-		button.addActionListener(new ActionListener(){
+		JButton addButton = new JButton("");
+		addButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
+		addButton.setBounds(250, 173, 68, 35);
+		addButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				if(list_1.getSelectedIndex() != -1){
 					model1.addElement(model.getElementAt(list_1.getSelectedIndex()));
@@ -93,17 +93,17 @@ public class OtherCallendarsMenu extends JFrame {
 				
 			}
 		});
-		getContentPane().add(button);
+		getContentPane().add(addButton);
 		
 		
 		
 	
 		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
-		getContentPane().add(button_1);
-		button_1.setBounds(250, 228, 68, 35);
-		button_1.addActionListener(new ActionListener(){
+		JButton removeButton = new JButton("");
+		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
+		getContentPane().add(removeButton);
+		removeButton.setBounds(250, 228, 68, 35);
+		removeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				if(list_2.getSelectedIndex() != -1){
 					model.addElement(model1.getElementAt(list_2.getSelectedIndex()));
@@ -130,19 +130,19 @@ public class OtherCallendarsMenu extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton = new JButton("Cancel");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				dispose();
 			}
 		});
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		btnNewButton.setBounds(174, 316, 117, 32);
-		contentPane.add(btnNewButton);
+		btnCancel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnCancel.setBounds(174, 316, 117, 32);
+		contentPane.add(btnCancel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(OtherCallendarsMenu.class.getResource("/images/1363373140_user-group-new copy.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(OtherCalendarsMenu.class.getResource("/images/1363373140_user-group-new copy.png")));
 		lblNewLabel_1.setBounds(369, 19, 122, 104);
 		contentPane.add(lblNewLabel_1);
 		
@@ -150,7 +150,7 @@ public class OtherCallendarsMenu extends JFrame {
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(39, 140, 496, 159);
 		contentPane.add(panel);
-		button_1.addActionListener(new ActionListener() {
+		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
