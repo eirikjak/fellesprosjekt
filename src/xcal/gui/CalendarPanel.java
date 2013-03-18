@@ -2,6 +2,8 @@ package xcal.gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -14,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import org.joda.time.DateTime;
 
 import xcal.client.Client;
 
@@ -32,13 +36,8 @@ public class CalendarPanel extends JPanel {
 		/*
 		 * SETTING THE DATES OF LABELS AND MONTH OF MAIN LABEL
 		 */
-		
-		
-		
-		
-		
-		
-		
+		SwingWorker w = new Worker();
+		w.execute();
 		setLayout(null);
 
 		
@@ -129,7 +128,7 @@ public class CalendarPanel extends JPanel {
 		lblNewLabel_2.setForeground(new Color(35, 103, 174));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Show", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -158,54 +157,54 @@ public class CalendarPanel extends JPanel {
 				panel_4.setBounds(6, 88, 922, 27);
 				panel.add(panel_4);
 				
-				JLabel label = new JLabel("18");
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setForeground(Color.WHITE);
-				label.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label.setBounds(20, 4, 90, 19);
-				panel_4.add(label);
+				JLabel mondayDate = new JLabel();
+				mondayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				mondayDate.setForeground(Color.WHITE);
+				mondayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				mondayDate.setBounds(20, 4, 90, 19);
+				panel_4.add(mondayDate);
 				
-				JLabel label_8 = new JLabel("20");
-				label_8.setHorizontalAlignment(SwingConstants.CENTER);
-				label_8.setForeground(Color.WHITE);
-				label_8.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_8.setBounds(285, 4, 90, 19);
-				panel_4.add(label_8);
+				JLabel tuesdayDate = new JLabel();
+				tuesdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				tuesdayDate.setForeground(Color.WHITE);
+				tuesdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				tuesdayDate.setBounds(150, 4, 90, 19);
+				panel_4.add(tuesdayDate);
 				
-				JLabel label_9 = new JLabel("19");
-				label_9.setHorizontalAlignment(SwingConstants.CENTER);
-				label_9.setForeground(Color.WHITE);
-				label_9.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_9.setBounds(150, 4, 90, 19);
-				panel_4.add(label_9);
+				JLabel wednesdayDate = new JLabel();
+				wednesdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				wednesdayDate.setForeground(Color.WHITE);
+				wednesdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				wednesdayDate.setBounds(285, 4, 90, 19);
+				panel_4.add(wednesdayDate);
 				
-				JLabel label_10 = new JLabel("21");
-				label_10.setHorizontalAlignment(SwingConstants.CENTER);
-				label_10.setForeground(Color.WHITE);
-				label_10.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_10.setBounds(416, 4, 90, 19);
-				panel_4.add(label_10);
+				JLabel thursdayDate = new JLabel();
+				thursdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				thursdayDate.setForeground(Color.WHITE);
+				thursdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				thursdayDate.setBounds(416, 4, 90, 19);
+				panel_4.add(thursdayDate);
 				
-				JLabel label_11 = new JLabel("22");
-				label_11.setHorizontalAlignment(SwingConstants.CENTER);
-				label_11.setForeground(Color.WHITE);
-				label_11.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_11.setBounds(549, 4, 90, 19);
-				panel_4.add(label_11);
+				JLabel fridayDate = new JLabel();
+				fridayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				fridayDate.setForeground(Color.WHITE);
+				fridayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				fridayDate.setBounds(549, 4, 90, 19);
+				panel_4.add(fridayDate);
 				
-				JLabel label_12 = new JLabel("23");
-				label_12.setHorizontalAlignment(SwingConstants.CENTER);
-				label_12.setForeground(Color.WHITE);
-				label_12.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_12.setBounds(681, 4, 90, 19);
-				panel_4.add(label_12);
+				JLabel saturdayDate = new JLabel();
+				saturdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				saturdayDate.setForeground(Color.WHITE);
+				saturdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				saturdayDate.setBounds(681, 4, 90, 19);
+				panel_4.add(saturdayDate);
 				
-				JLabel label_13 = new JLabel("24");
-				label_13.setHorizontalAlignment(SwingConstants.CENTER);
-				label_13.setForeground(Color.WHITE);
-				label_13.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_13.setBounds(814, 4, 90, 19);
-				panel_4.add(label_13);
+				JLabel sundayDate = new JLabel();
+				sundayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				sundayDate.setForeground(Color.WHITE);
+				sundayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				sundayDate.setBounds(814, 4, 90, 19);
+				panel_4.add(sundayDate);
 				
 				JLabel label_14 = new JLabel("");
 				label_14.setIcon(new ImageIcon(CalendarPanel.class.getResource("/images/kalender_bar.png")));
@@ -222,12 +221,12 @@ public class CalendarPanel extends JPanel {
 				button_1.setBounds(804, 11, 132, 29);
 				panel.add(button_1);
 				
-				JLabel lblMars = new JLabel("MARS");
-				lblMars.setHorizontalAlignment(SwingConstants.CENTER);
-				lblMars.setForeground(new Color(35, 103, 174));
-				lblMars.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-				lblMars.setBounds(334, 5, 233, 39);
-				panel.add(lblMars);
+				JLabel monthLbl = new JLabel("MARS");
+				monthLbl.setHorizontalAlignment(SwingConstants.CENTER);
+				monthLbl.setForeground(new Color(35, 103, 174));
+				monthLbl.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+				monthLbl.setBounds(334, 5, 233, 39);
+				panel.add(monthLbl);
 				
 				JList monday = new JList();
 				monday.setBounds(8, 122, 126, 365);
@@ -267,7 +266,15 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			// TODO Auto-generated method stub
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			DateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");
+			for(int i=0; i<7; i++){
+				System.out.println(df.format(cal.getTime()));
+				cal.add(Calendar.DATE, 1);
+			}
+			
+			
+			
 			return null;
 		}
 		
