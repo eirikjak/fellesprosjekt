@@ -27,6 +27,7 @@ import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Location;
+import xcal.model.Notification;
 
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
@@ -36,6 +37,8 @@ import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.DropMode;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -59,21 +62,24 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 import javax.swing.border.TitledBorder;
+import org.jdesktop.swingx.JXBusyLabel;
 
 
 
 public class AppointmentMenu extends JFrame {
 	private JTextField name;
-	private JTextField fromHour;
-	private JTextField fromMinute;
+	private JTextField startHour;
+	private JTextField startMinute;
 	private JTextField location;
 	private JXDatePicker datePicker;
-	private JTextField toHour;
-	private JTextField toMinute;
+	private JTextField endHour;
+	private JTextField endMinute;
 	private JTextArea description;
 	private JComboBox notificationBox;
 	private HashMap<String, Integer> notificationMap;
 	private Client client = Client.getClient();
+	private JLabel errorLabel;
+	private JXBusyLabel busyLabel;
 	
 	/**
 	 * Create the panel.
@@ -93,16 +99,16 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(name);
 		name.setColumns(10);
 		
-		fromHour = new JTextField();
-		((AbstractDocument)fromHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		fromHour.setBounds(181, 93, 57, 31);
-		getContentPane().add(fromHour);
-		fromHour.setColumns(10);
-		fromMinute = new JTextField();
-		((AbstractDocument)fromMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		fromMinute.setColumns(10);
-		fromMinute.setBounds(245, 93, 57, 31);
-		getContentPane().add(fromMinute);
+		startHour = new JTextField();
+		((AbstractDocument)startHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		startHour.setBounds(181, 93, 57, 31);
+		getContentPane().add(startHour);
+		startHour.setColumns(10);
+		startMinute = new JTextField();
+		((AbstractDocument)startMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		startMinute.setColumns(10);
+		startMinute.setBounds(245, 93, 57, 31);
+		getContentPane().add(startMinute);
 		
 		datePicker = new JXDatePicker();
 		datePicker.setBounds(547, 93, 104, 31);
@@ -181,17 +187,17 @@ public class AppointmentMenu extends JFrame {
 		label.setBounds(237, 82, 12, 49);
 		getContentPane().add(label);
 		
-		toHour = new JTextField();
-		((AbstractDocument)toHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		toHour.setColumns(10);
-		toHour.setBounds(324, 93, 57, 31);
-		getContentPane().add(toHour);
+		endHour = new JTextField();
+		((AbstractDocument)endHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		endHour.setColumns(10);
+		endHour.setBounds(324, 93, 57, 31);
+		getContentPane().add(endHour);
 		
-		toMinute = new JTextField();
-		((AbstractDocument)toMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
-		toMinute.setColumns(10);
-		toMinute.setBounds(388, 93, 57, 31);
-		getContentPane().add(toMinute);
+		endMinute = new JTextField();
+		((AbstractDocument)endMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
+		endMinute.setColumns(10);
+		endMinute.setBounds(388, 93, 57, 31);
+		getContentPane().add(endMinute);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -243,6 +249,19 @@ public class AppointmentMenu extends JFrame {
 		panel.setBounds(173, 32, 484, 326);
 		getContentPane().add(panel);
 		
+		errorLabel = new JLabel("Error on appointment creation ");
+		errorLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		errorLabel.setBounds(182, 438, 469, 14);
+		errorLabel.setVisible(false);
+		getContentPane().add(errorLabel);
+		
+		busyLabel = new JXBusyLabel();
+		busyLabel.setBounds(375, 438, 26, 26);
+		busyLabel.setVisible(false);
+		getContentPane().add(busyLabel);
+		
 		pack();
 
 	}
@@ -272,74 +291,105 @@ public class AppointmentMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
-			boolean valid = true;
-			int fromHourDate = 0;
-			int fromMinuteDate = 0;
-			int toHourDate = 0;
-			int toMinuteDate = 0;
-			try{
-				
-				fromHourDate = Integer.parseInt(fromHour.getText());
-				if(!(fromHourDate >= 0 &&  fromHourDate <24)){
-					valid = false;
+			busyLabel.setVisible(true);
+			busyLabel.setBusy(true);
+			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
+				protected Void doInBackground() throws Exception {
+					boolean valid = true;
+					int fromHourDate = 0;
+					int fromMinuteDate = 0;
+					int toHourDate = 0;
+					int toMinuteDate = 0;
+					try{
+						
+						fromHourDate = Integer.parseInt(startHour.getText());
+						if(!(fromHourDate >= 0 &&  fromHourDate <24)){
+							valid = false;
+						}
+						fromMinuteDate = Integer.parseInt(startMinute.getText());
+						if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
+							valid = false;
+						}
+						toHourDate = Integer.parseInt(endHour.getText());
+						if(!(toHourDate >= 0 &&  toHourDate <24)){
+							valid = false;
+						}
+						toMinuteDate = Integer.parseInt(endMinute.getText());
+						if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
+							valid = false;
+						}
+					}catch(NumberFormatException e1){
+						valid = false;
+					}
+					
+					DateTime inputDate = null;
+					if(datePicker.getDate()== null){
+						valid = false;
+						inputDate = new DateTime();
+					}else{
+						
+						inputDate = new DateTime(datePicker.getDate());
+					}
+					DateTime today = DateTime.now();
+					DateTime startTime;
+					DateTime endTime;
+					
+					System.out.println(today);
+					
+					startTime = new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),fromHourDate,fromMinuteDate,0);
+					endTime= new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),toHourDate,toMinuteDate,0);
+					if(!today.isBefore(startTime)){
+						valid = false;
+					}
+					if(!startTime.isBefore(endTime)){
+						
+						valid = false;
+					}
+					
+					String loc = location.getText();
+					if(!(loc.length() > 0))
+						valid = false;
+					
+					String desc = description.getText();
+					String titleString = name.getText();
+					if(!(titleString.length() > 0)){
+						valid = false;
+					}
+					
+					int notification = notificationMap.get(notificationBox.getSelectedItem());
+					System.out.println(notification);
+					
+					if(valid){
+						System.out.println("sending shit");
+					Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
+					Notification notificationObj = new Notification(app,Client.getClient().getUser());
+					notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+					app.setNotification(notificationObj);
+					System.out.println(app);
+					Wrapper response = client.sendObject(app, Status.CREATE);
+					
+					if(response.getFlag() != Status.SUCCESS){
+						errorLabel.setText("Error on appointment creation ");
+						errorLabel.setVisible(true);
+					}else{
+						if(response.getFlag() == Status.SUCCESS){
+							Close();
+						}
+					}
+					}else{
+						errorLabel.setText("One or more invalid fields");
+						errorLabel.setVisible(true);
+						busyLabel.setBusy(false);
+						busyLabel.setVisible(false);
+						
+					}
+					return null;
 				}
-				fromMinuteDate = Integer.parseInt(fromMinute.getText());
-				if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
-					valid = false;
-				}
-				toHourDate = Integer.parseInt(toHour.getText());
-				if(!(toHourDate >= 0 &&  toHourDate <24)){
-					valid = false;
-				}
-				toMinuteDate = Integer.parseInt(toMinute.getText());
-				if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
-					valid = false;
-				}
-			}catch(NumberFormatException e1){
-				valid = false;
-			}
-			
-			Date inputDate = datePicker.getDate();
-			if(inputDate == null){
-				valid = false;
-				inputDate = new Date();
-			}
-			DateTime today = DateTime.now();
-			DateTime startTime;
-			DateTime endTime;
+
+			};
+			worker.execute();
 			
 			
-			if((DateTimeComparator.getInstance().compare(new DateTime(inputDate), today)) <= 0){
-				valid = false;
-			}
-			
-			System.out.println(valid);
-			startTime = new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),fromHourDate,fromMinuteDate,0);
-			endTime= new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),toHourDate,toMinuteDate,0);
-			if(DateTimeComparator.getInstance().compare(startTime, endTime) > 0){
-				valid = false;
-			}
-			
-			String loc = location.getText();
-			if(!(loc.length() > 0))
-				valid = false;
-			
-			String desc = description.getText();
-			String titleString = name.getText();
-			if(!(titleString.length() > 0)){
-				valid = false;
-			}
-			
-			int notification = notificationMap.get(notificationBox.getSelectedItem());
-			System.out.println(notification);
-			
-			if(valid){
-				System.out.println("sending shit");
-			Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
-			System.out.println(app);
-			Wrapper response = client.sendObject(app, Status.CREATE);
-			}
-			Close();
 			
 			
 			

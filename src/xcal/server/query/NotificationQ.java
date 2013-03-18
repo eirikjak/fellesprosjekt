@@ -1,16 +1,23 @@
 package xcal.server.query;
 
+import java.net.ConnectException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import xcal.model.Appointment;
+import xcal.model.Employee;
 import xcal.model.Notification;
  
 public class NotificationQ
 {
 	private AppointmentsQ appointments_query;
 	private EmployeeQ employee_query;
-	private DbConnection connection;
+	private static DbConnection connection;
 	
 	
 	
@@ -21,9 +28,6 @@ public class NotificationQ
 		employee_query=new EmployeeQ(this.connection);
 
 	}
-
-	
-	
 	/**
 	 * Notification[] not=dc.checkNotification();
 	        	
@@ -34,7 +38,26 @@ public class NotificationQ
 	 * @return
 	 */
 	
-	public boolean notificationReady()
+	public static Notification createNotification(Appointment app){
+		
+		synchronized (connection) {
+			try {
+			DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+			String query = "INSERT INTO Notification (app_id,person,notifiedAt) VALUES('" + app.getAppId() + "'," + "'" + app.getLeader().getName() +  "'," + "'" + format.print(app.getNotification().getNotificationTime()) + "')";
+			Statement stat = connection.getConnection().createStatement();
+			stat.execute(query);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+				
+			}
+			
+		}
+		return new Notification(app, app.getLeader());
+		
+	}
+	public static boolean notificationReady()
 	{
 		synchronized (connection) {
 		

@@ -16,6 +16,7 @@ import xcal.model.*;
 
 public class ObjectManagers {
 	
+	
 	public static Object manage(Object o){
 		
 		Wrapper w = (Wrapper) o;
@@ -32,7 +33,7 @@ public class ObjectManagers {
 				//return (Meeting)AppointmentsQ.createMeeting(m);
 			
 			case UPDATE:
-				AppointmentsQ.updateMeeting(m);
+				//AppointmentsQ.updateMeeting(m);
 				break;
 				
 			case DESTROY:
@@ -48,9 +49,21 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				Appointment result = (Appointment)AppointmentsQ.createAppointment(a);
-				if(result != null)
-					return new Wrapper(Status.SUCCESS,null);
+				System.out.println(a);
+				Location loc = LocationQ.createLocation(a.getLocationName());
+				if(loc != null){
+					Appointment app = AppointmentsQ.createAppointment(a, loc);
+					if(app != null){
+						Notification not = NotificationQ.createNotification(app);
+						if(not != null){
+							return new Wrapper(Status.SUCCESS, null);
+						}else{
+							AppointmentsQ.deleteAppointment(app);
+						}
+					}else{
+						LocationQ.deleteLocation(loc);
+					}
+				}
 				return new Wrapper(Status.ERROR,null);
 			case UPDATE:
 				int app_id = a.getAppId();
@@ -82,19 +95,14 @@ public class ObjectManagers {
 					return EmployeeQ.selectPersonWithEmail(e.getEmail());
 				}
 			case CREATE:
-				try {
-					return EmployeeQ.createPerson(e);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+					Employee result = EmployeeQ.createPerson(e);
+					if(result != null)
+						return new Wrapper(Status.SUCCESS, result);
+					return new Wrapper(Status.ERROR,null);
+				
 			case UPDATE:
-				try {
 					EmployeeQ.updatePerson(e);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				break;
 			case DESTROY:
 				EmployeeQ.deletePerson(e.getEmpId());

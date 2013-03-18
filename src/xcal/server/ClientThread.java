@@ -107,31 +107,12 @@ public class ClientThread extends Thread
 			{
 				Object object= ObjectManagers.manage(recieveObject());
 				System.out.println("recieved object");
-				/*try {
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
 				System.out.println(sendObject(object));
 				System.out.println("object sent");
 			}
 		
 		
 		
-		//check user before continue
-		//while(!checkUser());
-			
-		/*System.out.println("User authenticated");
-		System.out.println("Welcome "+person);
-		//what to do when client connected and thread run
-		String msg;*/
-		
-		/*try
-		{
-			while((msg=readFromClient())!=null)//print msg for all input from client
-				System.out.println("msg"+msg);
-		}
-		catch(Exception e){}*/
 		
 		
 	}

@@ -22,6 +22,7 @@ public class Appointment implements Serializable
         private Employee leader;
         private String name;
         private String description;
+        private Notification notfiNotification;
  
        
         public Appointment(DateTime start,DateTime end,String title,String description,Employee leader,Location location)
@@ -31,8 +32,14 @@ public class Appointment implements Serializable
                 this.title = title;
                 this.description = description;
                 this.leader = leader;
+                this.location = location;
                
                
+        }
+        public Appointment(DateTime start,DateTime end,String title,String description,Employee leader)
+        {
+        		this(start,end,title,description,leader,null);
+ 
         }
  
        
@@ -44,29 +51,23 @@ public class Appointment implements Serializable
         public void setFromTime(Timestamp from){this.from_time = new DateTime(from);}
         public void setToTime(DateTime to){to_time=to;}
         public void setToTime(Timestamp to){ this.to_time = new DateTime(to);}
-               
+        public void setNotification(Notification notification){this.notfiNotification = notification;};
         public void setLocation(Location location){this.location=location;}
- 
         public void setName(String name){this.name=name;}
         public void setDescription(String desc){this.description=desc;}
         public void setTitle(String title){this.title = title;}
-       
+        public void setAppId(int id){this.appId = id;}
  
         public int getLocationID(){return this.location.getID();};
         public DateTime getFromTime(){return from_time;}
         public DateTime getToTime(){return to_time;}
         public String getLocationName(){return location.getName();}
-        public Employee getLeader(){
-                return this.leader;
-        }
+        public Employee getLeader(){ return this.leader; }
         public String getName(){return name;}
         public String getDescription(){return description;}
-        public String getTitle(){
-                return this.title;
-        }
-        public int getAppId() {
-                return appId;
-        }
+        public String getTitle(){ return this.title; }
+        public int getAppId() { return appId;}
+        public Notification getNotification(){return this.notfiNotification;};
  
         public String toString(){
                 return "" + from_time + " " + to_time + " " + title + " " + description + " " + leader + " " + location;
