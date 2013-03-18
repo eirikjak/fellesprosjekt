@@ -109,34 +109,6 @@ public class CalendarPanel extends JPanel {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 		
-		JList list_1 = new JList();
-		list_1.setBounds(8, 122, 126, 365);
-		panel_1.add(list_1);
-		
-		JList list_2 = new JList();
-		list_2.setBounds(141, 122, 126, 365);
-		panel_1.add(list_2);
-		
-		JList list_3 = new JList();
-		list_3.setBounds(274, 122, 126, 365);
-		panel_1.add(list_3);
-		
-		JList list_4 = new JList();
-		list_4.setBounds(540, 122, 126, 365);
-		panel_1.add(list_4);
-		
-		JList list_5 = new JList();
-		list_5.setBounds(806, 122, 126, 365);
-		panel_1.add(list_5);
-		
-		JList list_6 = new JList();
-		list_6.setBounds(673, 122, 126, 365);
-		panel_1.add(list_6);
-		
-		JList list_7 = new JList();
-		list_7.setBounds(407, 122, 126, 365);
-		panel_1.add(list_7);
-		
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
@@ -173,19 +145,19 @@ public class CalendarPanel extends JPanel {
 				label.setBounds(20, 4, 90, 19);
 				panel_4.add(label);
 				
-				JLabel label_8 = new JLabel("20");
-				label_8.setHorizontalAlignment(SwingConstants.CENTER);
-				label_8.setForeground(Color.WHITE);
-				label_8.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_8.setBounds(285, 4, 90, 19);
-				panel_4.add(label_8);
-				
 				JLabel label_9 = new JLabel("19");
 				label_9.setHorizontalAlignment(SwingConstants.CENTER);
 				label_9.setForeground(Color.WHITE);
 				label_9.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_9.setBounds(150, 4, 90, 19);
 				panel_4.add(label_9);
+				
+				JLabel label_8 = new JLabel("20");
+				label_8.setHorizontalAlignment(SwingConstants.CENTER);
+				label_8.setForeground(Color.WHITE);
+				label_8.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				label_8.setBounds(285, 4, 90, 19);
+				panel_4.add(label_8);
 				
 				JLabel label_10 = new JLabel("21");
 				label_10.setHorizontalAlignment(SwingConstants.CENTER);
