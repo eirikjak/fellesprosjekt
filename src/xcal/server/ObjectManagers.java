@@ -1,8 +1,11 @@
 package xcal.server;
 
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 
 import xcal.client.Wrapper;
 import xcal.client.Status;
@@ -26,7 +29,7 @@ public class ObjectManagers {
 			Meeting m = (Meeting)content;
 			switch(flag){
 			case CREATE:
-				return (Meeting)AppointmentsQ.createMeeting(m);
+				//return (Meeting)AppointmentsQ.createMeeting(m);
 			
 			case UPDATE:
 				AppointmentsQ.updateMeeting(m);
@@ -45,15 +48,17 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				return (Appointment)AppointmentsQ.createAppointment(a);
-			
+				Appointment result = (Appointment)AppointmentsQ.createAppointment(a);
+				if(result != null)
+					return new Wrapper(Status.SUCCESS,null);
+				return new Wrapper(Status.ERROR,null);
 			case UPDATE:
 				int app_id = a.getAppId();
-				Timestamp start = a.getFromTime();
-				Timestamp end = a.getToTime();
+				DateTime start = a.getFromTime();
+				DateTime end = a.getToTime();
 				String descr = a.getDescription();
 				String email = a.getLeader().getEmail();
-				int place = a.getLocation();
+				int place = a.getLocationID();
 				break;
 				
 			case DESTROY:
@@ -77,15 +82,28 @@ public class ObjectManagers {
 					return EmployeeQ.selectPersonWithEmail(e.getEmail());
 				}
 			case CREATE:
-				return EmployeeQ.createPerson(e);
+				try {
+					return EmployeeQ.createPerson(e);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			case UPDATE:
-				EmployeeQ.updatePerson(e);
+				try {
+					EmployeeQ.updatePerson(e);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case DESTROY:
 				EmployeeQ.deletePerson(e.getEmpId());
 				break;
-			case LOGIN:
-				return EmployeeQ.checkPassword(e.getEmail());
+			case GET_ALL:
+				return new Wrapper(Status.IGNORE, EmployeeQ.getAllEmployees());
+			/*case LOGIN:
+				
+				return EmployeeQ.checkPassword(e.getEmail());*/
 				
 			}
 		}
@@ -106,7 +124,7 @@ public class ObjectManagers {
 			System.out.println("Recieved String");
 			if(flag == Status.SELECT){
 				try {
-					return (Room[])RoomQ.getAvailableRooms(new Timestamp(0),new Timestamp(0));
+				//	return (Room[])RoomQ.getAvailableRooms(new Timestamp(0),new Timestamp(0));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

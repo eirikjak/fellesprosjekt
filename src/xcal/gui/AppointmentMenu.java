@@ -23,7 +23,10 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
 
 import xcal.client.Client;
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.model.Appointment;
+import xcal.model.Location;
 
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
@@ -68,17 +71,16 @@ public class AppointmentMenu extends JFrame {
 	private JTextField toHour;
 	private JTextField toMinute;
 	private JTextArea description;
-	private JComboBox<String> notificationBox;
+	private JComboBox notificationBox;
 	private HashMap<String, Integer> notificationMap;
-	private Client client;
-	private JLabel title;
+	private Client client = Client.getClient();
+	
 	/**
 	 * Create the panel.
 	 */
 	
-	public AppointmentMenu(Client client) {
+	public AppointmentMenu() {
 		super();
-		this.client = client;
 		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
@@ -128,7 +130,7 @@ public class AppointmentMenu extends JFrame {
 		notificationMap.put("2 hours", 120);
 		notificationMap.put("5 hours", 300);
 		notificationMap.put("1 day", 1440);
-		notificationBox = new JComboBox<String>(new String[]{"1 minute","5 minutes","10 minutes","15 minutes",
+		notificationBox = new JComboBox(new String[]{"1 minute","5 minutes","10 minutes","15 minutes",
 				"30 minutes","1 hour","2 hours","5 hours","1 day"});
 		
 		
@@ -145,7 +147,7 @@ public class AppointmentMenu extends JFrame {
 		cancelButton.setBounds(380, 404, 181, 23);
 		getContentPane().add(cancelButton);
 		
-		 title = new JLabel("Name:");
+		JLabel title = new JLabel("Name:");
 		title.setHorizontalAlignment(SwingConstants.RIGHT);
 		title.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		title.setBounds(70, 48, 92, 14);
@@ -306,10 +308,12 @@ public class AppointmentMenu extends JFrame {
 			DateTime startTime;
 			DateTime endTime;
 			
-			if((DateTimeComparator.getInstance().compare(new DateTime(inputDate), today)) > 0){
+			
+			if((DateTimeComparator.getInstance().compare(new DateTime(inputDate), today)) <= 0){
 				valid = false;
 			}
 			
+			System.out.println(valid);
 			startTime = new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),fromHourDate,fromMinuteDate,0);
 			endTime= new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),toHourDate,toMinuteDate,0);
 			if(DateTimeComparator.getInstance().compare(startTime, endTime) > 0){
@@ -321,7 +325,7 @@ public class AppointmentMenu extends JFrame {
 				valid = false;
 			
 			String desc = description.getText();
-			String titleString = title.getText();
+			String titleString = name.getText();
 			if(!(titleString.length() > 0)){
 				valid = false;
 			}
@@ -330,7 +334,10 @@ public class AppointmentMenu extends JFrame {
 			System.out.println(notification);
 			
 			if(valid){
-			Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), loc);
+				System.out.println("sending shit");
+			Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
+			System.out.println(app);
+			Wrapper response = client.sendObject(app, Status.CREATE);
 			}
 			Close();
 			
