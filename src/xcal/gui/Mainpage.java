@@ -32,11 +32,9 @@ public class Mainpage extends JPanel {
 		
 		JLabel lblTrerg = new JLabel("");
 		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
-<<<<<<< HEAD
+
 		lblTrerg.setBounds(778, 44, 66, 76);
-=======
-		lblTrerg.setBounds(341, 41, 66, 76);
->>>>>>> 45cd177ad536bc371fd221c99f03e5636a10215c
+
 		add(lblTrerg);
 		
 		
@@ -179,15 +177,11 @@ public class Mainpage extends JPanel {
 		panel_1.add(list_7);
 		
 		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
-<<<<<<< HEAD
+
 		btnNewButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		btnNewButton_1.setBounds(858, 55, 109, 58);
-=======
-		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		btnNewButton_1.addActionListener(new OtherCalendarsListener());
-		btnNewButton_1.setBounds(429, 55, 109, 58);
->>>>>>> 45cd177ad536bc371fd221c99f03e5636a10215c
+
 		add(btnNewButton_1);
 		
 		JPanel panel_3 = new JPanel();
