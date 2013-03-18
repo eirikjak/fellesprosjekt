@@ -42,10 +42,11 @@ public class EmployeeQ
  		   Statement stat = connection.getConnection().createStatement();
  		   ResultSet result=stat.executeQuery(query);
  		   
- 		   result.next();
- 		   
+ 		  if( result.next()){
  		   Employee e=new Employee(result.getString("name"),result.getString("email"), result.getString("password"));
  		   return e;
+ 		  }
+ 		  return null;
  	   } 
  	   catch (SQLException e) 
  	   {

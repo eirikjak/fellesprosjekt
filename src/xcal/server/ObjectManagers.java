@@ -1,5 +1,7 @@
 package xcal.server;
 
+import java.io.ObjectOutputStream;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import xcal.client.Wrapper;
@@ -16,6 +18,7 @@ public class ObjectManagers {
 		Wrapper w = (Wrapper) o;
 		Object content = w.getContent();
 		Status flag = w.getFlag();
+	
 		
 		if(content instanceof Meeting){
 			System.out.println("Recieved Meeting");
@@ -45,7 +48,12 @@ public class ObjectManagers {
 				return (Appointment)AppointmentsQ.createAppointment(a);
 			
 			case UPDATE:
-				AppointmentsQ.updateAppointment(a);
+				int app_id = a.getAppId();
+				Timestamp start = a.getFromTime();
+				Timestamp end = a.getToTime();
+				String descr = a.getDescription();
+				String email = a.getLeader().getEmail();
+				int place = a.getLocation();
 				break;
 				
 			case DESTROY:
@@ -86,18 +94,23 @@ public class ObjectManagers {
 				Authentication auth=(Authentication)content;
 				if(ServerLogic.login(auth)){
 					//System.out.println("SUCCESS " +EmployeeQ.selectPersonWithEmail(auth.getUser()));
-					Employee emp = EmployeeQ.selectPersonWithEmail(auth.getUser());
-					return new Wrapper(Status.SUCCESS, emp);
+					
+					return new Wrapper(Status.SUCCESS, EmployeeQ.selectPersonWithEmail(auth.getUser()));
 				}
 				else{
-					return new Wrapper(Status.ERROR,null);
+					return new Wrapper(Status.ERROR,new Employee());
 				}
 			}
 		}
 		else if(content instanceof String){
 			System.out.println("Recieved String");
 			if(flag == Status.SELECT){
-				return (ArrayList<Room>)RoomQ.findAvailableRooms();
+				try {
+					return (Room[])RoomQ.getAvailableRooms(new Timestamp(0),new Timestamp(0));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return null;

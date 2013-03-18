@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 
+import xcal.client.Wrapper;
 import xcal.core.ObjectCheck;
 import xcal.model.Employee;
 
@@ -81,6 +82,7 @@ public class ClientThread extends Thread
 	 */	
 	public boolean sendObject(Object send)
 	{
+		System.out.println(((Wrapper)send).getContent().toString());
 		try
 		{
 			output=new ObjectOutputStream(client.getOutputStream());
@@ -105,7 +107,12 @@ public class ClientThread extends Thread
 			{
 				Object object= ObjectManagers.manage(recieveObject());
 				System.out.println("recieved object");
-				sendObject(object);
+				/*try {
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				System.out.println(sendObject(object));
 				System.out.println("object sent");
 			}
 		
