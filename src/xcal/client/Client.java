@@ -23,6 +23,7 @@ import org.joda.time.format.DateTimeFormatter;
 import xcal.core.Settings;
 import xcal.gui.Login;
 import xcal.gui.RootFrame;
+import xcal.model.Employee;
 
 
 
@@ -33,6 +34,7 @@ public class Client
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Client client;
+	private Employee user;
 	
 	public Client()
 	{
@@ -75,6 +77,12 @@ public class Client
 	 * @return boolean - if send was successful or not
 	 */
 	
+	public Employee getUser(){
+		return this.user;
+	}
+	public void setUser(Employee user){
+		this.user = user;
+	}
 	public Wrapper sendObject(Object o, Status s){
 		Wrapper sentObj = new Wrapper(s,o);
 		

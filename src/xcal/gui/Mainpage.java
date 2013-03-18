@@ -20,13 +20,17 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import xcal.client.Client;
+
 public class Mainpage extends JPanel {
 
+	private Client client;
 	/**
 	 * Create the panel.
 	 */
-	public Mainpage() {
+	public Mainpage(Client client) {
 		setLayout(null);
+		this.client = client;
 
 		setBounds(0, 0, 1000, 700);
 		
@@ -212,7 +216,7 @@ public class Mainpage extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			new AppointmentMenu();
+			new AppointmentMenu(client);
 			
 		}
 		
