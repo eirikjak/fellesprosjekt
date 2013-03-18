@@ -30,6 +30,7 @@ public class Mainpage extends JPanel {
 
 		setBounds(0, 0, 1000, 700);
 		
+
 		
 		
 		
@@ -169,16 +170,17 @@ public class Mainpage extends JPanel {
 		list_7.setBounds(407, 122, 126, 365);
 		panel_1.add(list_7);
 		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Show", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBounds(300, 23, 232, 97);
 		add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel lblTrerg = new JLabel("");
-		lblTrerg.setBounds(15, 16, 66, 66);
-		panel_3.add(lblTrerg);
-		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
+		JLabel lblTrerg1 = new JLabel("");
+		lblTrerg1.setBounds(15, 16, 66, 66);
+		panel_3.add(lblTrerg1);
+		lblTrerg1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
 		
 		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
 		btnNewButton_1.setBounds(100, 24, 109, 58);
