@@ -12,12 +12,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class Calendar extends JPanel {
+public class CalendarPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public Calendar() {
+	public CalendarPanel() {
 		setLayout(null);
 
 		
@@ -216,7 +216,7 @@ public class Calendar extends JPanel {
 				panel_4.add(label_13);
 				
 				JLabel label_14 = new JLabel("");
-				label_14.setIcon(new ImageIcon(Calendar.class.getResource("/images/kalender_bar.png")));
+				label_14.setIcon(new ImageIcon(CalendarPanel.class.getResource("/images/kalender_bar.png")));
 				label_14.setBounds(0, 47, 940, 72);
 				panel.add(label_14);
 				
