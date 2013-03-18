@@ -82,19 +82,12 @@ public class Mainpage extends JPanel {
 		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
-		
+		CalendarPanel calendarPanel = new CalendarPanel();		
 				
-		CalendarPanel calendar = new CalendarPanel();		
-				
-		add(calendar);
-		calendar.setBounds(25, 155, 950, 500);
-		calendar.setLayout(null);
-		calendar.setVisible(true);
-		
-		
-	
-		
-		
+		calendarPanel.setBounds(25, 155, 950, 500);
+		add(calendarPanel);
+		calendarPanel.setLayout(null);
+		calendarPanel.setVisible(true);
 
 	}
 	

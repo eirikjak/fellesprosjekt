@@ -22,6 +22,10 @@ public class EmployeeQ
 		EmployeeQ.connection=connection;
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
 
 	public static Employee createPerson(String name, String mail, String password) throws SQLException{ 
 		synchronized (connection) {
@@ -107,8 +111,19 @@ public class EmployeeQ
 		}
 	}
 	
-	public static boolean checkPassword(String email){
+    private String getPasswordFromEmail (String email) throws SQLException{
+    	String sql = "SELECT * FROM Person WHERE email = '" + email + "'";
+    	ResultSet resultset = statement.executeQuery(sql);
+    	resultset.next();
+    	return resultset.getString("password");
+    }
+	
+	public  boolean checkPassword(String email, String password) throws SQLException{
 		synchronized (connection) {
+			
+			if (getPasswordFromEmail(email) == password)
+				return true;
+			else
 		return false;
 		
 		}
