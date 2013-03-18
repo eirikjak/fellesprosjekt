@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.sql.*;//jconnector
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 import structs.*;
-import sun.security.action.GetIntegerAction;
+
 
 import xcal.model.Appointment;
 import xcal.model.Employee;
@@ -19,7 +21,7 @@ import xcal.model.Employee;
 	public class DbConnection {
 
 			public  Connection connection = null;
-			public static  Statement statement = null;
+			public  Statement statement = null;
 			public PreparedStatement preparedStatement = null;     
 			public String url, user, password;
 
@@ -127,46 +129,18 @@ import xcal.model.Employee;
 	        	return resultset.getString("password");
 	        }
 	        
-	        public void createRoom(int id, String name, int capacity) throws SQLException{
-	    		statement = connection.createStatement();
-	    		String sql  = "INSERT INTO Room (id, name, capacity) VALUES("+id+", "+name+", "+capacity+");";
-	    		statement.executeUpdate(sql);
+	      
 	    	
-	    	}
-	        
-	    	public void updateRoom(int id, String name, int capacity) throws SQLException{
-	    				String sql = "UPDATE Room "+
-	    								"SET name='"+name+"',"+
-	    								"capacity='"+capacity+
-	    										"WHERE id= "+ id;
-	    				statement.executeUpdate(sql);
-	    	}
 	    	
-	    	public  Room[] selectRoom(int id) throws SQLException{
-	    		String sql = "SELECT * FROM Room WHERE id ='"+id+"'";
-	    	    ResultSet resultset = statement.executeQuery(sql);
-	    	   resultset.last();
-	    	    Room [] rooms = new Room [resultset.getRow()];
-	    	    resultset.beforeFirst();
-	    	    int roomCount = 0;
-	    	    while(resultset.next()){
-	    	    	String name = resultset.getString("name");
-	    	    	int capacity = resultset.getInt("capacity");
-	    	    	
-	    	    	rooms[roomCount] = new Room(id, name, capacity); 
-	    	    	roomCount++	;
-	    	    }
-	    	    return rooms;
-	    	}
-	    	
-	    	public void createAppointment(int EmployeeId, datetime startDate, datetime endDate, String description, String email, int roomid){
+	    /*	public void createAppointment(int EmployeeId, DateTime startDate, DateTime endDate, String description, String email, int roomid) throws SQLException{
 	    		statement = connection.createStatement();
 	    		String sql = "INSERT INTO Appointment (start_date, end_date, description, leader,place, room) VALUES ("+startDate+","+endDate+","+description+","+email+","+roomid+");";
 	    		statement.executeUpdate(sql);
 	    		
 	    	}
-	    	/** no need to return array, since appointments have unique id **/
-	    	/*public Appointment[] selectAppointment(int AppointmentId){
+	    	/** no need to return array, since appointments have unique id 
+	    	 * @throws SQLException **/
+	    	public Appointment[] selectAppointment(int AppointmentId){
 	    		String sql = "SELECT * FROM Room WHERE id ='"+AppointmentId+"'";
 	    	    ResultSet resultset = statement.executeQuery(sql);
 	    	   resultset.last();
@@ -188,18 +162,7 @@ import xcal.model.Employee;
 	    	    return appointments;
 	    	}*/
 	    	
-	    	public void updateAppointment(int AppointmentId, datetime startDate, datetime endDate, String description, String email,int place, int room ){
-	    		
-    				String sql = "UPDATE Appointment "+
-    								"SET start_date='"+startDate+"',"+
-    								"end_date='"+endDate+"',"+
-    								"description='"+description+"',"+
-    								"leader='"+email+"',"+
-    								"place='"+place+"',"+
-    								"room='"+room+
-    										"WHERE id= "+ AppointmentId;
-    				statement.executeUpdate(sql);
-    	}
+	 
 	    	public void createMeeting(int EmployeeId){
 	    		
 	    	}
@@ -234,7 +197,7 @@ import xcal.model.Employee;
 	        //TODO add parameters for datetime starttime and datetime endtime
 	        
 	        
-	        public Room[] getAvailableRooms () throws Exception{
+	    /*    public Room[] getAvailableRooms (Timestamp startDate, Timestamp endDate) throws Exception{
 	        	
 	        	
 	    	    String sqlstr = "SELECT R.name"+
@@ -242,9 +205,9 @@ import xcal.model.Employee;
 				    	"WHERE R.id NOT IN("+
 				    	"SELECT R.id"+
 				    	"FROM Room R, Appointment A"+
-				    	"WHERE ((('"startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
+				    	"WHERE ((('"+startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
 				    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
-				    	"OR (('"startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
+				    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
 				    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
 				       
 	    	    ResultSet resultset = statement.executeQuery(sqlstr);
@@ -261,7 +224,7 @@ import xcal.model.Employee;
 	    	    	roomCount++	;
 	    	    }
 	    	    return rooms;
-	       }
+	       }*/
 	        
 	}
 	

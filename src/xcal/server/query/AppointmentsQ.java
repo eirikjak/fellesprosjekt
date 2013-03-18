@@ -2,12 +2,18 @@ package xcal.server.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.*;
 
 public class AppointmentsQ
 {
+	public  Statement statement = null;
 	private static DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
@@ -19,7 +25,14 @@ public class AppointmentsQ
 	}
 
 	public static Appointment createAppointment(Appointment app){
-		return app;
+		
+		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+		
+		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place')";
+			
+				
+		
+		return null;
 	
 	}
 	
@@ -65,9 +78,18 @@ public class AppointmentsQ
  	   return null;
 	}
 	
-	public static void updateAppointment(Appointment a){
+   	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place, int room ) throws SQLException{
 		
-	}
+		String sql = "UPDATE Appointment "+
+						"SET start_date='"+startDate+"',"+
+						"end_date='"+endDate+"',"+
+						"description='"+description+"',"+
+						"leader='"+email+"',"+
+						"place='"+place+"',"+
+						"room='"+room+
+								"WHERE id= "+ AppointmentId;
+		statement.executeUpdate(sql);
+}
 	
 	public static Meeting createMeeting(Meeting m){
 		return m;

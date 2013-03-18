@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.swingx.JXDatePicker;
 
-import xcal.model.Person;
+import xcal.model.Employee;
 
 import javax.swing.JList;
 import javax.swing.JTabbedPane;

@@ -6,10 +6,17 @@
 package xcal.client;
 
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
+import javax.swing.SwingUtilities;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 
 
@@ -25,14 +32,24 @@ public class Client
 	
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
-	
+	private Client client;
 	
 	public Client()
 	{
 
-		//connect();
-		RootFrame.init(1015, 720);
-		RootFrame.addPanel(new Login(this));
+		connect();
+		client = this;
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				RootFrame.init(1015, 720);
+				RootFrame.addPanel(new Login(client));
+				
+			}
+		});
+		
 
 	}
 	
@@ -41,6 +58,7 @@ public class Client
 		try
 		{
 			socket=new Socket(Settings.server_ip,Settings.port);
+		
 		}
 		catch(IOException e)
 		{
@@ -112,12 +130,12 @@ public class Client
 	 * 
 	 * @return Object - the object recieved
 	 */
-	public Wrapper recieveObject() 
+	public Object recieveObject() 
 	{
 		try
 		{
 			input=new ObjectInputStream(socket.getInputStream());
-			return (Wrapper) input.readObject();
+			return input.readObject();
 			
 		}
 		catch(ClassNotFoundException e){} catch (IOException e) {
@@ -133,6 +151,9 @@ public class Client
 	
 	public static void main(String[] args)
 	{
+		
+		
+		
 		new Client();
 	}
 	

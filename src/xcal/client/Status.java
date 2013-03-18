@@ -5,6 +5,9 @@ public enum Status {
 	UPDATE,
 	SELECT,
 	DESTROY,
-	LOGIN
+	LOGIN,
+	SUCCESS,
+	ERROR,
+	INVALID_INPUT
 
 }
