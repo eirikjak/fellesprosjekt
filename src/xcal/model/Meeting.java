@@ -24,7 +24,7 @@ public class Meeting extends Appointment
 
 
 	public Meeting(){
-		super();
+		super(from_time, from_time, description, description, manager, description);
 	}
 	
 
