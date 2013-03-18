@@ -11,6 +11,8 @@ public enum Status {
 	INVALID_INPUT,
 	RESPOND,
 	GET_ALL,
-	IGNORE
+	IGNORE,
+	ACCEPT,
+	DECLINE
 
 }

@@ -17,8 +17,12 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import xcal.client.*;
+
 
 public class Notification extends JFrame {
+	
+	private Client client = Client.getClient();
 
 	/**
 	 * Launch the application.
@@ -87,6 +91,8 @@ public class Notification extends JFrame {
 		JButton btnNewButton = new JButton("Accept");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Wrapper answer = new Wrapper(Status.ACCEPT, )
+				//client.sendObject(o, s);
 			}
 		});
 		btnNewButton.setBounds(62, 325, 117, 29);
