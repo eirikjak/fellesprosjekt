@@ -1,6 +1,7 @@
 package xcal.server;
 
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -77,9 +78,19 @@ public class ObjectManagers {
 					return EmployeeQ.selectPersonWithEmail(e.getEmail());
 				}
 			case CREATE:
-				return EmployeeQ.createPerson(e);
+				try {
+					return EmployeeQ.createPerson(e);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			case UPDATE:
-				EmployeeQ.updatePerson(e);
+				try {
+					EmployeeQ.updatePerson(e);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case DESTROY:
 				EmployeeQ.deletePerson(e.getEmpId());
@@ -106,7 +117,7 @@ public class ObjectManagers {
 			System.out.println("Recieved String");
 			if(flag == Status.SELECT){
 				try {
-					return (Room[])RoomQ.getAvailableRooms(new Timestamp(0),new Timestamp(0));
+				//	return (Room[])RoomQ.getAvailableRooms(new Timestamp(0),new Timestamp(0));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

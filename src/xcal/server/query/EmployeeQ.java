@@ -1,5 +1,6 @@
 package xcal.server.query;
 
+import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +11,7 @@ import xcal.model.*;
 
 public class EmployeeQ
 {
-	private static DbConnection connection;
+	private static  DbConnection connection;
 	private static Statement statement = null;
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
@@ -18,7 +19,7 @@ public class EmployeeQ
 	
 
 	public EmployeeQ(DbConnection connection) {
-		this.connection=connection;
+		EmployeeQ.connection=connection;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -112,6 +113,33 @@ public class EmployeeQ
 		
 		}
 	}
+
+	public static Object[] getAllEmployees() {
+		/*
+		synchronized (connection) {
+			String query="select * from Person";
+			Employee[] empList = null;
+			System.out.println("heii");
+	 	   try 
+	 	   {
+	 		   Statement stat = connection.getConnection().createStatement();
+	 		   ResultSet result=stat.executeQuery(query);
+	 		   while(result.next()){
+	 			   empList[empList.length] = new Employee(result.getString("name"),result.getString("email"), result.getString("password"));   
+	 		   }
+	 	   }
+	 	  catch (SQLException e) 
+	 	   {
+				//couldn't get from db
+				e.printStackTrace();
+	 	   }
+	 	   */
+	 	   
+		Employee[] empList ={new Employee("Nemanja", "nemanja@xcal.com","123"),new Employee("Nemanja1", "nemanja1@xcal.com","1123"),new Employee("Nemanja11", "nemanja2@xcal.com","1223")};
+		//System.out.println(empList);
+		return empList;
+		}
+	//}
 	
 
 }

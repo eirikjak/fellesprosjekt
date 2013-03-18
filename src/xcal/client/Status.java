@@ -8,6 +8,7 @@ public enum Status {
 	LOGIN,
 	SUCCESS,
 	ERROR,
-	INVALID_INPUT
+	INVALID_INPUT,
+	RESPOND
 
 }
