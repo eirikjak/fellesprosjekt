@@ -12,8 +12,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.Color;
@@ -36,12 +40,15 @@ public class Login extends JPanel {
 	private JPasswordField passwordField;
 	private JLabel errorLabel;
 	private Client client;
+	private JPanel owner;
+	private JXBusyLabel bussyLabel;
 
 	/**
 	 * Create the panel.
 	 */
 	public Login(Client client) {
 		
+		owner = this;
 		this.client=client;
 		setLayout(null);
 		
@@ -101,35 +108,46 @@ public class Login extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//to login stuff
+			if(bussyLabel != null)
+				remove(bussyLabel);
 			
-			JXBusyLabel bussyLabel = new JXBusyLabel(new Dimension(40,40));
+			bussyLabel = new JXBusyLabel(new Dimension(40,40));
 			add(bussyLabel);
 			bussyLabel.setBounds(299 + 369/2 - 20 ,389 + 154/2 - 20, 40, 40);
 			bussyLabel.setBusy(true);
-			
-			if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
-			{
-				Authentication auth=new Authentication(textField.getText(),passwordField.getText());
-
-				Wrapper response = client.sendObject(auth, Status.LOGIN);
+			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
+				protected Void doInBackground() throws Exception {
+					if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
+					{
+						
+						Authentication auth=new Authentication(textField.getText(),passwordField.getText());
+						Wrapper response = client.sendObject(auth, Status.LOGIN);
+						
+						if(response.getFlag() != Status.SUCCESS){
+							System.out.println("Wrong username/password");
+							errorLabel.setVisible(true);		
+						}
+						
+						else
+						{
+							RootFrame.clearAll();
+							RootFrame.addPanel(new Mainpage());
+							System.out.println("Welcome" + (Employee)response.getContent());
+						}
+						
+					}
+					return null;
+				}
 				
-				if(response.getFlag() != Status.SUCCESS){
-					System.out.println("Wrong username/password");
-					errorLabel.setVisible(true);
+				public void done(){
+					bussyLabel.setBusy(false);
+					bussyLabel.setVisible(false);
+					
 					
 				}
 				
-				else
-				{
-					RootFrame.clearAll();
-					RootFrame.addPanel(new Mainpage());
-					System.out.println("Welcome" + (Employee)response.getContent());
-				}
-				
-			}
-			bussyLabel.setBusy(false);
-			remove(bussyLabel);
+			};
+			worker.execute();
 			
 			
 			
