@@ -49,12 +49,13 @@ public class ObjectManagers {
 				return (Appointment)AppointmentsQ.createAppointment(a);
 			
 			case UPDATE:
-				int app_id = a.getAppId();
+			/*	int app_id = a.getAppId();
 				Timestamp start = a.getFromTime();
 				Timestamp end = a.getToTime();
 				String descr = a.getDescription();
 				String email = a.getLeader().getEmail();
 				int place = a.getLocation();
+				break;*/
 				break;
 				
 			case DESTROY:
@@ -95,8 +96,11 @@ public class ObjectManagers {
 			case DESTROY:
 				EmployeeQ.deletePerson(e.getEmpId());
 				break;
-			case LOGIN:
-				return EmployeeQ.checkPassword(e.getEmail());
+			case GET_ALL:
+				return new Wrapper(Status.IGNORE, EmployeeQ.getAllEmployees());
+			/*case LOGIN:
+				
+				return EmployeeQ.checkPassword(e.getEmail());*/
 				
 			}
 		}

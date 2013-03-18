@@ -14,8 +14,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.border.TitledBorder;
 
+import xcal.client.*;
+import xcal.model.Employee;
 import xcal.server.query.EmployeeQ;
 
 public class OtherCallendarsMenu extends JFrame {
@@ -42,6 +46,7 @@ public class OtherCallendarsMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public OtherCallendarsMenu() {
+		Client client = Client.getClient();
 		setTitle("Add other calendars");
 		this.setVisible(true);
 	
@@ -52,11 +57,18 @@ public class OtherCallendarsMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		final DefaultListModel model = new DefaultListModel();
-		for(int i=0; i<EmployeeQ.getAllEmployees().length; i++){
-			model.addElement(EmployeeQ.getAllEmployees()[i]);
+		Employee e = new Employee();
+		Object o = client.sendObject(e, Status.GET_ALL).getContent();
+		ArrayList<Employee> empList = ((ArrayList<Employee>)o);
+		for(int i=0; i<empList.size(); i++){
+			if(empList.get(i) != client.getUser()){
+				model.addElement(empList.get(i));
+			}
+			
 		}
 		
 		final DefaultListModel model1 = new DefaultListModel();
+		model1.addElement(client.getUser());
 		
 		
 		

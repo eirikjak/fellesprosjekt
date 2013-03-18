@@ -9,6 +9,8 @@ public enum Status {
 	SUCCESS,
 	ERROR,
 	INVALID_INPUT,
-	RESPOND
+	RESPOND,
+	GET_ALL,
+	IGNORE
 
 }

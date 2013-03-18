@@ -82,7 +82,7 @@ public class ClientThread extends Thread
 	 */	
 	public boolean sendObject(Object send)
 	{
-		System.out.println(((Wrapper)send).getContent().toString());
+		//System.out.println(((Wrapper)send).getContent().toString());
 		try
 		{
 			output=new ObjectOutputStream(client.getOutputStream());

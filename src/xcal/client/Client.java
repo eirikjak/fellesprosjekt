@@ -33,7 +33,7 @@ public class Client
 	
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
-	private Client client;
+	private static Client client;
 	private Employee user;
 	
 	public Client()
@@ -95,7 +95,7 @@ public class Client
 				input = new ObjectInputStream(socket.getInputStream());
 				
 				Wrapper response = (Wrapper) input.readObject();
-				System.out.println(response.getContent().toString());
+				//System.out.println(response.getContent().toString());
 				return response;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -165,5 +165,8 @@ public class Client
 		new Client();
 	}
 	
+	public static Client getClient(){
+		return client;
+	}
 
 }

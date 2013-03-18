@@ -114,18 +114,19 @@ public class EmployeeQ
 		}
 	}
 
-	public static Object[] getAllEmployees() {
-		/*
+	public static ArrayList<Employee> getAllEmployees() {
+		
 		synchronized (connection) {
 			String query="select * from Person";
-			Employee[] empList = null;
+			ArrayList<Employee> empArray = new ArrayList();
+			Employee[] empList = {};
 			System.out.println("heii");
 	 	   try 
 	 	   {
 	 		   Statement stat = connection.getConnection().createStatement();
 	 		   ResultSet result=stat.executeQuery(query);
 	 		   while(result.next()){
-	 			   empList[empList.length] = new Employee(result.getString("name"),result.getString("email"), result.getString("password"));   
+	 			   empArray.add(new Employee(result.getString("name"),result.getString("email"), result.getString("password")));
 	 		   }
 	 	   }
 	 	  catch (SQLException e) 
@@ -133,13 +134,15 @@ public class EmployeeQ
 				//couldn't get from db
 				e.printStackTrace();
 	 	   }
-	 	   */
 	 	   
-		Employee[] empList ={new Employee("Nemanja", "nemanja@xcal.com","123"),new Employee("Nemanja1", "nemanja1@xcal.com","1123"),new Employee("Nemanja11", "nemanja2@xcal.com","1223")};
+	 	   
+	//	Employee[] empList ={new Employee("Nemanja", "nemanja@xcal.com","123"),new Employee("Nemanja1", "nemanja1@xcal.com","1123"),new Employee("Nemanja11", "nemanja2@xcal.com","1223")};
 		//System.out.println(empList);
-		return empList;
+	 	//System.out.println(empArray);
+//	 	empList = (Employee[]) empArray.toArray();
+		return empArray;
 		}
-	//}
+	}
 	
 
 }

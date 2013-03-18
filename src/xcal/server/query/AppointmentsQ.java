@@ -50,7 +50,7 @@ public class AppointmentsQ
  		   result.next();
 
  		   
- 		   if(result.getString("room").isEmpty())//appointment doesn't contain room
+ 		/*   if(result.getString("room").isEmpty())//appointment doesn't contain room
  		   {
  			   Appointment app=new Appointment();
  			  //app.setLocation(result.getString("Location"));
@@ -66,7 +66,8 @@ public class AppointmentsQ
  		   meeting.setFromTime(result.getTimestamp("start_date"));
  		   meeting.setToTime(result.getTimestamp("end_date"));
  		   
- 		   return meeting;   		   
+ 		   return meeting;  */
+ 			   return null;
  		   
 
  	   } 
