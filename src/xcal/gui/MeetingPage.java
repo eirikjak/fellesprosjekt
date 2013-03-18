@@ -41,7 +41,7 @@ public class MeetingPage extends JFrame {
 	public MeetingPage() {
 		setTitle("Meeting ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 749, 619);
+		setBounds(100, 100, 749, 575);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -64,26 +64,26 @@ public class MeetingPage extends JFrame {
 		
 		JLabel lblMeatingSubject = new JLabel("Coffie talk meeting");
 		lblMeatingSubject.setFont(new Font("Helvetica", Font.BOLD, 18));
-		lblMeatingSubject.setBounds(42, 142, 228, 44);
+		lblMeatingSubject.setBounds(42, 136, 228, 44);
 		getContentPane().add(lblMeatingSubject);
 		
 		JLabel lblNewLabel_1 = new JLabel("Time: 12:30 - 14:30");
 		lblNewLabel_1.setFont(new Font("Helvetica", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(59, 185, 218, 16);
+		lblNewLabel_1.setBounds(59, 179, 218, 16);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Date:  04.April.2013");
-		lblNewLabel_2.setBounds(59, 204, 132, 16);
+		lblNewLabel_2.setBounds(59, 198, 132, 16);
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setFont(new Font("Helvetica", Font.BOLD, 14));
-		lblDescription.setBounds(42, 274, 158, 16);
+		lblDescription.setBounds(41, 274, 158, 16);
 		getContentPane().add(lblDescription);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setFont(new Font("Helvetica", Font.PLAIN, 14));
-		textPane.setBounds(52, 302, 377, 114);
+		textPane.setBounds(52, 296, 377, 120);
 		getContentPane().add(textPane);
 		
 		JPanel panel_1 = new JPanel();
@@ -125,23 +125,23 @@ public class MeetingPage extends JFrame {
 		panel_3.setLayout(null);
 		
 		JLabel lblInvitationStatis = new JLabel("Invitation status");
-		lblInvitationStatis.setBounds(12, 15, 149, 29);
+		lblInvitationStatis.setBounds(12, 15, 137, 29);
 		panel_3.add(lblInvitationStatis);
 		lblInvitationStatis.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		
 		JLabel lblAccepted = new JLabel("Accepted:");
 		lblAccepted.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblAccepted.setBounds(20, 68, 81, 16);
+		lblAccepted.setBounds(38, 68, 81, 16);
 		panel_3.add(lblAccepted);
 		
 		JLabel lblNewLabel_5 = new JLabel("Declined:");
 		lblNewLabel_5.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblNewLabel_5.setBounds(20, 187, 81, 16);
+		lblNewLabel_5.setBounds(38, 187, 81, 16);
 		panel_3.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("No answer yet:");
 		lblNewLabel_6.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblNewLabel_6.setBounds(20, 311, 132, 16);
+		lblNewLabel_6.setBounds(38, 311, 103, 16);
 		panel_3.add(lblNewLabel_6);
 		
 		JButton btnNewButton_2 = new JButton("Change your status");
@@ -154,6 +154,7 @@ public class MeetingPage extends JFrame {
 		panel_3.add(lblNewLabel_8);
 		
 		JList list = new JList();
+		list.setToolTipText("");
 		list.setBounds(30, 89, 168, 85);
 		panel_3.add(list);
 		
@@ -165,15 +166,44 @@ public class MeetingPage extends JFrame {
 		list_1.setBounds(30, 331, 168, 85);
 		panel_3.add(list_1);
 		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363622473_Forward.png")));
+		lblNewLabel_10.setBounds(159, 12, 36, 35);
+		panel_3.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363622750_thumb_up.png")));
+		lblNewLabel_11.setBounds(10, 64, 24, 20);
+		panel_3.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363622738_thumb_down.png")));
+		lblNewLabel_12.setBounds(10, 187, 21, 16);
+		panel_3.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_13 = new JLabel("");
+		lblNewLabel_13.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363622923_error.png")));
+		lblNewLabel_13.setBounds(10, 311, 23, 16);
+		panel_3.add(lblNewLabel_13);
+		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBounds(25, 120, 439, 323);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
 		
+		JLabel lblLocation = new JLabel("Location:");
+		lblLocation.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+		lblLocation.setBounds(18, 113, 66, 16);
+		panel_4.add(lblLocation);
+		
+		JLabel lblNewLabel_9 = new JLabel("New label");
+		lblNewLabel_9.setBounds(96, 114, 195, 16);
+		panel_4.add(lblNewLabel_9);
+		
 		JLabel lblNewLabel_7 = new JLabel("");
 		lblNewLabel_7.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/andrekalendere.png")));
-		lblNewLabel_7.setBounds(355, 24, 96, 84);
+		lblNewLabel_7.setBounds(353, 22, 96, 84);
 		contentPane.add(lblNewLabel_7);
 		
 	}
