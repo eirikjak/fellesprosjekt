@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -94,9 +95,19 @@ public class AppointmentsQ
    		}
 }
 	
-	public static Meeting createMeeting(Meeting m){
+	public void createMeeting(	 Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
 		synchronized (connection) {
-		return m;
+			synchronized (connection) {
+				DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+	
+				String sql = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','room') VALUES ("+from_time+","+to_time+","+Description+","+leader+","+room+");";
+				statement.executeUpdate(sql);
+				
+				
+					
+				}
+			
+		
 		}
 	}
 	
