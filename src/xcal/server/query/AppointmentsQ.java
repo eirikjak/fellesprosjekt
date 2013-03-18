@@ -25,13 +25,13 @@ public class AppointmentsQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public  Appointment createAppointment(Appointment app){
+	public  Appointment createAppointment(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int place) throws SQLException{
 		
 		synchronized (connection) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
 		
-		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place')";
-			
+		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place') VALUES('"+from_time+"','"+to_time+"','"+Description+"','"+leader+"','"+place+"');";
+		statement.executeUpdate(query);	
 		}
 		
 		return null;
@@ -122,7 +122,7 @@ public class AppointmentsQ
    		}
 }
 	
-	public void createMeeting(	 Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
+	public void createMeeting(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
 		synchronized (connection) {
 			synchronized (connection) {
 				DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
