@@ -11,7 +11,7 @@ import xcal.model.*;
 public class EmployeeQ
 {
 	private static DbConnection connection;
-	private Statement statement = null;
+	private static Statement statement = null;
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
@@ -22,14 +22,32 @@ public class EmployeeQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createPerson(String name, String mail, String password) throws SQLException{ 
+	public static Employee createPerson(String name, String mail, String password) throws SQLException{ 
+		synchronized (connection) {
+			
+		
 		String sql = "INSERT INTO Person(email, password, name) VALUES("+mail+","+password+","+name+");";
 		statement.executeUpdate(sql);
+		return new Employee(name, mail, password);
+		}
 	}
 	
-	public static void updatePerson(String name, String mail, String password){
+	public static Employee createPerson(Employee emp) throws SQLException{
+		return createPerson(emp.getName(),emp.getEmail(),emp.getPassword());
+	}
+	
+	public static void updatePerson(String name, String mail, String password) throws SQLException{
+		synchronized (connection) {
 		String sql ="UPDATE `Person` SET `email`=["+mail+"],`password`=["+password+"],`name`=["+name+"] WHERE 1";
 				statement.executeUpdate(sql);
+		}
+	}
+	
+	public static void updatePerson(Employee emp) throws SQLException{
+		synchronized (connection) {
+			updatePerson(emp.getName(),emp.getEmail(),emp.getPassword());
+		}
+		
 	}
 	
 	public static Employee selectPerson(int EmployeeId){
@@ -38,6 +56,8 @@ public class EmployeeQ
 	
 	public static Employee selectPersonWithEmail(String mail)
 	{
+		
+		synchronized (connection) {
 		String query="select * from Person where email='"+mail+"'";
  	   
  	   try 
@@ -58,22 +78,39 @@ public class EmployeeQ
  	   }
  	   
  	   return null;
+ 	   
+		}
 	}
 	
 	public static void deletePerson(int EmployeeId){
+		synchronized (connection) {
+			
+			
+		}
+		
 		
 	}
 	
 	public ArrayList<Meeting> getMeetingsFor (int EmployeeId){
-		return null;
+		synchronized (connection) {
+			
+			return null;
+		}
+		
+		
 	}
 	
 	public ArrayList<Appointment> getAppointmentsFor (int EmployeeId){
+		synchronized (connection) {
 		return null;
+		}
 	}
 	
 	public static boolean checkPassword(String email){
+		synchronized (connection) {
 		return false;
+		
+		}
 	}
 	
 

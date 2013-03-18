@@ -26,11 +26,12 @@ public class AppointmentsQ
 
 	public static Appointment createAppointment(Appointment app){
 		
+		synchronized (connection) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
 		
 		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place')";
 			
-				
+		}
 		
 		return null;
 	
@@ -39,6 +40,7 @@ public class AppointmentsQ
 	
 	public static Appointment selectAppointment(int AppointmentId)
 	{
+		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";
  	   
  	   try 
@@ -74,12 +76,12 @@ public class AppointmentsQ
 			e.printStackTrace();
  	   }
  	   
- 	   
+		}
  	   return null;
 	}
 	
    	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place ) throws SQLException{
-		
+   		synchronized (connection) {
 		String sql = "UPDATE Appointment "+
 						"SET start_date='"+startDate+"',"+
 						"end_date='"+endDate+"',"+
@@ -89,39 +91,61 @@ public class AppointmentsQ
 						//"room='"+room+
 								"WHERE id= "+ AppointmentId;
 		statement.executeUpdate(sql);
+   		}
 }
 	
 	public static Meeting createMeeting(Meeting m){
+		synchronized (connection) {
 		return m;
+		}
 	}
 	
 	public static Meeting selectMeeting(int appId){
+		synchronized (connection) {
 		return null;
+		}
 		
 	}
 	
 	public static void updateMeeting(Meeting m){
+		synchronized (connection) {
+			
+		}
 		
 	}
 	
 	public static void deleteEvent(int id){
+		synchronized (connection) {
+			
+		}
 		
 	}
 	
 	public boolean isMeeting(int id){
+		synchronized (connection) {
 		return false;
+		}
 	}
 	
 	public void removePersonFromMeetign (int app_id, int EmployeeId){
+		synchronized (connection) {
+			
+		}
 		
 	}
 	
 	private void sendInvites(ArrayList<Employee> participants, int app_id){
-		
+		synchronized (connection) {
+			
+		}
 	}
 	
 	public boolean getAnswer(int app_id, int EmployeeId){
+		
+		synchronized (connection) {
 		return false;
+		
+		}
 	}
 
 	

@@ -18,21 +18,28 @@ public class RoomQ {
 	
 	}*/
     public void createRoom(int id, String name, int capacity) throws SQLException{
+    	synchronized (connection) {
+    	
 		statement = connection.createStatement();
 		String sql  = "INSERT INTO Room (id, name, capacity) VALUES("+id+", "+name+", "+capacity+");";
 		statement.executeUpdate(sql);
+		
+    	}
 	
 	}
     
 	public void updateRoom(int id, String name, int capacity) throws SQLException{
+		synchronized (connection) {
 				String sql = "UPDATE Room "+
 								"SET name='"+name+"',"+
 								"capacity='"+capacity+
 										"WHERE id= "+ id;
 				statement.executeUpdate(sql);
+		}
 	}
 	
 	public  Room[] selectRoom(int id) throws SQLException{
+		synchronized (connection) {
 		String sql = "SELECT * FROM Room WHERE id ='"+id+"'";
 	    ResultSet resultset = statement.executeQuery(sql);
 	   resultset.last();
@@ -46,11 +53,13 @@ public class RoomQ {
 	    	rooms[roomCount] = new Room(id, name, capacity); 
 	    	roomCount++	;
 	    }
+		
 	    return rooms;
+		}
 	}
 	
 	   public static Room[] getAvailableRooms (Timestamp startDate, Timestamp endDate) throws Exception{
-       	
+		   synchronized (connection) {
        	
    	    String sqlstr = "SELECT R.name"+
    	    		"FROM Room R"+
@@ -75,11 +84,16 @@ public class RoomQ {
    	    	rooms[roomCount] = new Room(id, name, capacity); 
    	    	roomCount++	;
    	    }
+		   
    	    return rooms;
+		   }
       }
 	
 	public void updateRoom(Room room){
-		
+		synchronized (connection) {
+			
+			
+		}
 	}
 	
 	/*public Room selectRoom(int romId){
@@ -87,7 +101,9 @@ public class RoomQ {
 	}*/
 
 	public static ArrayList<Room> findAvailableRooms() {
+		synchronized (connection) {
 		return null;
+		}
 	}
 	
 	

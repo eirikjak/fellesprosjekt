@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import structs.*;
+
 
 
 import xcal.model.Appointment;

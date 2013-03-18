@@ -36,6 +36,8 @@ public class NotificationQ
 	
 	public boolean notificationReady()
 	{
+		synchronized (connection) {
+		
 		String query="select * from Notification where NOW() >=  notifiedAt";
 		
 		 
@@ -55,6 +57,7 @@ public class NotificationQ
 		}
 		
 		return false;
+		}
 		 
 	}
 	
@@ -62,7 +65,7 @@ public class NotificationQ
 	
 	public Notification[] getNotifications()
     {
-
+		synchronized (connection) {
  	   String query="select * from Notification where NOW() >=  notifiedAt";
  	   
  	   try 
@@ -88,6 +91,7 @@ public class NotificationQ
  			 ++size;
  		   }
  			   
+ 	   
  		   return notification;
 			
  	   } 
@@ -96,7 +100,7 @@ public class NotificationQ
 			//couldn't get from db
 			e.printStackTrace();
  	   }
- 	   
+		}
  	   return null;
     }
 
