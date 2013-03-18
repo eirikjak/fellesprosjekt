@@ -34,19 +34,13 @@ public class Mainpage extends JPanel {
 
 		setBounds(0, 0, 1000, 700);
 		
-		JLabel lblTrerg = new JLabel("");
-		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
 
-		lblTrerg.setBounds(778, 44, 66, 76);
-
-		add(lblTrerg);
-		
 		
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Create new", TitledBorder.TRAILING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(30, 44, 232, 97);
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Create new", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(40, 23, 232, 97);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -59,20 +53,26 @@ public class Mainpage extends JPanel {
 		
 		JButton btnOpprettAvtale = new JButton("Appointment");
 		btnOpprettAvtale.addActionListener(new NewAppointmentListener());
-		btnOpprettAvtale.setBounds(97, 52, 108, 29);
+		btnOpprettAvtale.setBounds(97, 55, 115, 35);
 		panel.add(btnOpprettAvtale);
-		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JButton btnNewButton = new JButton("Meeting");
 		btnNewButton.addActionListener(new NewMeetingListener());
-		btnNewButton.setBounds(98, 25, 108, 29);
+		btnNewButton.setBounds(98, 19, 115, 35);
 		panel.add(btnNewButton);
-		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(32, 166, 940, 493);
+		add(panel_1);
+		panel_1.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(6, 88, 922, 27);
+		panel_1.add(panel_2);
 		panel_2.setBackground(new Color(143, 179, 206));
-		panel_2.setBounds(40, 256, 922, 27);
-		add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel label_1 = new JLabel("DATO");
@@ -124,12 +124,6 @@ public class Mainpage extends JPanel {
 		label_7.setBounds(814, 4, 90, 19);
 		panel_2.add(label_7);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(32, 166, 940, 493);
-		add(panel_1);
-		panel_1.setLayout(null);
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1, 47, 940, 72);
 		panel_1.add(lblNewLabel_1);
@@ -180,18 +174,24 @@ public class Mainpage extends JPanel {
 		list_7.setBounds(407, 122, 126, 365);
 		panel_1.add(list_7);
 		
-		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
 
-		btnNewButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		btnNewButton_1.addActionListener(new OtherCalendarsListener());
-		btnNewButton_1.setBounds(858, 55, 109, 58);
-
-		add(btnNewButton_1);
-		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(323, 34, 241, 95);
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Show", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBounds(300, 23, 232, 97);
 		add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblTrerg1 = new JLabel("");
+		lblTrerg1.setBounds(15, 16, 66, 66);
+		panel_3.add(lblTrerg1);
+		lblTrerg1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
+		
+		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
+		btnNewButton_1.setBounds(100, 24, 109, 58);
+		panel_3.add(btnNewButton_1);
+		
+				btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+				btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
 	
 		
