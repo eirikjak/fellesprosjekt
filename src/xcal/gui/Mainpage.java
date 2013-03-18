@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import xcal.client.Client;
+import xcal.core.Action;
 import xcal.gui.CalendarPanel;
 
 public class Mainpage extends JPanel {
@@ -97,6 +98,7 @@ public class Mainpage extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			new OtherCalendarsMenu();
+			
 			
 		}
 			

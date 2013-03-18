@@ -28,6 +28,7 @@ import org.joda.time.DateTime;
 import xcal.client.Client;
 import xcal.client.Status;
 import xcal.client.Wrapper;
+import xcal.core.KeyValuePair;
 import xcal.model.Appointment;
 import xcal.model.Employee;
 import xcal.model.Location;
@@ -318,7 +319,7 @@ public class MeetingMenu extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 		
-			System.out.println("hello");
+			
 	
 		}
 		

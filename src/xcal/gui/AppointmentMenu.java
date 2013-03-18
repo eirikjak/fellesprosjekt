@@ -334,7 +334,7 @@ public class AppointmentMenu extends JFrame {
 					DateTime startTime;
 					DateTime endTime;
 					
-					System.out.println(today);
+				
 					
 					startTime = new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),fromHourDate,fromMinuteDate,0);
 					endTime= new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),toHourDate,toMinuteDate,0);
@@ -357,33 +357,32 @@ public class AppointmentMenu extends JFrame {
 					}
 					
 					int notification = notificationMap.get(notificationBox.getSelectedItem());
-					System.out.println(notification);
+				
 					
 					if(valid){
-						System.out.println("sending shit");
-					Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
-					Notification notificationObj = new Notification(app,Client.getClient().getUser());
-					notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-					app.setNotification(notificationObj);
-					System.out.println(app);
-					Wrapper response = client.sendObject(app, Status.CREATE);
-					
-					if(response.getFlag() != Status.SUCCESS){
-						errorLabel.setText("Error on appointment creation ");
-						errorLabel.setVisible(true);
-					}else{
-						if(response.getFlag() == Status.SUCCESS){
-							Close();
-						}
-					}
-					}else{
-						errorLabel.setText("One or more invalid fields");
-						errorLabel.setVisible(true);
-						busyLabel.setBusy(false);
-						busyLabel.setVisible(false);
 						
-					}
-					return null;
+						Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
+						Notification notificationObj = new Notification(app,Client.getClient().getUser());
+						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+						app.setNotification(notificationObj);
+						Wrapper response = client.sendObject(app, Status.CREATE);
+						
+						if(response.getFlag() != Status.SUCCESS){
+							errorLabel.setText("Error on appointment creation ");
+							errorLabel.setVisible(true);
+						}else{
+							if(response.getFlag() == Status.SUCCESS){
+								Close();
+							}
+						}
+						}else{
+							errorLabel.setText("One or more invalid fields");
+							errorLabel.setVisible(true);
+							busyLabel.setBusy(false);
+							busyLabel.setVisible(false);
+							
+						}
+						return null;
 				}
 
 			};
