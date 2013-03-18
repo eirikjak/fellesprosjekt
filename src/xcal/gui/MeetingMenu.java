@@ -27,6 +27,7 @@ import xcal.model.Employee;
 import javax.swing.JList;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
+import javax.swing.border.TitledBorder;
 
 
 
@@ -72,12 +73,12 @@ public class MeetingMenu extends JFrame {
 		
 
 		textField = new JTextField();
-		textField.setBounds(182, 40, 469, 31);
+		textField.setBounds(180, 40, 469, 31);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(181, 93, 57, 31);
+		textField_1.setBounds(180, 93, 57, 31);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -225,7 +226,7 @@ public class MeetingMenu extends JFrame {
 		getContentPane().add(button_1);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(181, 156, 178, 31);
+		comboBox_1.setBounds(180, 156, 178, 31);
 		getContentPane().add(comboBox_1);
 		
 		JLabel lblNewLabel_6 = new JLabel("Select:");
@@ -251,6 +252,25 @@ public class MeetingMenu extends JFrame {
 		lblNewLabel_7.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363371142_Person_Undefined_Male_Light.png")));
 		lblNewLabel_7.setBounds(73, 355, 32, 38);
 		getContentPane().add(lblNewLabel_7);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(172, 33, 489, 98);
+		getContentPane().add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(172, 211, 489, 143);
+		getContentPane().add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(662, 529, -493, -165);
+		getContentPane().add(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBounds(172, 362, 489, 178);
+		getContentPane().add(panel_3);
 		
 		pack();
 	}

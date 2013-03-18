@@ -46,7 +46,11 @@ public class Notification extends JInternalFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/andrekalendere.png")));
+<<<<<<< HEAD
 		lblNewLabel.setBounds(374, 43, 142, 133);
+=======
+		lblNewLabel.setBounds(341, 34, 103, 114);
+>>>>>>> 45cd177ad536bc371fd221c99f03e5636a10215c
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblInvitertAv = new JLabel("Invited by:");

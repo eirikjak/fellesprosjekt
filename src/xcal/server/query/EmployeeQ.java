@@ -11,6 +11,7 @@ import xcal.model.*;
 public class EmployeeQ
 {
 	private static DbConnection connection;
+	private Statement statement = null;
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
@@ -21,12 +22,14 @@ public class EmployeeQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Object createPerson(Employee p){
-		return null;
+	public void createPerson(String name, String mail, String password) throws SQLException{ 
+		String sql = "INSERT INTO Person(email, password, name) VALUES("+mail+","+password+","+name+");";
+		statement.executeUpdate(sql);
 	}
 	
-	public static void updatePerson(Employee p){
-		
+	public static void updatePerson(String name, String mail, String password){
+		String sql ="UPDATE `Person` SET `email`=["+mail+"],`password`=["+password+"],`name`=["+name+"] WHERE 1";
+				statement.executeUpdate(sql);
 	}
 	
 	public static Employee selectPerson(int EmployeeId){

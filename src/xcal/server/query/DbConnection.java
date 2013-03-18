@@ -163,37 +163,6 @@ import xcal.model.Employee;
 	    	}*/
 	    	
 	 
-	    	public void createMeeting(int EmployeeId){
-	    		
-	    	}
-	    	
-	    	public void selectMeeting(int MeetingId){
-	    		
-	    	}
-	    	
-	    	public void updateMeeting(int MeetingId){
-	    		
-	    	}
-	    	
-	    	public void deleteEvent(int id){
-	    		
-	    	}
-	    	
-	    	public boolean isMeeting(int id){
-	    		return false;
-	    	}
-	    	
-	    	public void removePersonFromMeetign (int app_id, int EmployeeId){
-	    		
-	    	}
-	    	
-	    	private void sendInvites(ArrayList<Employee> participants, int app_id){
-	    		
-	    	}
-	    	
-	    	public boolean getAnswer(int app_id, int EmployeeId){
-	    		return false;
-	    	}
 	        //TODO add parameters for datetime starttime and datetime endtime
 	        
 	        
