@@ -40,9 +40,13 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+
+import javax.swing.border.TitledBorder;
+
 
 
 public class AppointmentMenu extends JFrame {
@@ -137,6 +141,7 @@ public class AppointmentMenu extends JFrame {
 		JTextArea description = new JTextArea();
 		description.setBounds(181, 219, 470, 127);
 		getContentPane().add(description);
+
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
 		lblBeskrivelse.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -203,6 +208,11 @@ public class AppointmentMenu extends JFrame {
 		lblNewLabel_5.setIcon(new ImageIcon(AppointmentMenu.class.getResource("/images/1363369435_event.png")));
 		lblNewLabel_5.setBounds(463, 87, 40, 42);
 		getContentPane().add(lblNewLabel_5);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(173, 32, 484, 326);
+		getContentPane().add(panel);
 		
 		pack();
 

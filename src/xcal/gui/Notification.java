@@ -45,8 +45,8 @@ public class Notification extends JInternalFrame {
 		getContentPane().add(lblYouAreInvited);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/1362768365_Group_Meeting_Light.png")));
-		lblNewLabel.setBounds(341, 34, 142, 133);
+		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/andrekalendere.png")));
+		lblNewLabel.setBounds(341, 34, 103, 114);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblInvitertAv = new JLabel("Invited by:");
