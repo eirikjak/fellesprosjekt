@@ -32,36 +32,36 @@ public class Mainpage extends JPanel {
 		
 		JLabel lblTrerg = new JLabel("");
 		lblTrerg.setIcon(new ImageIcon(Mainpage.class.getResource("/images/andrekalendere2.png")));
-		lblTrerg.setBounds(428, 44, 66, 76);
+		lblTrerg.setBounds(778, 44, 66, 76);
 		add(lblTrerg);
 		
 		
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(32, 34, 279, 95);
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Create new", TitledBorder.TRAILING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(30, 44, 232, 97);
 		add(panel);
 		panel.setLayout(null);
 		
 
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(12, 6, 90, 83);
+		lblNewLabel.setBounds(12, 8, 91, 90);
 		panel.add(lblNewLabel);
 		lblNewLabel.setIcon(new ImageIcon(Mainpage.class.getResource("/images/appointmentAdd3.png")));
 		
-		JButton btnOpprettAvtale = new JButton("New Appointment");
+		JButton btnOpprettAvtale = new JButton("Appointment");
 		btnOpprettAvtale.addActionListener(new NewAppointmentListener());
-		btnOpprettAvtale.setBounds(89, 47, 164, 35);
+		btnOpprettAvtale.setBounds(97, 52, 108, 29);
 		panel.add(btnOpprettAvtale);
-		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnOpprettAvtale.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		
-		JButton btnNewButton = new JButton("New Meeting");
+		JButton btnNewButton = new JButton("Meeting");
 		btnNewButton.addActionListener(new NewMeetingListener());
-		btnNewButton.setBounds(104, 8, 133, 35);
+		btnNewButton.setBounds(98, 25, 108, 29);
 		panel.add(btnNewButton);
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(143, 179, 206));
@@ -130,14 +130,14 @@ public class Mainpage extends JPanel {
 		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
 		
 		JButton btnLastWeek = new JButton("Last Week");
-		btnLastWeek.setBounds(2, 5, 117, 39);
+		btnLastWeek.setBounds(2, 11, 132, 29);
 		panel_1.add(btnLastWeek);
-		btnLastWeek.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnLastWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		
 		JButton btnNextWeek = new JButton("Next Week");
-		btnNextWeek.setBounds(820, 5, 117, 39);
+		btnNextWeek.setBounds(804, 11, 132, 29);
 		panel_1.add(btnNextWeek);
-		btnNextWeek.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnNextWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
 		lblNewLabel_2.setBounds(334, 5, 233, 39);
@@ -175,9 +175,9 @@ public class Mainpage extends JPanel {
 		panel_1.add(list_7);
 		
 		JButton btnNewButton_1 = new JButton("<html> &nbsp;\nOther </p><br>Calendars  </html>");
-		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+		btnNewButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		btnNewButton_1.addActionListener(new OtherCalendarsListener());
-		btnNewButton_1.setBounds(508, 55, 109, 58);
+		btnNewButton_1.setBounds(858, 55, 109, 58);
 		add(btnNewButton_1);
 		
 	

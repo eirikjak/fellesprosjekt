@@ -4,7 +4,7 @@ import xcal.model.*;
 import xcal.server.ServerLogic;
 
 public class ObjectCheck 
-{
+{/*
 	public static Object handleObject(Object o)
 	{
 		Object o_return;
@@ -23,5 +23,5 @@ public class ObjectCheck
 		}
 		
 		return null;
-	}
+	}*/
 }

@@ -84,11 +84,13 @@ public class ObjectManagers {
 		else if(content instanceof Authentication){
 			if(flag == Status.LOGIN){
 				Authentication auth=(Authentication)content;
-				if(ServerLogic.login(auth))
-					
-					return new Wrapper(Status.SUCCESS,new Employee());
+				if(ServerLogic.login(auth)){
+					//System.out.println("SUCCESS " +EmployeeQ.selectPersonWithEmail(auth.getUser()));
+					Employee emp = EmployeeQ.selectPersonWithEmail(auth.getUser());
+					return new Wrapper(Status.SUCCESS, emp);
+				}
 				else{
-					return new Wrapper(Status.ERROR,new Employee());
+					return new Wrapper(Status.ERROR,null);
 				}
 			}
 		}
