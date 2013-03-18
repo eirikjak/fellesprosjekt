@@ -16,6 +16,7 @@ import xcal.model.*;
 
 public class ObjectManagers {
 	
+	
 	public static Object manage(Object o){
 		
 		Wrapper w = (Wrapper) o;
@@ -48,9 +49,21 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				Appointment result = (Appointment)AppointmentsQ.createAppointment(a);
-				if(result != null)
-					return new Wrapper(Status.SUCCESS,null);
+				System.out.println(a);
+				Location loc = LocationQ.createLocation(a.getLocationName());
+				if(loc != null){
+					Appointment app = AppointmentsQ.createAppointment(a, loc);
+					if(app != null){
+						Notification not = NotificationQ.createNotification(app);
+						if(not != null){
+							return new Wrapper(Status.SUCCESS, null);
+						}else{
+							AppointmentsQ.deleteAppointment(app);
+						}
+					}else{
+						LocationQ.deleteLocation(loc);
+					}
+				}
 				return new Wrapper(Status.ERROR,null);
 			case UPDATE:
 				int app_id = a.getAppId();

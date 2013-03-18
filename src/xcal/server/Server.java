@@ -22,6 +22,7 @@ import java.util.Vector;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.core.Settings;
+import xcal.server.query.LocationQ;
 
 
 
@@ -39,12 +40,14 @@ public class Server
 	
 	public Server()
 	{
+		
 		clients=new Vector<ClientThread>();
 		notify=new NotifyThread(clients);
 		notify.start();
 		
 		size=0;//hold how many clients added
 		//clients=null;
+		
 		try
 		{
 			socket=new ServerSocket(Settings.port);//start listening on port

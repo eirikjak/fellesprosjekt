@@ -22,6 +22,7 @@ public class AppointmentsQ
 	
 	public AppointmentsQ(DbConnection connection) {
 		this.connection=connection;
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,29 +32,50 @@ public class AppointmentsQ
 	}
 
 
-	public static  Appointment createAppointment(Appointment app) {
-
-		
+	public static  Appointment createAppointment(Appointment app,Location loc) {
 		synchronized (connection) {
+			
 		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
-
 		String query = "INSERT INTO Appointment ( start_date,end_date,title,description,leader,place)"
 				+ " VALUES("+ stringForSql(format.print(app.getFromTime())) +"," + stringForSql(format.print(app.getToTime())) + ","
-				+ stringForSql(app.getTitle())+ "," + stringForSql(app.getDescription()) + "," + stringForSql(app.getLeader().getEmail()) + "," + stringForSql(new Integer(1).toString()) + ")";
+				+ stringForSql(app.getTitle())+ "," + stringForSql(app.getDescription()) + "," + stringForSql(app.getLeader().getEmail()) + "," + stringForSql(new Integer(loc.getID()).toString()) + ")";
 		System.out.println(query);
 		Statement stat;
 		try {
 			stat = connection.getConnection().createStatement();
-			stat.execute(query);
+			stat.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			ResultSet result = stat.getGeneratedKeys();
+			if(result.next()){
+			app.setAppId(result.getInt(1));
+			app.setLocation(loc);
+			}
+			else
+				return null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 
 		}
 		
-		return null;
+		
+		return app;
 	
+	}
+	public static void deleteAppointment(Appointment app){
+		
+		synchronized (connection) {
+			try {
+				String query = "DELETE FROM Appointment WHERE id='" + app.getAppId() +"'";
+				Statement stat = connection.getConnection().createStatement();
+				stat.execute(query);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	public Appointment selectAppointmentsFromDate (Timestamp startDate, Timestamp endDate) throws SQLException{

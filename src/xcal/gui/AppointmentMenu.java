@@ -27,6 +27,7 @@ import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Location;
+import xcal.model.Notification;
 
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
@@ -36,6 +37,8 @@ import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.DropMode;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -74,6 +77,7 @@ public class AppointmentMenu extends JFrame {
 	private JComboBox notificationBox;
 	private HashMap<String, Integer> notificationMap;
 	private Client client = Client.getClient();
+	private JLabel errorLabel;
 	
 	/**
 	 * Create the panel.
@@ -243,6 +247,14 @@ public class AppointmentMenu extends JFrame {
 		panel.setBounds(173, 32, 484, 326);
 		getContentPane().add(panel);
 		
+		errorLabel = new JLabel("Error on appointment creation ");
+		errorLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		errorLabel.setBounds(182, 438, 469, 14);
+		errorLabel.setVisible(false);
+		getContentPane().add(errorLabel);
+		
 		pack();
 
 	}
@@ -272,74 +284,102 @@ public class AppointmentMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
-			boolean valid = true;
-			int fromHourDate = 0;
-			int fromMinuteDate = 0;
-			int toHourDate = 0;
-			int toMinuteDate = 0;
-			try{
-				
-				fromHourDate = Integer.parseInt(fromHour.getText());
-				if(!(fromHourDate >= 0 &&  fromHourDate <24)){
-					valid = false;
+			
+			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
+				protected Void doInBackground() throws Exception {
+					boolean valid = true;
+					int fromHourDate = 0;
+					int fromMinuteDate = 0;
+					int toHourDate = 0;
+					int toMinuteDate = 0;
+					try{
+						
+						fromHourDate = Integer.parseInt(fromHour.getText());
+						if(!(fromHourDate >= 0 &&  fromHourDate <24)){
+							valid = false;
+						}
+						fromMinuteDate = Integer.parseInt(fromMinute.getText());
+						if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
+							valid = false;
+						}
+						toHourDate = Integer.parseInt(toHour.getText());
+						if(!(toHourDate >= 0 &&  toHourDate <24)){
+							valid = false;
+						}
+						toMinuteDate = Integer.parseInt(toMinute.getText());
+						if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
+							valid = false;
+						}
+					}catch(NumberFormatException e1){
+						valid = false;
+					}
+					
+					DateTime inputDate = null;
+					if(datePicker.getDate()== null){
+						valid = false;
+						inputDate = new DateTime();
+					}else{
+						
+						inputDate = new DateTime(datePicker.getDate());
+					}
+					DateTime today = DateTime.now();
+					DateTime startTime;
+					DateTime endTime;
+					
+					System.out.println(today);
+					
+					startTime = new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),fromHourDate,fromMinuteDate,0);
+					endTime= new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),toHourDate,toMinuteDate,0);
+					if(!today.isBefore(startTime)){
+						valid = false;
+					}
+					if(!startTime.isBefore(endTime)){
+						
+						valid = false;
+					}
+					
+					String loc = location.getText();
+					if(!(loc.length() > 0))
+						valid = false;
+					
+					String desc = description.getText();
+					String titleString = name.getText();
+					if(!(titleString.length() > 0)){
+						valid = false;
+					}
+					
+					int notification = notificationMap.get(notificationBox.getSelectedItem());
+					System.out.println(notification);
+					
+					if(valid){
+						System.out.println("sending shit");
+					Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
+					Notification notificationObj = new Notification(app,Client.getClient().getUser());
+					notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+					app.setNotification(notificationObj);
+					System.out.println(app);
+					Wrapper response = client.sendObject(app, Status.CREATE);
+					
+					if(response.getFlag() != Status.SUCCESS){
+						errorLabel.setText("Error on appointment creation ");
+						errorLabel.setVisible(true);
+					}else{
+						if(response.getFlag() == Status.SUCCESS){
+							Close();
+						}
+					}
+					}else{
+						errorLabel.setText("One or more invalid fields");
+						errorLabel.setVisible(true);
+						
+					}
+					return null;
 				}
-				fromMinuteDate = Integer.parseInt(fromMinute.getText());
-				if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
-					valid = false;
-				}
-				toHourDate = Integer.parseInt(toHour.getText());
-				if(!(toHourDate >= 0 &&  toHourDate <24)){
-					valid = false;
-				}
-				toMinuteDate = Integer.parseInt(toMinute.getText());
-				if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
-					valid = false;
-				}
-			}catch(NumberFormatException e1){
-				valid = false;
-			}
-			
-			Date inputDate = datePicker.getDate();
-			if(inputDate == null){
-				valid = false;
-				inputDate = new Date();
-			}
-			DateTime today = DateTime.now();
-			DateTime startTime;
-			DateTime endTime;
+
+			};
+			worker.execute();
 			
 			
-			if((DateTimeComparator.getInstance().compare(new DateTime(inputDate), today)) <= 0){
-				valid = false;
-			}
-			
-			System.out.println(valid);
-			startTime = new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),fromHourDate,fromMinuteDate,0);
-			endTime= new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),toHourDate,toMinuteDate,0);
-			if(DateTimeComparator.getInstance().compare(startTime, endTime) > 0){
-				valid = false;
-			}
-			
-			String loc = location.getText();
-			if(!(loc.length() > 0))
-				valid = false;
-			
-			String desc = description.getText();
-			String titleString = name.getText();
-			if(!(titleString.length() > 0)){
-				valid = false;
-			}
-			
-			int notification = notificationMap.get(notificationBox.getSelectedItem());
-			System.out.println(notification);
-			
-			if(valid){
-				System.out.println("sending shit");
-			Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
-			System.out.println(app);
-			Wrapper response = client.sendObject(app, Status.CREATE);
-			}
-			Close();
 			
 			
 			

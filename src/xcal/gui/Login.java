@@ -120,22 +120,16 @@ public class Login extends JPanel {
 						
 						Authentication auth=new Authentication(textField.getText(),passwordField.getText());
 						Wrapper response = client.sendObject(auth, Status.LOGIN);
-						
-						
 						if(response.getFlag() != Status.SUCCESS){
 							System.out.println("Wrong username/password");
 							errorLabel.setVisible(true);		
 						}
-						
 						else
 						{
-							
 							RootFrame.clearAll();
 							RootFrame.addPanel(new Mainpage(client));
-							
 							client.setUser((Employee)response.getContent());
 							System.out.println("Welcome" + ((Employee)response.getContent()).getName());
-
 						}
 						
 					}

@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Notification extends JFrame {
+public class NotificationMenu extends JFrame {
 
 	/**
 	 * Launch the application.
@@ -27,7 +27,7 @@ public class Notification extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Notification frame = new Notification();
+					NotificationMenu frame = new NotificationMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class Notification extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Notification() {
+	public NotificationMenu() {
 		setBounds(100, 100, 562, 439);
 		getContentPane().setLayout(null);
 		
@@ -49,7 +49,7 @@ public class Notification extends JFrame {
 		getContentPane().add(lblYouAreInvited);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/andrekalendere.png")));
+		lblNewLabel.setIcon(new ImageIcon(NotificationMenu.class.getResource("/images/andrekalendere.png")));
 		lblNewLabel.setBounds(374, 43, 142, 133);
 
 
