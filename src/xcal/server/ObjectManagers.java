@@ -33,7 +33,7 @@ public class ObjectManagers {
 				//return (Meeting)AppointmentsQ.createMeeting(m);
 			
 			case UPDATE:
-				AppointmentsQ.updateMeeting(m);
+				//AppointmentsQ.updateMeeting(m);
 				break;
 				
 			case DESTROY:
