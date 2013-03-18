@@ -47,7 +47,7 @@ public class Client
 			@Override
 			public void run() {
 				RootFrame.init(1015, 720);
-				RootFrame.addPanel(new Login(client));
+				RootFrame.addPanel(new Login());
 				
 			}
 		});

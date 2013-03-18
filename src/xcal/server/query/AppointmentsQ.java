@@ -31,7 +31,7 @@ public class AppointmentsQ
 	}
 
 
-	public  Appointment createAppointment(Appointment app) throws SQLException{
+	public static  Appointment createAppointment(Appointment app) {
 
 		
 		synchronized (connection) {
@@ -84,7 +84,7 @@ public class AppointmentsQ
   	   } 
 			
 	}
-	public  Appointment selectAppointment(int AppointmentId)
+	public static  Appointment selectAppointment(int AppointmentId)
 	{
 		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";
