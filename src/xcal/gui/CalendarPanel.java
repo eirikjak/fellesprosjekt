@@ -12,12 +12,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class Calendar extends JPanel {
+public class CalendarPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public Calendar() {
+	public CalendarPanel() {
 		setLayout(null);
 
 		
@@ -166,49 +166,49 @@ public class Calendar extends JPanel {
 				panel_4.setBounds(6, 88, 922, 27);
 				panel.add(panel_4);
 				
-				JLabel label = new JLabel("DATO");
+				JLabel label = new JLabel("18");
 				label.setHorizontalAlignment(SwingConstants.CENTER);
 				label.setForeground(Color.WHITE);
 				label.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label.setBounds(20, 4, 90, 19);
 				panel_4.add(label);
 				
-				JLabel label_8 = new JLabel("DATO");
+				JLabel label_8 = new JLabel("20");
 				label_8.setHorizontalAlignment(SwingConstants.CENTER);
 				label_8.setForeground(Color.WHITE);
 				label_8.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_8.setBounds(285, 4, 90, 19);
 				panel_4.add(label_8);
 				
-				JLabel label_9 = new JLabel("DATO");
+				JLabel label_9 = new JLabel("19");
 				label_9.setHorizontalAlignment(SwingConstants.CENTER);
 				label_9.setForeground(Color.WHITE);
 				label_9.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_9.setBounds(150, 4, 90, 19);
 				panel_4.add(label_9);
 				
-				JLabel label_10 = new JLabel("DATO");
+				JLabel label_10 = new JLabel("21");
 				label_10.setHorizontalAlignment(SwingConstants.CENTER);
 				label_10.setForeground(Color.WHITE);
 				label_10.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_10.setBounds(416, 4, 90, 19);
 				panel_4.add(label_10);
 				
-				JLabel label_11 = new JLabel("DATO");
+				JLabel label_11 = new JLabel("22");
 				label_11.setHorizontalAlignment(SwingConstants.CENTER);
 				label_11.setForeground(Color.WHITE);
 				label_11.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_11.setBounds(549, 4, 90, 19);
 				panel_4.add(label_11);
 				
-				JLabel label_12 = new JLabel("DATO");
+				JLabel label_12 = new JLabel("23");
 				label_12.setHorizontalAlignment(SwingConstants.CENTER);
 				label_12.setForeground(Color.WHITE);
 				label_12.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 				label_12.setBounds(681, 4, 90, 19);
 				panel_4.add(label_12);
 				
-				JLabel label_13 = new JLabel("DATO");
+				JLabel label_13 = new JLabel("24");
 				label_13.setHorizontalAlignment(SwingConstants.CENTER);
 				label_13.setForeground(Color.WHITE);
 				label_13.setFont(new Font("Lucida Grande", Font.BOLD, 14));
@@ -216,7 +216,7 @@ public class Calendar extends JPanel {
 				panel_4.add(label_13);
 				
 				JLabel label_14 = new JLabel("");
-				label_14.setIcon(new ImageIcon(Calendar.class.getResource("/images/kalender_bar.png")));
+				label_14.setIcon(new ImageIcon(CalendarPanel.class.getResource("/images/kalender_bar.png")));
 				label_14.setBounds(0, 47, 940, 72);
 				panel.add(label_14);
 				
@@ -230,12 +230,12 @@ public class Calendar extends JPanel {
 				button_1.setBounds(804, 11, 132, 29);
 				panel.add(button_1);
 				
-				JLabel label_15 = new JLabel("M\u00C5NED");
-				label_15.setHorizontalAlignment(SwingConstants.CENTER);
-				label_15.setForeground(new Color(35, 103, 174));
-				label_15.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-				label_15.setBounds(334, 5, 233, 39);
-				panel.add(label_15);
+				JLabel lblMars = new JLabel("MARS");
+				lblMars.setHorizontalAlignment(SwingConstants.CENTER);
+				lblMars.setForeground(new Color(35, 103, 174));
+				lblMars.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+				lblMars.setBounds(334, 5, 233, 39);
+				panel.add(lblMars);
 				
 				JList list = new JList();
 				list.setBounds(8, 122, 126, 365);
