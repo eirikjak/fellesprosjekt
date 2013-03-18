@@ -3,7 +3,6 @@ package xcal.server.query;
 import xcal.model.*;
 import java.sql.*;
 import java.util.ArrayList;
-import structs.*;
 
 public class RoomQ {
 	

@@ -2,6 +2,8 @@ package xcal.gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,15 +11,34 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import xcal.client.Client;
+
 public class CalendarPanel extends JPanel {
 
+	private Client client = Client.getClient();
+	private Calendar cal = Calendar.getInstance();
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	public CalendarPanel() {
+		//System.out.println(cal.get(Calendar.DAY_OF_YEAR)+ "THIS IS THE DATE");
+		
+		/*
+		 * SETTING THE DATES OF LABELS AND MONTH OF MAIN LABEL
+		 */
+		
+		
+		
+		
+		
+		
+		
 		setLayout(null);
 
 		
@@ -109,35 +130,6 @@ public class CalendarPanel extends JPanel {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 		
-		JList list_1 = new JList();
-		list_1.setBounds(8, 122, 126, 365);
-		panel_1.add(list_1);
-		
-		JList list_2 = new JList();
-		list_2.setBounds(141, 122, 126, 365);
-		panel_1.add(list_2);
-		
-		JList list_3 = new JList();
-		list_3.setBounds(274, 122, 126, 365);
-		panel_1.add(list_3);
-		
-		JList list_4 = new JList();
-		list_4.setBounds(540, 122, 126, 365);
-		panel_1.add(list_4);
-		
-		JList list_5 = new JList();
-		list_5.setBounds(806, 122, 126, 365);
-		panel_1.add(list_5);
-		
-		JList list_6 = new JList();
-		list_6.setBounds(673, 122, 126, 365);
-		panel_1.add(list_6);
-		
-		JList list_7 = new JList();
-		list_7.setBounds(407, 122, 126, 365);
-		panel_1.add(list_7);
-		
-
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Show", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -268,6 +260,16 @@ public class CalendarPanel extends JPanel {
 		
 		
 		
+		
+	}
+	
+	class Worker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 
