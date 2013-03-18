@@ -40,7 +40,7 @@ public class Mainpage extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Create new", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(40, 23, 232, 97);
+		panel.setBounds(25, 23, 232, 97);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -66,7 +66,7 @@ public class Mainpage extends JPanel {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Show", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(300, 23, 232, 97);
+		panel_3.setBounds(280, 23, 232, 97);
 		add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -88,6 +88,11 @@ public class Mainpage extends JPanel {
 		calendarPanel.setBounds(25, 155, 950, 500);
 		add(calendarPanel);
 		calendarPanel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/xcalSmall2.png")));
+		lblNewLabel_1.setBounds(776, 33, 159, 81);
+		add(lblNewLabel_1);
 		calendarPanel.setVisible(true);
 
 	}
