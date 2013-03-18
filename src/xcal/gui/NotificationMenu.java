@@ -84,17 +84,17 @@ public class NotificationMenu extends JFrame {
 		lblDescription.setBounds(57, 174, 158, 16);
 		getContentPane().add(lblDescription);
 		
-		JButton btnNewButton = new JButton("Accept");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAccept = new JButton("Accept");
+		btnAccept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(62, 325, 117, 29);
-		getContentPane().add(btnNewButton);
+		btnAccept.setBounds(62, 325, 117, 29);
+		getContentPane().add(btnAccept);
 		
-		JButton btnNewButton_1 = new JButton("Decline");
-		btnNewButton_1.setBounds(185, 325, 117, 29);
-		getContentPane().add(btnNewButton_1);
+		JButton btnDecline = new JButton("Decline");
+		btnDecline.setBounds(185, 325, 117, 29);
+		getContentPane().add(btnDecline);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setEditable(false);

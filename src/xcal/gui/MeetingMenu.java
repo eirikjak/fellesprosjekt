@@ -36,12 +36,12 @@ import javax.swing.border.TitledBorder;
 public class MeetingMenu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField name;
+	private JTextField startHour;
+	private JTextField startMinute;
 
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField endHour;
+	private JTextField endMinute;
 	private DefaultListModel model;
 	/**
 	 * Launch the application.
@@ -72,20 +72,20 @@ public class MeetingMenu extends JFrame {
 		setBounds(0,0,570,666);
 		
 
-		textField = new JTextField();
-		textField.setBounds(180, 40, 469, 31);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		name = new JTextField();
+		name.setBounds(180, 40, 469, 31);
+		getContentPane().add(name);
+		name.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(180, 93, 57, 31);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		startHour = new JTextField();
+		startHour.setBounds(180, 93, 57, 31);
+		getContentPane().add(startHour);
+		startHour.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(245, 93, 57, 31);
-		getContentPane().add(textField_2);
+		startMinute = new JTextField();
+		startMinute.setColumns(10);
+		startMinute.setBounds(245, 93, 57, 31);
+		getContentPane().add(startMinute);
 		
 		JXDatePicker datePicker = new JXDatePicker();
 		datePicker.setBounds(547, 93, 104, 31);
@@ -97,19 +97,19 @@ public class MeetingMenu extends JFrame {
 		lblVarsel.setBounds(70, 576, 92, 14);
 		getContentPane().add(lblVarsel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(174, 569, 178, 31);
-		getContentPane().add(comboBox);
+		JComboBox notificationBox = new JComboBox();
+		notificationBox.setBounds(174, 569, 178, 31);
+		getContentPane().add(notificationBox);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.addActionListener(new OkButtonListener());
-		btnNewButton.setBounds(172, 612, 181, 23);
-		getContentPane().add(btnNewButton);
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new OkButtonListener());
+		btnSave.setBounds(172, 612, 181, 23);
+		getContentPane().add(btnSave);
 		
-		JButton btnAvbryt = new JButton("Cancel");
-		btnAvbryt.addActionListener(new CancelButtonListener());
-		btnAvbryt.setBounds(393, 612, 181, 23);
-		getContentPane().add(btnAvbryt);
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new CancelButtonListener());
+		btnCancel.setBounds(393, 612, 181, 23);
+		getContentPane().add(btnCancel);
 		
 		JLabel lblNavn = new JLabel("Name:");
 		lblNavn.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -129,9 +129,9 @@ public class MeetingMenu extends JFrame {
 		lblSted.setBounds(70, 161, 92, 14);
 		getContentPane().add(lblSted);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(181, 219, 470, 127);
-		getContentPane().add(textArea);
+		JTextArea description = new JTextArea();
+		description.setBounds(181, 219, 470, 127);
+		getContentPane().add(description);
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
 		lblBeskrivelse.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -144,15 +144,15 @@ public class MeetingMenu extends JFrame {
 		label.setBounds(237, 82, 12, 49);
 		getContentPane().add(label);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(324, 93, 57, 31);
-		getContentPane().add(textField_3);
+		endHour = new JTextField();
+		endHour.setColumns(10);
+		endHour.setBounds(324, 93, 57, 31);
+		getContentPane().add(endHour);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(388, 93, 57, 31);
-		getContentPane().add(textField_4);
+		endMinute = new JTextField();
+		endMinute.setColumns(10);
+		endMinute.setBounds(388, 93, 57, 31);
+		getContentPane().add(endMinute);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -199,14 +199,10 @@ public class MeetingMenu extends JFrame {
 		lblNewLabel_5.setBounds(463, 87, 40, 42);
 		getContentPane().add(lblNewLabel_5);
 		
-		JList list = new JList();
-		list.setBounds(183, 406, -148, 78);
-		getContentPane().add(list);
-		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
-		button.setBounds(379, 413, 68, 35);
-		getContentPane().add(button);
+		JButton addButton = new JButton("");
+		addButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
+		addButton.setBounds(379, 413, 68, 35);
+		getContentPane().add(addButton);
 		
 		JList list_2 = new JList();
 		list_2.setBounds(465, 397, 185, 133);
@@ -216,18 +212,18 @@ public class MeetingMenu extends JFrame {
 		list_1.setBounds(182, 397, 178, 133);
 		getContentPane().add(list_1);
 		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
-		button_1.addActionListener(new ActionListener() {
+		JButton removeButton = new JButton("");
+		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
+		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button_1.setBounds(379, 469, 68, 35);
-		getContentPane().add(button_1);
+		removeButton.setBounds(379, 469, 68, 35);
+		getContentPane().add(removeButton);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(180, 156, 178, 31);
-		getContentPane().add(comboBox_1);
+		JComboBox locationBox = new JComboBox();
+		locationBox.setBounds(180, 156, 178, 31);
+		getContentPane().add(locationBox);
 		
 		JLabel lblNewLabel_6 = new JLabel("Select:");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);

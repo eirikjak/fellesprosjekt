@@ -188,8 +188,18 @@ public class AppointmentsQ
 		
 	}
 	
-	public static void updateMeeting(Meeting m){
+	public void updateMeeting(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int room) throws SQLException{
 		synchronized (connection) {
+			
+			String sql = "UPDATE Appointment "+
+					"SET start_date='"+startDate+"',"+
+					"end_date='"+endDate+"',"+
+					"description='"+description+"',"+
+					"leader='"+email+"',"+
+					"'room='"+room+
+							"WHERE id= "+ AppointmentId;
+	statement.executeUpdate(sql);
+			
 			
 		}
 		
