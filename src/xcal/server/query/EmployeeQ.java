@@ -42,7 +42,7 @@ public class EmployeeQ
 	
 	public static void updatePerson(String name, String mail, String password) throws SQLException{
 		synchronized (connection) {
-		String sql ="UPDATE `Person` SET `email`=["+mail+"],`password`=["+password+"],`name`=["+name+"] WHERE 1";
+		String sql ="UPDATE `Person` SET `password`=["+password+"],`name`=["+name+"] WHERE email='"+mail+"';";
 				statement.executeUpdate(sql);
 		}
 	}
@@ -54,8 +54,14 @@ public class EmployeeQ
 		
 	}
 	
-	public static Employee selectPerson(int EmployeeId){
-		return null;
+	public static Employee selectPerson(int EmployeeId) throws SQLException{
+		String sql = "SELECT * FROM Person WHERE id='"+EmployeeId+"';";
+		 
+		Statement stat = connection.getConnection().createStatement();
+		ResultSet result=stat.executeQuery(sql);
+		Employee e=new Employee(result.getString("name"),result.getString("email"), result.getString("password"));
+		   return e;
+		
 	}
 	
 	public static Employee selectPersonWithEmail(String mail)
