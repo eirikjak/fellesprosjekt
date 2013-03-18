@@ -13,7 +13,7 @@ import xcal.model.*;
 
 public class AppointmentsQ
 {
-	public  Statement statement = null;
+	public  static Statement statement = null;
 	private static DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
@@ -24,13 +24,27 @@ public class AppointmentsQ
 		// TODO Auto-generated constructor stub
 	}
 
+	private static String stringForSql(String string){
+		return "'" + string + "'";
+	}
 	public static Appointment createAppointment(Appointment app){
+		System.out.println(app);
 		
 		synchronized (connection) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
 		
-		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place')";
-			
+		String query = "INSERT INTO Appointment ( start_date,end_date,title,description,leader,place)"
+				+ " VALUES("+ stringForSql(format.print(app.getFromTime())) +"," + stringForSql(format.print(app.getToTime())) + ","
+				+ stringForSql(app.getTitle())+ "," + stringForSql(app.getDescription()) + "," + stringForSql(app.getLeader().getEmail()) + "," + stringForSql(new Integer(1).toString()) + ")";
+		System.out.println(query);
+		Statement stat;
+		try {
+			stat = connection.getConnection().createStatement();
+			stat.execute(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}
 		
 		return null;

@@ -4,6 +4,8 @@ import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 import xcal.client.Wrapper;
 import xcal.client.Status;
 
@@ -45,15 +47,17 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				return (Appointment)AppointmentsQ.createAppointment(a);
-			
+				Appointment result = (Appointment)AppointmentsQ.createAppointment(a);
+				if(result != null)
+					return new Wrapper(Status.SUCCESS,null);
+				return new Wrapper(Status.ERROR,null);
 			case UPDATE:
 				int app_id = a.getAppId();
-				Timestamp start = a.getFromTime();
-				Timestamp end = a.getToTime();
+				DateTime start = a.getFromTime();
+				DateTime end = a.getToTime();
 				String descr = a.getDescription();
 				String email = a.getLeader().getEmail();
-				int place = a.getLocation();
+				int place = a.getLocationID();
 				break;
 				
 			case DESTROY:
