@@ -12,6 +12,9 @@ package xcal.model;
 import java.io.Serializable;
 import java.util.Vector;
 
+import xcal.client.Client;
+import xcal.client.Status;
+
 
 public class Employee extends Person implements Serializable
 {
@@ -39,6 +42,10 @@ public class Employee extends Person implements Serializable
 	
 	public String toString(){
 		return this.getName();
+	}
+	
+	public Employee[] getAllEmployees(){
+		return null;
 	}
 	
 }

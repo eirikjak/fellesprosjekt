@@ -7,14 +7,18 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.Color;
+
+import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.DropMode;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
-public class Notification extends JInternalFrame {
+public class Notification extends JFrame {
 
 	/**
 	 * Launch the application.
@@ -46,8 +50,8 @@ public class Notification extends JInternalFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/andrekalendere.png")));
-
 		lblNewLabel.setBounds(374, 43, 142, 133);
+
 
 		getContentPane().add(lblNewLabel);
 		
@@ -81,6 +85,10 @@ public class Notification extends JInternalFrame {
 		getContentPane().add(lblDescription);
 		
 		JButton btnNewButton = new JButton("Accept");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(62, 325, 117, 29);
 		getContentPane().add(btnNewButton);
 		
@@ -89,6 +97,7 @@ public class Notification extends JInternalFrame {
 		getContentPane().add(btnNewButton_1);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		textPane.setBounds(67, 202, 377, 114);
 		getContentPane().add(textPane);

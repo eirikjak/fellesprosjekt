@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import structs.*;
 
-import structs.Room;
 public class RoomQ {
 	
 	public Connection connection = null;
@@ -58,7 +57,7 @@ public class RoomQ {
 		}
 	}
 	
-	   public static Room[] getAvailableRooms (Timestamp startDate, Timestamp endDate) throws Exception{
+	   public Room[] getAvailableRooms (Timestamp startDate, Timestamp endDate) throws Exception{
 		   synchronized (connection) {
        	
    	    String sqlstr = "SELECT R.name"+
@@ -100,7 +99,7 @@ public class RoomQ {
 		return null;
 	}*/
 
-	public static ArrayList<Room> findAvailableRooms() {
+	public ArrayList<Room> findAvailableRooms() {
 		synchronized (connection) {
 		return null;
 		}

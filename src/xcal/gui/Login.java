@@ -39,15 +39,15 @@ public class Login extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel errorLabel;
-	private Client client;
 	private JXBusyLabel bussyLabel;
+	private Client client = Client.getClient();
 
 	/**
 	 * Create the panel.
 	 */
-	public Login(Client client) {
+	public Login() {
 		
-		this.client=client;
+		
 		setLayout(null);
 		
 		setBounds(0,0,1000,700);
@@ -121,6 +121,7 @@ public class Login extends JPanel {
 						Authentication auth=new Authentication(textField.getText(),passwordField.getText());
 						Wrapper response = client.sendObject(auth, Status.LOGIN);
 						
+						
 						if(response.getFlag() != Status.SUCCESS){
 							System.out.println("Wrong username/password");
 							errorLabel.setVisible(true);		
@@ -128,28 +129,19 @@ public class Login extends JPanel {
 						
 						else
 						{
+							
 							RootFrame.clearAll();
 							RootFrame.addPanel(new Mainpage(client));
+							
+							client.setUser((Employee)response.getContent());
 							System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+
 						}
 						
 					}
 					return null;
 				}
-				
-/*
-				if(response.getFlag() != Status.SUCCESS)
-					System.out.println("Wrong username/password");
-				else
-				{
-					RootFrame.clearAll();
-					RootFrame.addPanel(new Mainpage());
-					Object res = response.getContent();
-					if(res instanceof Employee){
-						System.out.println("Welcome" + res);
-					}
-					System.out.println("Welcome +++" + res);
-*/
+
 				public void done(){
 					bussyLabel.setBusy(false);
 					bussyLabel.setVisible(false);

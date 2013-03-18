@@ -23,7 +23,9 @@ public class Meeting extends Appointment
 
 
 
-	public Meeting(){}
+	public Meeting(){
+		
+	}
 	
 
 	

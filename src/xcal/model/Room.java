@@ -14,6 +14,10 @@ public class Room
 	
 	public Room(){}
 	
+	public Room(int id, String name2, int capacity) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName(){return this.name;}
 	public int getSize(){return size;}
 	
