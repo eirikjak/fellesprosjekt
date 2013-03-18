@@ -39,8 +39,10 @@ public class Client
 	public Client()
 	{
 
+	
 		connect();
 		client = this;
+		
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			
