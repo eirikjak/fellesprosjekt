@@ -14,7 +14,7 @@ import xcal.model.*;
 
 public class AppointmentsQ
 {
-	public  Statement statement = null;
+	public  static Statement statement = null;
 	private static DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
@@ -25,13 +25,31 @@ public class AppointmentsQ
 		// TODO Auto-generated constructor stub
 	}
 
-	public  Appointment createAppointment(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int place) throws SQLException{
+
+	private static String stringForSql(String string){
+		return "'" + string + "'";
+	}
+
+
+	public  Appointment createAppointment(Appointment app) throws SQLException{
+
 		
 		synchronized (connection) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
-		
-		String query = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','place') VALUES('"+from_time+"','"+to_time+"','"+Description+"','"+leader+"','"+place+"');";
-		statement.executeUpdate(query);	
+
+		String query = "INSERT INTO Appointment ( start_date,end_date,title,description,leader,place)"
+				+ " VALUES("+ stringForSql(format.print(app.getFromTime())) +"," + stringForSql(format.print(app.getToTime())) + ","
+				+ stringForSql(app.getTitle())+ "," + stringForSql(app.getDescription()) + "," + stringForSql(app.getLeader().getEmail()) + "," + stringForSql(new Integer(1).toString()) + ")";
+		System.out.println(query);
+		Statement stat;
+		try {
+			stat = connection.getConnection().createStatement();
+			stat.execute(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		}
 		
 		return null;

@@ -108,7 +108,7 @@ public class Mainpage extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			new AppointmentMenu(client);
+			new AppointmentMenu();
 			
 		}
 		

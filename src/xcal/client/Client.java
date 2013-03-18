@@ -95,7 +95,7 @@ public class Client
 				input = new ObjectInputStream(socket.getInputStream());
 				
 				Wrapper response = (Wrapper) input.readObject();
-				//System.out.println(response.getContent().toString());
+
 				return response;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

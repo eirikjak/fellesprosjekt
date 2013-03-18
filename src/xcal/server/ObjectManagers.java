@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 import xcal.client.Wrapper;
 import xcal.client.Status;
 
@@ -46,9 +48,12 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				return (Appointment)AppointmentsQ.createAppointment(a);
-			
+				Appointment result = (Appointment)AppointmentsQ.createAppointment(a);
+				if(result != null)
+					return new Wrapper(Status.SUCCESS,null);
+				return new Wrapper(Status.ERROR,null);
 			case UPDATE:
+<<<<<<< HEAD
 			/*	int app_id = a.getAppId();
 				Timestamp start = a.getFromTime();
 				Timestamp end = a.getToTime();
@@ -56,6 +61,14 @@ public class ObjectManagers {
 				String email = a.getLeader().getEmail();
 				int place = a.getLocation();
 				break;*/
+=======
+				int app_id = a.getAppId();
+				DateTime start = a.getFromTime();
+				DateTime end = a.getToTime();
+				String descr = a.getDescription();
+				String email = a.getLeader().getEmail();
+				int place = a.getLocationID();
+>>>>>>> 68959c5730b07a7ebd670b42854786212e58820e
 				break;
 				
 			case DESTROY:
