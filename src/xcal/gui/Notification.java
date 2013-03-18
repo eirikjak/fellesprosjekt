@@ -50,7 +50,8 @@ public class Notification extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/andrekalendere.png")));
-		lblNewLabel.setBounds(341, 34, 103, 114);
+		lblNewLabel.setBounds(374, 43, 142, 133);
+
 
 		getContentPane().add(lblNewLabel);
 		

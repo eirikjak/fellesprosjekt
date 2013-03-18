@@ -20,8 +20,13 @@ import java.awt.Color;
 import java.awt.CardLayout;
 import org.jdesktop.swingx.JXDatePicker;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
+
+import xcal.client.Client;
+import xcal.model.Appointment;
 
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
@@ -38,9 +43,14 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
@@ -54,20 +64,21 @@ public class AppointmentMenu extends JFrame {
 	private JTextField fromHour;
 	private JTextField fromMinute;
 	private JTextField location;
-	
+	private JXDatePicker datePicker;
 	private JTextField toHour;
 	private JTextField toMinute;
-	
+	private JTextArea description;
+	private JComboBox<String> notificationBox;
+	private HashMap<String, Integer> notificationMap;
+	private Client client;
+	private JLabel title;
 	/**
 	 * Create the panel.
 	 */
 	
-	public static void main(String[] args) {
-		new AppointmentMenu();
-	}
-	public AppointmentMenu() {
+	public AppointmentMenu(Client client) {
 		super();
-		
+		this.client = client;
 		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
@@ -81,16 +92,17 @@ public class AppointmentMenu extends JFrame {
 		name.setColumns(10);
 		
 		fromHour = new JTextField();
+		((AbstractDocument)fromHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		fromHour.setBounds(181, 93, 57, 31);
 		getContentPane().add(fromHour);
 		fromHour.setColumns(10);
-		
 		fromMinute = new JTextField();
+		((AbstractDocument)fromMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		fromMinute.setColumns(10);
 		fromMinute.setBounds(245, 93, 57, 31);
 		getContentPane().add(fromMinute);
 		
-		JXDatePicker datePicker = new JXDatePicker();
+		datePicker = new JXDatePicker();
 		datePicker.setBounds(547, 93, 104, 31);
 		getContentPane().add(datePicker);
 		
@@ -106,7 +118,20 @@ public class AppointmentMenu extends JFrame {
 		lblVarsel.setBounds(70, 368, 92, 14);
 		getContentPane().add(lblVarsel);
 		
-		JComboBox notificationBox = new JComboBox();
+		notificationMap = new HashMap<String,Integer>();
+		notificationMap.put("1 minute", 1);
+		notificationMap.put("5 minutes", 5);
+		notificationMap.put("10 minutes", 10);
+		notificationMap.put("15 minutes", 15);
+		notificationMap.put("30 minutes", 30);
+		notificationMap.put("1 hour", 60);
+		notificationMap.put("2 hours", 120);
+		notificationMap.put("5 hours", 300);
+		notificationMap.put("1 day", 1440);
+		notificationBox = new JComboBox<String>(new String[]{"1 minute","5 minutes","10 minutes","15 minutes",
+				"30 minutes","1 hour","2 hours","5 hours","1 day"});
+		
+		
 		notificationBox.setBounds(174, 361, 178, 31);
 		getContentPane().add(notificationBox);
 		
@@ -120,11 +145,11 @@ public class AppointmentMenu extends JFrame {
 		cancelButton.setBounds(380, 404, 181, 23);
 		getContentPane().add(cancelButton);
 		
-		JLabel lblNavn = new JLabel("Name:");
-		lblNavn.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNavn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblNavn.setBounds(70, 48, 92, 14);
-		getContentPane().add(lblNavn);
+		 title = new JLabel("Name:");
+		title.setHorizontalAlignment(SwingConstants.RIGHT);
+		title.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		title.setBounds(70, 48, 92, 14);
+		getContentPane().add(title);
 		
 		JLabel lblTidspunkt = new JLabel("Time:");
 		lblTidspunkt.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -138,7 +163,7 @@ public class AppointmentMenu extends JFrame {
 		lblSted.setBounds(70, 161, 92, 14);
 		getContentPane().add(lblSted);
 		
-		JTextArea description = new JTextArea();
+		description = new JTextArea();
 		description.setBounds(181, 219, 470, 127);
 		getContentPane().add(description);
 
@@ -155,11 +180,13 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(label);
 		
 		toHour = new JTextField();
+		((AbstractDocument)toHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		toHour.setColumns(10);
 		toHour.setBounds(324, 93, 57, 31);
 		getContentPane().add(toHour);
 		
 		toMinute = new JTextField();
+		((AbstractDocument)toMinute.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		toMinute.setColumns(10);
 		toMinute.setBounds(388, 93, 57, 31);
 		getContentPane().add(toMinute);
@@ -224,29 +251,7 @@ public class AppointmentMenu extends JFrame {
 		dispose();
 	}
 	
-	private  class TimeFieldFilter extends DocumentFilter{
-	
-		@Override
-		public void insertString(FilterBypass fb, int offset, String string,
-				AttributeSet attr) throws BadLocationException {
-			// TODO Auto-generated method stub
-			super.insertString(fb, offset, string, attr);
-		}
-		
-		@Override
-		public void replace(FilterBypass fb, int offset, int length,
-				String text, AttributeSet attrs) throws BadLocationException {
-			// TODO Auto-generated method stub
-			super.replace(fb, offset, length, text, attrs);
-		}
-		
-		@Override
-		public void remove(FilterBypass fb, int offset, int length)
-				throws BadLocationException {
-			// TODO Auto-generated method stub
-			super.remove(fb, offset, length);
-		}
-	}
+
 	private class CancelButtonListener implements ActionListener{
 
 		@Override
@@ -258,14 +263,75 @@ public class AppointmentMenu extends JFrame {
 		
 	}
 	
+	
 	private class OkButtonListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
+			boolean valid = true;
+			int fromHourDate = 0;
+			int fromMinuteDate = 0;
+			int toHourDate = 0;
+			int toMinuteDate = 0;
+			try{
+				
+				fromHourDate = Integer.parseInt(fromHour.getText());
+				if(!(fromHourDate >= 0 &&  fromHourDate <24)){
+					valid = false;
+				}
+				fromMinuteDate = Integer.parseInt(fromMinute.getText());
+				if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
+					valid = false;
+				}
+				toHourDate = Integer.parseInt(toHour.getText());
+				if(!(toHourDate >= 0 &&  toHourDate <24)){
+					valid = false;
+				}
+				toMinuteDate = Integer.parseInt(toMinute.getText());
+				if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
+					valid = false;
+				}
+			}catch(NumberFormatException e1){
+				valid = false;
+			}
 			
-			DateTime from = new DateTime();
+			Date inputDate = datePicker.getDate();
+			if(inputDate == null){
+				valid = false;
+				inputDate = new Date();
+			}
+			DateTime today = DateTime.now();
+			DateTime startTime;
+			DateTime endTime;
+			
+			if((DateTimeComparator.getInstance().compare(new DateTime(inputDate), today)) > 0){
+				valid = false;
+			}
+			
+			startTime = new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),fromHourDate,fromMinuteDate,0);
+			endTime= new DateTime(inputDate.getYear(),inputDate.getMonth(),inputDate.getDay(),toHourDate,toMinuteDate,0);
+			if(DateTimeComparator.getInstance().compare(startTime, endTime) > 0){
+				valid = false;
+			}
+			
+			String loc = location.getText();
+			if(!(loc.length() > 0))
+				valid = false;
+			
+			String desc = description.getText();
+			String titleString = title.getText();
+			if(!(titleString.length() > 0)){
+				valid = false;
+			}
+			
+			int notification = notificationMap.get(notificationBox.getSelectedItem());
+			System.out.println(notification);
+			
+			if(valid){
+			Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), loc);
+			}
 			Close();
 			
 			

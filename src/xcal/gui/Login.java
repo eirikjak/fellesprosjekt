@@ -129,8 +129,10 @@ public class Login extends JPanel {
 						else
 						{
 							RootFrame.clearAll();
-							RootFrame.addPanel(new Mainpage());
-							System.out.println("Welcome" + (Employee)response.getContent());
+
+							RootFrame.addPanel(new Mainpage(client));
+							System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+
 						}
 						
 					}
