@@ -62,6 +62,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 import javax.swing.border.TitledBorder;
+import org.jdesktop.swingx.JXBusyLabel;
 
 
 
@@ -78,6 +79,7 @@ public class AppointmentMenu extends JFrame {
 	private HashMap<String, Integer> notificationMap;
 	private Client client = Client.getClient();
 	private JLabel errorLabel;
+	private JXBusyLabel busyLabel;
 	
 	/**
 	 * Create the panel.
@@ -255,6 +257,11 @@ public class AppointmentMenu extends JFrame {
 		errorLabel.setVisible(false);
 		getContentPane().add(errorLabel);
 		
+		busyLabel = new JXBusyLabel();
+		busyLabel.setBounds(375, 438, 26, 26);
+		busyLabel.setVisible(false);
+		getContentPane().add(busyLabel);
+		
 		pack();
 
 	}
@@ -284,7 +291,8 @@ public class AppointmentMenu extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
-			
+			busyLabel.setVisible(true);
+			busyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
 					boolean valid = true;
@@ -371,6 +379,8 @@ public class AppointmentMenu extends JFrame {
 					}else{
 						errorLabel.setText("One or more invalid fields");
 						errorLabel.setVisible(true);
+						busyLabel.setBusy(false);
+						busyLabel.setVisible(false);
 						
 					}
 					return null;

@@ -38,6 +38,7 @@ import javax.swing.JList;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
+import java.awt.Color;
 
 
 
@@ -58,6 +59,7 @@ public class MeetingMenu extends JFrame {
 	private JTextArea description;
 	private HashMap<String, Integer> notificationMap;
 	private JComboBox notificationBox;
+	private JLabel errorLabel ;
 	private Client client;
 	/**
 	 * Launch the application.
@@ -87,8 +89,6 @@ public class MeetingMenu extends JFrame {
 		
 		getContentPane().setLayout(null);
 		setBounds(0,0,570,666);
-		
-
 		name = new JTextField();
 		name.setBounds(180, 40, 469, 31);
 		getContentPane().add(name);
@@ -105,6 +105,7 @@ public class MeetingMenu extends JFrame {
 		getContentPane().add(startMinute);
 		
 		datePicker = new JXDatePicker();
+		datePicker.addActionListener(new DatePickerListener());
 		datePicker.setBounds(547, 93, 104, 31);
 		getContentPane().add(datePicker);
 		
@@ -296,6 +297,13 @@ public class MeetingMenu extends JFrame {
 		panel_3.setBounds(172, 362, 489, 178);
 		getContentPane().add(panel_3);
 		
+		errorLabel = new JLabel("");
+		errorLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		errorLabel.setBounds(180, 646, 469, 14);
+		getContentPane().add(errorLabel);
+		
 		pack();
 	}
 	
@@ -303,6 +311,18 @@ public class MeetingMenu extends JFrame {
 		
 	}
 	
+	
+	
+	private class DatePickerListener implements ActionListener{
+
+		
+		public void actionPerformed(ActionEvent e) {
+		
+			System.out.println("hello");
+	
+		}
+		
+	}
 	private void Close(){
 		setVisible(false);
 		dispose();

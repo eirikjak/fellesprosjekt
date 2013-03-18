@@ -72,6 +72,14 @@ public class Login extends JPanel {
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		passwordField.setBounds(411, 360, 203, 28);
+		passwordField.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login();
+				
+			}
+		});
 		add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
@@ -102,54 +110,56 @@ public class Login extends JPanel {
 		
 	}
 	
+	private void login(){
+		
+		if(bussyLabel != null)
+			remove(bussyLabel);
+		
+		bussyLabel = new JXBusyLabel(new Dimension(40,40));
+		add(bussyLabel);
+		bussyLabel.setBounds(299 + 369/2 - 20 ,389 + 154/2 - 20, 40, 40);
+		bussyLabel.setBusy(true);
+		SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
+			protected Void doInBackground() throws Exception {
+				if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
+				{
+					
+					Authentication auth=new Authentication(textField.getText(),passwordField.getText());
+					Wrapper response = client.sendObject(auth, Status.LOGIN);
+					if(response.getFlag() != Status.SUCCESS){
+						System.out.println("Wrong username/password");
+						errorLabel.setVisible(true);		
+					}
+					else
+					{
+						RootFrame.clearAll();
+						RootFrame.addPanel(new Mainpage(client));
+						client.setUser((Employee)response.getContent());
+						System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+					}
+					
+				}
+				return null;
+			}
+
+			public void done(){
+				bussyLabel.setBusy(false);
+				bussyLabel.setVisible(false);
+				
+				
+			}
+			
+		};
+		worker.execute();
+		
+		
+		
+	}
 	private class LoginButtonListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(bussyLabel != null)
-				remove(bussyLabel);
-			
-			bussyLabel = new JXBusyLabel(new Dimension(40,40));
-			add(bussyLabel);
-			bussyLabel.setBounds(299 + 369/2 - 20 ,389 + 154/2 - 20, 40, 40);
-			bussyLabel.setBusy(true);
-			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
-				protected Void doInBackground() throws Exception {
-					if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
-					{
-						
-						Authentication auth=new Authentication(textField.getText(),passwordField.getText());
-						Wrapper response = client.sendObject(auth, Status.LOGIN);
-						if(response.getFlag() != Status.SUCCESS){
-							System.out.println("Wrong username/password");
-							errorLabel.setVisible(true);		
-						}
-						else
-						{
-							RootFrame.clearAll();
-							RootFrame.addPanel(new Mainpage(client));
-							client.setUser((Employee)response.getContent());
-							System.out.println("Welcome" + ((Employee)response.getContent()).getName());
-						}
-						
-					}
-					return null;
-				}
-
-				public void done(){
-					bussyLabel.setBusy(false);
-					bussyLabel.setVisible(false);
-					
-					
-				}
-				
-			};
-			worker.execute();
-			
-			
-			
-
-
+			login();
 		}
 		
 	}
