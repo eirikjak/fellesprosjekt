@@ -40,7 +40,6 @@ public class Login extends JPanel {
 	private JPasswordField passwordField;
 	private JLabel errorLabel;
 	private Client client;
-	private JPanel owner;
 	private JXBusyLabel bussyLabel;
 
 	/**
@@ -48,7 +47,6 @@ public class Login extends JPanel {
 	 */
 	public Login(Client client) {
 		
-		owner = this;
 		this.client=client;
 		setLayout(null);
 		

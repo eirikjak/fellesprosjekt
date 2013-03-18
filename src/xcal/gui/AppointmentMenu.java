@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.CardLayout;
 import org.jdesktop.swingx.JXDatePicker;
+import org.joda.time.DateTime;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -39,16 +40,19 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 
 public class AppointmentMenu extends JFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_5;
+	private JTextField name;
+	private JTextField fromHour;
+	private JTextField fromMinute;
+	private JTextField location;
 	
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField toHour;
+	private JTextField toMinute;
 	
 	/**
 	 * Create the panel.
@@ -59,6 +63,7 @@ public class AppointmentMenu extends JFrame {
 	}
 	public AppointmentMenu() {
 		super();
+		
 		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
@@ -66,30 +71,30 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().setLayout(null);
 		setBounds(0,0,648,519);
 		
-		textField = new JTextField();
-		textField.setBounds(182, 40, 469, 31);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		name = new JTextField();
+		name.setBounds(182, 40, 469, 31);
+		getContentPane().add(name);
+		name.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(181, 93, 57, 31);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		fromHour = new JTextField();
+		fromHour.setBounds(181, 93, 57, 31);
+		getContentPane().add(fromHour);
+		fromHour.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(245, 93, 57, 31);
-		getContentPane().add(textField_2);
+		fromMinute = new JTextField();
+		fromMinute.setColumns(10);
+		fromMinute.setBounds(245, 93, 57, 31);
+		getContentPane().add(fromMinute);
 		
 		JXDatePicker datePicker = new JXDatePicker();
 		datePicker.setBounds(547, 93, 104, 31);
 		getContentPane().add(datePicker);
 		
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(179, 154, 472, 31);
-		getContentPane().add(textField_5);
+		location = new JTextField();
+		location.setColumns(10);
+		location.setBounds(179, 154, 472, 31);
+		getContentPane().add(location);
 		
 		JLabel lblVarsel = new JLabel("Notification:");
 		lblVarsel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -97,19 +102,19 @@ public class AppointmentMenu extends JFrame {
 		lblVarsel.setBounds(70, 368, 92, 14);
 		getContentPane().add(lblVarsel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(174, 361, 178, 31);
-		getContentPane().add(comboBox);
+		JComboBox notificationBox = new JComboBox();
+		notificationBox.setBounds(174, 361, 178, 31);
+		getContentPane().add(notificationBox);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.addActionListener(new OkButtonListener());
-		btnNewButton.setBounds(172, 404, 181, 23);
-		getContentPane().add(btnNewButton);
+		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new OkButtonListener());
+		saveButton.setBounds(172, 404, 181, 23);
+		getContentPane().add(saveButton);
 		
-		JButton btnAvbryt = new JButton("Cancel");
-		btnAvbryt.addActionListener(new CancelButtonListener());
-		btnAvbryt.setBounds(380, 404, 181, 23);
-		getContentPane().add(btnAvbryt);
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new CancelButtonListener());
+		cancelButton.setBounds(380, 404, 181, 23);
+		getContentPane().add(cancelButton);
 		
 		JLabel lblNavn = new JLabel("Name:");
 		lblNavn.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -129,9 +134,9 @@ public class AppointmentMenu extends JFrame {
 		lblSted.setBounds(70, 161, 92, 14);
 		getContentPane().add(lblSted);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(181, 219, 470, 127);
-		getContentPane().add(textArea);
+		JTextArea description = new JTextArea();
+		description.setBounds(181, 219, 470, 127);
+		getContentPane().add(description);
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
 		lblBeskrivelse.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -144,15 +149,15 @@ public class AppointmentMenu extends JFrame {
 		label.setBounds(237, 82, 12, 49);
 		getContentPane().add(label);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(324, 93, 57, 31);
-		getContentPane().add(textField_3);
+		toHour = new JTextField();
+		toHour.setColumns(10);
+		toHour.setBounds(324, 93, 57, 31);
+		getContentPane().add(toHour);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(388, 93, 57, 31);
-		getContentPane().add(textField_4);
+		toMinute = new JTextField();
+		toMinute.setColumns(10);
+		toMinute.setBounds(388, 93, 57, 31);
+		getContentPane().add(toMinute);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Times New Roman", Font.BOLD, 26));
@@ -208,6 +213,30 @@ public class AppointmentMenu extends JFrame {
 		setVisible(false);
 		dispose();
 	}
+	
+	private  class TimeFieldFilter extends DocumentFilter{
+	
+		@Override
+		public void insertString(FilterBypass fb, int offset, String string,
+				AttributeSet attr) throws BadLocationException {
+			// TODO Auto-generated method stub
+			super.insertString(fb, offset, string, attr);
+		}
+		
+		@Override
+		public void replace(FilterBypass fb, int offset, int length,
+				String text, AttributeSet attrs) throws BadLocationException {
+			// TODO Auto-generated method stub
+			super.replace(fb, offset, length, text, attrs);
+		}
+		
+		@Override
+		public void remove(FilterBypass fb, int offset, int length)
+				throws BadLocationException {
+			// TODO Auto-generated method stub
+			super.remove(fb, offset, length);
+		}
+	}
 	private class CancelButtonListener implements ActionListener{
 
 		@Override
@@ -226,7 +255,7 @@ public class AppointmentMenu extends JFrame {
 			//send stuff til server
 			//lukk vindu når ferdig
 			
-			
+			DateTime from = new DateTime();
 			Close();
 			
 			
