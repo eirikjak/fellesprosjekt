@@ -95,19 +95,14 @@ public class ObjectManagers {
 					return EmployeeQ.selectPersonWithEmail(e.getEmail());
 				}
 			case CREATE:
-				try {
-					return EmployeeQ.createPerson(e);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+					Employee result = EmployeeQ.createPerson(e);
+					if(result != null)
+						return new Wrapper(Status.SUCCESS, result);
+					return new Wrapper(Status.ERROR,null);
+				
 			case UPDATE:
-				try {
 					EmployeeQ.updatePerson(e);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				break;
 			case DESTROY:
 				EmployeeQ.deletePerson(e.getEmpId());

@@ -27,42 +27,65 @@ public class EmployeeQ
 	
 	
 
-	public static Employee createPerson(String name, String mail, String password) throws SQLException{ 
+	public static Employee createPerson(String name, String mail, String password){
 		synchronized (connection) {
 			
 		
 		String sql = "INSERT INTO Person(email, password, name) VALUES("+mail+","+password+","+name+");";
-		statement.executeUpdate(sql);
-		return new Employee(name, mail, password);
+		try {
+			statement.executeUpdate(sql);
+			return new Employee(name, mail, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 		}
 	}
 	
-	public static Employee createPerson(Employee emp) throws SQLException{
+	public static Employee createPerson(Employee emp){
 		return createPerson(emp.getName(),emp.getEmail(),emp.getPassword());
 	}
 	
-	public static void updatePerson(String name, String mail, String password) throws SQLException{
+	public static void updatePerson(String name, String mail, String password){
 		synchronized (connection) {
-		String sql ="UPDATE `Person` SET `password`=["+password+"],`name`=["+name+"] WHERE email='"+mail+"';";
+			String sql ="UPDATE `Person` SET `password`=["+password+"],`name`=["+name+"] WHERE email='"+mail+"';";
+			try {
 				statement.executeUpdate(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	public static void updatePerson(Employee emp) throws SQLException{
-		synchronized (connection) {
+	public static void updatePerson(Employee emp){
+		
 			updatePerson(emp.getName(),emp.getEmail(),emp.getPassword());
-		}
+		
 		
 	}
 	
-	public static Employee selectPerson(int EmployeeId) throws SQLException{
-		String sql = "SELECT * FROM Person WHERE id='"+EmployeeId+"';";
-		 
-		Statement stat = connection.getConnection().createStatement();
-		ResultSet result=stat.executeQuery(sql);
-		Employee e=new Employee(result.getString("name"),result.getString("email"), result.getString("password"));
-		   return e;
+	public static Employee selectPerson(int EmployeeId){
 		
+		synchronized (connection) {
+			
+		
+			try {
+				String sql = "SELECT * FROM Person WHERE id='"+EmployeeId+"';";
+				 
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result;
+			
+				result = stat.executeQuery(sql);
+				Employee e=new Employee(result.getString("name"),result.getString("email"), result.getString("password"));
+				return e;
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+	
+			}
+		
+		}
 	}
 	
 	public static Employee selectPersonWithEmail(String mail)
@@ -117,22 +140,36 @@ public class EmployeeQ
 		}
 	}
 	
-    private String getPasswordFromEmail (String email) throws SQLException{
+    private String getPasswordFromEmail (String email){
+    	
+    	synchronized (connection) {
+    		try {
+		
     	String sql = "SELECT * FROM Person WHERE email = '" + email + "'";
     	ResultSet resultset = statement.executeQuery(sql);
-    	resultset.next();
-    	return resultset.getString("password");
+		
+		if(resultset.next())
+		return resultset.getString("password");
+		else
+			return null;
+		} catch (SQLException e) {	
+			e.printStackTrace();
+			return null;
+		}
+    	
+    	
+    	}
     }
 	
-	public  boolean checkPassword(String email, String password) throws SQLException{
-		synchronized (connection) {
+	public  boolean checkPassword(String email, String password){
+		
 			
 			if (getPasswordFromEmail(email) == password)
 				return true;
 			else
 		return false;
 		
-		}
+		
 	}
 
 	public static ArrayList<Employee> getAllEmployees() {
