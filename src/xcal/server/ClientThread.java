@@ -105,7 +105,7 @@ public class ClientThread extends Thread
 			System.out.println("Client nr "+id+" running");
 			while(!client.isClosed())
 			{
-				Object object= ObjectManagers.manage(recieveObject());
+				Object object= ObjectManager.manage(recieveObject());
 				System.out.println("recieved object");
 				System.out.println(sendObject(object));
 				System.out.println("object sent");

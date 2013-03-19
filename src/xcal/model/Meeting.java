@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
 public class Meeting extends Appointment implements Serializable
 {
 	public static final String PROPERTY_ROOM = "room";
@@ -30,6 +33,11 @@ public class Meeting extends Appointment implements Serializable
 		participants = new ArrayList<Employee>();
 	}
 	
+	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader,Room room){
+		super(start,end,title,description,leader);
+		this.room = room;
+		
+	}
 
 	
 	
@@ -64,7 +72,9 @@ public class Meeting extends Appointment implements Serializable
 		}
 	public void setRoom(Room r){
 		pcs.firePropertyChange(PROPERTY_ROOM, this.room, r);
-		room=r;
+		this.room=r;
+		System.out.println("setRoom" + room);
+		
 	}
 	
 	public boolean validateParticipants(){
@@ -81,16 +91,11 @@ public class Meeting extends Appointment implements Serializable
 		return super.validateFields() && validateParticipants();
 	};
 	
-	
-	/**send invite sends invite to all participants
-	 * 
-	 * write to db that invite sent to employee
-	 */
-	private void sendInvite()
-	{
-		
-	
-	}
+	@Override
+	 public String toString(){
+		System.out.println("tostring");
+         return "" + getFromTime() + " " + getToTime() + " " + getTitle() + " " + getDescription()+ " " + getLeader() + " " + room;
+ }
 	
 	
 }

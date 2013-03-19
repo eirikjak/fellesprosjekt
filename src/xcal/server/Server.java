@@ -89,7 +89,7 @@ public class Server
 	
 	
 	public Object recieveObject(Wrapper o){
-		ObjectManagers om = new ObjectManagers();
+		ObjectManager om = new ObjectManager();
 		Object obj = om.manage(o);
 		
 		

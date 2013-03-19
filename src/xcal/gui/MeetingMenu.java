@@ -355,7 +355,8 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		pack();
 		addListeners();
 		model.addPropertyChangeListener(this);
-		
+		model.setFromTime(DateTime.now().plusHours(1));
+		model.setToTime(DateTime.now().plusHours(2));
 		updatePersonList();
 		
 		AutoCompleteDecorator.decorate(personListLeft, employeeSearch, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);
@@ -611,6 +612,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	private void updateRoomsList(){
 		
 		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+			private Room[] rooms;
 			@Override
 			protected Void doInBackground() throws Exception {
 				roomBussyLabel.setVisible(true);
@@ -618,14 +620,9 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 				Meeting meeting = new Meeting();
 				meeting.setFromTime(new DateTime(datePicker.getDate()));
 				meeting.setToTime(new DateTime(datePicker.getDate()));
-				
 				Wrapper response = client.sendObject(meeting, Status.GET_AVAILABLE_ROOMS);
-				Room[] rooms = (Room[]) response.getContent();
-				locationBox.removeAllItems();
-				Arrays.sort(rooms, new RoomComparator());
-				for (int i = 0; i <rooms.length; i++){
-					locationBox.addItem(rooms[i]);
-				}
+				rooms = (Room[]) response.getContent();
+				
 				return null;
 			}
 			
@@ -633,6 +630,15 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 			protected void done() {
 				roomBussyLabel.setBusy(false);
 				roomBussyLabel.setVisible(false);
+				locationBox.removeAllItems();
+				Arrays.sort(rooms, new RoomComparator());
+				for (int i = 0; i <rooms.length; i++){
+					locationBox.addItem(rooms[i]);
+				}
+				
+				if(rooms.length > 0)
+					model.setRoom(rooms[0]);
+				
 				super.done();
 			}
 		};
@@ -723,7 +729,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 				protected Void doInBackground() throws Exception {
 				
 					
-					/*
+					
 					if(model.validateFields()){
 						int notification = notificationMap.get(notificationBox.getSelectedItem());
 						DateTime startTime = model.getFromTime();
@@ -731,12 +737,14 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 						String title = model.getTitle();
 						String desc = model.getDescription();
 						String loc = model.getLocationName();
-						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
-						Notification notificationObj = new Notification(app,Client.getClient().getUser());
+						Room room = model.getRoom();
+						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(), room);
+						Notification notificationObj = new Notification(meeting,Client.getClient().getUser());
 						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-						app.setNotification(notificationObj);
-						System.out.println(app);
-						Wrapper response = client.sendObject(app, Status.CREATE);
+						meeting.setNotification(notificationObj);
+						System.out.println(meeting);
+						Wrapper response = client.sendObject(meeting, Status.CREATE);
+						
 						
 						if(response.getFlag() != Status.SUCCESS){
 							errorLabel.setText("Error on appointment creation ");
@@ -746,12 +754,13 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 								Close();
 							}
 						}
+						
 						}else{
 							errorLabel.setText("One or more invalid fields");
 							errorLabel.setVisible(true);
 							
 						}
-						*/
+						
 						return null;
 				}
 
