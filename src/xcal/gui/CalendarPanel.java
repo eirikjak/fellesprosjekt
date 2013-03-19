@@ -84,25 +84,13 @@ public class CalendarPanel extends JPanel {
 		btnLastWeek.setBounds(2, 11, 132, 29);
 		panel_1.add(btnLastWeek);
 		btnLastWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnLastWeek.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("btnpressed");
-				cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
-				monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-				DateFormat df = new SimpleDateFormat("dd/MM");
-				for(int i=0; i<7; i++){
-					//System.out.println(df.format(cal.getTime()));
-					week[i].setText(df.format(cal.getTime()));				
-					cal.add(Calendar.DATE, 1);
-				}
-			}
-		});
+		btnLastWeek.addActionListener(new LastWeekBtnListener());
 		
 		JButton btnNextWeek = new JButton("Next Week");
 		btnNextWeek.setBounds(804, 11, 132, 29);
 		panel_1.add(btnNextWeek);
 		btnNextWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnNextWeek.addActionListener(new NextWeekBtnListener());
 		
 		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
 		lblNewLabel_2.setBounds(334, 5, 233, 39);
@@ -196,6 +184,7 @@ public class CalendarPanel extends JPanel {
 				button.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				button.setBounds(2, 11, 132, 29);
 				panel.add(button);
+				button.addActionListener(new LastWeekBtnListener());
 				
 				JButton button_1 = new JButton("Next Week");
 				button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
@@ -259,6 +248,66 @@ public class CalendarPanel extends JPanel {
 			
 			
 			return null;
+		}
+		
+	}
+	
+	class WeekWorker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
+			DateFormat df = new SimpleDateFormat("dd/MM");
+			cal.add(Calendar.DATE, -8);
+			for(int i=6; i>=0; i--){
+				System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime()));				
+				cal.add(Calendar.DATE, -1);
+			}
+			return null;
+		}
+		
+	}
+	
+	class NextWeekWorker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
+			DateFormat df = new SimpleDateFormat("dd/MM");
+			cal.add(Calendar.DATE, 7);
+			for(int i=6; i>=0; i--){
+				System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime()));				
+				cal.add(Calendar.DATE, 1);
+			}
+			return null;
+		}
+		
+	}
+	
+	private class LastWeekBtnListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("btnpressed");
+			SwingWorker ws = new WeekWorker();
+			ws.execute();
+			System.out.println("Done");
+		}
+		
+	}
+	
+	private class NextWeekBtnListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("btnpressed");
+			SwingWorker nws = new NextWeekWorker();
+			nws.execute();
+			System.out.println("Done");
 		}
 		
 	}
