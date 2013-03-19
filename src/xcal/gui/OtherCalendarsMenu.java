@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import xcal.client.*;
 import xcal.model.Employee;
 import xcal.server.query.EmployeeQ;
+import javax.swing.JScrollPane;
 
 public class OtherCalendarsMenu extends JFrame {
 
@@ -62,16 +63,21 @@ public class OtherCalendarsMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(53, 153, 178, 133);
+		contentPane.add(scrollPane);
+		
 		
 		
 		final JList list_1 = new JList(model);
-		//list_1.setListData(EmployeeQ.getAllEmployees());
-		list_1.setBounds(53, 153, 178, 133);
-		getContentPane().add(list_1);
+		scrollPane.setViewportView(list_1);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(336, 153, 185, 133);
+		contentPane.add(scrollPane_1);
 		
 		final JList list_2 = new JList(model1);
-		list_2.setBounds(336, 153, 185, 133);
-		getContentPane().add(list_2);
+		scrollPane_1.setViewportView(list_2);
 		
 
 		SwingWorker w = new getAllWorker();
