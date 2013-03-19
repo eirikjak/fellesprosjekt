@@ -80,17 +80,6 @@ public class CalendarPanel extends JPanel {
 		panel_1.add(lblNewLabel_1);
 		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
 		
-		JButton btnLastWeek = new JButton("Last Week");
-		btnLastWeek.setBounds(2, 11, 132, 29);
-		panel_1.add(btnLastWeek);
-		btnLastWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnLastWeek.addActionListener(new LastWeekBtnListener());
-		
-		JButton btnNextWeek = new JButton("Next Week");
-		btnNextWeek.setBounds(804, 11, 132, 29);
-		panel_1.add(btnNextWeek);
-		btnNextWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnNextWeek.addActionListener(new NextWeekBtnListener());
 		
 		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
 		lblNewLabel_2.setBounds(334, 5, 233, 39);
@@ -259,6 +248,7 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
+			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			DateFormat df = new SimpleDateFormat("dd/MM");
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
@@ -279,6 +269,7 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
+			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			DateFormat df = new SimpleDateFormat("dd/MM");
@@ -304,7 +295,7 @@ public class CalendarPanel extends JPanel {
 			ws.execute();
 			System.out.println("Done");
 		}
-		
+			
 	}
 	
 	private class NextWeekBtnListener implements ActionListener{
