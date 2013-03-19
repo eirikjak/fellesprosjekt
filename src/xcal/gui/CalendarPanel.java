@@ -246,12 +246,12 @@ public class CalendarPanel extends JPanel {
 			
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
-			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
 			for(int i=6; i>=0; i--){
 				cal.add(Calendar.DATE, -1);
 				System.out.println(df.format(cal.getTime()));
+				int monthNum = Integer.valueOf(m.format(cal.getTime()));
 				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);			
 				
 			}
@@ -269,8 +269,8 @@ public class CalendarPanel extends JPanel {
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
-			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			cal.add(Calendar.DATE, 7);
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			for(int i=0; i<7; i++){
 				//System.out.println(df.format(cal.getTime()));
 				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);				
