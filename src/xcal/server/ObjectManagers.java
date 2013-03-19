@@ -86,6 +86,9 @@ public class ObjectManagers {
 				
 			case SELECT:
 				return (Appointment)AppointmentsQ.selectAppointment(a.getAppId());
+				
+			case TD_APP:
+				return new Wrapper(Status.IGNORE, AppointmentsQ.selectAppointmentsForPersonFromDate (a.getFromTime(), a.getToTime(), a.getLeader().getEmail()));
 			}
 				
 		}

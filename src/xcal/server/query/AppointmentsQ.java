@@ -3,6 +3,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -79,35 +81,68 @@ public class AppointmentsQ
 		}
 	}
 	
-	public Appointment selectAppointmentsForPersonFromDate (Timestamp startDate, Timestamp endDate, String Email){
+	public static ArrayList<Appointment> selectAppointmentsForPersonFromDate (DateTime startDate, DateTime endDate, String Email) {
+		ArrayList<Appointment> appList = new ArrayList();
+		Timestamp fromDate = new Timestamp(startDate.getMillis());
+		Timestamp toDate = new Timestamp(endDate.getMillis());
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//System.out.println(df.format(fromDate) + "FFJJFJ");
+		
 		synchronized (connection) {
-			String sqlstr = "SELECT * FROM Appointment A, Invites I WHERE((I.person = "+Email+") AND I.app_id = id) AND((A.start_date >= "+startDate+" AND A.start_date <= "+startDate+"))";
-			ResultSet resultSet = statement.executeQuery(sql);
-        	resultSet.last();
+			String sqlstr = "SELECT * "+
+                    "FROM Appointment A "+
+                    "WHERE A.id IN "+
+                            "(SELECT id "+
+                            "FROM Appointment "+
+                            "WHERE leader = '"+Email+"' "+
+                     
+                           "UNION "+
+                     
+                            "SELECT app_id "+
+                            "FROM Invites "+
+                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(fromDate)+"')";
+			ResultSet resultSet = null;
+			
+			try {
+				Statement statement = connection.getConnection().createStatement();
+				resultSet = statement.executeQuery(sqlstr);
+				System.out.println(resultSet);
+				while(resultSet.next()){
+					
+					if(resultSet.getString("room") != null)//appointment doesn't contain room
+		  		   	{
+						Appointment app=new Appointment();
+						//app.setLocation(result.getString("Location"));
+		  			   	app.setDescription(resultSet.getString("description"));
+		  			   	//app.setName(result.getString("name"));
+		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
+		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
+		  			   	appList.add(app);
+		  		   }
+					else{
+						Appointment meeting=new Meeting();
+						meeting.setDescription(resultSet.getString("description"));
+						meeting.setFromTime(resultSet.getTimestamp("start_date"));
+						meeting.setToTime(resultSet.getTimestamp("end_date"));
+						appList.add(meeting);
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+        	return appList;
         	
-        	if(resultSet.getString("room").isEmpty())//appointment doesn't contain room
-  		   {
-  			   Appointment app=new Appointment();
-  			  //app.setLocation(result.getString("Location"));
-  			   app.setDescription(resultSet.getString("description"));
-  			   //app.setName(result.getString("name"));
-  			   app.setFromTime(resultSet.getTimestamp("start_date"));
-  			   app.setToTime(resultSet.getTimestamp("end_date"));
-  			   return app;
-  		   }
   		   
-  		   Appointment meeting=new Meeting();
-  		   meeting.setDescription(resultSet.getString("description"));
-  		   meeting.setFromTime(resultSet.getTimestamp("start_date"));
-  		   meeting.setToTime(resultSet.getTimestamp("end_date"));
-  		   
-  		   return meeting;   		   
+  		     		   
   		   
 
   	   } 
 		
 		}
-	}
+	
 	
 	public Appointment selectAppointmentsFromDate (Timestamp startDate, Timestamp endDate) throws SQLException{
 		synchronized (connection) {
@@ -146,7 +181,7 @@ public class AppointmentsQ
 	 * @param AppointmentId - id to select from db
 	 * @return appointment selected from id
 	 */
-	public  Appointment selectAppointment(int AppointmentId)
+	public static  Appointment selectAppointment(int AppointmentId)
 	{
 		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";

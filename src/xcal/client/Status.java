@@ -14,6 +14,7 @@ public enum Status {
 	IGNORE,
 	GET_AVALIABLE_ROOMS,
 	ACCEPT,
-	DECLINE
+	DECLINE,
+	TD_APP
 
 }

@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,11 +24,17 @@ import javax.swing.border.TitledBorder;
 import org.joda.time.DateTime;
 
 import xcal.client.Client;
+import xcal.client.Status;
+import xcal.client.Wrapper;
+
 import javax.swing.JScrollPane;
+import xcal.model.*;
 
 public class CalendarPanel extends JPanel {
 	private Client client = Client.getClient();
+	private Calendar tCal = Calendar.getInstance();
 	private Calendar cal = Calendar.getInstance();
+	
 	//Labels for dates
 	private JLabel mondayDate = new JLabel();
 	private JLabel tuesdayDate = new JLabel();
@@ -37,20 +45,22 @@ public class CalendarPanel extends JPanel {
 	private JLabel sundayDate = new JLabel();
 	//end labels for dates
 	
-	//Lists for appointments
-	JList monday = new JList();
-	JList tuesday = new JList();
-	JList wednesday = new JList();
-	JList thursday = new JList();
-	JList friday = new JList();
-	JList saturday = new JList();
-	JList sunday = new JList();
-	//end for list appointments
+	
+	
+	//Models
+	private final DefaultListModel mondayModel = new DefaultListModel();
+	private final DefaultListModel tuesdayModel = new DefaultListModel();
+	private final DefaultListModel wednesdayModel = new DefaultListModel();
+	private final DefaultListModel thursdayModel = new DefaultListModel();
+	private final DefaultListModel fridayModel = new DefaultListModel();
+	private final DefaultListModel saturdayModel = new DefaultListModel();
+	private final DefaultListModel sundayModel = new DefaultListModel();
+	
 	
 	//Arrays with weekdays, appointments, month names etc
 	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
 			sundayDate};
-	private JList[] weekAppointments = { monday, tuesday, wednesday, thursday, friday, saturday, sunday}; 
+	private DefaultListModel[] weekAppointments = { mondayModel, tuesdayModel, wednesdayModel, thursdayModel, fridayModel, saturdayModel, sundayModel}; 
 	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
 			,"November", "December"};
 
@@ -63,6 +73,16 @@ public class CalendarPanel extends JPanel {
 		SwingWorker w = new Worker();
 		w.execute();
 		setLayout(null);
+		
+		//Lists for appointments
+		JList monday = new JList(mondayModel);
+		JList tuesday = new JList(thursdayModel);
+		JList wednesday = new JList(wednesdayModel);
+		JList thursday = new JList(thursdayModel);
+		JList friday = new JList(fridayModel);
+		JList saturday = new JList(saturdayModel);
+		JList sunday = new JList(sundayModel);
+		//end for list appointments
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(388, 5, 1, 1);
@@ -185,49 +205,49 @@ public class CalendarPanel extends JPanel {
 				scrollPane.setBounds(8, 122, 126, 365);
 				panel.add(scrollPane);
 				
-				JList monday = new JList();
+				//JList monday = new JList();
 				scrollPane.setViewportView(monday);
 				
 				JScrollPane scrollPane_1 = new JScrollPane();
 				scrollPane_1.setBounds(141, 122, 126, 365);
 				panel.add(scrollPane_1);
 				
-				JList tuesday = new JList();
+				//JList tuesday = new JList();
 				scrollPane_1.setViewportView(tuesday);
 				
 				JScrollPane scrollPane_2 = new JScrollPane();
 				scrollPane_2.setBounds(274, 122, 126, 365);
 				panel.add(scrollPane_2);
 				
-				JList wednesday = new JList();
+				//JList wednesday = new JList();
 				scrollPane_2.setViewportView(wednesday);
 				
 				JScrollPane scrollPane_4 = new JScrollPane();
 				scrollPane_4.setBounds(540, 122, 126, 365);
 				panel.add(scrollPane_4);
 				
-				JList thursday = new JList();
+				//JList thursday = new JList();
 				scrollPane_4.setViewportView(thursday);
 				
 				JScrollPane scrollPane_6 = new JScrollPane();
 				scrollPane_6.setBounds(806, 122, 126, 365);
 				panel.add(scrollPane_6);
 				
-				JList friday = new JList();
+				//JList friday = new JList();
 				scrollPane_6.setViewportView(friday);
 				
 				JScrollPane scrollPane_5 = new JScrollPane();
 				scrollPane_5.setBounds(673, 122, 126, 365);
 				panel.add(scrollPane_5);
 				
-				JList saturday = new JList();
+			//	JList saturday = new JList();
 				scrollPane_5.setViewportView(saturday);
 				
 				JScrollPane scrollPane_3 = new JScrollPane();
 				scrollPane_3.setBounds(407, 122, 126, 365);
 				panel.add(scrollPane_3);
 				
-				JList sunday = new JList();
+				//JList sunday = new JList();
 				scrollPane_3.setViewportView(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
@@ -240,23 +260,36 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);			
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
 			int monthNum = Integer.valueOf(m.format(cal.getTime()));
+			
+			
 			for(int i=0; i<7; i++){
-				//System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
+				DateTime dtFrom = new DateTime(cal.get(Calendar.YEAR),monthNum, cal.get(Calendar.DAY_OF_MONTH),00,00,00);
+				DateTime dtTo = new DateTime(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),23,59,00);
+				System.out.println(dtFrom);
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);
+				ArrayList<Appointment> appList = new ArrayList();
+				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				Object obj = client.sendObject(app, Status.TD_APP).getContent();
+		
+				ArrayList<Appointment> rcvd = (ArrayList<Appointment>)obj;
+				for(Appointment a : rcvd){
+					weekAppointments[i].addElement(a);
+				}
+				//System.out.println(weekAppointments[0]);
 				cal.add(Calendar.DATE, 1);
 			}
 			
 			cal.add(Calendar.DATE, -7);
 			
-			
-			
+		
 			return null;
 		}
+		
 		
 	}
 	
@@ -270,9 +303,20 @@ public class CalendarPanel extends JPanel {
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
 			for(int i=6; i>=0; i--){
+				int monthNum = Integer.valueOf(m.format(cal.getTime()));
+				DateTime dtFrom = new DateTime(cal.get(Calendar.YEAR),monthNum, cal.get(Calendar.DAY_OF_MONTH),00,00,00);
+				DateTime dtTo = new DateTime(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),23,59,00);
+				ArrayList<Appointment> appList = new ArrayList();
+				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				Object obj = client.sendObject(app, Status.TD_APP).getContent();
+		
+				ArrayList<Appointment> rcvd = (ArrayList<Appointment>)obj;
+				for(Appointment a : rcvd){
+					weekAppointments[i].addElement(a);
+				}
 				cal.add(Calendar.DATE, -1);
 				System.out.println(df.format(cal.getTime()));
-				int monthNum = Integer.valueOf(m.format(cal.getTime()));
+				monthNum = Integer.valueOf(m.format(cal.getTime()));
 				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
 			}
 
