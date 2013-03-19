@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
@@ -248,8 +250,9 @@ public class MeetingMenu extends JFrame {
 		removeButton.setBounds(379, 469, 68, 35);
 		getContentPane().add(removeButton);
 		
-		locationBox = new JComboBox();
-		locationBox.setBounds(180, 156, 178, 31);
+		locationBox = new JComboBox(new String[]{"Please select time and date"});
+		locationBox.setBounds(180, 156, 188, 31);
+		
 		getContentPane().add(locationBox);
 		
 		JLabel lblNewLabel_6 = new JLabel("Select:");
@@ -310,20 +313,40 @@ public class MeetingMenu extends JFrame {
 	}
 	
 	
+	public void updateRoomsList(){
+		Meeting meeting = new Meeting();
+		meeting.setFromTime(new DateTime(datePicker.getDate()));
+		meeting.setToTime(new DateTime(datePicker.getDate()));
+		
+		Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
+		Room[] rooms = (Room[]) response.getContent();
+		
+		for (int i = 0; i <rooms.length; i++){
+			System.out.println(rooms[i]);
+		}
+	}
 	
+	
+	private class TimeFieldListener implements FocusListener{
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			
+			
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			
+			
+		}
+		
+	}
 	private class DatePickerListener implements ActionListener{
 
 		
 		public void actionPerformed(ActionEvent e) {
-		
-			Meeting meeting = new Meeting();
-			meeting.setFromTime(new DateTime(datePicker.getDate()));
-			meeting.setToTime(new DateTime(datePicker.getDate()));
-			
-			Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
-			System.out.println(response.getContent());
-			
-	
+			updateRoomsList();
 		}
 		
 	}
