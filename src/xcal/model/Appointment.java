@@ -59,7 +59,9 @@ public class Appointment implements Serializable
         }
         public Appointment(DateTime start,DateTime end,String title,String description,Employee leader)
         {
+        	
         		this(start,end,title,description,leader,null);
+        		System.out.println(leader);
  
         }
  

@@ -148,9 +148,9 @@ public class Login extends JPanel {
 				bussyLabel.setVisible(false);
 				if(success){
 					RootFrame.clearAll();
+					client.setUser((Employee)response.getContent());
 					RootFrame.addPanel(new Mainpage());
 					System.out.println(response.getContent());
-					client.setUser((Employee)response.getContent());
 					System.out.println("Welcome" + ((Employee)response.getContent()).getName());
 				}
 				

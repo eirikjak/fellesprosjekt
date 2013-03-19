@@ -31,7 +31,7 @@ import javax.swing.JScrollPane;
 import xcal.model.*;
 
 public class CalendarPanel extends JPanel {
-	private Client client = Client.getClient();
+	private Client client;
 	private Calendar tCal = Calendar.getInstance();
 	private Calendar cal = Calendar.getInstance();
 	
@@ -70,6 +70,7 @@ public class CalendarPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public CalendarPanel() {
+		client = Client.getClient();
 		SwingWorker w = new Worker();
 		w.execute();
 		setLayout(null);
@@ -260,20 +261,25 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			
-			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);			
+			/*
+			 * Formatting the dates of days labels
+			 */
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
 			int monthNum = Integer.valueOf(m.format(cal.getTime()));
+			DateTime dtFrom = new DateTime(cal.get(Calendar.YEAR),monthNum, cal.get(Calendar.DAY_OF_MONTH),00,00,00);
+			DateTime dtTo = new DateTime(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),23,59,00);
 			
 			
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);			
+
 			for(int i=0; i<7; i++){
-				DateTime dtFrom = new DateTime(cal.get(Calendar.YEAR),monthNum, cal.get(Calendar.DAY_OF_MONTH),00,00,00);
-				DateTime dtTo = new DateTime(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),23,59,00);
-				System.out.println(dtFrom);
+				
 				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);
 				ArrayList<Appointment> appList = new ArrayList();
+				System.out.println(client.getUser());
 				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				System.out.println(app);
 				Object obj = client.sendObject(app, Status.TD_APP).getContent();
 		
 				ArrayList<Appointment> rcvd = (ArrayList<Appointment>)obj;

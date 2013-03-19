@@ -107,7 +107,7 @@ public class AppointmentsQ
 			try {
 				Statement statement = connection.getConnection().createStatement();
 				resultSet = statement.executeQuery(sqlstr);
-				System.out.println(resultSet);
+			//	System.out.println(resultSet);
 				while(resultSet.next()){
 					
 					if(resultSet.getString("room") != null)//appointment doesn't contain room
