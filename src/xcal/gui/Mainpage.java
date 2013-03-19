@@ -88,10 +88,21 @@ public class Mainpage extends JPanel {
 		add(calendarPanel);
 		calendarPanel.setLayout(null);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(756, 30, 211, 88);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/xcalSmall2.png")));
-		lblNewLabel_1.setBounds(776, 33, 159, 81);
-		add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(14, 8, 70, 73);
+		panel_1.add(lblNewLabel_1);
+		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/1363727523_logout.png")));
+		
+		JButton btnNewButton_2 = new JButton("Logout");
+		btnNewButton_2.setBounds(101, 26, 91, 35);
+		panel_1.add(btnNewButton_2);
+		btnNewButton_2.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		calendarPanel.setVisible(true);
 
 	}
