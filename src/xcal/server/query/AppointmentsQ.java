@@ -62,6 +62,7 @@ public class AppointmentsQ
 		
 		return app;
 	
+
 	}
 	public static void deleteAppointment(Appointment app){
 		
@@ -136,7 +137,16 @@ public class AppointmentsQ
   	   } 
 			
 	}
-	public static  Appointment selectAppointment(int AppointmentId)
+	
+	
+	
+	/**
+	 * get appointment from db
+	 * 
+	 * @param AppointmentId - id to select from db
+	 * @return appointment selected from id
+	 */
+	public  Appointment selectAppointment(int AppointmentId)
 	{
 		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";
@@ -178,6 +188,7 @@ public class AppointmentsQ
 		}
  	   return null;
 	}
+	
 	
    	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place ) throws SQLException{
    		synchronized (connection) {

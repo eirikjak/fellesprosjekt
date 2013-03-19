@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class MeetingPage extends JFrame {
 
@@ -159,18 +160,27 @@ public class MeetingPage extends JFrame {
 		lblNewLabel_8.setBounds(14, 447, 38, 38);
 		panel_3.add(lblNewLabel_8);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 89, 168, 85);
+		panel_3.add(scrollPane);
+		
 		JList listAccepted = new JList();
+		scrollPane.setViewportView(listAccepted);
 		listAccepted.setToolTipText("");
-		listAccepted.setBounds(30, 89, 168, 85);
-		panel_3.add(listAccepted);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(30, 207, 168, 85);
+		panel_3.add(scrollPane_1);
 		
 		JTextArea textAreaDeclined = new JTextArea();
-		textAreaDeclined.setBounds(30, 207, 168, 85);
-		panel_3.add(textAreaDeclined);
+		scrollPane_1.setViewportView(textAreaDeclined);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(30, 331, 168, 85);
+		panel_3.add(scrollPane_2);
 		
 		JList listNoAnswer = new JList();
-		listNoAnswer.setBounds(30, 331, 168, 85);
-		panel_3.add(listNoAnswer);
+		scrollPane_2.setViewportView(listNoAnswer);
 		
 		JLabel lblNewLabel_10 = new JLabel("");
 		lblNewLabel_10.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363622473_Forward.png")));
