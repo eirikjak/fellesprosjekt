@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import org.joda.time.DateTime;
 
 import xcal.client.Client;
+import javax.swing.JScrollPane;
 
 public class CalendarPanel extends JPanel {
 	private Client client = Client.getClient();
@@ -52,6 +53,7 @@ public class CalendarPanel extends JPanel {
 	private JList[] weekAppointments = { monday, tuesday, wednesday, thursday, friday, saturday, sunday}; 
 	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
 			,"November", "December"};
+
 	
 	
 	/**
@@ -178,27 +180,55 @@ public class CalendarPanel extends JPanel {
 				panel.add(button_1);
 				button_1.addActionListener(new NextWeekBtnListener());
 				
+
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(8, 122, 126, 365);
+				panel.add(scrollPane);
 				
-				monday.setBounds(8, 122, 126, 365);
-				panel.add(monday);
+				JList monday = new JList();
+				scrollPane.setViewportView(monday);
 				
-				tuesday.setBounds(141, 122, 126, 365);
-				panel.add(tuesday);
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(141, 122, 126, 365);
+				panel.add(scrollPane_1);
 				
-				wednesday.setBounds(274, 122, 126, 365);
-				panel.add(wednesday);
+				JList tuesday = new JList();
+				scrollPane_1.setViewportView(tuesday);
 				
-				thursday.setBounds(540, 122, 126, 365);
-				panel.add(thursday);
-			
-				friday.setBounds(806, 122, 126, 365);
-				panel.add(friday);
+				JScrollPane scrollPane_2 = new JScrollPane();
+				scrollPane_2.setBounds(274, 122, 126, 365);
+				panel.add(scrollPane_2);
 				
-				saturday.setBounds(673, 122, 126, 365);
-				panel.add(saturday);
+				JList wednesday = new JList();
+				scrollPane_2.setViewportView(wednesday);
 				
-				sunday.setBounds(407, 122, 126, 365);
-				panel.add(sunday);
+				JScrollPane scrollPane_4 = new JScrollPane();
+				scrollPane_4.setBounds(540, 122, 126, 365);
+				panel.add(scrollPane_4);
+				
+				JList thursday = new JList();
+				scrollPane_4.setViewportView(thursday);
+				
+				JScrollPane scrollPane_6 = new JScrollPane();
+				scrollPane_6.setBounds(806, 122, 126, 365);
+				panel.add(scrollPane_6);
+				
+				JList friday = new JList();
+				scrollPane_6.setViewportView(friday);
+				
+				JScrollPane scrollPane_5 = new JScrollPane();
+				scrollPane_5.setBounds(673, 122, 126, 365);
+				panel.add(scrollPane_5);
+				
+				JList saturday = new JList();
+				scrollPane_5.setViewportView(saturday);
+				
+				JScrollPane scrollPane_3 = new JScrollPane();
+				scrollPane_3.setBounds(407, 122, 126, 365);
+				panel.add(scrollPane_3);
+				
+				JList sunday = new JList();
+				scrollPane_3.setViewportView(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
 		

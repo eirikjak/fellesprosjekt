@@ -40,6 +40,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class MeetingMenu extends JFrame {
 
@@ -231,13 +232,19 @@ public class MeetingMenu extends JFrame {
 		addButton.setBounds(379, 413, 68, 35);
 		getContentPane().add(addButton);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(465, 397, 185, 133);
+		getContentPane().add(scrollPane_1);
+		
 		JList list_2 = new JList();
-		list_2.setBounds(465, 397, 185, 133);
-		getContentPane().add(list_2);
+		scrollPane_1.setViewportView(list_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(182, 397, 178, 133);
+		getContentPane().add(scrollPane);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(182, 397, 178, 133);
-		getContentPane().add(list_1);
+		scrollPane.setViewportView(list_1);
 		
 		JButton removeButton = new JButton("");
 		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
