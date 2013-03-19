@@ -84,11 +84,11 @@ public class AppointmentsQ
 	public static ArrayList<Appointment> selectAppointmentsForPersonFromDate (DateTime startDate, DateTime endDate, String Email) {
 		ArrayList<Appointment> appList = new ArrayList();
 		Timestamp fromDate = new Timestamp(startDate.getMillis());
+		//System.out.println();
 		Timestamp toDate = new Timestamp(endDate.getMillis());
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//System.out.println(df.format(fromDate) + "FFJJFJ");
-		
 		synchronized (connection) {
 			String sqlstr = "SELECT * "+
                     "FROM Appointment A "+
@@ -101,7 +101,7 @@ public class AppointmentsQ
                      
                             "SELECT app_id "+
                             "FROM Invites "+
-                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(fromDate)+"')";
+                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(toDate)+"')";
 			ResultSet resultSet = null;
 			
 			try {

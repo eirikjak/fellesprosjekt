@@ -142,7 +142,7 @@ public class Appointment implements Serializable
         	setToMinute(to.getMinuteOfHour());
         	to_time=to;
         }
-        public void setToTime(Timestamp to){ setToTime(to);}
+        public void setToTime(Timestamp to){ setToTime(new DateTime(to));}
         public void setToHour(String hour){
         	try{
         		setToHour(Integer.parseInt(hour));
