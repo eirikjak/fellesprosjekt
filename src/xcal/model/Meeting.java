@@ -8,43 +8,79 @@
 
 package xcal.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Meeting extends Appointment implements Serializable
 {
-	private Vector<Employee> participants;
-	private Employee manager;
+	public static final String PROPERTY_ROOM = "room";
+	public static final String PROPERTY_EMPLOYEES_ADD = "employeesAdd";
+	public static final String PROPERTY_EMPLOYEES_REMOVE ="employeesRemove";
+	private ArrayList<Employee> participants;
 	private Room room;
+	private PropertyChangeSupport pcs;
 	
 
-
-
+	
 	public Meeting(){
+		pcs = new PropertyChangeSupport(this);
+		participants = new ArrayList<Employee>();
 	}
 	
 
 	
-	public void removeParticipant(Employee e)
+	
+	@Override
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+		super.addPropertyChangeListener(listener);
+		
+	};
+	public void removeParticipant(Employee emp)
 	{
-		for(int i=0;i<participants.size();++i)//loop thru vector to find invited employee
-			if(participants.get(i)==e)
-				participants.remove(i);
+		
+		participants.remove(emp);
+		pcs.firePropertyChange(PROPERTY_EMPLOYEES_REMOVE, null, emp);
 	}
 	
-	public void addParticipant(Employee e)
+	public void addParticipant(Employee emp)
 	{
-		participants.add(e);
+		pcs.firePropertyChange(PROPERTY_EMPLOYEES_ADD, null, emp);
+		participants.add(emp);
+		
 	}
 	
-	public Vector<Employee> getParticipants(){return participants;}
+
+	public ArrayList<Employee> getParticipants(){return participants;}
 	public Employee getParticipant(int index){return participants.get(index);}
 	
-	public Employee getManager(){return manager;}
-	public void setManager(Employee e){manager=e;}
+
 	
-	public Room getRoom(){return room;}
-	public void setRoom(Room r){room=r;}
+	public Room getRoom(){
+		return room;
+		}
+	public void setRoom(Room r){
+		pcs.firePropertyChange(PROPERTY_ROOM, this.room, r);
+		room=r;
+	}
+	
+	public boolean validateParticipants(){
+		
+		return participants.size() > 0;
+	}
+	
+	@Override
+	public boolean validateLocation() {
+		return room != null;
+	};
+	@Override
+	public boolean validateFields() {
+		return super.validateFields() && validateParticipants();
+	};
+	
 	
 	/**send invite sends invite to all participants
 	 * 
