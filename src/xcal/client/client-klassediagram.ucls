@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.1" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="xcal.server" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/server" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="223" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="xcal.model" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/model" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="364" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="xcal.gui" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/gui" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="935" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="xcal.client.Client" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="199" x="686" y="109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="5" language="java" name="xcal.server.query" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="122" x="1076" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="6" language="java" name="xcal.client.Wrapper" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Wrapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="141" x="505" y="109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="7" language="java" name="xcal.client.Status" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Status.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="190" x="505" y="438"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <package id="8" language="java" name="xcal.core" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/core" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1238" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="9" language="java" name="xcal.client" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/client" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1379" y="109"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <association id="10">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="11" name="client"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="14" name="flag"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
