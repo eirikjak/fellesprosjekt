@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.1" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="xcal.model.Appointment" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Appointment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="340" x="1938" y="2250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="xcal.gui.Login" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="181" x="3390" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="xcal.client.Wrapper" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Wrapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="141" x="2914" y="2250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="xcal.gui.AppointmentMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="1851" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="xcal.server.ClientThread" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ClientThread.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="161" x="730" y="920"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="xcal.core.ObjectCheck" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/core/ObjectCheck.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="97" x="1015" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="xcal.gui.OtherCalendarsMenu.getAllWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="146" x="3473" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="xcal.gui.CalendarPanel.NextWeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="2593" y="920"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="xcal.server.Server" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/Server.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="177" x="730" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="xcal.gui.AppointmentMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2444" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="xcal.model.Location" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Location.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="127" x="2256" y="2893"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="xcal.server.query.LocationQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/LocationQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="855" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="xcal.server.query.DbPopulator" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/DbPopulator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="1480" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="xcal.gui.CalendarPanel.NextWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2651" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="xcal.gui.MeetingMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2730" y="1329"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="xcal.model.Meeting" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Meeting.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="198" x="1719" y="2893"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="xcal.gui.AppointmentMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="225" x="2444" y="1329"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="xcal.model.Room" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Room.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="127" x="2033" y="3549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="xcal.gui.Mainpage.NewMeetingListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2920" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="xcal.gui.NotificationMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/NotificationMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="119" x="3314" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="21" language="java" name="xcal.client.Status" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Status.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="190" x="3116" y="2893"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="22" language="java" name="xcal.gui.MeetingMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="225" x="2965" y="920"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="xcal.client.Client" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="199" x="3180" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="xcal.model.Notification" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Notification.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="243" x="2056" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="xcal.server.query.DbConnection" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/DbConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="216" x="834" y="2250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="xcal.gui.TimeFieldFilter" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/TimeFieldFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="277" x="2085" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="xcal.model.Person" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Person.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="127" x="269" y="2893"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="xcal.gui.MeetingPage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="123" x="1961" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="xcal.gui.MeetingMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2699" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="xcal.model.CalendarModel" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/CalendarModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="109" x="2453" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="xcal.gui.MeetingMenu.DatePickerListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2954" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="xcal.gui.Login.LoginButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="1533" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="xcal.server.query.NotificationQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/NotificationQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="234" x="1073" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="xcal.core.Settings" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/core/Settings.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="166" x="230" y="2250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="xcal.model.Employee" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Employee.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="293" x="1719" y="3266"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="xcal.gui.Mainpage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="3154" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="xcal.gui.CalendarPanel.Worker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="2465" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="xcal.server.query.AppointmentsQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/AppointmentsQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="355" x="1073" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="xcal.gui.Mainpage.OtherCalendarsListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="3154" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="xcal.gui.CalendarPanel.LastWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2906" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="xcal.gui.RootFrame" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/RootFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="161" x="3513" y="2250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="xcal.server.NotifyThread" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/NotifyThread.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="250" x="459" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="xcal.server.ServerLogic" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ServerLogic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="166" x="1435" y="1684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="xcal.server.ObjectManagers" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ObjectManagers.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="137" x="1590" y="1329"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="xcal.model.Authentication" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Authentication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="162" x="1812" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="xcal.server.query.EmployeeQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/EmployeeQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="262" x="1489" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="xcal.server.query.RoomQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/RoomQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="253" x="520" y="1859"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="xcal.model.Invite" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Invite.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="2932" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="xcal.gui.CalendarPanel.WeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="2779" y="920"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="xcal.gui.CalendarPanel" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="143" x="2737" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="xcal.gui.Mainpage.NewAppointmentListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2444" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="xcal.gui.OtherCalendarsMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="145" x="3203" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="53">    
+    <bendpoint x="468" y="920"/>    
+    <bendpoint x="468" y="1329"/>    
+    <bendpoint x="468" y="1684"/>    
+    <bendpoint x="489" y="1859"/>    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="54" name="connection"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="56">    
+    <bendpoint x="1021" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="47"/>  
+  </dependency>  
+  <dependency id="57">    
+    <bendpoint x="3649" y="269"/>    
+    <bendpoint x="3649" y="408"/>    
+    <bendpoint x="3649" y="709"/>    
+    <bendpoint x="3649" y="920"/>    
+    <bendpoint x="3649" y="1329"/>    
+    <bendpoint x="3649" y="1684"/>    
+    <bendpoint x="3440" y="1859"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <nesting id="58">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="32"/>  
+  </nesting>  
+  <dependency id="59">    
+    <bendpoint x="2877" y="1859"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="60">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="61">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="62">    
+    <bendpoint x="3378" y="408"/>    
+    <bendpoint x="3378" y="709"/>    
+    <bendpoint x="3328" y="920"/>    
+    <bendpoint x="3295" y="1329"/>    
+    <bendpoint x="3262" y="1684"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="63" name="client"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="65">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <dependency id="66">    
+    <bendpoint x="2645" y="1859"/>    
+    <bendpoint x="2668" y="2250"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="67">    
+    <bendpoint x="1781" y="1859"/>    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="68">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="50"/>  
+  </dependency>  
+  <association id="69">    
+    <bendpoint x="3399" y="269"/>    
+    <bendpoint x="3399" y="408"/>    
+    <bendpoint x="3399" y="709"/>    
+    <bendpoint x="3370" y="920"/>    
+    <bendpoint x="3326" y="1329"/>    
+    <bendpoint x="3283" y="1684"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="70" name="client"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="72">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <association id="73">    
+    <bendpoint x="699" y="920"/>    
+    <bendpoint x="699" y="1329"/>    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="74" name="notification_query"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="76">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="77">    
+    <bendpoint x="1736" y="709"/>    
+    <bendpoint x="1736" y="920"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <dependency id="78">    
+    <bendpoint x="1757" y="1684"/>    
+    <bendpoint x="2329" y="1859"/>    
+    <bendpoint x="2329" y="2250"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="79">    
+    <bendpoint x="3461" y="1859"/>    
+    <bendpoint x="3461" y="2250"/>    
+    <bendpoint x="3461" y="2893"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="80">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <nesting id="81">    
+    <bendpoint x="3349" y="920"/>    
+    <bendpoint x="3349" y="1329"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <dependency id="82">    
+    <bendpoint x="1340" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="83">    
+    <bendpoint x="803" y="1859"/>    
+    <bendpoint x="803" y="2250"/>    
+    <bendpoint x="803" y="2893"/>    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="84">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="85">    
+    <bendpoint x="2392" y="709"/>    
+    <bendpoint x="2434" y="920"/>    
+    <bendpoint x="2699" y="1329"/>    
+    <bendpoint x="2923" y="1684"/>    
+    <bendpoint x="2923" y="1859"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <nesting id="86">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <dependency id="87">    
+    <bendpoint x="1757" y="269"/>    
+    <bendpoint x="1757" y="408"/>    
+    <bendpoint x="1757" y="709"/>    
+    <bendpoint x="1757" y="920"/>    
+    <bendpoint x="1757" y="1329"/>    
+    <bendpoint x="1694" y="1684"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <dependency id="88">    
+    <bendpoint x="1042" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="89">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="90" name="notify"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="92">    
+    <bendpoint x="1947" y="2893"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="93" name="leader"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="96" name="people_connected"/>      
+      <multiplicity id="97" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="98">    
+    <bendpoint x="2875" y="709"/>    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <dependency id="99">    
+    <bendpoint x="3704" y="269"/>    
+    <bendpoint x="3704" y="408"/>    
+    <bendpoint x="3704" y="709"/>    
+    <bendpoint x="3704" y="920"/>    
+    <bendpoint x="3704" y="1329"/>    
+    <bendpoint x="3704" y="1684"/>    
+    <bendpoint x="3704" y="1859"/>    
+    <bendpoint x="3704" y="2250"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <association id="100">    
+    <bendpoint x="489" y="1329"/>    
+    <bendpoint x="447" y="1684"/>    
+    <bendpoint x="447" y="1859"/>    
+    <bendpoint x="447" y="2250"/>    
+    <bendpoint x="447" y="2893"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="101" name="person"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="103">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="37"/>  
+  </nesting>  
+  <nesting id="104">    
+    <bendpoint x="2975" y="1329"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="31"/>  
+  </nesting>  
+  <dependency id="105">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="106">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="107" name="connection"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="109">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <dependency id="110">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="111">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="43"/>  
+  </dependency>  
+  <generalization id="112">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="113">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="114" name="location"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="116">    
+    <bendpoint x="2708" y="1859"/>    
+    <bendpoint x="2647" y="2250"/>    
+    <bendpoint x="2647" y="2893"/>    
+    <bendpoint x="2647" y="3266"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="117">    
+    <bendpoint x="3178" y="1684"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="118" name="client"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="121" name="manager"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="123">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <nesting id="124">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <dependency id="125">    
+    <bendpoint x="2729" y="1859"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="126">    
+    <bendpoint x="1405" y="2250"/>    
+    <bendpoint x="1405" y="2893"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <association id="127">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="128" name="client"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="130">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <dependency id="131">    
+    <bendpoint x="2518" y="1859"/>    
+    <bendpoint x="2518" y="2250"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="132">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="52"/>  
+  </dependency>  
+  <association id="133">    
+    <bendpoint x="739" y="709"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="134" name="clients"/>      
+      <multiplicity id="135" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <bendpoint x="3199" y="1329"/>    
+    <bendpoint x="3199" y="1684"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="137" name="client"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="139">    
+    <bendpoint x="1673" y="1684"/>    
+    <bendpoint x="2004" y="1859"/>    
+    <bendpoint x="1907" y="2250"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="140">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="141">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="142">    
+    <bendpoint x="2434" y="1859"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="143">    
+    <bendpoint x="1799" y="1684"/>    
+    <bendpoint x="2371" y="1859"/>    
+    <bendpoint x="2392" y="2250"/>    
+    <bendpoint x="2434" y="2893"/>    
+    <bendpoint x="2434" y="3266"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="144">    
+    <bendpoint x="384" y="709"/>    
+    <bendpoint x="384" y="920"/>    
+    <bendpoint x="384" y="1329"/>    
+    <bendpoint x="384" y="1684"/>    
+    <bendpoint x="384" y="1859"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <association id="145">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="146" name="app"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="148">    
+    <bendpoint x="1820" y="1684"/>    
+    <bendpoint x="2476" y="1859"/>    
+    <bendpoint x="2560" y="2250"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <association id="149">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="150" name="client"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="152">    
+    <bendpoint x="1575" y="2250"/>    
+    <bendpoint x="1575" y="2893"/>    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="153">    
+    <bendpoint x="3482" y="1859"/>    
+    <bendpoint x="3482" y="2250"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="154">    
+    <bendpoint x="2856" y="1859"/>    
+    <bendpoint x="2856" y="2250"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="155">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <association id="156">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="157" name="connection"/>      
+      <multiplicity id="158" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="159">    
+    <bendpoint x="1617" y="2250"/>    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="160">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <generalization id="161">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="162">    
+    <bendpoint x="3151" y="709"/>    
+    <bendpoint x="3220" y="920"/>    
+    <bendpoint x="3220" y="1329"/>    
+    <bendpoint x="3220" y="1684"/>    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="163" name="client"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="165">    
+    <bendpoint x="2539" y="1859"/>    
+    <bendpoint x="2539" y="2250"/>    
+    <bendpoint x="2539" y="2893"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="166">    
+    <bendpoint x="1458" y="1859"/>    
+    <bendpoint x="1458" y="2250"/>    
+    <bendpoint x="1458" y="2893"/>    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <association id="167">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="168" name="connection"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <bendpoint x="3085" y="2250"/>    
+    <bendpoint x="3085" y="2893"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="171" name="user"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="173">    
+    <bendpoint x="3670" y="269"/>    
+    <bendpoint x="3670" y="408"/>    
+    <bendpoint x="3670" y="709"/>    
+    <bendpoint x="3670" y="920"/>    
+    <bendpoint x="3670" y="1329"/>    
+    <bendpoint x="3670" y="1684"/>    
+    <bendpoint x="3670" y="1859"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="174">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="175">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="176">    
+    <bendpoint x="1596" y="2250"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="177">    
+    <bendpoint x="2392" y="1859"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="178">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="179">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="180" name="participants"/>      
+      <multiplicity id="181" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="182">    
+    <bendpoint x="2308" y="2250"/>    
+    <bendpoint x="2225" y="2893"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="183" name="emp"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="185">    
+    <bendpoint x="2497" y="1859"/>    
+    <bendpoint x="2497" y="2250"/>    
+    <bendpoint x="2497" y="2893"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="186">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="187">    
+    <bendpoint x="2413" y="269"/>    
+    <bendpoint x="2413" y="408"/>    
+    <bendpoint x="2413" y="709"/>    
+    <bendpoint x="2413" y="920"/>    
+    <bendpoint x="2413" y="1329"/>    
+    <bendpoint x="2413" y="1684"/>    
+    <bendpoint x="2413" y="1859"/>    
+    <bendpoint x="2413" y="2250"/>    
+    <bendpoint x="2413" y="2893"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <nesting id="188">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="40"/>  
+  </nesting>  
+  <dependency id="189">    
+    <bendpoint x="3106" y="1859"/>    
+    <bendpoint x="3106" y="2250"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <nesting id="190">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="39"/>  
+  </nesting>  
+  <dependency id="191">    
+    <bendpoint x="2944" y="1859"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="192">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="193">    
+    <bendpoint x="1673" y="2250"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <association id="194">    
+    <bendpoint x="824" y="1859"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="195" name="connection"/>      
+      <multiplicity id="196" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="197">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="198" name="employee_query"/>      
+      <multiplicity id="199" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="200">    
+    <bendpoint x="2392" y="1684"/>    
+    <bendpoint x="2350" y="1859"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="201" name="model"/>      
+      <multiplicity id="202" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="203">    
+    <bendpoint x="2954" y="1329"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="29"/>  
+  </nesting>  
+  <dependency id="204">    
+    <bendpoint x="1715" y="920"/>    
+    <bendpoint x="1778" y="1329"/>    
+    <bendpoint x="1778" y="1684"/>    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="205">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="206" name="connection"/>      
+      <multiplicity id="207" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="208">    
+    <bendpoint x="1652" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <association id="209">    
+    <bendpoint x="2042" y="3266"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="210" name="room"/>      
+      <multiplicity id="211" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="212">    
+    <bendpoint x="426" y="920"/>    
+    <bendpoint x="426" y="1329"/>    
+    <bendpoint x="426" y="1684"/>    
+    <bendpoint x="426" y="1859"/>    
+    <bendpoint x="426" y="2250"/>    
+    <bendpoint x="426" y="2893"/>    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <nesting id="213">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="51"/>  
+  </nesting>  
+  <dependency id="214">    
+    <bendpoint x="1736" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="215">    
+    <bendpoint x="3172" y="709"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="216">    
+    <bendpoint x="489" y="2250"/>    
+    <bendpoint x="489" y="2893"/>    
+    <bendpoint x="489" y="3266"/>    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="217">    
+    <bendpoint x="405" y="920"/>    
+    <bendpoint x="405" y="1329"/>    
+    <bendpoint x="405" y="1684"/>    
+    <bendpoint x="405" y="1859"/>    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="218">    
+    <bendpoint x="489" y="1684"/>    
+    <bendpoint x="468" y="1859"/>    
+    <bendpoint x="468" y="2250"/>    
+    <bendpoint x="510" y="2893"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <nesting id="219">    
+    <bendpoint x="3130" y="709"/>    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="49"/>  
+  </nesting>  
+  <dependency id="220">    
+    <bendpoint x="2434" y="709"/>    
+    <bendpoint x="2455" y="920"/>    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="221">    
+    <bendpoint x="3241" y="920"/>    
+    <bendpoint x="3241" y="1329"/>    
+    <bendpoint x="3241" y="1684"/>    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="222" name="client"/>      
+      <multiplicity id="223" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="224">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <association id="225">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="226" name="flag"/>      
+      <multiplicity id="227" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="228">    
+    <bendpoint x="3157" y="2250"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="229">    
+    <bendpoint x="1715" y="1684"/>    
+    <bendpoint x="2025" y="1859"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="230">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="231" name="appointments_query"/>      
+      <multiplicity id="232" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="233">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <dependency id="234">    
+    <bendpoint x="1631" y="1684"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="235">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="236" name="notfiNotification"/>      
+      <multiplicity id="237" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="238">    
+    <bendpoint x="2455" y="1859"/>    
+    <bendpoint x="2455" y="2250"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <nesting id="239">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <dependency id="240">    
+    <bendpoint x="2668" y="1684"/>    
+    <bendpoint x="2666" y="1859"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="241">    
+    <bendpoint x="1479" y="2250"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="242">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="49"/>  
+  </dependency>  
+  <dependency id="243">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="244">    
+    <bendpoint x="3419" y="1859"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="245">    
+    <bendpoint x="2687" y="1859"/>    
+    <bendpoint x="2476" y="2250"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

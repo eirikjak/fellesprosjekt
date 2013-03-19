@@ -21,6 +21,8 @@ import java.awt.CardLayout;
 import org.jdesktop.swingx.JXDatePicker;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import xcal.client.Client;
 import xcal.client.Status;
@@ -51,6 +53,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,7 +72,7 @@ import org.jdesktop.swingx.JXBusyLabel;
 
 
 
-public class AppointmentMenu extends JFrame {
+public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 	private JTextField name;
 	private JTextField startHour;
 	private JTextField startMinute;
@@ -83,14 +87,20 @@ public class AppointmentMenu extends JFrame {
 	private JLabel errorLabel;
 	private JXBusyLabel busyLabel;
 	private Appointment model;
+
 	
 	/**
 	 * Create the panel.
 	 */
 	
+	public static void main(String[] args) {
+		new  AppointmentMenu();
+	}
+	
 	public AppointmentMenu() {
 		super();
 		model = new Appointment();
+		model.addPropertyChangeListener(this);
 		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
@@ -104,28 +114,7 @@ public class AppointmentMenu extends JFrame {
 		name.setColumns(10);
 		
 		startHour = new JTextField();
-		startHour.addFocusListener(new FocusListener() {
-			
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("action!");
-			}
-			
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		startHour.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
 		
-				
-			}
-		});
 		((AbstractDocument)startHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		startHour.setBounds(181, 93, 57, 31);
 		getContentPane().add(startHour);
@@ -135,7 +124,6 @@ public class AppointmentMenu extends JFrame {
 		startMinute.setColumns(10);
 		startMinute.setBounds(245, 93, 57, 31);
 		getContentPane().add(startMinute);
-		
 		datePicker = new JXDatePicker();
 		datePicker.getEditor().setEditable(false);
 		datePicker.setBounds(547, 93, 104, 31);
@@ -171,8 +159,8 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(notificationBox);
 		
 		JButton saveButton = new JButton("Save");
-		saveButton.addActionListener(new OkButtonListener());
 		saveButton.setBounds(172, 404, 181, 23);
+		saveButton.addActionListener(new OkButtonListener());
 		getContentPane().add(saveButton);
 		
 		JButton cancelButton = new JButton("Cancel");
@@ -290,16 +278,245 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(busyLabel);
 		
 		pack();
+		addTextFieldListeners();
+		model.setFromTime(DateTime.now());
+		model.setToTime(DateTime.now().plusHours(1));
+		
+		
+		
 
+	}
+	public void setModel(Appointment model){
+		this.model.removePropertyChangeListener(this);
+		this.model = model;
+		this.model.addPropertyChangeListener(this);
+		
+		datePicker.setDate(model.getFromTime().toDate());
+		startHour.setText(new Integer(model.getFromTime().getHourOfDay()).toString());
+		startMinute.setText((new Integer(model.getFromTime().getMinuteOfHour()).toString()));
+		endHour.setText(new Integer(model.getToTime().getHourOfDay()).toString());
+		endMinute.setText(new Integer(model.getToTime().getMinuteOfHour()).toString());
+		name.setText(model.getTitle());
+		description.setText(model.getDescription());
+		location.setText(model.getLocationName());
+	}
+	private void addTextFieldListeners(){
+		
+		startHour.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				
+				model.setFromHour(startHour.getText());
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+			
+				
+			}
+		});
+		startHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+					model.setFromHour(startHour.getText());
+				
+				
+			}
+		});
+		
+		
+		startMinute.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				model.setFromMinute(startMinute.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		startMinute.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setFromMinute(startMinute.getText());
+				
+			}
+		});
+		
+		endHour.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setToHour(endHour.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		endHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setToHour(endHour.getText());
+				
+			}
+		});
+		
+		
+		endMinute.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				model.setToMinute(endMinute.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		endMinute.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				model.setToMinute(endMinute.getText());
+				
+			}
+		});
+		name.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setTitle(name.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		name.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setTitle(name.getText());
+				
+			}
+		});
+		
+		description.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setDescription(description.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+				
+			}
+		});
+		
+		location.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setLocation(new Location(location.getText()));
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		location.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setLocation(new Location(location.getText()));
+				
+			}
+		});
+		
+		notificationBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int notification = notificationMap.get(notificationBox.getSelectedItem());
+				model.setNotification(new Notification(model, client.getUser(),model.getFromTime().minusMinutes(notification)));
+				
+			}
+		});
+		datePicker.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg) {
+				model.setDate(new DateTime(datePicker.getDate()));
+				
+			}
+		});
+		
+	
+		
+	}
+	
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		DateTimeFormatter format = DateTimeFormat.forPattern("Y.M.d");
+		System.out.println("hllo");
+		String pName = evt.getPropertyName();
+		
+		if(pName.equals(Appointment.PROPERTY_DAY)){
+			datePicker.setDate(((DateTime)evt.getNewValue()).toDate());
+		}else if(pName.equals(Appointment.PROPERTY_FROM_HOUR)){
+			startHour.setText(((Integer)evt.getNewValue()).toString());
+		}else if(pName.equals(Appointment.PROPERTY_FROM_MINUTE)){
+			startMinute.setText(((Integer)evt.getNewValue()).toString());
+		}else if (pName.equals(Appointment.PROPERTY_TO_HOUR)){
+			endHour.setText(((Integer)evt.getNewValue()).toString());
+		}else if(pName.equals(Appointment.PROPERTY_TO_MINUTE)){
+			endMinute.setText(((Integer)evt.getNewValue()).toString());
+		}else if (pName.equals(Appointment.PROPERTY_TITLE)){
+			name.setText((String)evt.getNewValue());
+		}else if (pName.equals(Appointment.PROPERTY_DESCRIPTION)){
+			description.setText((String)evt.getNewValue());
+		}else if (pName.equals(Appointment.PROPERTY_LOCATION)){
+			location.setText(((Location)evt.getNewValue()).getName());
+		
+		}
 	}
 	
 	
+	
 	private void Close(){
+		model.removePropertyChangeListener(this);
 		setVisible(false);
 		dispose();
 	}
 	
-
+	
 	private class CancelButtonListener implements ActionListener{
 
 		@Override
@@ -322,73 +539,19 @@ public class AppointmentMenu extends JFrame {
 			busyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-					boolean valid = true;
-					int fromHourDate = 0;
-					int fromMinuteDate = 0;
-					int toHourDate = 0;
-					int toMinuteDate = 0;
-					try{
-						
-						fromHourDate = Integer.parseInt(startHour.getText());
-						if(!(fromHourDate >= 0 &&  fromHourDate <24)){
-							valid = false;
-						}
-						fromMinuteDate = Integer.parseInt(startMinute.getText());
-						if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
-							valid = false;
-						}
-						toHourDate = Integer.parseInt(endHour.getText());
-						if(!(toHourDate >= 0 &&  toHourDate <24)){
-							valid = false;
-						}
-						toMinuteDate = Integer.parseInt(endMinute.getText());
-						if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
-							valid = false;
-						}
-					}catch(NumberFormatException e1){
-						valid = false;
-					}
 					
-					DateTime inputDate = null;
-					if(datePicker.getDate()== null){
-						valid = false;
-						inputDate = new DateTime();
-					}else{
-						
-						inputDate = new DateTime(datePicker.getDate());
-					}
-					DateTime today = DateTime.now();
-					DateTime startTime;
-					DateTime endTime;
 					
-				
-					
-					startTime = new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),fromHourDate,fromMinuteDate,0);
-					endTime= new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),toHourDate,toMinuteDate,0);
-					if(!today.isBefore(startTime)){
-						valid = false;
-					}
-					if(!startTime.isBefore(endTime)){
-						
-						valid = false;
-					}
-					
-					String loc = location.getText();
-					if(!(loc.length() > 0))
-						valid = false;
-					
-					String desc = description.getText();
-					String titleString = name.getText();
-					if(!(titleString.length() > 0)){
-						valid = false;
-					}
 					
 					int notification = notificationMap.get(notificationBox.getSelectedItem());
-				
-					
-					if(valid){
-						
-						Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
+					System.out.println("hello");
+					if(model.validateFields()){
+						System.out.println();
+						DateTime startTime = model.getFromTime();
+						DateTime endTime = model.getToTime();
+						String title = model.getTitle();
+						String desc = model.getDescription();
+						String loc = model.getLocationName();
+						Appointment app = new Appointment(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
 						Notification notificationObj = new Notification(app,Client.getClient().getUser());
 						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
 						app.setNotification(notificationObj);
@@ -422,4 +585,7 @@ public class AppointmentMenu extends JFrame {
 		}
 		
 	}
+
+
+	
 }

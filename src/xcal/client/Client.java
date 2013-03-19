@@ -40,11 +40,14 @@ public class Client
 	{
 
 	
+		System.out.println(new DateTime(0,1,1,0,0));
 		connect();
 		client = this;
 		
 		
 		SwingUtilities.invokeLater(new Runnable() {
+			
+		
 			
 			@Override
 			public void run() {

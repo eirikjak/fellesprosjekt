@@ -237,7 +237,7 @@ public class AppointmentsQ
 								"WHERE id= "+ AppointmentId;
 		statement.executeUpdate(sql);
    		}
-}
+   	}
 	
 	public void createMeeting(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
 		synchronized (connection) {

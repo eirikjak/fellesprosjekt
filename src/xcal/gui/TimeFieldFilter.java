@@ -26,16 +26,13 @@ public class TimeFieldFilter extends DocumentFilter {
 		if( offset > 2 || offset + string.length() > 2){
 			return;
 		}
-	
-	
-	
 		super.replace(fb, offset, length, text, attrs);
 	}
 	
 	@Override
 	public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
 		// TODO Auto-generated method stub
-	
+		System.out.println("hello");
 		super.remove(fb, offset, length);
 	}
 

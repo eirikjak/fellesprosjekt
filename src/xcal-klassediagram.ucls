@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.1" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="xcal.model.Appointment" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Appointment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="340" x="4074" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="xcal.gui.Login" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="181" x="3595" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="xcal.gui.Placeholder" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Placeholder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="92" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="xcal.client.Wrapper" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Wrapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="141" x="780" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="xcal.gui.AppointmentMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2937" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="xcal.server.ClientThread" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ClientThread.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="161" x="2897" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="xcal.core.ObjectCheck" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/core/ObjectCheck.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="97" x="173" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="xcal.gui.OtherCalendarsMenu.getAllWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="146" x="3888" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="xcal.gui.CalendarPanel.NextWeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="5177" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="xcal.server.Server" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/Server.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="177" x="2897" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="xcal.gui.AppointmentMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="3171" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="xcal.model.Location" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Location.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="127" x="4114" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="xcal.server.query.LocationQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/LocationQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="1709" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="xcal.server.query.DbPopulator" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/DbPopulator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="310" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="xcal.gui.CalendarPanel.NextWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="5363" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="xcal.gui.MeetingMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="1924" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="xcal.model.Meeting" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Meeting.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="198" x="3688" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="xcal.gui.AppointmentMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="225" x="3171" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="xcal.model.Room" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Room.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="127" x="3688" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="xcal.gui.Mainpage.NewMeetingListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4475" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="xcal.gui.NotificationMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/NotificationMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="119" x="3436" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="22" language="java" name="xcal.client.Status" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Status.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="190" x="780" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="23" language="java" name="xcal.gui.MeetingMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="225" x="2392" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="xcal.client.Client" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/client/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="199" x="3405" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="xcal.model.Notification" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Notification.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="243" x="4192" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="xcal.server.query.DbConnection" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/DbConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="216" x="2605" y="1763"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="xcal.gui.TimeFieldFilter" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/TimeFieldFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="277" x="463" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="xcal.model.Person" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Person.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="127" x="3926" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="xcal.gui.MeetingPage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="123" x="961" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="xcal.gui.MeetingMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2158" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="xcal.model.CalendarModel" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/CalendarModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="109" x="1124" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="xcal.gui.MeetingMenu.DatePickerListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2392" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="xcal.gui.Login.LoginButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="3654" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="xcal.server.query.NotificationQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/NotificationQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="234" x="2371" y="1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="xcal.core.Settings" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/core/Settings.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="166" x="1273" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="xcal.model.Employee" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Employee.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="293" x="3855" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="xcal.gui.Mainpage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="4475" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="xcal.gui.CalendarPanel.Worker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="5597" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="xcal.server.query.AppointmentsQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/AppointmentsQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="355" x="1927" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="xcal.gui.Mainpage.OtherCalendarsListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4709" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="xcal.gui.CalendarPanel.LastWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="5783" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="xcal.gui.RootFrame" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/RootFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="161" x="1479" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="xcal.server.NotifyThread" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/NotifyThread.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="250" x="2626" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="xcal.server.ServerLogic" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ServerLogic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="166" x="1680" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="xcal.server.ObjectManagers" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/ObjectManagers.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="137" x="1886" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="xcal.model.Authentication" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Authentication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="162" x="2063" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="xcal.server.query.EmployeeQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/EmployeeQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="262" x="2322" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="xcal.server.query.RoomQ" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query/RoomQ.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="253" x="2666" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="xcal.model.Invite" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/model/Invite.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="2265" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="xcal.gui.CalendarPanel.WeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="6017" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="xcal.gui.CalendarPanel" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="143" x="5363" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="xcal.gui.Mainpage.NewAppointmentListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4943" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="xcal.gui.OtherCalendarsMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="145" x="3816" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="54">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="55" name="appointments_query"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <bendpoint x="2906" y="446"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="58" name="clients"/>      
+      <multiplicity id="59" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="61" name="client"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="64" name="connection"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="66">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="67">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <association id="68">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="69" name="client"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <bendpoint x="2635" y="1089"/>    
+    <bendpoint x="2635" y="1372"/>    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="72" name="connection"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="74">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="75">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="76" name="location"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="79" name="notification_query"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="81">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="40"/>  
+  </nesting>  
+  <association id="82">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="83" name="model"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <bendpoint x="2614" y="1372"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="86" name="connection"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="89" name="flag"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <bendpoint x="3639" y="1089"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="92" name="user"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="94">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <association id="95">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="96" name="client"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="99" name="client"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="102" name="client"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="104">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <association id="105">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="106" name="client"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="108">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="109" name="room"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="111">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="112" name="connection"/>      
+      <multiplicity id="113" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="114">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="38"/>  
+  </nesting>  
+  <association id="115">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="116" name="connection"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="118">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="50"/>  
+  </nesting>  
+  <association id="119">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="120" name="app"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="122">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="123" name="client"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="126" name="connection"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="129" name="employee_query"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="132" name="participants"/>      
+      <multiplicity id="133" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="135" name="notfiNotification"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="138" name="people_connected"/>      
+      <multiplicity id="139" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="140">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="141" name="person"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="143">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <association id="144">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="145" name="client"/>      
+      <multiplicity id="146" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="147">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="30"/>  
+  </nesting>  
+  <nesting id="148">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="52"/>  
+  </nesting>  
+  <association id="149">    
+    <bendpoint x="4444" y="446"/>    
+    <bendpoint x="4444" y="1089"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="150" name="emp"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="152">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <nesting id="153">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="33"/>  
+  </nesting>  
+  <association id="154">    
+    <bendpoint x="4083" y="1089"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="155" name="leader"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="158" name="notify"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="160">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="16"/>  
+  </nesting>  
+  <nesting id="161">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="20"/>  
+  </nesting>  
+  <nesting id="162">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="41"/>  
+  </nesting>  
+  <nesting id="163">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="32"/>  
+  </nesting>  
+  <association id="164">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="165" name="manager"/>      
+      <multiplicity id="166" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
