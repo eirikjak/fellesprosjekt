@@ -33,7 +33,7 @@ public class CalendarPanel extends JPanel {
 	private JLabel fridayDate = new JLabel();
 	private JLabel saturdayDate = new JLabel();
 	private JLabel sundayDate = new JLabel();
-	private JLabel monthLbl = new JLabel();
+	//private JLabel monthLbl = new JLabel();
 	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
 			sundayDate};
 	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
@@ -181,13 +181,6 @@ public class CalendarPanel extends JPanel {
 				panel.add(button_1);
 				button_1.addActionListener(new NextWeekBtnListener());
 				
-				
-				monthLbl.setHorizontalAlignment(SwingConstants.CENTER);
-				monthLbl.setForeground(new Color(35, 103, 174));
-				monthLbl.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-				monthLbl.setBounds(334, 5, 233, 39);
-				panel.add(monthLbl);
-				
 				JList monday = new JList();
 				monday.setBounds(8, 122, 126, 365);
 				panel.add(monday);
@@ -227,11 +220,13 @@ public class CalendarPanel extends JPanel {
 		@Override
 		protected Object doInBackground() throws Exception {
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			DateFormat df = new SimpleDateFormat("dd/MM");
+			
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			for(int i=0; i<7; i++){
 				//System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
 				cal.add(Calendar.DATE, 1);
 			}
 			
@@ -248,14 +243,16 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			DateFormat df = new SimpleDateFormat("dd/MM");
+			
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
 			for(int i=6; i>=0; i--){
 				cal.add(Calendar.DATE, -1);
 				System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);			
 				
 			}
 
@@ -269,14 +266,14 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			DateFormat df = new SimpleDateFormat("dd/MM");
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			cal.add(Calendar.DATE, 7);
 			for(int i=0; i<7; i++){
 				//System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);				
 				cal.add(Calendar.DATE, 1);
 			}
 			cal.add(Calendar.DATE, -7);
