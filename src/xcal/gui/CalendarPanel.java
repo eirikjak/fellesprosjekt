@@ -246,6 +246,8 @@ public class CalendarPanel extends JPanel {
 				cal.add(Calendar.DATE, 1);
 			}
 			
+			cal.add(Calendar.DATE, -7);
+			
 			
 			
 			return null;
@@ -257,18 +259,17 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
-			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			
 			DateFormat df = new SimpleDateFormat("dd/MM");
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
-			
 			for(int i=6; i>=0; i--){
+				cal.add(Calendar.DATE, -1);
 				System.out.println(df.format(cal.getTime()));
 				week[i].setText(df.format(cal.getTime()));				
-				cal.add(Calendar.DATE, -1);
+				
 			}
+
+			
 			return null;
 		}
 		
@@ -278,16 +279,18 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			DateFormat df = new SimpleDateFormat("dd/MM");
-			//cal.add(Calendar.DATE, 7);
+			cal.add(Calendar.DATE, 7);
 			for(int i=0; i<7; i++){
-				System.out.println(df.format(cal.getTime()));
+				//System.out.println(df.format(cal.getTime()));
 				week[i].setText(df.format(cal.getTime()));				
 				cal.add(Calendar.DATE, 1);
 			}
+			cal.add(Calendar.DATE, -7);
 			return null;
+			
 		}
 		
 	}
