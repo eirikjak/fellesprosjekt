@@ -22,10 +22,12 @@ import javax.swing.border.TitledBorder;
 import org.joda.time.DateTime;
 
 import xcal.client.Client;
+import javax.swing.JScrollPane;
 
 public class CalendarPanel extends JPanel {
 	private Client client = Client.getClient();
 	private Calendar cal = Calendar.getInstance();
+	//Labels for dates
 	private JLabel mondayDate = new JLabel();
 	private JLabel tuesdayDate = new JLabel();
 	private JLabel wednesdayDate = new JLabel();
@@ -33,30 +35,35 @@ public class CalendarPanel extends JPanel {
 	private JLabel fridayDate = new JLabel();
 	private JLabel saturdayDate = new JLabel();
 	private JLabel sundayDate = new JLabel();
-	private JLabel monthLbl = new JLabel();
+	//end labels for dates
+	
+	//Lists for appointments
+	JList monday = new JList();
+	JList tuesday = new JList();
+	JList wednesday = new JList();
+	JList thursday = new JList();
+	JList friday = new JList();
+	JList saturday = new JList();
+	JList sunday = new JList();
+	//end for list appointments
+	
+	//Arrays with weekdays, appointments, month names etc
 	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
 			sundayDate};
+	private JList[] weekAppointments = { monday, tuesday, wednesday, thursday, friday, saturday, sunday}; 
 	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
 			,"November", "December"};
+
 	
 	
 	/**
 	 * Create the panel.
 	 */
 	public CalendarPanel() {
-		//System.out.println(cal.get(Calendar.DAY_OF_YEAR)+ "THIS IS THE DATE");
-		
-		/*
-		 * SETTING THE DATES OF LABELS AND MONTH OF MAIN LABEL
-		 */
-		
-		
 		SwingWorker w = new Worker();
 		w.execute();
 		setLayout(null);
 
-		
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(388, 5, 1, 1);
 		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -71,33 +78,14 @@ public class CalendarPanel extends JPanel {
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("");
+		/*JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 61, 16);
-		panel_1.add(lblNewLabel);
+		panel_1.add(lblNewLabel);*/
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1, 47, 940, 72);
 		panel_1.add(lblNewLabel_1);
 		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
-		
-		JButton btnLastWeek = new JButton("Last Week");
-		btnLastWeek.setBounds(2, 11, 132, 29);
-		panel_1.add(btnLastWeek);
-		btnLastWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnLastWeek.addActionListener(new LastWeekBtnListener());
-		
-		JButton btnNextWeek = new JButton("Next Week");
-		btnNextWeek.setBounds(804, 11, 132, 29);
-		panel_1.add(btnNextWeek);
-		btnNextWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnNextWeek.addActionListener(new NextWeekBtnListener());
-		
-		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
-		lblNewLabel_2.setBounds(334, 5, 233, 39);
-		panel_1.add(lblNewLabel_2);
-		lblNewLabel_2.setForeground(new Color(35, 103, 174));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
@@ -192,40 +180,55 @@ public class CalendarPanel extends JPanel {
 				panel.add(button_1);
 				button_1.addActionListener(new NextWeekBtnListener());
 				
-				
-				monthLbl.setHorizontalAlignment(SwingConstants.CENTER);
-				monthLbl.setForeground(new Color(35, 103, 174));
-				monthLbl.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-				monthLbl.setBounds(334, 5, 233, 39);
-				panel.add(monthLbl);
+
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(8, 122, 126, 365);
+				panel.add(scrollPane);
 				
 				JList monday = new JList();
-				monday.setBounds(8, 122, 126, 365);
-				panel.add(monday);
+				scrollPane.setViewportView(monday);
+				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(141, 122, 126, 365);
+				panel.add(scrollPane_1);
 				
 				JList tuesday = new JList();
-				tuesday.setBounds(141, 122, 126, 365);
-				panel.add(tuesday);
+				scrollPane_1.setViewportView(tuesday);
+				
+				JScrollPane scrollPane_2 = new JScrollPane();
+				scrollPane_2.setBounds(274, 122, 126, 365);
+				panel.add(scrollPane_2);
 				
 				JList wednesday = new JList();
-				wednesday.setBounds(274, 122, 126, 365);
-				panel.add(wednesday);
+				scrollPane_2.setViewportView(wednesday);
+				
+				JScrollPane scrollPane_4 = new JScrollPane();
+				scrollPane_4.setBounds(540, 122, 126, 365);
+				panel.add(scrollPane_4);
 				
 				JList thursday = new JList();
-				thursday.setBounds(540, 122, 126, 365);
-				panel.add(thursday);
+				scrollPane_4.setViewportView(thursday);
+				
+				JScrollPane scrollPane_6 = new JScrollPane();
+				scrollPane_6.setBounds(806, 122, 126, 365);
+				panel.add(scrollPane_6);
 				
 				JList friday = new JList();
-				friday.setBounds(806, 122, 126, 365);
-				panel.add(friday);
+				scrollPane_6.setViewportView(friday);
+				
+				JScrollPane scrollPane_5 = new JScrollPane();
+				scrollPane_5.setBounds(673, 122, 126, 365);
+				panel.add(scrollPane_5);
 				
 				JList saturday = new JList();
-				saturday.setBounds(673, 122, 126, 365);
-				panel.add(saturday);
+				scrollPane_5.setViewportView(saturday);
+				
+				JScrollPane scrollPane_3 = new JScrollPane();
+				scrollPane_3.setBounds(407, 122, 126, 365);
+				panel.add(scrollPane_3);
 				
 				JList sunday = new JList();
-				sunday.setBounds(407, 122, 126, 365);
-				panel.add(sunday);
+				scrollPane_3.setViewportView(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
 		
@@ -238,13 +241,17 @@ public class CalendarPanel extends JPanel {
 		@Override
 		protected Object doInBackground() throws Exception {
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			DateFormat df = new SimpleDateFormat("dd/MM");
+			
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			for(int i=0; i<7; i++){
 				//System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
 				cal.add(Calendar.DATE, 1);
 			}
+			
+			cal.add(Calendar.DATE, -7);
 			
 			
 			
@@ -257,18 +264,19 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
-			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
 			
-			DateFormat df = new SimpleDateFormat("dd/MM");
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			
-			
 			for(int i=6; i>=0; i--){
-				System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
 				cal.add(Calendar.DATE, -1);
+				System.out.println(df.format(cal.getTime()));
+				int monthNum = Integer.valueOf(m.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
 			}
+
+			
 			return null;
 		}
 		
@@ -278,16 +286,20 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
-			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
-			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
-			DateFormat df = new SimpleDateFormat("dd/MM");
-			//cal.add(Calendar.DATE, 7);
+			//Select and show date
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			cal.add(Calendar.DATE, 7);
+			int monthNum = Integer.valueOf(m.format(cal.getTime()));
 			for(int i=0; i<7; i++){
-				System.out.println(df.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime()));				
+				//System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);				
 				cal.add(Calendar.DATE, 1);
 			}
+			cal.add(Calendar.DATE, -7);
 			return null;
+			
 		}
 		
 	}
@@ -301,7 +313,7 @@ public class CalendarPanel extends JPanel {
 			ws.execute();
 			System.out.println("Done");
 		}
-		
+			
 	}
 	
 	private class NextWeekBtnListener implements ActionListener{
