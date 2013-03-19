@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import xcal.client.Client;
-import xcal.core.Action;
 import xcal.gui.CalendarPanel;
 
 public class Mainpage extends JPanel {
@@ -30,9 +29,9 @@ public class Mainpage extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Mainpage(Client client) {
+	public Mainpage() {
 		setLayout(null);
-		this.client = client;
+		this.client = Client.getClient();
 
 		setBounds(0, 0, 1000, 700);
 		

@@ -11,6 +11,7 @@ public enum Status {
 	INVALID_INPUT,
 	RESPOND,
 	GET_ALL,
-	IGNORE
+	IGNORE,
+	GET_AVALIABLE_ROOMS
 
 }

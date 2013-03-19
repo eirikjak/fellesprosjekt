@@ -28,10 +28,10 @@ import org.joda.time.DateTime;
 import xcal.client.Client;
 import xcal.client.Status;
 import xcal.client.Wrapper;
-import xcal.core.KeyValuePair;
 import xcal.model.Appointment;
 import xcal.model.Employee;
 import xcal.model.Location;
+import xcal.model.Meeting;
 import xcal.model.Notification;
 import xcal.model.Room;
 
@@ -40,10 +40,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-
-
-
-
 
 public class MeetingMenu extends JFrame {
 
@@ -108,6 +104,7 @@ public class MeetingMenu extends JFrame {
 		datePicker = new JXDatePicker();
 		datePicker.addActionListener(new DatePickerListener());
 		datePicker.setBounds(547, 93, 104, 31);
+		datePicker.getEditor().setEditable(false);
 		getContentPane().add(datePicker);
 		
 		JLabel lblVarsel = new JLabel("Notification:");
@@ -319,6 +316,12 @@ public class MeetingMenu extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 		
+			Meeting meeting = new Meeting();
+			meeting.setFromTime(new DateTime(datePicker.getDate()));
+			meeting.setToTime(new DateTime(datePicker.getDate()));
+			
+			Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
+			System.out.println(response.getContent());
 			
 	
 		}
@@ -334,6 +337,8 @@ public class MeetingMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			
+			
 			Close();
 			
 		}
