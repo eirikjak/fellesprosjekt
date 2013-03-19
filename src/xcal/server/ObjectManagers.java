@@ -40,7 +40,7 @@ public class ObjectManagers {
 				AppointmentsQ.deleteEvent(m.getAppId());
 				break;
 				
-			case GET_AVALIABLE_ROOMS:
+			case GET_AVAILABLE_ROOMS:
 				Room[] rooms = RoomQ.getAvailableRooms(m.getFromTime(), m.getToTime());
 				if(rooms != null)
 					return new Wrapper(Status.SUCCESS, rooms);

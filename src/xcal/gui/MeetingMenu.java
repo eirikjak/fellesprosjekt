@@ -624,7 +624,6 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 				locationBox.removeAllItems();
 				Arrays.sort(rooms, new RoomComparator());
 				for (int i = 0; i <rooms.length; i++){
-					System.out.println();
 					locationBox.addItem(rooms[i]);
 				}
 				return null;
