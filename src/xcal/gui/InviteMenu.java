@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 
 import xcal.client.*;
 
-public class NotificationMenu extends JFrame {
+public class InviteMenu extends JFrame {
 
 
 	
@@ -31,7 +31,7 @@ public class NotificationMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NotificationMenu frame = new NotificationMenu();
+					InviteMenu frame = new InviteMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class NotificationMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NotificationMenu() {
+	public InviteMenu() {
 		setBounds(100, 100, 562, 439);
 		getContentPane().setLayout(null);
 		
@@ -53,7 +53,7 @@ public class NotificationMenu extends JFrame {
 		getContentPane().add(lblYouAreInvited);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(NotificationMenu.class.getResource("/images/andrekalendere.png")));
+		lblNewLabel.setIcon(new ImageIcon(InviteMenu.class.getResource("/images/andrekalendere.png")));
 		lblNewLabel.setBounds(374, 43, 142, 133);
 
 

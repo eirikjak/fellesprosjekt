@@ -88,7 +88,7 @@ public class EmployeeQ
 		}
 	}
 	
-	public Employee selectPersonWithEmail(String mail)
+	public static Employee selectPersonWithEmail(String mail)
 	{
 		
 		synchronized (connection) {

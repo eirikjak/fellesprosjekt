@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.1" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="xcal.server" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/server" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="202" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="xcal.gui.Login" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="181" x="637" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="xcal.gui.Placeholder" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Placeholder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="92" x="343" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="4" language="java" name="xcal.server.query" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/server/query" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="122" x="475" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="5" language="java" name="xcal.gui.TimeFieldFilter" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/TimeFieldFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="277" x="858" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="xcal.gui.AppointmentMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2496" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="xcal.gui.MeetingPage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="123" x="1175" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="xcal.gui.OtherCalendarsMenu.getAllWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="146" x="3990" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="xcal.gui.MeetingMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4176" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="xcal.gui.MeetingMenu.DatePickerListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4410" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="xcal.gui.CalendarPanel.NextWeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="2964" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="12" language="java" name="xcal.client" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/client" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1338" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="13" language="java" name="xcal.gui.Login.LoginButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="637" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="14" language="java" name="xcal.model" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/model" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1479" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="15" language="java" name="xcal.gui.AppointmentMenu.OkButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2730" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="16" language="java" name="xcal.gui" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/gui" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1620" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="17" language="java" name="xcal.gui.Mainpage" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="87" x="2262" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="xcal.gui.CalendarPanel.Worker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="3150" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="xcal.gui.Mainpage.OtherCalendarsListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="1794" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="xcal.gui.RootFrame" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/RootFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="161" x="1761" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="xcal.gui.CalendarPanel.LastWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="3336" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="xcal.gui.CalendarPanel.NextWeekBtnListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="3570" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="xcal.gui.MeetingMenu.CancelButtonListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="4644" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <package id="24" language="java" name="xcal.core" project="fellesprosjekt" file="/fellesprosjekt/src/xcal/core" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="101" x="1962" y="101"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="25" language="java" name="xcal.gui.AppointmentMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/AppointmentMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="225" x="2613" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="xcal.gui.CalendarPanel.WeekWorker" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="3804" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="xcal.gui.CalendarPanel" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/CalendarPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="143" x="3336" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="xcal.gui.Mainpage.NewMeetingListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2028" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="xcal.gui.NotificationMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/NotificationMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="119" x="2103" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="xcal.gui.Mainpage.NewAppointmentListener" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/Mainpage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="194" x="2262" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="xcal.gui.OtherCalendarsMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/OtherCalendarsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="145" x="3990" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="xcal.gui.MeetingMenu" project="fellesprosjekt" 
+    file="/fellesprosjekt/src/xcal/gui/MeetingMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="225" x="4410" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <nesting id="33">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <nesting id="34">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <nesting id="35">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <nesting id="36">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <nesting id="37">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <nesting id="38">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="23"/>  
+  </nesting>  
+  <nesting id="39">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="22"/>  
+  </nesting>  
+  <nesting id="40">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="28"/>  
+  </nesting>  
+  <nesting id="41">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
+  <nesting id="42">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="30"/>  
+  </nesting>  
+  <nesting id="43">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <nesting id="44">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <nesting id="45">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <nesting id="46">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <nesting id="47">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

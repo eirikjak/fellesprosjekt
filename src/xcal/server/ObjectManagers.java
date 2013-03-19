@@ -55,7 +55,7 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				System.out.println(a);
+				
 				Location loc = LocationQ.createLocation(a.getLocationName());
 				if(loc != null){
 					Appointment app = AppointmentsQ.createAppointment(a, loc);
@@ -86,6 +86,12 @@ public class ObjectManagers {
 				
 			case SELECT:
 				return (Appointment)AppointmentsQ.selectAppointment(a.getAppId());
+				
+			case TD_APP:
+				//System.out.println(a);
+				//System.out.println("EMAIL : " + a.getLeader().getEmail());
+
+				return new Wrapper(Status.IGNORE, AppointmentsQ.selectAppointmentsForPersonFromDate (a.getFromTime(), a.getToTime(), a.getLeader().getEmail()));
 			}
 				
 		}
