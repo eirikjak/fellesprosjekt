@@ -4,10 +4,12 @@ import xcal.model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
+
 public class RoomQ {
 	
-	public Connection connection = null;
-	public Statement statement = null;;
+	private static DbConnection connection = null;
 
 	/*public void createRoom(int id, String name, int capacity){
 		statement = connection.createStatement();
@@ -15,10 +17,15 @@ public class RoomQ {
 
 	
 	}*/
+	
+	public RoomQ(DbConnection connection){
+		this.connection = connection;
+	}
     public void createRoom(int id, String name, int capacity) throws SQLException{
     	synchronized (connection) {
     	
-		statement = connection.createStatement();
+    	Statement statement = connection.getConnection().createStatement();
+		statement = connection.getConnection().createStatement();
 		String sql  = "INSERT INTO Room (id, name, capacity) VALUES("+id+", "+name+", "+capacity+");";
 		statement.executeUpdate(sql);
 		
@@ -32,6 +39,7 @@ public class RoomQ {
 								"SET name='"+name+"',"+
 								"capacity='"+capacity+
 										"WHERE id= "+ id;
+				Statement statement = connection.getConnection().createStatement();
 				statement.executeUpdate(sql);
 		}
 	}
@@ -39,8 +47,9 @@ public class RoomQ {
 	public  Room[] selectRoom(int id) throws SQLException{
 		synchronized (connection) {
 		String sql = "SELECT * FROM Room WHERE id ='"+id+"'";
+		Statement statement = connection.getConnection().createStatement();
 	    ResultSet resultset = statement.executeQuery(sql);
-	   resultset.last();
+	    resultset.last();
 	    Room [] rooms = new Room [resultset.getRow()];
 	    resultset.beforeFirst();
 	    int roomCount = 0;
@@ -56,34 +65,43 @@ public class RoomQ {
 		}
 	}
 	
-	   public Room[] getAvailableRooms (Timestamp startDate, Timestamp endDate) throws Exception{
+	   public static Room[] getAvailableRooms (DateTime  start, DateTime end){
 		   synchronized (connection) {
-       	
-   	    String sqlstr = "SELECT R.name"+
-   	    		"FROM Room R"+
-			    	"WHERE R.id NOT IN("+
-			    	"SELECT R.id"+
-			    	"FROM Room R, Appointment A"+
-			    	"WHERE ((('"+startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
-			    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
-			    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
-			    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
-			       
-   	    ResultSet resultset = statement.executeQuery(sqlstr);
-   	    resultset.last();
-   	    Room [] rooms = new Room [resultset.getRow()];
-   	    resultset.beforeFirst();
-   	    int roomCount = 0;
-   	    while(resultset.next()){
-   	    	int id = resultset.getInt("id");
-   	    	String name = resultset.getString("name");
-   	    	int capacity = resultset.getInt("capacity");
-   	    	
-   	    	rooms[roomCount] = new Room(id, name, capacity); 
-   	    	roomCount++	;
-   	    }
-		   
-   	    return rooms;
+			   try{
+				   Timestamp startDate = new Timestamp(start.getMillis());
+				   Timestamp endDate = new Timestamp(end.getMillis());
+				   
+			   	    String sqlstr = "SELECT R.name"+
+			   	    		"FROM Room R "+
+						    	"WHERE R.id NOT IN("+
+						    	"SELECT R.id"+
+						    	"FROM Room R, Appointment A"+
+						    	"WHERE ((('"+startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
+						    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
+						    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
+						    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
+			   	    System.out.println(sqlstr);
+			   		Statement statement = connection.getConnection().createStatement();
+			   	    ResultSet resultset = statement.executeQuery(sqlstr);
+			   	    resultset.last();
+			   	    Room [] rooms = new Room [resultset.getRow()];
+			   	    resultset.beforeFirst();
+			   	    int roomCount = 0;
+			   	    while(resultset.next()){
+			   	    	int id = resultset.getInt("id");
+			   	    	String name = resultset.getString("name");
+			   	    	int capacity = resultset.getInt("capacity");
+			   	    	
+			   	    	rooms[roomCount] = new Room(id, name, capacity); 
+			   	    	roomCount++	;
+			   	    }
+					   
+			   	    return rooms;
+			   }catch(SQLException e){
+				   e.printStackTrace();
+				   return null;
+				   
+			   }
 		   }
       }
 	

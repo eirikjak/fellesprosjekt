@@ -120,22 +120,23 @@ public class Login extends JPanel {
 		bussyLabel.setBounds(299 + 369/2 - 20 ,389 + 154/2 - 20, 40, 40);
 		bussyLabel.setBusy(true);
 		SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
+			protected boolean success = false;
+			protected Wrapper response;
 			protected Void doInBackground() throws Exception {
 				if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 				{
 					
+					
 					Authentication auth=new Authentication(textField.getText(),passwordField.getText());
-					Wrapper response = client.sendObject(auth, Status.LOGIN);
+					response = client.sendObject(auth, Status.LOGIN);
 					if(response.getFlag() != Status.SUCCESS){
 						System.out.println("Wrong username/password");
 						errorLabel.setVisible(true);		
 					}
 					else
 					{
-						RootFrame.clearAll();
-						RootFrame.addPanel(new Mainpage(client));
-						client.setUser((Employee)response.getContent());
-						System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+						success = true;
+						
 					}
 					
 				}
@@ -145,7 +146,13 @@ public class Login extends JPanel {
 			public void done(){
 				bussyLabel.setBusy(false);
 				bussyLabel.setVisible(false);
-				
+				if(success){
+					RootFrame.clearAll();
+					RootFrame.addPanel(new Mainpage());
+					System.out.println(response.getContent());
+					client.setUser((Employee)response.getContent());
+					System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+				}
 				
 			}
 			

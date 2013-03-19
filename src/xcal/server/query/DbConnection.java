@@ -80,6 +80,7 @@ public class DbConnection {
 				new LocationQ(this);
 				new AppointmentsQ(this);
 				new NotificationQ(this);
+				new RoomQ(this);
 				return true;
 			}
 		} catch (Exception e) {

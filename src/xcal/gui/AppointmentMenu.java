@@ -47,6 +47,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Calendar;
@@ -80,6 +82,7 @@ public class AppointmentMenu extends JFrame {
 	private Client client = Client.getClient();
 	private JLabel errorLabel;
 	private JXBusyLabel busyLabel;
+	private Appointment model;
 	
 	/**
 	 * Create the panel.
@@ -87,6 +90,7 @@ public class AppointmentMenu extends JFrame {
 	
 	public AppointmentMenu() {
 		super();
+		model = new Appointment();
 		setTitle("New appointment");
 		setPreferredSize(new Dimension(695,513));
 		setVisible(true);
@@ -100,6 +104,28 @@ public class AppointmentMenu extends JFrame {
 		name.setColumns(10);
 		
 		startHour = new JTextField();
+		startHour.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("action!");
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		startHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+		
+				
+			}
+		});
 		((AbstractDocument)startHour.getDocument()).setDocumentFilter(new TimeFieldFilter());
 		startHour.setBounds(181, 93, 57, 31);
 		getContentPane().add(startHour);
@@ -111,6 +137,7 @@ public class AppointmentMenu extends JFrame {
 		getContentPane().add(startMinute);
 		
 		datePicker = new JXDatePicker();
+		datePicker.getEditor().setEditable(false);
 		datePicker.setBounds(547, 93, 104, 31);
 		getContentPane().add(datePicker);
 		
