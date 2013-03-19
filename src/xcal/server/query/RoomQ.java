@@ -3,7 +3,6 @@ package xcal.server.query;
 import xcal.model.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.concurrent.DelayQueue;
 
 import org.joda.time.DateTime;
 

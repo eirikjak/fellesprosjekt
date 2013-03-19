@@ -2,6 +2,12 @@ package xcal.gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,15 +15,44 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class CalendarPanel extends JPanel {
+import org.joda.time.DateTime;
 
+import xcal.client.Client;
+
+public class CalendarPanel extends JPanel {
+	private Client client = Client.getClient();
+	private Calendar cal = Calendar.getInstance();
+	private JLabel mondayDate = new JLabel();
+	private JLabel tuesdayDate = new JLabel();
+	private JLabel wednesdayDate = new JLabel();
+	private JLabel thursdayDate = new JLabel();
+	private JLabel fridayDate = new JLabel();
+	private JLabel saturdayDate = new JLabel();
+	private JLabel sundayDate = new JLabel();
+	private JLabel monthLbl = new JLabel();
+	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
+			sundayDate};
+	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
+			,"November", "December"};
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	public CalendarPanel() {
+		//System.out.println(cal.get(Calendar.DAY_OF_YEAR)+ "THIS IS THE DATE");
+		
+		/*
+		 * SETTING THE DATES OF LABELS AND MONTH OF MAIN LABEL
+		 */
+		
+		
+		SwingWorker w = new Worker();
+		w.execute();
 		setLayout(null);
 
 		
@@ -34,54 +69,7 @@ public class CalendarPanel extends JPanel {
 		panel_2.setBackground(new Color(143, 179, 206));
 		panel_2.setLayout(null);
 		
-		JLabel label_1 = new JLabel("DATO");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_1.setBounds(20, 4, 90, 19);
-		panel_2.add(label_1);
 		
-		JLabel label_2 = new JLabel("DATO");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_2.setBounds(285, 4, 90, 19);
-		panel_2.add(label_2);
-		
-		JLabel label_3 = new JLabel("DATO");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_3.setBounds(150, 4, 90, 19);
-		panel_2.add(label_3);
-		
-		JLabel label_4 = new JLabel("DATO");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_4.setBounds(416, 4, 90, 19);
-		panel_2.add(label_4);
-		
-		JLabel label_5 = new JLabel("DATO");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setForeground(Color.WHITE);
-		label_5.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_5.setBounds(549, 4, 90, 19);
-		panel_2.add(label_5);
-		
-		JLabel label_6 = new JLabel("DATO");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setForeground(Color.WHITE);
-		label_6.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_6.setBounds(681, 4, 90, 19);
-		panel_2.add(label_6);
-		
-		JLabel label_7 = new JLabel("DATO");
-		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setForeground(Color.WHITE);
-		label_7.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		label_7.setBounds(814, 4, 90, 19);
-		panel_2.add(label_7);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 61, 16);
@@ -96,11 +84,13 @@ public class CalendarPanel extends JPanel {
 		btnLastWeek.setBounds(2, 11, 132, 29);
 		panel_1.add(btnLastWeek);
 		btnLastWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnLastWeek.addActionListener(new LastWeekBtnListener());
 		
 		JButton btnNextWeek = new JButton("Next Week");
 		btnNextWeek.setBounds(804, 11, 132, 29);
 		panel_1.add(btnNextWeek);
 		btnNextWeek.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnNextWeek.addActionListener(new NextWeekBtnListener());
 		
 		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
 		lblNewLabel_2.setBounds(334, 5, 233, 39);
@@ -108,35 +98,6 @@ public class CalendarPanel extends JPanel {
 		lblNewLabel_2.setForeground(new Color(35, 103, 174));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-		
-		JList list_1 = new JList();
-		list_1.setBounds(8, 122, 126, 365);
-		panel_1.add(list_1);
-		
-		JList list_2 = new JList();
-		list_2.setBounds(141, 122, 126, 365);
-		panel_1.add(list_2);
-		
-		JList list_3 = new JList();
-		list_3.setBounds(274, 122, 126, 365);
-		panel_1.add(list_3);
-		
-		JList list_4 = new JList();
-		list_4.setBounds(540, 122, 126, 365);
-		panel_1.add(list_4);
-		
-		JList list_5 = new JList();
-		list_5.setBounds(806, 122, 126, 365);
-		panel_1.add(list_5);
-		
-		JList list_6 = new JList();
-		list_6.setBounds(673, 122, 126, 365);
-		panel_1.add(list_6);
-		
-		JList list_7 = new JList();
-		list_7.setBounds(407, 122, 126, 365);
-		panel_1.add(list_7);
-		
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
@@ -166,54 +127,49 @@ public class CalendarPanel extends JPanel {
 				panel_4.setBounds(6, 88, 922, 27);
 				panel.add(panel_4);
 				
-				JLabel label = new JLabel("18");
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setForeground(Color.WHITE);
-				label.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label.setBounds(20, 4, 90, 19);
-				panel_4.add(label);
 				
-				JLabel label_8 = new JLabel("20");
-				label_8.setHorizontalAlignment(SwingConstants.CENTER);
-				label_8.setForeground(Color.WHITE);
-				label_8.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_8.setBounds(285, 4, 90, 19);
-				panel_4.add(label_8);
+				mondayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				mondayDate.setForeground(Color.WHITE);
+				mondayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				mondayDate.setBounds(20, 4, 90, 19);
+				panel_4.add(mondayDate);
 				
-				JLabel label_9 = new JLabel("19");
-				label_9.setHorizontalAlignment(SwingConstants.CENTER);
-				label_9.setForeground(Color.WHITE);
-				label_9.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_9.setBounds(150, 4, 90, 19);
-				panel_4.add(label_9);
 				
-				JLabel label_10 = new JLabel("21");
-				label_10.setHorizontalAlignment(SwingConstants.CENTER);
-				label_10.setForeground(Color.WHITE);
-				label_10.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_10.setBounds(416, 4, 90, 19);
-				panel_4.add(label_10);
+				tuesdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				tuesdayDate.setForeground(Color.WHITE);
+				tuesdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				tuesdayDate.setBounds(150, 4, 90, 19);
+				panel_4.add(tuesdayDate);
 				
-				JLabel label_11 = new JLabel("22");
-				label_11.setHorizontalAlignment(SwingConstants.CENTER);
-				label_11.setForeground(Color.WHITE);
-				label_11.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_11.setBounds(549, 4, 90, 19);
-				panel_4.add(label_11);
+				wednesdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				wednesdayDate.setForeground(Color.WHITE);
+				wednesdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				wednesdayDate.setBounds(285, 4, 90, 19);
+				panel_4.add(wednesdayDate);
 				
-				JLabel label_12 = new JLabel("23");
-				label_12.setHorizontalAlignment(SwingConstants.CENTER);
-				label_12.setForeground(Color.WHITE);
-				label_12.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_12.setBounds(681, 4, 90, 19);
-				panel_4.add(label_12);
+				thursdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				thursdayDate.setForeground(Color.WHITE);
+				thursdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				thursdayDate.setBounds(416, 4, 90, 19);
+				panel_4.add(thursdayDate);
 				
-				JLabel label_13 = new JLabel("24");
-				label_13.setHorizontalAlignment(SwingConstants.CENTER);
-				label_13.setForeground(Color.WHITE);
-				label_13.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-				label_13.setBounds(814, 4, 90, 19);
-				panel_4.add(label_13);
+				fridayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				fridayDate.setForeground(Color.WHITE);
+				fridayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				fridayDate.setBounds(549, 4, 90, 19);
+				panel_4.add(fridayDate);
+				
+				saturdayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				saturdayDate.setForeground(Color.WHITE);
+				saturdayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				saturdayDate.setBounds(681, 4, 90, 19);
+				panel_4.add(saturdayDate);
+				
+				sundayDate.setHorizontalAlignment(SwingConstants.CENTER);
+				sundayDate.setForeground(Color.WHITE);
+				sundayDate.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+				sundayDate.setBounds(814, 4, 90, 19);
+				panel_4.add(sundayDate);
 				
 				JLabel label_14 = new JLabel("");
 				label_14.setIcon(new ImageIcon(CalendarPanel.class.getResource("/images/kalender_bar.png")));
@@ -221,53 +177,142 @@ public class CalendarPanel extends JPanel {
 				panel.add(label_14);
 				
 				JButton button = new JButton("Last Week");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				button.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				button.setBounds(2, 11, 132, 29);
 				panel.add(button);
+				button.addActionListener(new LastWeekBtnListener());
 				
 				JButton button_1 = new JButton("Next Week");
 				button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				button_1.setBounds(804, 11, 132, 29);
 				panel.add(button_1);
+				button_1.addActionListener(new NextWeekBtnListener());
 				
-				JLabel lblMars = new JLabel("MARS");
-				lblMars.setHorizontalAlignment(SwingConstants.CENTER);
-				lblMars.setForeground(new Color(35, 103, 174));
-				lblMars.setFont(new Font("Lucida Grande", Font.BOLD, 28));
-				lblMars.setBounds(334, 5, 233, 39);
-				panel.add(lblMars);
 				
-				JList list = new JList();
-				list.setBounds(8, 122, 126, 365);
-				panel.add(list);
+				monthLbl.setHorizontalAlignment(SwingConstants.CENTER);
+				monthLbl.setForeground(new Color(35, 103, 174));
+				monthLbl.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+				monthLbl.setBounds(334, 5, 233, 39);
+				panel.add(monthLbl);
 				
-				JList list_8 = new JList();
-				list_8.setBounds(141, 122, 126, 365);
-				panel.add(list_8);
+				JList monday = new JList();
+				monday.setBounds(8, 122, 126, 365);
+				panel.add(monday);
 				
-				JList list_9 = new JList();
-				list_9.setBounds(274, 122, 126, 365);
-				panel.add(list_9);
+				JList tuesday = new JList();
+				tuesday.setBounds(141, 122, 126, 365);
+				panel.add(tuesday);
 				
-				JList list_10 = new JList();
-				list_10.setBounds(540, 122, 126, 365);
-				panel.add(list_10);
+				JList wednesday = new JList();
+				wednesday.setBounds(274, 122, 126, 365);
+				panel.add(wednesday);
 				
-				JList list_11 = new JList();
-				list_11.setBounds(806, 122, 126, 365);
-				panel.add(list_11);
+				JList thursday = new JList();
+				thursday.setBounds(540, 122, 126, 365);
+				panel.add(thursday);
 				
-				JList list_12 = new JList();
-				list_12.setBounds(673, 122, 126, 365);
-				panel.add(list_12);
+				JList friday = new JList();
+				friday.setBounds(806, 122, 126, 365);
+				panel.add(friday);
 				
-				JList list_13 = new JList();
-				list_13.setBounds(407, 122, 126, 365);
-				panel.add(list_13);
+				JList saturday = new JList();
+				saturday.setBounds(673, 122, 126, 365);
+				panel.add(saturday);
+				
+				JList sunday = new JList();
+				sunday.setBounds(407, 122, 126, 365);
+				panel.add(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
 		
 		
+		
+	}
+	
+	class Worker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			monthLbl.setText(month[cal.get(Calendar.MONTH)]);
+			DateFormat df = new SimpleDateFormat("dd/MM");
+			for(int i=0; i<7; i++){
+				//System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime()));				
+				cal.add(Calendar.DATE, 1);
+			}
+			
+			
+			
+			return null;
+		}
+		
+	}
+	
+	class WeekWorker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
+			
+			DateFormat df = new SimpleDateFormat("dd/MM");
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			
+			
+			for(int i=6; i>=0; i--){
+				System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime()));				
+				cal.add(Calendar.DATE, -1);
+			}
+			return null;
+		}
+		
+	}
+	
+	class NextWeekWorker extends SwingWorker{
+
+		@Override
+		protected Object doInBackground() throws Exception {
+			//cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+			//monthLbl.setText(month[cal.get(Calendar.MONTH)]);
+			DateFormat df = new SimpleDateFormat("dd/MM");
+			//cal.add(Calendar.DATE, 7);
+			for(int i=0; i<7; i++){
+				System.out.println(df.format(cal.getTime()));
+				week[i].setText(df.format(cal.getTime()));				
+				cal.add(Calendar.DATE, 1);
+			}
+			return null;
+		}
+		
+	}
+	
+	private class LastWeekBtnListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("btnpressed");
+			SwingWorker ws = new WeekWorker();
+			ws.execute();
+			System.out.println("Done");
+		}
+		
+	}
+	
+	private class NextWeekBtnListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("btnpressed");
+			SwingWorker nws = new NextWeekWorker();
+			nws.execute();
+			System.out.println("Done");
+		}
 		
 	}
 
