@@ -80,14 +80,21 @@ public class CalendarPanel extends JPanel {
 	public CalendarPanel() {
 		//Lists for appointments
 		JList monday = new JList(mondayModel);
+		monday.setCellRenderer(new CalendarPanelRenderer());
 		JList tuesday = new JList(tuesdayModel);
+		tuesday.setCellRenderer(new CalendarPanelRenderer());
+
 		JList wednesday = new JList(wednesdayModel);
+		wednesday.setCellRenderer(new CalendarPanelRenderer());
 		JList thursday = new JList(thursdayModel);
+		thursday.setCellRenderer(new CalendarPanelRenderer());
 		JList friday = new JList(fridayModel);
+		friday.setCellRenderer(new CalendarPanelRenderer());
 		JList saturday = new JList(saturdayModel);
+		saturday.setCellRenderer(new CalendarPanelRenderer());
 		JList sunday = new JList(sundayModel);
-		
-		
+		sunday.setCellRenderer(new CalendarPanelRenderer());
+
 		//end for list appointments
 				
 		client = Client.getClient();
@@ -260,8 +267,9 @@ public class CalendarPanel extends JPanel {
 			/*
 			 * Formatting the dates of days labels
 			 */
-			
-			
+
+			//ArrayList<Appointment> rcvd = null;
+
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
 			
@@ -284,9 +292,7 @@ public class CalendarPanel extends JPanel {
 				Object obj = client.sendObject(app, Status.TD_APP).getContent();
 				
 				
-				
 				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
-
 				cal = cal.plusDays(1);
 			}
 			return null;
