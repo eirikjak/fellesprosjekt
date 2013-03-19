@@ -62,6 +62,7 @@ public class AppointmentsQ
 		
 		return app;
 	
+
 	}
 	public static void deleteAppointment(Appointment app){
 		
@@ -75,6 +76,36 @@ public class AppointmentsQ
 				e.printStackTrace();
 			}
 			
+		}
+	}
+	
+	public Appointment selectAppointmentsForPersonFromDate (Timestamp startDate, Timestamp endDate, String Email){
+		synchronized (connection) {
+			String sqlstr = "SELECT * FROM Appointment A, Invites I WHERE((I.person = "+Email+") AND I.app_id = id) AND((A.start_date >= "+startDate+" AND A.start_date <= "+startDate+"))";
+			ResultSet resultSet = statement.executeQuery(sql);
+        	resultSet.last();
+        	
+        	if(resultSet.getString("room").isEmpty())//appointment doesn't contain room
+  		   {
+  			   Appointment app=new Appointment();
+  			  //app.setLocation(result.getString("Location"));
+  			   app.setDescription(resultSet.getString("description"));
+  			   //app.setName(result.getString("name"));
+  			   app.setFromTime(resultSet.getTimestamp("start_date"));
+  			   app.setToTime(resultSet.getTimestamp("end_date"));
+  			   return app;
+  		   }
+  		   
+  		   Appointment meeting=new Meeting();
+  		   meeting.setDescription(resultSet.getString("description"));
+  		   meeting.setFromTime(resultSet.getTimestamp("start_date"));
+  		   meeting.setToTime(resultSet.getTimestamp("end_date"));
+  		   
+  		   return meeting;   		   
+  		   
+
+  	   } 
+		
 		}
 	}
 	
@@ -106,7 +137,16 @@ public class AppointmentsQ
   	   } 
 			
 	}
-	public static  Appointment selectAppointment(int AppointmentId)
+	
+	
+	
+	/**
+	 * get appointment from db
+	 * 
+	 * @param AppointmentId - id to select from db
+	 * @return appointment selected from id
+	 */
+	public  Appointment selectAppointment(int AppointmentId)
 	{
 		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";
@@ -149,6 +189,7 @@ public class AppointmentsQ
  	   return null;
 	}
 	
+	
    	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place ) throws SQLException{
    		synchronized (connection) {
 		String sql = "UPDATE Appointment "+
@@ -161,7 +202,7 @@ public class AppointmentsQ
 								"WHERE id= "+ AppointmentId;
 		statement.executeUpdate(sql);
    		}
-}
+   	}
 	
 	public void createMeeting(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
 		synchronized (connection) {

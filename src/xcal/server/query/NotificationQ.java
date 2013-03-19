@@ -28,15 +28,7 @@ public class NotificationQ
 		employee_query=new EmployeeQ(this.connection);
 
 	}
-	/**
-	 * Notification[] not=dc.checkNotification();
-	        	
-	        	for(int i=0;i<not.length;++i)
-	        	{
-	        		System.out.println(not[i].getEmployee().getName());
-	        	}
-	 * @return
-	 */
+
 	
 	public static Notification createNotification(Appointment app){
 		
@@ -57,7 +49,14 @@ public class NotificationQ
 		return new Notification(app, app.getLeader());
 		
 	}
-	public static boolean notificationReady()
+	
+	
+	/**
+	 * check if any notifications need to be triggered
+	 * 
+	 * @return - true if found notifications - false otherwise
+	 */
+	public boolean notificationReady()
 	{
 		synchronized (connection) {
 		
@@ -85,7 +84,11 @@ public class NotificationQ
 	}
 	
 	
-	
+	/**
+	 * get notifications that need to be triggered
+	 * 
+	 * @return notifications that need to be sent
+	 */
 	public Notification[] getNotifications()
     {
 		synchronized (connection) {

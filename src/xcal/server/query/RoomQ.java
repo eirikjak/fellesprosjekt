@@ -18,6 +18,16 @@ public class RoomQ {
 	
 	}*/
 	
+	public static void main(String[] args) {
+		DbConnection dc = new DbConnection(
+				"jdbc:mysql://84.48.49.149/fellesprosjekt", "felles", "felles");
+		dc.connect();
+		new RoomQ(dc);
+		RoomQ.getAvailableRooms(DateTime.now(), DateTime.now());
+		dc.closeConnection();
+	}
+	
+	
 	public RoomQ(DbConnection connection){
 		this.connection = connection;
 	}
@@ -71,16 +81,16 @@ public class RoomQ {
 				   Timestamp startDate = new Timestamp(start.getMillis());
 				   Timestamp endDate = new Timestamp(end.getMillis());
 				   
-			   	    String sqlstr = "SELECT R.name"+
+			   	    String sqlstr = "SELECT * "+
 			   	    		"FROM Room R "+
 						    	"WHERE R.id NOT IN("+
 						    	"SELECT R.id"+
-						    	"FROM Room R, Appointment A"+
-						    	"WHERE ((('"+startDate+"' >= A.start_date) AND '"+endDate+"' <= A.end_date)) "+
+						    	" FROM Room R, Appointment A "+
+						    	"WHERE ((('"+startDate+"' >= A.start_date) AND ('"+endDate+"' <= A.end_date)) "+
 						    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' >= A.end_date))"+
 						    	"OR (('"+startDate+"' <= A.start_date) AND ('"+endDate+"' = A.end_date))"+
 						    	"OR (('"+startDate+"' > A.start_date AND '"+endDate+"' < A.end_date) AND ('"+endDate+"' >= A.end_date))) AND R.id = A.room)";
-			   	    System.out.println(sqlstr);
+			   	  
 			   		Statement statement = connection.getConnection().createStatement();
 			   	    ResultSet resultset = statement.executeQuery(sqlstr);
 			   	    resultset.last();
@@ -91,8 +101,10 @@ public class RoomQ {
 			   	    	int id = resultset.getInt("id");
 			   	    	String name = resultset.getString("name");
 			   	    	int capacity = resultset.getInt("capacity");
-			   	    	
+			   	    	System.out.println(name);
+			   	    	Room room = new Room(id, name, capacity);
 			   	    	rooms[roomCount] = new Room(id, name, capacity); 
+			   	    	System.out.println(rooms[roomCount]);
 			   	    	roomCount++	;
 			   	    }
 					   

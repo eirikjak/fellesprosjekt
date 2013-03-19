@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
@@ -40,6 +42,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class MeetingMenu extends JFrame {
 
@@ -231,13 +234,19 @@ public class MeetingMenu extends JFrame {
 		addButton.setBounds(379, 413, 68, 35);
 		getContentPane().add(addButton);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(465, 397, 185, 133);
+		getContentPane().add(scrollPane_1);
+		
 		JList list_2 = new JList();
-		list_2.setBounds(465, 397, 185, 133);
-		getContentPane().add(list_2);
+		scrollPane_1.setViewportView(list_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(182, 397, 178, 133);
+		getContentPane().add(scrollPane);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(182, 397, 178, 133);
-		getContentPane().add(list_1);
+		scrollPane.setViewportView(list_1);
 		
 		JButton removeButton = new JButton("");
 		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
@@ -248,8 +257,9 @@ public class MeetingMenu extends JFrame {
 		removeButton.setBounds(379, 469, 68, 35);
 		getContentPane().add(removeButton);
 		
-		locationBox = new JComboBox();
-		locationBox.setBounds(180, 156, 178, 31);
+		locationBox = new JComboBox(new String[]{"Please select time and date"});
+		locationBox.setBounds(180, 156, 188, 31);
+		
 		getContentPane().add(locationBox);
 		
 		JLabel lblNewLabel_6 = new JLabel("Select:");
@@ -310,20 +320,40 @@ public class MeetingMenu extends JFrame {
 	}
 	
 	
+	public void updateRoomsList(){
+		Meeting meeting = new Meeting();
+		meeting.setFromTime(new DateTime(datePicker.getDate()));
+		meeting.setToTime(new DateTime(datePicker.getDate()));
+		
+		Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
+		Room[] rooms = (Room[]) response.getContent();
+		
+		for (int i = 0; i <rooms.length; i++){
+			System.out.println(rooms[i]);
+		}
+	}
 	
+	
+	private class TimeFieldListener implements FocusListener{
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			
+			
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			
+			
+		}
+		
+	}
 	private class DatePickerListener implements ActionListener{
 
 		
 		public void actionPerformed(ActionEvent e) {
-		
-			Meeting meeting = new Meeting();
-			meeting.setFromTime(new DateTime(datePicker.getDate()));
-			meeting.setToTime(new DateTime(datePicker.getDate()));
-			
-			Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
-			System.out.println(response.getContent());
-			
-	
+			updateRoomsList();
 		}
 		
 	}
