@@ -37,8 +37,8 @@ public class CalendarPanel extends JPanel {
 	//private JLabel monthLbl = new JLabel();
 	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
 			sundayDate};
-	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
-			,"November", "December"};
+	private String[] month = {" January", " February", " March"," April"," May"," June"," July"," August"," September"," October"
+			," November", " December"};
 	
 	
 	/**
