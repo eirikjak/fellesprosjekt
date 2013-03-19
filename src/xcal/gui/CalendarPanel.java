@@ -76,12 +76,19 @@ public class CalendarPanel extends JPanel {
 	public CalendarPanel() {
 		//Lists for appointments
 		JList monday = new JList(mondayModel);
-		JList tuesday = new JList(thursdayModel);
+		monday.setCellRenderer(new CalendarPanelRenderer());
+		JList tuesday = new JList(tuesdayModel);
+		tuesday.setCellRenderer(new CalendarPanelRenderer());
 		JList wednesday = new JList(wednesdayModel);
+		wednesday.setCellRenderer(new CalendarPanelRenderer());
 		JList thursday = new JList(thursdayModel);
+		thursday.setCellRenderer(new CalendarPanelRenderer());
 		JList friday = new JList(fridayModel);
+		friday.setCellRenderer(new CalendarPanelRenderer());
 		JList saturday = new JList(saturdayModel);
+		saturday.setCellRenderer(new CalendarPanelRenderer());
 		JList sunday = new JList(sundayModel);
+		sunday.setCellRenderer(new CalendarPanelRenderer());
 		//end for list appointments
 				
 		client = Client.getClient();
@@ -277,7 +284,7 @@ public class CalendarPanel extends JPanel {
 			/*
 			 * Formatting the dates of days labels
 			 */
-			ArrayList<Appointment> rcvd = new ArrayList();
+			ArrayList<Appointment> rcvd = null;
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
 			DateTime cal = new DateTime();
@@ -285,7 +292,6 @@ public class CalendarPanel extends JPanel {
 			cal = cal.withDayOfWeek(1);
 
 			for (int i=0; i<7; i++){
-				rcvd.clear();
 				Date c = cal.toDate();
 				DateTime dtFrom = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),00,00,00);
 				DateTime dtTo = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),23,59,59);
@@ -299,9 +305,13 @@ public class CalendarPanel extends JPanel {
 				
 				rcvd = (ArrayList<Appointment>)obj;
 				System.out.println(rcvd + "THIS IS ARRAY");
-				for(Appointment a : rcvd){
+				for(int x=0; x<rcvd.size(); x++){
 					//System.out.println("DAY : " + i + "AND APP: " + a);
-					weekAppointments[i].addElement(a);
+					DateTime getDate = rcvd.get(x).getFromTime();
+					if(getDate.isAfter(dtFrom) && getDate.isBefore(dtTo) ){
+						weekAppointments[i].addElement(rcvd.get(x));
+					}
+					
 					//weekAppointments[i].addElement("SPAAAACE");
 					
 				}
