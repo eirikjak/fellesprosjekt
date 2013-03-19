@@ -26,6 +26,7 @@ import xcal.client.Client;
 public class CalendarPanel extends JPanel {
 	private Client client = Client.getClient();
 	private Calendar cal = Calendar.getInstance();
+	//Labels for dates
 	private JLabel mondayDate = new JLabel();
 	private JLabel tuesdayDate = new JLabel();
 	private JLabel wednesdayDate = new JLabel();
@@ -33,9 +34,22 @@ public class CalendarPanel extends JPanel {
 	private JLabel fridayDate = new JLabel();
 	private JLabel saturdayDate = new JLabel();
 	private JLabel sundayDate = new JLabel();
-	//private JLabel monthLbl = new JLabel();
+	//end labels for dates
+	
+	//Lists for appointments
+	JList monday = new JList();
+	JList tuesday = new JList();
+	JList wednesday = new JList();
+	JList thursday = new JList();
+	JList friday = new JList();
+	JList saturday = new JList();
+	JList sunday = new JList();
+	//end for list appointments
+	
+	//Arrays with weekdays, appointments, month names etc
 	private JLabel[] week = {mondayDate, tuesdayDate, wednesdayDate, thursdayDate, fridayDate, saturdayDate,
 			sundayDate};
+	private JList[] weekAppointments = { monday, tuesday, wednesday, thursday, friday, saturday, sunday}; 
 	private String[] month = {"January", "February", "March","April","May","June","July","August","September","October"
 			,"November", "December"};
 	
@@ -44,19 +58,10 @@ public class CalendarPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public CalendarPanel() {
-		//System.out.println(cal.get(Calendar.DAY_OF_YEAR)+ "THIS IS THE DATE");
-		
-		/*
-		 * SETTING THE DATES OF LABELS AND MONTH OF MAIN LABEL
-		 */
-		
-		
 		SwingWorker w = new Worker();
 		w.execute();
 		setLayout(null);
 
-		
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(388, 5, 1, 1);
 		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -71,22 +76,14 @@ public class CalendarPanel extends JPanel {
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("");
+		/*JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 61, 16);
-		panel_1.add(lblNewLabel);
+		panel_1.add(lblNewLabel);*/
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(1, 47, 940, 72);
 		panel_1.add(lblNewLabel_1);
 		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/kalender_bar.png")));
-		
-		
-		JLabel lblNewLabel_2 = new JLabel("M\u00C5NED");
-		lblNewLabel_2.setBounds(334, 5, 233, 39);
-		panel_1.add(lblNewLabel_2);
-		lblNewLabel_2.setForeground(new Color(35, 103, 174));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(394, 5, 1, 1);
@@ -181,31 +178,25 @@ public class CalendarPanel extends JPanel {
 				panel.add(button_1);
 				button_1.addActionListener(new NextWeekBtnListener());
 				
-				JList monday = new JList();
+				
 				monday.setBounds(8, 122, 126, 365);
 				panel.add(monday);
 				
-				JList tuesday = new JList();
 				tuesday.setBounds(141, 122, 126, 365);
 				panel.add(tuesday);
 				
-				JList wednesday = new JList();
 				wednesday.setBounds(274, 122, 126, 365);
 				panel.add(wednesday);
 				
-				JList thursday = new JList();
 				thursday.setBounds(540, 122, 126, 365);
 				panel.add(thursday);
-				
-				JList friday = new JList();
+			
 				friday.setBounds(806, 122, 126, 365);
 				panel.add(friday);
 				
-				JList saturday = new JList();
 				saturday.setBounds(673, 122, 126, 365);
 				panel.add(saturday);
 				
-				JList sunday = new JList();
 				sunday.setBounds(407, 122, 126, 365);
 				panel.add(sunday);
 			//	btnNewButton_1.addActionListener(new OtherCalendarsListener());
@@ -252,8 +243,7 @@ public class CalendarPanel extends JPanel {
 				cal.add(Calendar.DATE, -1);
 				System.out.println(df.format(cal.getTime()));
 				int monthNum = Integer.valueOf(m.format(cal.getTime()));
-				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);			
-				
+				week[i].setText(df.format(cal.getTime())+ month[monthNum-1]);	
 			}
 
 			
