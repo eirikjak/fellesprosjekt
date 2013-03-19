@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class NotificationPage extends JFrame {
 
@@ -39,6 +41,7 @@ public class NotificationPage extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 519, 310);
 		contentPane = new JPanel();
+		contentPane.setBackground(UIManager.getColor("Panel.background"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
