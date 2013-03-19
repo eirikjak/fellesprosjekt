@@ -189,6 +189,10 @@ public class CalendarPanel extends JPanel {
 				panel.add(label_14);
 				
 				JButton button = new JButton("Last Week");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				button.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 				button.setBounds(2, 11, 132, 29);
 				panel.add(button);
