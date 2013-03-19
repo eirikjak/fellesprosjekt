@@ -1,4 +1,5 @@
 /**
+
  * Socket Server code
  * 
  * Socket server, accepts client to be connected
@@ -12,13 +13,18 @@ package xcal.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.core.Settings;
+import xcal.server.query.LocationQ;
+
 
 
 public class Server 
@@ -35,12 +41,14 @@ public class Server
 	
 	public Server()
 	{
+		
 		clients=new Vector<ClientThread>();
 		notify=new NotifyThread(clients);
 		notify.start();
 		
 		size=0;//hold how many clients added
 		//clients=null;
+		
 		try
 		{
 			socket=new ServerSocket(Settings.port);//start listening on port
@@ -65,7 +73,6 @@ public class Server
 			Socket client=socket.accept();//wait for connection
 			clients.add(new ClientThread(client,size));
 			clients.get(size).start();
-			
 			++size;
 			
 			return true;
@@ -79,12 +86,16 @@ public class Server
 		return false;
 	}
 	
-	public void sendObject(Object o){
-		
-	}
 	
-	public Object recieveObject(Object o){
-		return null;
+	
+	public Object recieveObject(Wrapper o){
+		ObjectManagers om = new ObjectManagers();
+		Object obj = om.manage(o);
+		
+		
+		return obj;
+		
+		
 	}
 	
 	

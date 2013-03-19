@@ -8,15 +8,20 @@
 
 package xcal.model;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Meeting extends Appointment
+public class Meeting extends Appointment implements Serializable
 {
 	private Vector<Employee> participants;
 	private Employee manager;
 	private Room room;
 	
-	public Meeting(){}
+
+
+
+	public Meeting(){
+	}
 	
 
 	

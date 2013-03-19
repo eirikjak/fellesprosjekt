@@ -2,25 +2,113 @@ package xcal.server.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Vector;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.*;
 
 public class AppointmentsQ
 {
-	private DbConnection connection;
+	public  static Statement statement = null;
+	private static DbConnection connection;
 	/*
 	 * CREATE / CHANGE / DELETE / UPDATE APPOINTMENTS
 	 */
 	
 	public AppointmentsQ(DbConnection connection) {
 		this.connection=connection;
+		
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createAppointment(int EmployeeId){
-	
+
+	private static String stringForSql(String string){
+		return "'" + string + "'";
 	}
+
+
+	public static  Appointment createAppointment(Appointment app,Location loc) {
+		synchronized (connection) {
+			
+		DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+		String query = "INSERT INTO Appointment ( start_date,end_date,title,description,leader,place)"
+				+ " VALUES("+ stringForSql(format.print(app.getFromTime())) +"," + stringForSql(format.print(app.getToTime())) + ","
+				+ stringForSql(app.getTitle())+ "," + stringForSql(app.getDescription()) + "," + stringForSql(app.getLeader().getEmail()) + "," + stringForSql(new Integer(loc.getID()).toString()) + ")";
+		System.out.println(query);
+		Statement stat;
+		try {
+			stat = connection.getConnection().createStatement();
+			stat.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			ResultSet result = stat.getGeneratedKeys();
+			if(result.next()){
+			app.setAppId(result.getInt(1));
+			app.setLocation(loc);
+			}
+			else
+				return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		}
+		
+		
+		return app;
+	
+
+	}
+	public static void deleteAppointment(Appointment app){
+		
+		synchronized (connection) {
+			try {
+				String query = "DELETE FROM Appointment WHERE id='" + app.getAppId() +"'";
+				Statement stat = connection.getConnection().createStatement();
+				stat.execute(query);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public Appointment selectAppointmentsFromDate (Timestamp startDate, Timestamp endDate) throws SQLException{
+		synchronized (connection) {
+			String sql = "select * from Appontment where date >= ["+startDate+"] and end_date <= ["+endDate+"];";
+			ResultSet resultSet = statement.executeQuery(sql);
+        	resultSet.last();
+        	
+        	if(resultSet.getString("room").isEmpty())//appointment doesn't contain room
+  		   {
+  			   Appointment app=new Appointment();
+  			  //app.setLocation(result.getString("Location"));
+  			   app.setDescription(resultSet.getString("description"));
+  			   //app.setName(result.getString("name"));
+  			   app.setFromTime(resultSet.getTimestamp("start_date"));
+  			   app.setToTime(resultSet.getTimestamp("end_date"));
+  			   return app;
+  		   }
+  		   
+  		   Appointment meeting=new Meeting();
+  		   meeting.setDescription(resultSet.getString("description"));
+  		   meeting.setFromTime(resultSet.getTimestamp("start_date"));
+  		   meeting.setToTime(resultSet.getTimestamp("end_date"));
+  		   
+  		   return meeting;   		   
+  		   
+
+  	   } 
+			
+	}
+	
+	
 	
 	/**
 	 * get appointment from db
@@ -28,8 +116,9 @@ public class AppointmentsQ
 	 * @param AppointmentId - id to select from db
 	 * @return appointment selected from id
 	 */
-	public Appointment selectAppointment(int AppointmentId)
+	public  Appointment selectAppointment(int AppointmentId)
 	{
+		synchronized (connection) {
 		String query="select * from Appointment where id='"+AppointmentId+"'";
  	   
  	   try 
@@ -39,7 +128,7 @@ public class AppointmentsQ
  		   result.next();
 
  		   
- 		   if(result.getString("room").isEmpty())//appointment doesn't contain room
+ 		/*   if(result.getString("room").isEmpty())//appointment doesn't contain room
  		   {
  			   Appointment app=new Appointment();
  			  //app.setLocation(result.getString("Location"));
@@ -55,7 +144,8 @@ public class AppointmentsQ
  		   meeting.setFromTime(result.getTimestamp("start_date"));
  		   meeting.setToTime(result.getTimestamp("end_date"));
  		   
- 		   return meeting;   		   
+ 		   return meeting;  */
+ 			   return null;
  		   
 
  	   } 
@@ -65,44 +155,101 @@ public class AppointmentsQ
 			e.printStackTrace();
  	   }
  	   
- 	   
+		}
  	   return null;
 	}
 	
-	public void updateAppointment(int AppointmentId){
+	
+   	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place ) throws SQLException{
+   		synchronized (connection) {
+		String sql = "UPDATE Appointment "+
+						"SET start_date='"+startDate+"',"+
+						"end_date='"+endDate+"',"+
+						"description='"+description+"',"+
+						"leader='"+email+"',"+
+						"place='"+place+"',"+
+						//"room='"+room+
+								"WHERE id= "+ AppointmentId;
+		statement.executeUpdate(sql);
+   		}
+}
+	
+	public void createMeeting(Timestamp from_time,Timestamp to_time, String name, String Description, Employee leader, int room) throws SQLException{
+		synchronized (connection) {
+			synchronized (connection) {
+				DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+	
+				String sql = "INSERT INTO Appointment ('start_date','end_date','title','description','leader','room') VALUES ("+from_time+","+to_time+","+Description+","+leader+","+room+");";
+				statement.executeUpdate(sql);
+				
+				
+					
+				}
+			
+		
+		}
+	}
+	
+	public static Meeting selectMeeting(int appId){
+		synchronized (connection) {
+			
+			
+		return null;
+		}
 		
 	}
 	
-	public void createMeeting(int EmployeeId){
+	public void updateMeeting(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int room) throws SQLException{
+		synchronized (connection) {
+			
+			String sql = "UPDATE Appointment "+
+					"SET start_date='"+startDate+"',"+
+					"end_date='"+endDate+"',"+
+					"description='"+description+"',"+
+					"leader='"+email+"',"+
+					"'room='"+room+
+							"WHERE id= "+ AppointmentId;
+	statement.executeUpdate(sql);
+			
+			
+		}
 		
 	}
 	
-	public void selectMeeting(int MeetingId){
-		
-	}
-	
-	public void updateMeeting(int MeetingId){
-		
-	}
-	
-	public void deleteEvent(int id){
+	public static void deleteEvent(int id){
+		synchronized (connection) {
+			
+		}
 		
 	}
 	
 	public boolean isMeeting(int id){
+		synchronized (connection) {
 		return false;
+		}
 	}
 	
 	public void removePersonFromMeetign (int app_id, int EmployeeId){
+		synchronized (connection) {
+			
+		}
 		
 	}
 	
 	private void sendInvites(ArrayList<Employee> participants, int app_id){
-		
+		synchronized (connection) {
+			
+		}
 	}
 	
 	public boolean getAnswer(int app_id, int EmployeeId){
+		
+		synchronized (connection) {
 		return false;
+		
+		}
 	}
+
+	
 	
 }

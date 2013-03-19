@@ -7,15 +7,23 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.Color;
+
+import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.DropMode;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import xcal.client.*;
+
+public class NotificationMenu extends JFrame {
 
 
-public class Notification extends JInternalFrame {
-
+	
+	private Client client = Client.getClient();
 	/**
 	 * Launch the application.
 	 */
@@ -23,7 +31,7 @@ public class Notification extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Notification frame = new Notification();
+					NotificationMenu frame = new NotificationMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +43,7 @@ public class Notification extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Notification() {
+	public NotificationMenu() {
 		setBounds(100, 100, 562, 439);
 		getContentPane().setLayout(null);
 		
@@ -45,8 +53,10 @@ public class Notification extends JInternalFrame {
 		getContentPane().add(lblYouAreInvited);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Notification.class.getResource("/images/1362768365_Group_Meeting_Light.png")));
-		lblNewLabel.setBounds(341, 34, 142, 133);
+		lblNewLabel.setIcon(new ImageIcon(NotificationMenu.class.getResource("/images/andrekalendere.png")));
+		lblNewLabel.setBounds(374, 43, 142, 133);
+
+
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblInvitertAv = new JLabel("Invited by:");
@@ -78,15 +88,22 @@ public class Notification extends JInternalFrame {
 		lblDescription.setBounds(57, 174, 158, 16);
 		getContentPane().add(lblDescription);
 		
-		JButton btnNewButton = new JButton("Accept");
-		btnNewButton.setBounds(62, 325, 117, 29);
-		getContentPane().add(btnNewButton);
+		JButton btnAccept = new JButton("Accept");
+		btnAccept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Wrapper answer = new Wrapper(Status.ACCEPT, )
+				//client.sendObject(o, s);
+			}
+		});
+		btnAccept.setBounds(62, 325, 117, 29);
+		getContentPane().add(btnAccept);
 		
-		JButton btnNewButton_1 = new JButton("Decline");
-		btnNewButton_1.setBounds(185, 325, 117, 29);
-		getContentPane().add(btnNewButton_1);
+		JButton btnDecline = new JButton("Decline");
+		btnDecline.setBounds(185, 325, 117, 29);
+		getContentPane().add(btnDecline);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		textPane.setBounds(67, 202, 377, 114);
 		getContentPane().add(textPane);

@@ -1,4 +1,4 @@
-package xcal.server;
+package xcal.server.query;
 
 
 import java.util.Random;

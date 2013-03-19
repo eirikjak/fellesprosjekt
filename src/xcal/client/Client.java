@@ -6,16 +6,24 @@
 package xcal.client;
 
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
+import javax.swing.SwingUtilities;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 
 
 import xcal.core.Settings;
 import xcal.gui.Login;
 import xcal.gui.RootFrame;
+import xcal.model.Employee;
 
 
 
@@ -25,14 +33,27 @@ public class Client
 	
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
-	
+	private static Client client;
+	private Employee user;
 	
 	public Client()
 	{
 
-		//connect();
-		RootFrame.init(1015, 720);
-		RootFrame.addPanel(new Login(this));
+	
+		connect();
+		client = this;
+		
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				RootFrame.init(1015, 720);
+				RootFrame.addPanel(new Login());
+				
+			}
+		});
+		
 
 	}
 	
@@ -41,6 +62,7 @@ public class Client
 		try
 		{
 			socket=new Socket(Settings.server_ip,Settings.port);
+		
 		}
 		catch(IOException e)
 		{
@@ -56,19 +78,63 @@ public class Client
 	 * @param send - object to send
 	 * @return boolean - if send was successful or not
 	 */
-	public boolean sendObject(Object send)
+	
+	public Employee getUser(){
+		return this.user;
+	}
+	public void setUser(Employee user){
+		this.user = user;
+	}
+	public Wrapper sendObject(Object o, Status s){
+		Wrapper sentObj = new Wrapper(s,o);
+		
+	
+		try {
+			output = new ObjectOutputStream(socket.getOutputStream());
+			output.writeObject(sentObj);
+			output.flush();
+			try {
+				input = new ObjectInputStream(socket.getInputStream());
+				
+				Wrapper response = (Wrapper) input.readObject();
+
+				return response;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+		
+	}
+	/*
+	public Object sendObject(Object send)
 	{
 		try
 		{
 			output=new ObjectOutputStream(socket.getOutputStream());
+			input = new ObjectInputStream(socket.getInputStream());
 			output.writeObject(send);
 			output.flush();
 			//output.close();
-			return true;
+			try {
+				Object response = input.readObject();
+				return response;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 		}
 		catch(IOException e){}
-		return false;
+		return null;
 	}
+	*/
 	
 	/**
 	 * Object to recieve from server
@@ -81,7 +147,7 @@ public class Client
 		try
 		{
 			input=new ObjectInputStream(socket.getInputStream());
-			return (Object) input.readObject();
+			return input.readObject();
 			
 		}
 		catch(ClassNotFoundException e){} catch (IOException e) {
@@ -97,8 +163,12 @@ public class Client
 	
 	public static void main(String[] args)
 	{
+		
 		new Client();
 	}
 	
+	public static Client getClient(){
+		return client;
+	}
 
 }

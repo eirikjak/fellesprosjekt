@@ -8,7 +8,9 @@
 
 package xcal.model;
 
-abstract class Person 
+import java.io.Serializable;
+
+abstract class Person implements Serializable 
 {
 	private String name;
 	private String email;
