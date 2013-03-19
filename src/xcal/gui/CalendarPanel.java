@@ -256,6 +256,7 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		protected Object doInBackground() throws Exception {
+			//Select and show date
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 			DateFormat df = new SimpleDateFormat("dd.");
 			DateFormat m = new SimpleDateFormat("MM");
