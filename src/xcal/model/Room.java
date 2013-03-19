@@ -32,6 +32,6 @@ public class Room implements Serializable
 	public void setSize(int size){this.size=size;}
 
 	public String toString(){
-		return name;
+		return name + "  Capacity:" + size;
 	}
 }

@@ -98,7 +98,6 @@ public class Client
 			output.flush();
 			try {
 				input = new ObjectInputStream(socket.getInputStream());
-				
 				Wrapper response = (Wrapper) input.readObject();
 
 				return response;
