@@ -22,7 +22,12 @@ public class AppointmentsQ
 	
 	}
 	
-	
+	/**
+	 * get appointment from db
+	 * 
+	 * @param AppointmentId - id to select from db
+	 * @return appointment selected from id
+	 */
 	public Appointment selectAppointment(int AppointmentId)
 	{
 		String query="select * from Appointment where id='"+AppointmentId+"'";

@@ -25,15 +25,10 @@ public class NotificationQ
 	
 	
 	/**
-	 * Notification[] not=dc.checkNotification();
-	        	
-	        	for(int i=0;i<not.length;++i)
-	        	{
-	        		System.out.println(not[i].getEmployee().getName());
-	        	}
-	 * @return
+	 * check if any notifications need to be triggered
+	 * 
+	 * @return - true if found notifications - false otherwise
 	 */
-	
 	public boolean notificationReady()
 	{
 		String query="select * from Notification where NOW() >=  notifiedAt";
@@ -59,7 +54,11 @@ public class NotificationQ
 	}
 	
 	
-	
+	/**
+	 * get notifications that need to be triggered
+	 * 
+	 * @return notifications that need to be sent
+	 */
 	public Notification[] getNotifications()
     {
 
