@@ -65,6 +65,9 @@ public class MeetingPage extends JFrame {
 		JButton btnBackToCalendar = new JButton("Back to calendar");
 		btnBackToCalendar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				dispose();
+				
 			}
 		});
 		btnBackToCalendar.setFont(new Font("Lucida Grande", Font.BOLD, 13));

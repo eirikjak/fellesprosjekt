@@ -201,8 +201,8 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		groupListLeft.setCellRenderer((ListCellRenderer) new GroupListCellRenderer());
 		scrollPane_3.setViewportView(groupListLeft);
 		
-		updateGroupList();
-		updatePersonList();
+	//	updateGroupList();
+		//updatePersonList();
 		
 		
 		
