@@ -15,6 +15,7 @@ public enum Status {
 	GET_AVAILABLE_ROOMS,
 	ACCEPT,
 	DECLINE,
-	TD_APP
+	TD_APP,
+	PENDING
 
 }

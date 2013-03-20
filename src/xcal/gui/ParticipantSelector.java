@@ -209,7 +209,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 	}
 	private void insertSorted(JList list, Employee emp){
 		for (int i = 0; i< list.getModel().getSize(); i++){
-			if(emp.getName().compareTo(((Component) list.getModel().getElementAt(i)).getName()) <= 0){
+			if(emp.getName().compareTo(((Employee) list.getModel().getElementAt(i)).getName()) <= 0){
 				((DefaultListModel) list.getModel()).add(i, emp);
 				return;
 			}
@@ -220,7 +220,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 	
 	private void insertSorted(JList list, Group group){
 		for (int i = 0; i< list.getModel().getSize(); i++){
-			if(group.getName().compareTo(((Component) list.getModel().getElementAt(i)).getName()) <= 0){
+			if(group.getName().compareTo(((Group) list.getModel().getElementAt(i)).getName()) <= 0){
 				((DefaultListModel) list.getModel()).add(i, group);
 				return;
 			}
@@ -338,36 +338,25 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 	private class PersonListCellRenderer implements ListCellRenderer{
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 		
-		public Component getListCellRendererComponent(JList list, Employee value, int index, boolean isSelected, boolean cellHasFocus) {
-			
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			
-			label.setText(value.getName());
+			label.setText(((Employee)value).getName());
 			return label;
-		}
-
-		@Override
-		public Component getListCellRendererComponent(JList arg0, Object arg1,
-				int arg2, boolean arg3, boolean arg4) {
-			// TODO Auto-generated method stub
-			return null;
+			
 		}
 		
 	}
 	private class GroupListCellRenderer implements ListCellRenderer{
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 		
-		public Component getListCellRendererComponent(JList list, Group value, int index, boolean isSelected, boolean cellHasFocus) {
-			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-			label.setText(value.getName());
-			return label;
-		}
-
+		
 		@Override
-		public Component getListCellRendererComponent(JList arg0, Object arg1,
-				int arg2, boolean arg3, boolean arg4) {
-			// TODO Auto-generated method stub
-			return null;
+		public Component getListCellRendererComponent(JList list, Object value,int index, boolean isSelected, boolean cellHasFocus) {
+			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			label.setText(((Group)value).getName());
+			return label;
 		}
 		
 	}
