@@ -40,7 +40,7 @@ public class ObjectManagers {
 				AppointmentsQ.deleteEvent(m.getAppId());
 				break;
 				
-			case GET_AVALIABLE_ROOMS:
+			case GET_AVAILABLE_ROOMS:
 				Room[] rooms = RoomQ.getAvailableRooms(m.getFromTime(), m.getToTime());
 				if(rooms != null)
 					return new Wrapper(Status.SUCCESS, rooms);
@@ -55,7 +55,7 @@ public class ObjectManagers {
 			Appointment a = (Appointment)content;
 			switch(flag){
 			case CREATE:
-				System.out.println(a);
+				
 				Location loc = LocationQ.createLocation(a.getLocationName());
 				if(loc != null){
 					Appointment app = AppointmentsQ.createAppointment(a, loc);
@@ -88,7 +88,9 @@ public class ObjectManagers {
 				return (Appointment)AppointmentsQ.selectAppointment(a.getAppId());
 				
 			case TD_APP:
-				System.out.println(a);
+				//System.out.println(a);
+				//System.out.println("EMAIL : " + a.getLeader().getEmail());
+
 				return new Wrapper(Status.IGNORE, AppointmentsQ.selectAppointmentsForPersonFromDate (a.getFromTime(), a.getToTime(), a.getLeader().getEmail()));
 			}
 				

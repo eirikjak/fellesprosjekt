@@ -1,6 +1,7 @@
 package xcal.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -8,9 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
@@ -42,18 +49,24 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import javax.swing.JScrollPane;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class MeetingMenu extends JFrame {
+import javax.swing.JScrollPane;
+import org.jdesktop.swingx.JXBusyLabel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import org.jdesktop.swingx.autocomplete.ObjectToStringConverter;
+
+import com.mysql.jdbc.exceptions.DeadlockTimeoutRollbackMarker;
+
+public class MeetingMenu extends JFrame implements PropertyChangeListener {
 
 	private JPanel contentPane;
 	private JTextField name;
 	private JTextField startHour;
 	private JTextField startMinute;
-
 	private JTextField endHour;
 	private JTextField endMinute;
-	private DefaultListModel model;
 	private JXDatePicker datePicker;
 	private JComboBox locationBox;
 	private JTextArea description;
@@ -61,6 +74,16 @@ public class MeetingMenu extends JFrame {
 	private JComboBox notificationBox;
 	private JLabel errorLabel ;
 	private Client client;
+	private Meeting model;
+	private JXBusyLabel roomBussyLabel ;
+	private JXBusyLabel personBussyLabel;
+	private JList<Employee> personListLeft;
+	private DefaultListModel<Employee> personListModelLeft;
+	private DefaultListModel<Employee> personListModelRight;
+	private JList<Employee> personListRight;
+	private JTextField employeeSearch;
+	private JButton addButton;
+	private JButton removeButton;
 	/**
 	 * Launch the application.
 	 */
@@ -76,15 +99,16 @@ public class MeetingMenu extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	public MeetingMenu() {
 		super();
 		this.client = Client.getClient();
+		this.model = new Meeting();
+		
 		setTitle("New meeting");
-		setPreferredSize(new Dimension(710, 700));
+		setPreferredSize(new Dimension(710, 750));
 		setVisible(true);
 		
 		getContentPane().setLayout(null);
@@ -105,7 +129,6 @@ public class MeetingMenu extends JFrame {
 		getContentPane().add(startMinute);
 		
 		datePicker = new JXDatePicker();
-		datePicker.addActionListener(new DatePickerListener());
 		datePicker.setBounds(547, 93, 104, 31);
 		datePicker.getEditor().setEditable(false);
 		getContentPane().add(datePicker);
@@ -113,7 +136,7 @@ public class MeetingMenu extends JFrame {
 		JLabel lblVarsel = new JLabel("Notification:");
 		lblVarsel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVarsel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblVarsel.setBounds(70, 576, 92, 14);
+		lblVarsel.setBounds(70, 606, 92, 14);
 		getContentPane().add(lblVarsel);
 		
 		notificationMap = new HashMap<String,Integer>();
@@ -128,17 +151,17 @@ public class MeetingMenu extends JFrame {
 		notificationMap.put("1 day", 1440);
 		notificationBox = new JComboBox(new String[]{"1 minute","5 minutes","10 minutes","15 minutes",
 				"30 minutes","1 hour","2 hours","5 hours","1 day"});
-		notificationBox.setBounds(174, 569, 178, 31);
+		notificationBox.setBounds(174, 599, 178, 31);
 		getContentPane().add(notificationBox);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new OkButtonListener());
-		btnSave.setBounds(172, 612, 181, 23);
+		btnSave.setBounds(172, 642, 181, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new CancelButtonListener());
-		btnCancel.setBounds(393, 612, 181, 23);
+		btnCancel.setBounds(393, 642, 181, 23);
 		getContentPane().add(btnCancel);
 		
 		JLabel lblNavn = new JLabel("Name:");
@@ -146,6 +169,11 @@ public class MeetingMenu extends JFrame {
 		lblNavn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblNavn.setBounds(70, 48, 92, 14);
 		getContentPane().add(lblNavn);
+		
+		personBussyLabel = new JXBusyLabel();
+		personBussyLabel.setBounds(256, 478, 26, 26);
+		personBussyLabel.setVisible(false);
+		getContentPane().add(personBussyLabel);
 		
 		JLabel lblTidspunkt = new JLabel("Time:");
 		lblTidspunkt.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -229,32 +257,34 @@ public class MeetingMenu extends JFrame {
 		lblNewLabel_5.setBounds(463, 87, 40, 42);
 		getContentPane().add(lblNewLabel_5);
 		
-		JButton addButton = new JButton("");
+		addButton = new JButton("");
 		addButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
-		addButton.setBounds(379, 413, 68, 35);
+		addButton.setBounds(379, 443, 68, 35);
 		getContentPane().add(addButton);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(465, 397, 185, 133);
+		scrollPane_1.setBounds(465, 427, 185, 133);
 		getContentPane().add(scrollPane_1);
 		
-		JList list_2 = new JList();
-		scrollPane_1.setViewportView(list_2);
+		personListModelRight = new DefaultListModel<Employee>();
+		personListRight = new JList<Employee>(personListModelRight);
+		personListRight.setCellRenderer(new PersonListCellRenderer());
+		scrollPane_1.setViewportView(personListRight);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(182, 397, 178, 133);
+		scrollPane.setBounds(182, 427, 178, 133);
 		getContentPane().add(scrollPane);
 		
-		JList list_1 = new JList();
-		scrollPane.setViewportView(list_1);
+		personListModelLeft = new DefaultListModel<Employee>();
+		personListLeft = new JList<Employee>(personListModelLeft);
+		personListLeft.setCellRenderer(new PersonListCellRenderer());
+		scrollPane.setViewportView(personListLeft);
 		
-		JButton removeButton = new JButton("");
+		
+		
+		removeButton = new JButton("");
 		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
-		removeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		removeButton.setBounds(379, 469, 68, 35);
+		removeButton.setBounds(379, 499, 68, 35);
 		getContentPane().add(removeButton);
 		
 		locationBox = new JComboBox(new String[]{"Please select time and date"});
@@ -302,62 +332,369 @@ public class MeetingMenu extends JFrame {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(172, 362, 489, 178);
+		panel_3.setBounds(172, 362, 489, 205);
 		getContentPane().add(panel_3);
+		panel_3.setLayout(null);
 		
+		employeeSearch = new JTextField();
+		employeeSearch.setBounds(10, 36, 178, 25);
+		panel_3.add(employeeSearch);
+		employeeSearch.setColumns(10);
 		errorLabel = new JLabel("");
 		errorLabel.setFont(new Font("Dialog", Font.BOLD, 13));
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		errorLabel.setBounds(180, 646, 469, 14);
+		errorLabel.setBounds(180, 676, 469, 14);
 		getContentPane().add(errorLabel);
 		
+		roomBussyLabel = new JXBusyLabel();
+		roomBussyLabel.setBounds(377, 160, 26, 26);
+		roomBussyLabel.setVisible(false);
+		getContentPane().add(roomBussyLabel);
+		
 		pack();
-	}
-	
-	public void setModel(DefaultListModel model){
+		addListeners();
+		model.addPropertyChangeListener(this);
+		
+		updatePersonList();
+		
+		AutoCompleteDecorator.decorate(personListLeft, employeeSearch, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);
 		
 	}
 	
+	public void setModel(Meeting model){
+		throw new RuntimeException("not implemented");
+	}
 	
-	public void updateRoomsList(){
-		Meeting meeting = new Meeting();
-		meeting.setFromTime(new DateTime(datePicker.getDate()));
-		meeting.setToTime(new DateTime(datePicker.getDate()));
+	private void addListeners(){
 		
-		Wrapper response = client.sendObject(meeting, Status.GET_AVALIABLE_ROOMS);
-		Room[] rooms = (Room[]) response.getContent();
+		startHour.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				
+				model.setFromHour(startHour.getText());
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+			
+				
+			}
+		});
+		startHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+					model.setFromHour(startHour.getText());
+				
+				
+			}
+		});
 		
-		for (int i = 0; i <rooms.length; i++){
-			System.out.println(rooms[i]);
+		
+		startMinute.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				model.setFromMinute(startMinute.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		startMinute.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setFromMinute(startMinute.getText());
+				
+			}
+		});
+		
+		endHour.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setToHour(endHour.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		endHour.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setToHour(endHour.getText());
+				
+			}
+		});
+		
+		
+		endMinute.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				model.setToMinute(endMinute.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		endMinute.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				model.setToMinute(endMinute.getText());
+				
+			}
+		});
+		name.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setTitle(name.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		name.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setTitle(name.getText());
+				
+			}
+		});
+		
+		description.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				model.setDescription(description.getText());
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+				
+			}
+		});
+		
+		notificationBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int notification = notificationMap.get(notificationBox.getSelectedItem());
+				model.setNotification(new Notification(model, client.getUser(),model.getFromTime().minusMinutes(notification)));
+				
+			}
+		});
+		datePicker.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg) {
+				model.setDate(new DateTime(datePicker.getDate()));
+				
+			}
+		});
+		
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				if(personListLeft.getSelectedIndex() > -1){
+					model.addParticipant(personListModelLeft.get(personListLeft.getSelectedIndex()));
+				}
+				
+			}
+		});
+		
+		removeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(personListRight.getSelectedIndex() > -1)
+					model.removeParticipant(personListModelRight.getElementAt(personListRight.getSelectedIndex()));
+				
+			}
+		});
+		
+		locationBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//
+				model.setRoom((Room)locationBox.getSelectedItem());
+			}
+		});
+	}
+	
+	
+	private void insertSorted(JList<Employee> list, Employee emp){
+		
+		for (int i = 0; i< list.getModel().getSize(); i++){
+			if(emp.getName().compareTo(list.getModel().getElementAt(i).getName()) <= 0){
+				((DefaultListModel<Employee>) list.getModel()).add(i, emp);
+				return;
+			}
 		}
+		
+		((DefaultListModel<Employee>) list.getModel()).addElement(emp);
 	}
 	
 	
-	private class TimeFieldListener implements FocusListener{
+	private class PersonListCellRenderer implements ListCellRenderer<Employee>{
+		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+		
+		@Override
+		public Component getListCellRendererComponent(JList<? extends Employee> list, Employee value, int index, boolean isSelected, boolean cellHasFocus) {
+			
+			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			
+			label.setText(value.getName());
+			return label;
+		}
+		
+	}
+	private void updatePersonList(){
+		
+		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+			private ArrayList<Employee> employees;
+			@Override
+			protected Void doInBackground() throws Exception {
+				personBussyLabel.setVisible(true);
+				personBussyLabel.setBusy(true);
+				Employee emp = new Employee();
+				Wrapper response = client.sendObject(emp, Status.GET_ALL);
+				if(response.getContent() != null){
+					employees = (ArrayList<Employee>) response.getContent();
+				}
+				
+				return null;
+			}
+			
+			@Override
+			protected void done() {
+				for(Employee employee: employees){
+					personListModelLeft.addElement(employee);
+				}
+				personBussyLabel.setBusy(false);
+				personBussyLabel.setVisible(false);
+				super.done();
+			}
+		};
+		
+		worker.execute();
+		
+		
+	}
+	private void updateRoomsList(){
+		
+		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+			@Override
+			protected Void doInBackground() throws Exception {
+				roomBussyLabel.setVisible(true);
+				roomBussyLabel.setBusy(true);
+				Meeting meeting = new Meeting();
+				meeting.setFromTime(new DateTime(datePicker.getDate()));
+				meeting.setToTime(new DateTime(datePicker.getDate()));
+				
+				Wrapper response = client.sendObject(meeting, Status.GET_AVAILABLE_ROOMS);
+				Room[] rooms = (Room[]) response.getContent();
+				locationBox.removeAllItems();
+				Arrays.sort(rooms, new RoomComparator());
+				for (int i = 0; i <rooms.length; i++){
+					locationBox.addItem(rooms[i]);
+				}
+				return null;
+			}
+			
+			@Override
+			protected void done() {
+				roomBussyLabel.setBusy(false);
+				roomBussyLabel.setVisible(false);
+				super.done();
+			}
+		};
+		worker.execute();
+		
+	
+		
+		
+		
+	}
+	
+	private class RoomComparator implements Comparator<Room>{
 
 		@Override
-		public void focusGained(FocusEvent e) {
+		public int compare(Room room1, Room room2) {
 			
-			
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			
-			
+			return room1.getSize() - room2.getSize();
 		}
 		
 	}
-	private class DatePickerListener implements ActionListener{
-
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		String pName = evt.getPropertyName();
 		
-		public void actionPerformed(ActionEvent e) {
+		if(pName.equals(Meeting.PROPERTY_DAY)){
+			datePicker.setDate(((DateTime)evt.getNewValue()).toDate());
 			updateRoomsList();
+		}else if(pName.equals(Meeting.PROPERTY_FROM_HOUR)){
+			updateRoomsList();
+			startHour.setText(((Integer)evt.getNewValue()).toString());
+		}else if(pName.equals(Meeting.PROPERTY_FROM_MINUTE)){
+			updateRoomsList();
+			startMinute.setText(((Integer)evt.getNewValue()).toString());
+		}else if (pName.equals(Meeting.PROPERTY_TO_HOUR)){
+			updateRoomsList();
+			endHour.setText(((Integer)evt.getNewValue()).toString());
+		}else if(pName.equals(Meeting.PROPERTY_TO_MINUTE)){
+			updateRoomsList();
+			endMinute.setText(((Integer)evt.getNewValue()).toString());
+		}else if (pName.equals(Meeting.PROPERTY_TITLE)){
+			name.setText((String)evt.getNewValue());
+		}else if (pName.equals(Meeting.PROPERTY_DESCRIPTION)){
+			description.setText((String)evt.getNewValue());
+		}else if (pName.equals(Meeting.PROPERTY_ROOM)){
+			locationBox.setSelectedItem((Room)evt.getNewValue());
+			
+		}else if (pName.equals(Meeting.PROPERTY_EMPLOYEES_ADD)){
+				insertSorted(personListRight, (Employee)evt.getNewValue());
+				personListModelLeft.removeElement((Employee)evt.getNewValue());
+			
+			
+		}else if (pName.equals(Meeting.PROPERTY_EMPLOYEES_REMOVE)){
+				insertSorted(personListLeft, (Employee)evt.getNewValue());
+				personListModelRight.removeElement((Employee)evt.getNewValue());
 		}
 		
 	}
+	
+	
 	private void Close(){
+		
+		model.removePropertyChangeListener(this);
 		setVisible(false);
 		dispose();
 	}
@@ -384,90 +721,38 @@ public class MeetingMenu extends JFrame {
 			
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-					boolean valid = true;
-					int fromHourDate = 0;
-					int fromMinuteDate = 0;
-					int toHourDate = 0;
-					int toMinuteDate = 0;
-					try{
+				
+					
+					/*
+					if(model.validateFields()){
+						int notification = notificationMap.get(notificationBox.getSelectedItem());
+						DateTime startTime = model.getFromTime();
+						DateTime endTime = model.getToTime();
+						String title = model.getTitle();
+						String desc = model.getDescription();
+						String loc = model.getLocationName();
+						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
+						Notification notificationObj = new Notification(app,Client.getClient().getUser());
+						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+						app.setNotification(notificationObj);
+						System.out.println(app);
+						Wrapper response = client.sendObject(app, Status.CREATE);
 						
-						fromHourDate = Integer.parseInt(startHour.getText());
-						if(!(fromHourDate >= 0 &&  fromHourDate <24)){
-							valid = false;
+						if(response.getFlag() != Status.SUCCESS){
+							errorLabel.setText("Error on appointment creation ");
+							errorLabel.setVisible(true);
+						}else{
+							if(response.getFlag() == Status.SUCCESS){
+								Close();
+							}
 						}
-						fromMinuteDate = Integer.parseInt(startMinute.getText());
-						if(!(fromMinuteDate >= 0 && fromMinuteDate < 60)){
-							valid = false;
+						}else{
+							errorLabel.setText("One or more invalid fields");
+							errorLabel.setVisible(true);
+							
 						}
-						toHourDate = Integer.parseInt(endHour.getText());
-						if(!(toHourDate >= 0 &&  toHourDate <24)){
-							valid = false;
-						}
-						toMinuteDate = Integer.parseInt(endMinute.getText());
-						if(!(toMinuteDate >= 0 && toMinuteDate < 60)){
-							valid = false;
-						}
-					}catch(NumberFormatException e1){
-						valid = false;
-					}
-					
-					DateTime inputDate = null;
-					if(datePicker.getDate()== null){
-						valid = false;
-						inputDate = new DateTime();
-					}else{
-						
-						inputDate = new DateTime(datePicker.getDate());
-					}
-					DateTime today = DateTime.now();
-					DateTime startTime;
-					DateTime endTime;
-					
-					System.out.println(today);
-					
-					startTime = new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),fromHourDate,fromMinuteDate,0);
-					endTime= new DateTime(inputDate.getYear(),inputDate.getMonthOfYear(),inputDate.getDayOfMonth(),toHourDate,toMinuteDate,0);
-					if(!today.isBefore(startTime)){
-						valid = false;
-					}
-					if(!startTime.isBefore(endTime)){
-						
-						valid = false;
-					}
-					
-					String loc = ((Room)locationBox.getSelectedItem()).getName();
-					String desc = description.getText();
-					String titleString = name.getText();
-					if(!(titleString.length() > 0)){
-						valid = false;
-					}
-					
-					int notification = notificationMap.get(notificationBox.getSelectedItem());
-					System.out.println(notification);
-					
-					if(valid){
-						System.out.println("sending shit");
-					Appointment app = new Appointment(startTime, endTime ,titleString, desc, client.getUser(), new Location(loc));
-					Notification notificationObj = new Notification(app,Client.getClient().getUser());
-					notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-					app.setNotification(notificationObj);
-					System.out.println(app);
-					Wrapper response = client.sendObject(app, Status.CREATE);
-					
-					if(response.getFlag() != Status.SUCCESS){
-						errorLabel.setText("Error on appointment creation ");
-						errorLabel.setVisible(true);
-					}else{
-						if(response.getFlag() == Status.SUCCESS){
-							Close();
-						}
-					}
-					}else{
-						errorLabel.setText("One or more invalid fields");
-						errorLabel.setVisible(true);
-						
-					}
-					return null;
+						*/
+						return null;
 				}
 
 			};
