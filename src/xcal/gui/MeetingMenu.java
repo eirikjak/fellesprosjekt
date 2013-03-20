@@ -314,7 +314,17 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	}
 	
 	public void setModel(Meeting model){
-		throw new RuntimeException("not implemented");
+		this.model.removePropertyChangeListener(this);
+		this.model = model;
+		this.model.addPropertyChangeListener(this);
+		
+		datePicker.setDate(model.getFromTime().toDate());
+		startHour.setText(new Integer(model.getFromTime().getHourOfDay()).toString());
+		startMinute.setText((new Integer(model.getFromTime().getMinuteOfHour()).toString()));
+		endHour.setText(new Integer(model.getToTime().getHourOfDay()).toString());
+		endMinute.setText(new Integer(model.getToTime().getMinuteOfHour()).toString());
+		name.setText(model.getTitle());
+		description.setText(model.getDescription());
 	}
 	
 	private void addListeners(){
@@ -595,7 +605,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
-			//lukk vindu når ferdig
+			//lukk vindu nï¿½r ferdig
 			submitBussyLabel.setVisible(true);
 			submitBussyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
