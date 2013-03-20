@@ -88,56 +88,31 @@ public class Client
 	public void setUser(Employee user){
 		this.user = user;
 	}
-	public Wrapper sendObject(Object o, Status s){
+	public synchronized Wrapper sendObject(Object o, Status s){
 		Wrapper sentObj = new Wrapper(s,o);
-		
-	
 		try {
 			output = new ObjectOutputStream(socket.getOutputStream());
 			output.writeObject(sentObj);
 			output.flush();
 			try {
 				input = new ObjectInputStream(socket.getInputStream());
-				
 				Wrapper response = (Wrapper) input.readObject();
 
 				return response;
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
+		
 		return null;
 		
 		
 		
 	}
-	/*
-	public Object sendObject(Object send)
-	{
-		try
-		{
-			output=new ObjectOutputStream(socket.getOutputStream());
-			input = new ObjectInputStream(socket.getInputStream());
-			output.writeObject(send);
-			output.flush();
-			//output.close();
-			try {
-				Object response = input.readObject();
-				return response;
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-		}
-		catch(IOException e){}
-		return null;
-	}
-	*/
+	
 	
 	/**
 	 * Object to recieve from server
@@ -145,25 +120,6 @@ public class Client
 	 * 
 	 * @return Object - the object recieved
 	 */
-	public Object recieveObject() 
-	{
-		try
-		{
-			input=new ObjectInputStream(socket.getInputStream());
-			return input.readObject();
-			
-		}
-		catch(ClassNotFoundException e){} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	
-
-	
-	
 	public static void main(String[] args)
 	{
 		

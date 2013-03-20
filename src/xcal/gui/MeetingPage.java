@@ -16,33 +16,45 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JScrollPane;
+
+import xcal.client.Client;
+import xcal.model.Appointment;
+import xcal.model.Meeting;
 
 public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
+	private Client client = Client.getClient();
 
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MeetingPage frame = new MeetingPage();
+					MeetingPage frame = new MeetingPage(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		//MeetingPage frame = new MeetingPage(null);
+		//frame.setVisible(true);
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public MeetingPage() {
-		setTitle("Meeting ");
+	public MeetingPage(Appointment a) {
+		this.setVisible(true);
+		setTitle("Meeting: " + a.getTitle());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 575);
 		contentPane = new JPanel();
@@ -53,6 +65,9 @@ public class MeetingPage extends JFrame {
 		JButton btnBackToCalendar = new JButton("Back to calendar");
 		btnBackToCalendar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				dispose();
+				
 			}
 		});
 		btnBackToCalendar.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -69,17 +84,19 @@ public class MeetingPage extends JFrame {
 		panel.setBounds(25, 24, 270, 84);
 		contentPane.add(panel);
 		
-		JLabel lblMeatingSubject = new JLabel("Coffie talk meeting");
+		JLabel lblMeatingSubject = new JLabel(a.getTitle());
 		lblMeatingSubject.setFont(new Font("Helvetica", Font.BOLD, 18));
 		lblMeatingSubject.setBounds(42, 136, 228, 44);
 		getContentPane().add(lblMeatingSubject);
 		
-		JLabel lblNewLabel_1 = new JLabel("Time: 12:30 - 14:30");
+		DateFormat dfTime = new SimpleDateFormat("HH:mm");
+		JLabel lblNewLabel_1 = new JLabel("Time: " + dfTime.format(a.getFromTime().toDate()) + " - " + dfTime.format(a.getToTime().toDate()));
 		lblNewLabel_1.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(59, 179, 218, 16);
 		getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Date:  04.April.2013");
+		DateFormat dfDate = new SimpleDateFormat("dd.MM.yyyy");
+		JLabel lblNewLabel_2 = new JLabel("Date:  " + dfDate.format(a.getFromTime().toDate()));
 		lblNewLabel_2.setBounds(59, 198, 132, 16);
 		getContentPane().add(lblNewLabel_2);
 		
@@ -89,6 +106,7 @@ public class MeetingPage extends JFrame {
 		getContentPane().add(lblDescription);
 		
 		JTextPane descriptionPane = new JTextPane();
+		descriptionPane.setText(a.getDescription());
 		descriptionPane.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		descriptionPane.setBounds(52, 296, 377, 120);
 		getContentPane().add(descriptionPane);
@@ -96,7 +114,6 @@ public class MeetingPage extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(25, 464, 166, 55);
-		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -112,7 +129,15 @@ public class MeetingPage extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBounds(213, 464, 250, 55);
-		contentPane.add(panel_2);
+		if(client.getUser().getEmail().equals(a.getLeader().getEmail())){
+			contentPane.add(panel_1);
+			contentPane.add(panel_2);
+		}
+		else{
+			panel_1.setVisible(false);
+			panel_2.setVisible(false);
+		}
+		
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
@@ -128,7 +153,12 @@ public class MeetingPage extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBounds(490, 24, 228, 495);
-		contentPane.add(panel_3);
+		if(a instanceof Meeting){
+			contentPane.add(panel_3);
+		}
+		else{
+			panel_3.setVisible(false);
+		}
 		panel_3.setLayout(null);
 		
 		JLabel lblInvitationStatis = new JLabel("Invitation status");
@@ -213,7 +243,7 @@ public class MeetingPage extends JFrame {
 		lblLocation.setBounds(18, 113, 66, 16);
 		infoPanel.add(lblLocation);
 		
-		JLabel lblNewLabel_9 = new JLabel("New label");
+		JLabel lblNewLabel_9 = new JLabel(a.getLocationName());
 		lblNewLabel_9.setBounds(96, 114, 195, 16);
 		infoPanel.add(lblNewLabel_9);
 		
@@ -223,4 +253,5 @@ public class MeetingPage extends JFrame {
 		contentPane.add(lblNewLabel_7);
 		
 	}
+	
 }

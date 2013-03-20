@@ -31,8 +31,6 @@ public class TimeFieldFilter extends DocumentFilter {
 	
 	@Override
 	public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
-		// TODO Auto-generated method stub
-		System.out.println("hello");
 		super.remove(fb, offset, length);
 	}
 

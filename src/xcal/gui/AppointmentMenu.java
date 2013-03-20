@@ -278,8 +278,8 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		getContentPane().add(busyLabel);
 		
 		pack();
-		addTextFieldListeners();
-		model.setFromTime(DateTime.now());
+		addListeners();
+		model.setFromTime(DateTime.now().plusMinutes(10));
 		model.setToTime(DateTime.now().plusHours(1));
 		
 		
@@ -300,7 +300,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		description.setText(model.getDescription());
 		location.setText(model.getLocationName());
 	}
-	private void addTextFieldListeners(){
+	private void addListeners(){
 		
 		startHour.addFocusListener(new FocusListener() {
 			
@@ -484,8 +484,6 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		DateTimeFormatter format = DateTimeFormat.forPattern("Y.M.d");
-		System.out.println("hllo");
 		String pName = evt.getPropertyName();
 		
 		if(pName.equals(Appointment.PROPERTY_DAY)){
@@ -514,6 +512,8 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		model.removePropertyChangeListener(this);
 		setVisible(false);
 		dispose();
+		RootFrame.clearAll();
+		RootFrame.addPanel(new Mainpage());
 	}
 	
 	
@@ -539,13 +539,8 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			busyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-					
-					
-					
-					int notification = notificationMap.get(notificationBox.getSelectedItem());
-					System.out.println("hello");
 					if(model.validateFields()){
-						System.out.println();
+						int notification = notificationMap.get(notificationBox.getSelectedItem());
 						DateTime startTime = model.getFromTime();
 						DateTime endTime = model.getToTime();
 						String title = model.getTitle();

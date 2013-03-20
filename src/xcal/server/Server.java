@@ -23,11 +23,12 @@ import java.util.Vector;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.core.Settings;
+import xcal.server.query.DbConnection;
 import xcal.server.query.LocationQ;
 
 
 
-public class Server 
+public class Server
 {
 	private ServerSocket socket;
 	//private Socket clients;
@@ -42,16 +43,11 @@ public class Server
 	public Server()
 	{
 		
-		clients=new Vector<ClientThread>();
-		notify=new NotifyThread(clients);
-		notify.start();
-		
-		size=0;//hold how many clients added
-		//clients=null;
-		
 		try
 		{
 			socket=new ServerSocket(Settings.port);//start listening on port
+			DbConnection connection=new DbConnection(Settings.db_host,Settings.db_user,Settings.db_pw);
+			connection.connect();
 		}
 		catch(IOException e)//exit if not succeeded
 		{
@@ -61,20 +57,17 @@ public class Server
 		}
 	}
 	
-	public int getSize(){return size;}
+	private int getSize(){
+		return size;
+	}
 	
 	public boolean acceptClient()//accept clients
 	{
-		//clients=null;
-		
+
 		try
 		{
-			
 			Socket client=socket.accept();//wait for connection
-			clients.add(new ClientThread(client,size));
-			clients.get(size).start();
-			++size;
-			
+			new ClientThread(client,size).run();
 			return true;
 		}
 		catch(IOException e)
@@ -85,11 +78,9 @@ public class Server
 		
 		return false;
 	}
-	
-	
-	
+
 	public Object recieveObject(Wrapper o){
-		ObjectManagers om = new ObjectManagers();
+		ObjectManager om = new ObjectManager();
 		Object obj = om.manage(o);
 		
 		
@@ -98,55 +89,42 @@ public class Server
 		
 	}
 	
-	
-	//write to client connected
-	/*public void writeClient(String text,int index) 
-	{
-		clients.get(index).WriteToClient(text);
-		
-	}
-	
-	//get input from client connected
-	public String readClient(int index)
-	{
-		return clients.get(index).readFromClient();
-	}*/
-	
-	public void disconnect() throws IOException
+	private void disconnect() throws IOException
 	{
 		//clients.close();
 		print.close();
 	}
 	
+	public void startListening(){
+		Thread listeningThread = new Thread(){
+			
+			@Override
+			public void run() {
+				super.run();
+				while (true) 
+				{		
+					if(acceptClient())
+						System.out.println("client connected");
+					else
+						System.out.println("Failed acception client. Something may be very wrong.");
+				}
+			}
+		};
+		listeningThread.start();
+		
+	}
 	
 	public static void main(String args []) throws IOException
 	{
 		//ObjectOutputStream test;
 		
 		Server server=new Server();
+		server.startListening();
 		
 		
-		while (true) 
-		{
-			
-			if(server.acceptClient())
-			{
-				
-				System.out.println("CLient connected");
-				
-				//server.writeClient("Welcome!",server.getSize()-1);
-				//System.out.println(server.readClient(server.getSize()-1));
-				//System.out.println("client accepted");
-				
-			}
-			else
-				System.out.println("client NOT accepted");
-			
-			
-			
-		
-		}
 	}
+
+	
 	
 
 	

@@ -24,6 +24,7 @@ import java.awt.Color;
 //import java.lang.ProcessBuilder.Redirect;
 
 import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -92,7 +93,7 @@ public class Login extends JPanel {
 		add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBackground(UIManager.getColor("InternalFrame.background"));
 		panel.setBounds(299, 289, 369, 154);
 		add(panel);
@@ -132,12 +133,17 @@ public class Login extends JPanel {
 					if(response.getFlag() != Status.SUCCESS){
 						System.out.println("Wrong username/password");
 						errorLabel.setVisible(true);		
+						errorLabel.setText("Wrong username/password");
 					}
 					else
 					{
 						success = true;
 						
 					}
+					
+				}else{
+					errorLabel.setVisible(true);
+					errorLabel.setText("Please enter email and password");
 					
 				}
 				return null;
@@ -146,11 +152,13 @@ public class Login extends JPanel {
 			public void done(){
 				bussyLabel.setBusy(false);
 				bussyLabel.setVisible(false);
+				System.out.println("hello");
 				if(success){
 					RootFrame.clearAll();
+					client.setUser((Employee)response.getContent());
+					
 					RootFrame.addPanel(new Mainpage());
 					System.out.println(response.getContent());
-					client.setUser((Employee)response.getContent());
 					System.out.println("Welcome" + ((Employee)response.getContent()).getName());
 				}
 				

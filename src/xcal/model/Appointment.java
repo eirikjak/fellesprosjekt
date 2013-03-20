@@ -29,6 +29,7 @@ public class Appointment implements Serializable
 		public static final String PROPERTY_LOCATION = "location";
 		public static final String PROPERTY_NOTIFICATION = "notification";
 		public static final String PROPERTY_DAY = "day";
+		public static final String PROPERTY_LEADER = "leader";
 		
         private int appId;
         private PropertyChangeSupport pcs;
@@ -59,6 +60,7 @@ public class Appointment implements Serializable
         }
         public Appointment(DateTime start,DateTime end,String title,String description,Employee leader)
         {
+        	
         		this(start,end,title,description,leader,null);
  
         }
@@ -112,7 +114,7 @@ public class Appointment implements Serializable
         		newTime = new DateTime(from_time.getYear(), from_time.getMonthOfYear(), from_time.getDayOfMonth(), 0, from_time.getMinuteOfHour());
         	}
         	from_time = newTime;
-        	pcs.firePropertyChange(PROPERTY_FROM_HOUR, old, from_time.getHourOfDay());
+        	pcs.firePropertyChange(PROPERTY_FROM_HOUR, null, from_time.getHourOfDay());
         	
         }
         public void setFromMinute(String minute){
@@ -131,7 +133,7 @@ public class Appointment implements Serializable
         		newTime = new DateTime(from_time.getYear(), from_time.getMonthOfYear(), from_time.getDayOfMonth(), from_time.getHourOfDay(), 0);
         	}
         	from_time = newTime;
-        	pcs.firePropertyChange(PROPERTY_FROM_MINUTE, old, from_time.getMinuteOfHour());
+        	pcs.firePropertyChange(PROPERTY_FROM_MINUTE, null, from_time.getMinuteOfHour());
         	
         }
         public void setToTime(DateTime to){
@@ -140,7 +142,7 @@ public class Appointment implements Serializable
         	setToMinute(to.getMinuteOfHour());
         	to_time=to;
         }
-        public void setToTime(Timestamp to){ setToTime(to);}
+        public void setToTime(Timestamp to){ setToTime(new DateTime(to));}
         public void setToHour(String hour){
         	try{
         		setToHour(Integer.parseInt(hour));
@@ -157,7 +159,7 @@ public class Appointment implements Serializable
         		newTime = new DateTime(to_time.getYear(), to_time.getMonthOfYear(), to_time.getDayOfMonth(), 0, to_time.getMinuteOfHour());
         	}
         	to_time = newTime;
-        	pcs.firePropertyChange(PROPERTY_TO_HOUR, old, to_time.getHourOfDay());
+        	pcs.firePropertyChange(PROPERTY_TO_HOUR, null, to_time.getHourOfDay());
         }
         
         public void setToMinute(String minute){
@@ -174,11 +176,10 @@ public class Appointment implements Serializable
         	try{
         		newTime = new DateTime(to_time.getYear(), to_time.getMonthOfYear(), to_time.getDayOfMonth(), to_time.getHourOfDay(), minute);
         	}catch(IllegalFieldValueException e){
-        		System.out.println(minute);
         		newTime = new DateTime(to_time.getYear(), to_time.getMonthOfYear(), to_time.getDayOfMonth(), to_time.getHourOfDay(), 0);
         	}
         	to_time = newTime;
-        	pcs.firePropertyChange(PROPERTY_TO_MINUTE, old, to_time.getMinuteOfHour());
+        	pcs.firePropertyChange(PROPERTY_TO_MINUTE, null, to_time.getMinuteOfHour());
         }
         	
         
@@ -198,6 +199,10 @@ public class Appointment implements Serializable
         public void setTitle(String title){
         	pcs.firePropertyChange(PROPERTY_TITLE, this.title, title);
         	this.title = title;
+        }
+        public void setLeader(Employee leader){
+        	pcs.firePropertyChange(PROPERTY_LEADER, this.title, title);
+        	this.leader = leader;
         }
         public void setAppId(int id){this.appId = id;}
  

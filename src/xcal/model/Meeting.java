@@ -8,53 +8,88 @@
 
 package xcal.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Vector;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class Meeting extends Appointment implements Serializable
 {
-	private Vector<Employee> participants;
-	private Employee manager;
+	public static final String PROPERTY_ROOM = "room";
+	private ArrayList<Employee> participants;
 	private Room room;
+	private PropertyChangeSupport pcs;
 	
 
-
-
+	
 	public Meeting(){
+		
+		this(new DateTime(),new DateTime(),"", "",new Employee(),new ArrayList<Employee>(),new Room());
+		
 	}
 	
+	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader,Room room){
+		this(new DateTime(),new DateTime(),"", "",new Employee(),new ArrayList<Employee>(),new Room());
+		
+		
+	}
+	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader, ArrayList<Employee> participants ,Room room){
+		super(start,end,title,description,leader);
+		this.participants = participants;
+		this.room = room;
+		pcs = new PropertyChangeSupport(this);
+	}
 
 	
-	public void removeParticipant(Employee e)
-	{
-		for(int i=0;i<participants.size();++i)//loop thru vector to find invited employee
-			if(participants.get(i)==e)
-				participants.remove(i);
+	public void setParticipants(ArrayList<Employee> participants){
+		this.participants = participants;
 	}
 	
-	public void addParticipant(Employee e)
-	{
-		participants.add(e);
+	public ArrayList<Employee> getParticipants(){
+		return participants;
 	}
 	
-	public Vector<Employee> getParticipants(){return participants;}
-	public Employee getParticipant(int index){return participants.get(index);}
-	
-	public Employee getManager(){return manager;}
-	public void setManager(Employee e){manager=e;}
-	
-	public Room getRoom(){return room;}
-	public void setRoom(Room r){room=r;}
-	
-	/**send invite sends invite to all participants
-	 * 
-	 * write to db that invite sent to employee
-	 */
-	private void sendInvite()
-	{
+	@Override
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+		super.addPropertyChangeListener(listener);
 		
+	};
 	
+	public Employee getParticipant(int index){return participants.get(index);}
+	public Room getRoom(){
+		return room;
+		}
+	public void setRoom(Room r){
+		pcs.firePropertyChange(PROPERTY_ROOM, this.room, r);
+		this.room=r;
+		
+		
 	}
+	
+	public boolean validateParticipants(){
+		
+		return participants.size() > 0;
+	}
+	
+	@Override
+	public boolean validateLocation() {
+		return room != null;
+	};
+	@Override
+	public boolean validateFields() {
+		return super.validateFields() && validateParticipants();
+	};
+	
+	@Override
+	 public String toString(){
+		System.out.println("tostring");
+         return "" + getFromTime() + " " + getToTime() + " " + getTitle() + " " + getDescription()+ " " + getLeader() + " " + room;
+ }
 	
 	
 }
