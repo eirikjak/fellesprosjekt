@@ -91,7 +91,7 @@ public class AppointmentsQ
 		//System.out.println(df.format(fromDate) + "FFJJFJ");
 		synchronized (connection) {
 			String sqlstr = "SELECT * "+
-                    "FROM Appointment A "+
+                    "FROM Appointment A "+ "INNER JOIN Person P  ON (A.leader = P.email)" +
                     "WHERE A.id IN "+
                             "(SELECT id "+
                             "FROM Appointment "+
@@ -116,7 +116,7 @@ public class AppointmentsQ
 						//app.setLocation(result.getString("Location"));
 						app.setTitle(resultSet.getString("title"));
 		  			   	app.setDescription(resultSet.getString("description"));
-		  			   	Employee l = EmployeeQ.selectPersonWithEmail(resultSet.getString("leader"));
+		  			   	Employee l = new Employee(resultSet.getString("name"), resultSet.getString("email"),"");
 		  			   	app.setLeader(l);
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
 		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
@@ -127,7 +127,7 @@ public class AppointmentsQ
 						Appointment meeting=new Meeting();
 						meeting.setTitle(resultSet.getString("title"));
 						meeting.setDescription(resultSet.getString("description"));
-						Employee l = EmployeeQ.selectPersonWithEmail(resultSet.getString("leader"));
+						Employee l = new Employee(resultSet.getString("name"), resultSet.getString("email"),"");
 		  			   	meeting.setLeader(l);
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));
