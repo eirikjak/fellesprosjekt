@@ -1,11 +1,13 @@
 package xcal.server.managers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Employee;
+import xcal.model.Invite;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Notification;
@@ -36,7 +38,7 @@ public class MeetingManager {
 		return null;
 	}
 	
-	private static Wrapper create(Meeting meeting){
+	private static Wrapper create(Meeting meeting) throws SQLException{
 		System.out.println("creating room");
 		Room room = RoomQ.selectRoom(meeting.getRoom().getID());
 		if(room == null){
@@ -56,6 +58,8 @@ public class MeetingManager {
 						error = true;
 						break;
 					}
+					Invite invited = NotificationQ.createInvite(met, dbEmp);
+					
 					Notification notEmp = NotificationQ.createNotification(met, dbEmp);
 					if(notEmp == null){
 						error = true;
