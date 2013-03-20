@@ -144,6 +144,9 @@ public class MeetingPage extends JFrame {
 		if(a instanceof Meeting){
 			contentPane.add(panel_3);
 		}
+		else{
+			panel_3.setVisible(false);
+		}
 		panel_3.setLayout(null);
 		
 		JLabel lblInvitationStatis = new JLabel("Invitation status");
