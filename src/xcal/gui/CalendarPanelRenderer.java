@@ -22,7 +22,8 @@ import xcal.model.Meeting;
 
 public class CalendarPanelRenderer implements ListCellRenderer {
 
-	private ImageIcon appointment = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
+	private ImageIcon appointmentIcon = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
+	private ImageIcon meetingIcon = new ImageIcon(getClass().getResource("/images/1363749865_stock_new-meeting.png"));
 	
 	@Override
 	public Component getListCellRendererComponent(JList arg0, Object arg1,
@@ -44,7 +45,7 @@ public class CalendarPanelRenderer implements ListCellRenderer {
 			//area.setWrapStyleWord( true );
 			if(a instanceof Meeting){
 				l.setText("<HTML>" + df.format(date) +"-" + df.format(dateTo) +"<BR> Title: " + a.getTitle()+"<BR>Descr: " + a.getDescription()+"</HTML>");
-				l.setIcon(appointment);
+				l.setIcon(meetingIcon);
 				l.setAlignmentX(JLabel.LEFT);
 				
 				/*area.setText(df.format(date) + " - Title:" + a.getTitle() +"\n" +"Descr: " +a.getDescription());
@@ -53,6 +54,11 @@ public class CalendarPanelRenderer implements ListCellRenderer {
 				area.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 				area.setAlignmentX(JLabel.LEFT_ALIGNMENT);*/
 			}
+			/*else {
+				l.setText("<HTML>" + df.format(date) +"-" + df.format(dateTo) +"<BR> Title: " + a.getTitle()+"<BR>Descr: " + a.getDescription()+"</HTML>");
+				l.setIcon(appointmentIcon);
+				l.setAlignmentX(JLabel.LEFT);
+			}*/
 		}
 		
 		if(arg3){
