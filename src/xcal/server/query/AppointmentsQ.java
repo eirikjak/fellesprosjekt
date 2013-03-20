@@ -116,7 +116,8 @@ public class AppointmentsQ
 						//app.setLocation(result.getString("Location"));
 						app.setTitle(resultSet.getString("title"));
 		  			   	app.setDescription(resultSet.getString("description"));
-		  			   	//app.setName(result.getString("name"));
+		  			   	Employee l = EmployeeQ.selectPersonWithEmail(resultSet.getString("leader"));
+		  			   	app.setLeader(l);
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
 		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
 		  			   	app.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
@@ -126,6 +127,8 @@ public class AppointmentsQ
 						Appointment meeting=new Meeting();
 						meeting.setTitle(resultSet.getString("title"));
 						meeting.setDescription(resultSet.getString("description"));
+						Employee l = EmployeeQ.selectPersonWithEmail(resultSet.getString("leader"));
+		  			   	meeting.setLeader(l);
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));
 						Location loc = new Location(LocationQ.getRoomName(Integer.valueOf(resultSet.getString("room"))),Integer.valueOf(resultSet.getString("room")));
