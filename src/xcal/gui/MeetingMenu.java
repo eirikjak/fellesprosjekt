@@ -30,6 +30,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import org.jdesktop.swingx.JXDatePicker;
 import org.joda.time.DateTime;
@@ -42,6 +43,7 @@ import xcal.model.Employee;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Notification;
+import xcal.model.ParticipantSelectorModel;
 import xcal.model.Room;
 
 import javax.swing.JList;
@@ -58,6 +60,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.jdesktop.swingx.autocomplete.ObjectToStringConverter;
 
 import com.mysql.jdbc.exceptions.DeadlockTimeoutRollbackMarker;
+import javax.swing.UIManager;
 
 public class MeetingMenu extends JFrame implements PropertyChangeListener {
 
@@ -76,14 +79,8 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	private Client client;
 	private Meeting model;
 	private JXBusyLabel roomBussyLabel ;
-	private JXBusyLabel personBussyLabel;
-	private JList<Employee> personListLeft;
-	private DefaultListModel<Employee> personListModelLeft;
-	private DefaultListModel<Employee> personListModelRight;
-	private JList<Employee> personListRight;
-	private JTextField employeeSearch;
-	private JButton addButton;
-	private JButton removeButton;
+	private ParticipantSelector participantSelector;
+	private JXBusyLabel submitBussyLabel;
 	/**
 	 * Launch the application.
 	 */
@@ -170,10 +167,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		lblNavn.setBounds(70, 48, 92, 14);
 		getContentPane().add(lblNavn);
 		
-		personBussyLabel = new JXBusyLabel();
-		personBussyLabel.setBounds(256, 478, 26, 26);
-		personBussyLabel.setVisible(false);
-		getContentPane().add(personBussyLabel);
+		
 		
 		JLabel lblTidspunkt = new JLabel("Time:");
 		lblTidspunkt.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -257,35 +251,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		lblNewLabel_5.setBounds(463, 87, 40, 42);
 		getContentPane().add(lblNewLabel_5);
 		
-		addButton = new JButton("");
-		addButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow.png")));
-		addButton.setBounds(379, 443, 68, 35);
-		getContentPane().add(addButton);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(465, 427, 185, 133);
-		getContentPane().add(scrollPane_1);
-		
-		personListModelRight = new DefaultListModel<Employee>();
-		personListRight = new JList<Employee>(personListModelRight);
-		personListRight.setCellRenderer(new PersonListCellRenderer());
-		scrollPane_1.setViewportView(personListRight);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(182, 427, 178, 133);
-		getContentPane().add(scrollPane);
-		
-		personListModelLeft = new DefaultListModel<Employee>();
-		personListLeft = new JList<Employee>(personListModelLeft);
-		personListLeft.setCellRenderer(new PersonListCellRenderer());
-		scrollPane.setViewportView(personListLeft);
-		
-		
-		
-		removeButton = new JButton("");
-		removeButton.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363370401_arrow copy.png")));
-		removeButton.setBounds(379, 499, 68, 35);
-		getContentPane().add(removeButton);
 		
 		locationBox = new JComboBox(new String[]{"Please select time and date"});
 		locationBox.setBounds(180, 156, 188, 31);
@@ -300,46 +266,21 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		
 		ButtonGroup buttonGrioup = new ButtonGroup();
 		
-		JToggleButton tglbtnPersons = new JToggleButton("Persons");
-		tglbtnPersons.setBounds(176, 365, 100, 31);
-		getContentPane().add(tglbtnPersons);
-		buttonGrioup.add(tglbtnPersons);
-		tglbtnPersons.setSelected(true);
-		
-		JToggleButton tglbtnGroups = new JToggleButton("Groups");
-		tglbtnGroups.setBounds(263, 365, 100, 31);
-		getContentPane().add(tglbtnGroups);
-		buttonGrioup.add(tglbtnGroups);
-		
 		JLabel lblNewLabel_7 = new JLabel("");
 		lblNewLabel_7.setIcon(new ImageIcon(MeetingMenu.class.getResource("/images/1363371142_Person_Undefined_Male_Light.png")));
 		lblNewLabel_7.setBounds(73, 355, 32, 38);
 		getContentPane().add(lblNewLabel_7);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel.setBounds(172, 33, 489, 98);
 		getContentPane().add(panel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_1.setBounds(172, 211, 489, 143);
 		getContentPane().add(panel_1);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(662, 529, -493, -165);
-		getContentPane().add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(172, 362, 489, 205);
-		getContentPane().add(panel_3);
-		panel_3.setLayout(null);
-		
-		employeeSearch = new JTextField();
-		employeeSearch.setBounds(10, 36, 178, 25);
-		panel_3.add(employeeSearch);
-		employeeSearch.setColumns(10);
 		errorLabel = new JLabel("");
 		errorLabel.setFont(new Font("Dialog", Font.BOLD, 13));
 		errorLabel.setForeground(Color.RED);
@@ -352,13 +293,23 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		roomBussyLabel.setVisible(false);
 		getContentPane().add(roomBussyLabel);
 		
+		participantSelector = new ParticipantSelector();
+		participantSelector.setBounds(182, 369, 502, 219);
+		getContentPane().add(participantSelector);
+		
+		submitBussyLabel = new JXBusyLabel();
+		submitBussyLabel.setBounds(363, 664, 26, 26);
+		getContentPane().add(submitBussyLabel);
+		submitBussyLabel.setVisible(false);
+		
 		pack();
 		addListeners();
 		model.addPropertyChangeListener(this);
+		model.setFromTime(DateTime.now().plusHours(1));
+		model.setToTime(DateTime.now().plusHours(2));
 		
-		updatePersonList();
 		
-		AutoCompleteDecorator.decorate(personListLeft, employeeSearch, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);
+		
 		
 	}
 	
@@ -520,24 +471,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 			}
 		});
 		
-		addButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {		
-				if(personListLeft.getSelectedIndex() > -1){
-					model.addParticipant(personListModelLeft.get(personListLeft.getSelectedIndex()));
-				}
-				
-			}
-		});
 		
-		removeButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(personListRight.getSelectedIndex() > -1)
-					model.removeParticipant(personListModelRight.getElementAt(personListRight.getSelectedIndex()));
-				
-			}
-		});
 		
 		locationBox.addActionListener(new ActionListener() {
 			
@@ -550,82 +484,25 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	}
 	
 	
-	private void insertSorted(JList<Employee> list, Employee emp){
-		
-		for (int i = 0; i< list.getModel().getSize(); i++){
-			if(emp.getName().compareTo(list.getModel().getElementAt(i).getName()) <= 0){
-				((DefaultListModel<Employee>) list.getModel()).add(i, emp);
-				return;
-			}
-		}
-		
-		((DefaultListModel<Employee>) list.getModel()).addElement(emp);
-	}
 	
 	
-	private class PersonListCellRenderer implements ListCellRenderer<Employee>{
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
-		
-		@Override
-		public Component getListCellRendererComponent(JList<? extends Employee> list, Employee value, int index, boolean isSelected, boolean cellHasFocus) {
-			
-			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-			
-			label.setText(value.getName());
-			return label;
-		}
-		
-	}
-	private void updatePersonList(){
-		
-		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
-			private ArrayList<Employee> employees;
-			@Override
-			protected Void doInBackground() throws Exception {
-				personBussyLabel.setVisible(true);
-				personBussyLabel.setBusy(true);
-				Employee emp = new Employee();
-				Wrapper response = client.sendObject(emp, Status.GET_ALL);
-				if(response.getContent() != null){
-					employees = (ArrayList<Employee>) response.getContent();
-				}
-				
-				return null;
-			}
-			
-			@Override
-			protected void done() {
-				for(Employee employee: employees){
-					personListModelLeft.addElement(employee);
-				}
-				personBussyLabel.setBusy(false);
-				personBussyLabel.setVisible(false);
-				super.done();
-			}
-		};
-		
-		worker.execute();
-		
-		
-	}
+	
+
+	
 	private void updateRoomsList(){
 		
 		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+			private Room[] rooms;
 			@Override
 			protected Void doInBackground() throws Exception {
 				roomBussyLabel.setVisible(true);
 				roomBussyLabel.setBusy(true);
 				Meeting meeting = new Meeting();
-				meeting.setFromTime(new DateTime(datePicker.getDate()));
-				meeting.setToTime(new DateTime(datePicker.getDate()));
-				
+				meeting.setFromTime(model.getFromTime());
+				meeting.setToTime(model.getToTime());
 				Wrapper response = client.sendObject(meeting, Status.GET_AVAILABLE_ROOMS);
-				Room[] rooms = (Room[]) response.getContent();
-				locationBox.removeAllItems();
-				Arrays.sort(rooms, new RoomComparator());
-				for (int i = 0; i <rooms.length; i++){
-					locationBox.addItem(rooms[i]);
-				}
+				rooms = (Room[]) response.getContent();
+				
 				return null;
 			}
 			
@@ -633,6 +510,15 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 			protected void done() {
 				roomBussyLabel.setBusy(false);
 				roomBussyLabel.setVisible(false);
+				locationBox.removeAllItems();
+				Arrays.sort(rooms, new RoomComparator());
+				for (int i = 0; i <rooms.length; i++){
+					locationBox.addItem(rooms[i]);
+				}
+				
+				if(rooms.length > 0)
+					model.setRoom(rooms[0]);
+				
 				super.done();
 			}
 		};
@@ -679,14 +565,6 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		}else if (pName.equals(Meeting.PROPERTY_ROOM)){
 			locationBox.setSelectedItem((Room)evt.getNewValue());
 			
-		}else if (pName.equals(Meeting.PROPERTY_EMPLOYEES_ADD)){
-				insertSorted(personListRight, (Employee)evt.getNewValue());
-				personListModelLeft.removeElement((Employee)evt.getNewValue());
-			
-			
-		}else if (pName.equals(Meeting.PROPERTY_EMPLOYEES_REMOVE)){
-				insertSorted(personListLeft, (Employee)evt.getNewValue());
-				personListModelRight.removeElement((Employee)evt.getNewValue());
 		}
 		
 	}
@@ -718,42 +596,52 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
-			
+			submitBussyLabel.setVisible(true);
+			submitBussyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-				
-					
-					/*
+					model.setParticipants(participantSelector.getModel().getParticipantsAndGroups());
 					if(model.validateFields()){
+						System.out.println("save");
 						int notification = notificationMap.get(notificationBox.getSelectedItem());
+						
 						DateTime startTime = model.getFromTime();
 						DateTime endTime = model.getToTime();
 						String title = model.getTitle();
 						String desc = model.getDescription();
-						String loc = model.getLocationName();
-						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
-						Notification notificationObj = new Notification(app,Client.getClient().getUser());
+						Room room = model.getRoom();
+						System.out.println("helooo");
+						
+						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(),model.getParticipants(), room);
+						Notification notificationObj = new Notification(meeting,Client.getClient().getUser());
 						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-						app.setNotification(notificationObj);
-						System.out.println(app);
-						Wrapper response = client.sendObject(app, Status.CREATE);
+						meeting.setNotification(notificationObj);
+						
+						
+						System.out.println(meeting.getParticipants());
+						Wrapper response = client.sendObject(meeting, Status.CREATE);
+						
 						
 						if(response.getFlag() != Status.SUCCESS){
 							errorLabel.setText("Error on appointment creation ");
 							errorLabel.setVisible(true);
+							submitBussyLabel.setVisible(false);
+							submitBussyLabel.setBusy(false);
 						}else{
 							if(response.getFlag() == Status.SUCCESS){
 								Close();
 							}
 						}
+						
 						}else{
 							errorLabel.setText("One or more invalid fields");
 							errorLabel.setVisible(true);
 							
 						}
-						*/
+						
 						return null;
 				}
+				
 
 			};
 			worker.execute();

@@ -114,6 +114,7 @@ public class AppointmentsQ
 		  		   	{
 						Appointment app=new Appointment();
 						//app.setLocation(result.getString("Location"));
+						app.setTitle(resultSet.getString("title"));
 		  			   	app.setDescription(resultSet.getString("description"));
 		  			   	//app.setName(result.getString("name"));
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
@@ -122,6 +123,7 @@ public class AppointmentsQ
 		  		   }
 					else{
 						Appointment meeting=new Meeting();
+						meeting.setTitle(resultSet.getString("title"));
 						meeting.setDescription(resultSet.getString("description"));
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));

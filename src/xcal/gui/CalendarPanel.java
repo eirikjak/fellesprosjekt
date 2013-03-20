@@ -42,6 +42,7 @@ public class CalendarPanel extends JPanel {
 	private Calendar cal = Calendar.getInstance();
 	private final static int currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
 	private int shownWeek = cal.get(Calendar.WEEK_OF_YEAR);
+	private int shownYear = cal.get(Calendar.YEAR);
 	
 	//Labels for dates
 	private JLabel mondayDate = new JLabel();
@@ -276,6 +277,7 @@ public class CalendarPanel extends JPanel {
 			DateTime cal = new DateTime();
 			cal = cal.withWeekOfWeekyear(shownWeek);
 			cal = cal.withDayOfWeek(1);
+			cal = cal.withYear(shownYear);
 
 			result = new ArrayList<ArrayList<Appointment>>();
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
@@ -290,8 +292,7 @@ public class CalendarPanel extends JPanel {
 				week[i].setText(df.format(c) + month[monthNum-1]);
 				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
 				Object obj = client.sendObject(app, Status.TD_APP).getContent();
-				
-				
+
 				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
 				cal = cal.plusDays(1);
 			}
@@ -304,8 +305,7 @@ public class CalendarPanel extends JPanel {
 				ArrayList<Appointment> day = result.get(i);
 				if(day != null){
 					for(Appointment app: day){
-						System.out.println(app.getFromTime());
-						weekAppointments[i].addElement(cellDateFormatter.print(app.getFromTime()));
+						weekAppointments[i].addElement(app);
 					}
 				}
 			}
@@ -317,7 +317,56 @@ public class CalendarPanel extends JPanel {
 	
 	class NextWeekWorker extends SwingWorker{
 
+		private ArrayList<ArrayList<Appointment>> result;
 		@Override
+		protected Void doInBackground() throws Exception {
+			/*
+			 * Formatting the dates of days labels
+			 */
+
+			//ArrayList<Appointment> rcvd = null;
+
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			
+			DateTime cal = new DateTime();
+			cal = cal.withWeekOfWeekyear(shownWeek);
+			cal = cal.withDayOfWeek(1);
+			cal = cal.withYear(shownYear);
+
+			result = new ArrayList<ArrayList<Appointment>>();
+			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
+			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
+			
+			for (int i=0; i < 7; i++){
+				Date c = cal.toDate();
+				DateTime dtFrom = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),00,00,00);
+				DateTime dtTo = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),23,59,59);
+				int monthNum = Integer.valueOf(m.format(c));
+				weekAppointments[i].clear();
+				week[i].setText(df.format(c) + month[monthNum-1]);
+				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				Object obj = client.sendObject(app, Status.TD_APP).getContent();
+
+				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+				cal = cal.plusDays(1);
+			}
+			return null;
+		}
+		@Override
+		protected void done() {
+			DateTimeFormatter cellDateFormatter = DateTimeFormat.forPattern("Y-M-d H:m");
+			for(int i = 0; i < 7; i++){
+				ArrayList<Appointment> day = result.get(i);
+				if(day != null){
+					for(Appointment app: day){
+						weekAppointments[i].addElement(app);
+					}
+				}
+			}
+			super.done();
+		}
+		/*
 		protected Object doInBackground() throws Exception {
 			//Select and show date
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -333,6 +382,60 @@ public class CalendarPanel extends JPanel {
 			cal.add(Calendar.DATE, -7);
 			return null;
 			
+		}*/
+		
+	}
+	
+	class WeekWorker extends SwingWorker{
+
+		private ArrayList<ArrayList<Appointment>> result;
+		@Override
+		protected Void doInBackground() throws Exception {
+			/*
+			 * Formatting the dates of days labels
+			 */
+
+			//ArrayList<Appointment> rcvd = null;
+
+			DateFormat df = new SimpleDateFormat("dd.");
+			DateFormat m = new SimpleDateFormat("MM");
+			
+			DateTime cal = new DateTime();
+			cal = cal.withWeekOfWeekyear(shownWeek);
+			cal = cal.withDayOfWeek(1);
+			cal = cal.withYear(shownYear);
+
+			result = new ArrayList<ArrayList<Appointment>>();
+			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
+			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
+			
+			for (int i=0; i < 7; i++){
+				Date c = cal.toDate();
+				DateTime dtFrom = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),00,00,00);
+				DateTime dtTo = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),23,59,59);
+				int monthNum = Integer.valueOf(m.format(c));
+				weekAppointments[i].clear();
+				week[i].setText(df.format(c) + month[monthNum-1]);
+				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				Object obj = client.sendObject(app, Status.TD_APP).getContent();
+
+				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+				cal = cal.plusDays(1);
+			}
+			return null;
+		}
+		@Override
+		protected void done() {
+			DateTimeFormatter cellDateFormatter = DateTimeFormat.forPattern("Y-M-d H:m");
+			for(int i = 0; i < 7; i++){
+				ArrayList<Appointment> day = result.get(i);
+				if(day != null){
+					for(Appointment app: day){
+						weekAppointments[i].addElement(app);
+					}
+				}
+			}
+			super.done();
 		}
 		
 	}
@@ -341,9 +444,15 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			shownWeek = shownWeek -1;
-			//SwingWorker ws = new WeekWorker();
-			//ws.execute();
+			if(shownWeek>1){
+				shownWeek = shownWeek -1;
+			}
+			else{
+				shownYear --;
+				shownWeek = 52;
+			}
+			SwingWorker ws = new WeekWorker();
+			ws.execute();
 		}
 			
 	}
@@ -352,6 +461,13 @@ public class CalendarPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(shownWeek <= 51){
+				shownWeek = shownWeek +1;
+			}
+			else{
+				shownWeek = 1;
+				shownYear ++;
+			}
 			System.out.println("btnpressed");
 			SwingWorker nws = new NextWeekWorker();
 			nws.execute();

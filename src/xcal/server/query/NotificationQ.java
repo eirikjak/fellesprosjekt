@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.Appointment;
 import xcal.model.Employee;
+import xcal.model.Meeting;
 import xcal.model.Notification;
  
 public class NotificationQ
@@ -24,9 +25,6 @@ public class NotificationQ
 	public NotificationQ(DbConnection connection) 
 	{
 		this.connection=connection;
-		appointments_query=new AppointmentsQ(this.connection);
-		employee_query=new EmployeeQ(this.connection);
-
 	}
 
 	
@@ -35,7 +33,7 @@ public class NotificationQ
 		synchronized (connection) {
 			try {
 			DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
-			String query = "INSERT INTO Notification (app_id,person,notifiedAt) VALUES('" + app.getAppId() + "'," + "'" + app.getLeader().getName() +  "'," + "'" + format.print(app.getNotification().getNotificationTime()) + "')";
+			String query = "INSERT INTO Notification (app_id,person,notifiedAt) VALUES('" + app.getAppId() + "'," + "'" + app.getLeader().getEmail()+  "'," + "'" + format.print(app.getNotification().getNotificationTime()) + "')";
 			Statement stat = connection.getConnection().createStatement();
 			stat.execute(query);
 			
@@ -50,6 +48,36 @@ public class NotificationQ
 		
 	}
 	
+	public static Notification createNotification(Meeting meeting, Employee employee){
+		synchronized (connection) {
+			try {
+			DateTimeFormatter format = DateTimeFormat.forPattern("Y-M-d H:m:s");
+			String query = "INSERT INTO Notification (app_id,person,notifiedAt) VALUES('" + meeting.getAppId() + "'," + "'" + employee.getEmail()+  "'," + "'" + format.print(meeting.getNotification().getNotificationTime()) + "')";
+			Statement stat = connection.getConnection().createStatement();
+			stat.execute(query);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+				
+			}
+			
+		}
+		return new Notification(meeting, employee);
+	}
+	
+	public static void deleteNotification(String email, int appId){
+		synchronized (connection) {
+			try {
+				String query = "DELETE FROM Notification WHERE person ='" + email +"' + AND app_id = '" +appId + "'";
+				Statement stat = connection.getConnection().createStatement();
+				stat.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
 	
 	/**
 	 * check if any notifications need to be triggered
