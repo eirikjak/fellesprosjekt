@@ -69,7 +69,10 @@ public class MeetingManager {
 						break;
 					}
 					Invite invited = NotificationQ.createInvite(met, dbEmp);
-					
+					if(invited == null){
+						error = true;
+						break;
+					}
 					Notification notEmp = NotificationQ.createNotification(met, dbEmp);
 					if(notEmp == null){
 						error = true;

@@ -48,19 +48,36 @@ public class NotificationQ
 		return new Notification(app, app.getLeader());
 		
 	}
-	public static Invite deleteInvite (String email, int appId) throws SQLException{
+	public static Invite deleteInvite (Meeting meeting, Employee employee){
 		synchronized (connection) {
-			String query = "DELETE FROM Invites WHERE person ='" + email +"' + AND app_id = '" +appId + "'";
-			Statement stat = connection.getConnection().createStatement();
-			stat.execute(query);
+			String query = "DELETE FROM Invites WHERE person ='" +employee.getEmail() +"' + AND app_id = '" +meeting.getAppId() + "'";
+			Statement stat = null;
+			try {
+				stat = connection.getConnection().createStatement();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				stat.execute(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return null;
 			
 		}
 	}
-	public static Invite createInvite (Meeting meeting, Employee employee) throws SQLException{
+	public static Invite createInvite (Meeting meeting, Employee employee){
 		synchronized (connection) {
 			String query = "INSERT INTO Invites (app_id,person) VALUES('" + meeting.getAppId() + "'," + "'" + employee.getEmail()+ "')";
-			Statement stat = connection.getConnection().createStatement();
+			Statement stat = null;
+			try {
+				stat = connection.getConnection().createStatement();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				stat.execute(query);
 			} catch (SQLException e) {
