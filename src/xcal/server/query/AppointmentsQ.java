@@ -110,7 +110,7 @@ public class AppointmentsQ
 			//	System.out.println(resultSet);
 				while(resultSet.next()){
 					
-					if(resultSet.getString("room") != null)//appointment doesn't contain room
+					if(resultSet.getString("place") != null)//appointment doesn't contain room
 		  		   	{
 						Appointment app=new Appointment();
 						//app.setLocation(result.getString("Location"));
@@ -128,7 +128,8 @@ public class AppointmentsQ
 						meeting.setDescription(resultSet.getString("description"));
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));
-						meeting.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
+						Location loc = new Location(LocationQ.getRoomName(Integer.valueOf(resultSet.getString("room"))),Integer.valueOf(resultSet.getString("room")));
+						meeting.setLocation(loc);
 						appList.add(meeting);
 					}
 				}

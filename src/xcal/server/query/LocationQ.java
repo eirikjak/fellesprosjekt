@@ -71,6 +71,28 @@ public class LocationQ {
 		}
 	}
 	
+	public static String getRoomName(int loc){
+		synchronized (connection) {
+			
+			
+			try {
+				String sql = "SELECT name FROM Room WHERE id='"+loc+"';";
+				 
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result;
+			
+				result = stat.executeQuery(sql);
+				result.next();
+				String place = result.getString("name");
+				return place;
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+			}
+		
+		}
+	}
+	
 	public static void deleteLocation(Location loc){
 		synchronized (connection) {
 			try {
