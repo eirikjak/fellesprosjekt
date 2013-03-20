@@ -512,6 +512,8 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		model.removePropertyChangeListener(this);
 		setVisible(false);
 		dispose();
+		RootFrame.clearAll();
+		RootFrame.addPanel(new Mainpage());
 	}
 	
 	

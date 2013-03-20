@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -82,6 +84,29 @@ public class CalendarPanel extends JPanel {
 		//Lists for appointments
 		JList monday = new JList(mondayModel);
 		monday.setCellRenderer(new CalendarPanelRenderer());
+		monday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage();
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
+		/*monday.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		    }
+		});*/
 		JList tuesday = new JList(tuesdayModel);
 		tuesday.setCellRenderer(new CalendarPanelRenderer());
 
@@ -307,6 +332,7 @@ public class CalendarPanel extends JPanel {
 					for(Appointment app: day){
 						weekAppointments[i].addElement(app);
 					}
+					
 				}
 			}
 			super.done();

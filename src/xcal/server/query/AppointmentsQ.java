@@ -101,7 +101,7 @@ public class AppointmentsQ
                      
                             "SELECT app_id "+
                             "FROM Invites "+
-                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(toDate)+"')";
+                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(toDate)+"') ORDER BY A.start_date ASC";
 			ResultSet resultSet = null;
 			
 			try {
