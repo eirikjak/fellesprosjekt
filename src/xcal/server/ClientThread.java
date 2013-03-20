@@ -20,15 +20,10 @@ import xcal.model.Employee;
 public class ClientThread extends Thread
 {
 	private Socket client;
-	
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
-	
-
 	private int id;
-	
-	private xcal.model.Employee person;
-	
+	private xcal.model.Employee person;	
 	public ClientThread(Socket client,int i)
 	{
 		this.client=client;
@@ -50,22 +45,17 @@ public class ClientThread extends Thread
 	{
 		try
 		{
-			
-				input=new ObjectInputStream(client.getInputStream());
-				
-				Object o = input.readObject();
-				
-				return o;
-				//return input.readObject();
-			
+			input=new ObjectInputStream(client.getInputStream());
+			Object o = input.readObject();
+			return o;
 		}
-		catch(ClassNotFoundException e){} catch (IOException e) {
-			e.printStackTrace();
+		catch(ClassNotFoundException e){} 
+		catch (IOException e) {
+			
 			try {
 				client.close();
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -91,8 +81,11 @@ public class ClientThread extends Thread
 			return true;
 		}
 		catch(IOException e){
-			
-			e.printStackTrace();
+			try {
+				client.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		return false;
 	}
