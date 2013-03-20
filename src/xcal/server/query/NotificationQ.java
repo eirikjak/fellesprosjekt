@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.Appointment;
 import xcal.model.Employee;
+import xcal.model.Invite;
 import xcal.model.Meeting;
 import xcal.model.Notification;
  
@@ -46,6 +47,20 @@ public class NotificationQ
 		}
 		return new Notification(app, app.getLeader());
 		
+	}
+	
+	public static Invite createInvite (Meeting meeting, Employee employee) throws SQLException{
+		synchronized (connection) {
+			String query = "INSERT INTO Invites (app_id,person) VALUES('" + meeting.getAppId() + "'," + "'" + employee.getEmail()+ "')";
+			Statement stat = connection.getConnection().createStatement();
+			try {
+				stat.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+			
+		}
 	}
 	
 	public static Notification createNotification(Meeting meeting, Employee employee){
