@@ -319,6 +319,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		this.model.addPropertyChangeListener(this);
 		
 		datePicker.setDate(model.getFromTime().toDate());
+		
 		startHour.setText(new Integer(model.getFromTime().getHourOfDay()).toString());
 		startMinute.setText((new Integer(model.getFromTime().getMinuteOfHour()).toString()));
 		endHour.setText(new Integer(model.getToTime().getHourOfDay()).toString());

@@ -29,6 +29,7 @@ public class Appointment implements Serializable
 		public static final String PROPERTY_LOCATION = "location";
 		public static final String PROPERTY_NOTIFICATION = "notification";
 		public static final String PROPERTY_DAY = "day";
+		public static final String PROPERTY_LEADER = "leader";
 		
         private int appId;
         private PropertyChangeSupport pcs;
@@ -198,6 +199,10 @@ public class Appointment implements Serializable
         public void setTitle(String title){
         	pcs.firePropertyChange(PROPERTY_TITLE, this.title, title);
         	this.title = title;
+        }
+        public void setLeader(Employee leader){
+        	pcs.firePropertyChange(PROPERTY_LEADER, this.title, title);
+        	this.leader = leader;
         }
         public void setAppId(int id){this.appId = id;}
  

@@ -21,12 +21,14 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JScrollPane;
 
+import xcal.client.Client;
 import xcal.model.Appointment;
 import xcal.model.Meeting;
 
 public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
+	private Client client = Client.getClient();
 
 	/**
 	 * Launch the application.
@@ -109,7 +111,6 @@ public class MeetingPage extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(25, 464, 166, 55);
-		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -125,7 +126,15 @@ public class MeetingPage extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBounds(213, 464, 250, 55);
-		contentPane.add(panel_2);
+		if(client.getUser().equals(a.getLeader())){
+			contentPane.add(panel_1);
+			contentPane.add(panel_2);
+		}
+		else{
+			panel_1.setVisible(false);
+			panel_2.setVisible(false);
+		}
+		
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
