@@ -77,10 +77,14 @@ public class DbConnection {
 			connection = DriverManager.getConnection(url, user, password);
 			statement = connection.createStatement();
 			if (connection != null) {
+				new EmployeeQ(this);
 				new LocationQ(this);
 				new AppointmentsQ(this);
 				new NotificationQ(this);
 				new RoomQ(this);
+				//new MeetingQ(this);
+				new GroupQ(this);
+				
 				return true;
 			}
 		} catch (Exception e) {

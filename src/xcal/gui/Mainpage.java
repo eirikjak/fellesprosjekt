@@ -22,6 +22,8 @@ import javax.swing.JTextPane;
 
 import xcal.client.Client;
 import xcal.gui.CalendarPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
 
 public class Mainpage extends JPanel {
 
@@ -34,6 +36,7 @@ public class Mainpage extends JPanel {
 		this.client = Client.getClient();
 
 		setBounds(0, 0, 1000, 700);
+		
 		
 		
 		
@@ -89,7 +92,8 @@ public class Mainpage extends JPanel {
 		calendarPanel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel_1.setBounds(756, 30, 211, 88);
 		add(panel_1);
 		panel_1.setLayout(null);
@@ -99,10 +103,18 @@ public class Mainpage extends JPanel {
 		panel_1.add(lblNewLabel_1);
 		lblNewLabel_1.setIcon(new ImageIcon(Mainpage.class.getResource("/images/1363727523_logout.png")));
 		
-		JButton btnNewButton_2 = new JButton("Logout");
-		btnNewButton_2.setBounds(101, 26, 91, 35);
-		panel_1.add(btnNewButton_2);
-		btnNewButton_2.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.setBounds(101, 26, 91, 35);
+		panel_1.add(logoutButton);
+		logoutButton.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		logoutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.exit(0);
+			}
+		});
 		calendarPanel.setVisible(true);
 
 	}

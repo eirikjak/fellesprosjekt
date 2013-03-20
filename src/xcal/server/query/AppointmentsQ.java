@@ -91,7 +91,7 @@ public class AppointmentsQ
 		//System.out.println(df.format(fromDate) + "FFJJFJ");
 		synchronized (connection) {
 			String sqlstr = "SELECT * "+
-                    "FROM Appointment A "+
+                    "FROM Appointment A "+ "INNER JOIN Person P  ON (A.leader = P.email)" +
                     "WHERE A.id IN "+
                             "(SELECT id "+
                             "FROM Appointment "+
@@ -101,7 +101,7 @@ public class AppointmentsQ
                      
                             "SELECT app_id "+
                             "FROM Invites "+
-                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(toDate)+"')";
+                            "WHERE person = '"+Email+"') AND (A.start_date >= '"+df.format(fromDate)+"' AND A.start_date <= '"+df.format(toDate)+"') ORDER BY A.start_date ASC";
 			ResultSet resultSet = null;
 			
 			try {
@@ -110,21 +110,29 @@ public class AppointmentsQ
 			//	System.out.println(resultSet);
 				while(resultSet.next()){
 					
-					if(resultSet.getString("room") != null)//appointment doesn't contain room
+					if(resultSet.getString("place") != null)//appointment doesn't contain room
 		  		   	{
 						Appointment app=new Appointment();
 						//app.setLocation(result.getString("Location"));
+						app.setTitle(resultSet.getString("title"));
 		  			   	app.setDescription(resultSet.getString("description"));
-		  			   	//app.setName(result.getString("name"));
+		  			   	Employee l = new Employee(resultSet.getString("name"), resultSet.getString("email"),"");
+		  			   	app.setLeader(l);
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
 		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
+		  			   	app.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
 		  			   	appList.add(app);
 		  		   }
 					else{
 						Appointment meeting=new Meeting();
+						meeting.setTitle(resultSet.getString("title"));
 						meeting.setDescription(resultSet.getString("description"));
+						Employee l = new Employee(resultSet.getString("name"), resultSet.getString("email"),"");
+		  			   	meeting.setLeader(l);
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));
+						Location loc = new Location(LocationQ.getRoomName(Integer.valueOf(resultSet.getString("room"))),Integer.valueOf(resultSet.getString("room")));
+						meeting.setLocation(loc);
 						appList.add(meeting);
 					}
 				}

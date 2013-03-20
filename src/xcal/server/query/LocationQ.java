@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import xcal.model.Employee;
 import xcal.model.Location;
 
 public class LocationQ {
@@ -47,6 +48,51 @@ public class LocationQ {
 		}
 
 	}
+	
+	public static String getPlaceName(int loc){
+		synchronized (connection) {
+			
+			
+			try {
+				String sql = "SELECT description FROM Place WHERE id='"+loc+"';";
+				 
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result;
+			
+				result = stat.executeQuery(sql);
+				result.next();
+				String place = result.getString("description");
+				return place;
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+			}
+		
+		}
+	}
+	
+	public static String getRoomName(int loc){
+		synchronized (connection) {
+			
+			
+			try {
+				String sql = "SELECT name FROM Room WHERE id='"+loc+"';";
+				 
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result;
+			
+				result = stat.executeQuery(sql);
+				result.next();
+				String place = result.getString("name");
+				return place;
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+			}
+		
+		}
+	}
+	
 	public static void deleteLocation(Location loc){
 		synchronized (connection) {
 			try {
