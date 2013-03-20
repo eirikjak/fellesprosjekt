@@ -54,24 +54,26 @@ public class RoomQ {
 		}
 	}
 	
-	public  Room[] selectRoom(int id) throws SQLException{
+	public static Room selectRoom(int id){
 		synchronized (connection) {
-		String sql = "SELECT * FROM Room WHERE id ='"+id+"'";
-		Statement statement = connection.getConnection().createStatement();
-	    ResultSet resultset = statement.executeQuery(sql);
-	    resultset.last();
-	    Room [] rooms = new Room [resultset.getRow()];
-	    resultset.beforeFirst();
-	    int roomCount = 0;
-	    while(resultset.next()){
-	    	String name = resultset.getString("name");
-	    	int capacity = resultset.getInt("capacity");
-	    	
-	    	rooms[roomCount] = new Room(id, name, capacity); 
-	    	roomCount++	;
-	    }
-		
-	    return rooms;
+			try{
+				
+			
+				String sql = "SELECT * FROM Room WHERE id ='"+id+"'";
+				Statement statement = connection.getConnection().createStatement();
+			    ResultSet resultset = statement.executeQuery(sql);
+			    Room room = null;
+			    if(resultset.next()){
+			    	String name = resultset.getString("name");
+			    	int capacity = resultset.getInt("capacity");
+			    	room  = new Room(id, name, capacity); 
+			    	
+			    }
+				
+			    return room;
+			}catch(SQLException e){
+				return null;
+			}
 		}
 	}
 	
@@ -101,10 +103,8 @@ public class RoomQ {
 			   	    	int id = resultset.getInt("id");
 			   	    	String name = resultset.getString("name");
 			   	    	int capacity = resultset.getInt("capacity");
-			   	    	System.out.println(name);
 			   	    	Room room = new Room(id, name, capacity);
 			   	    	rooms[roomCount] = new Room(id, name, capacity); 
-			   	    	System.out.println(rooms[roomCount]);
 			   	    	roomCount++	;
 			   	    }
 					   

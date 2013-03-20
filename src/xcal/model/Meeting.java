@@ -20,8 +20,6 @@ import org.joda.time.format.DateTimeFormat;
 public class Meeting extends Appointment implements Serializable
 {
 	public static final String PROPERTY_ROOM = "room";
-	public static final String PROPERTY_EMPLOYEES_ADD = "employeesAdd";
-	public static final String PROPERTY_EMPLOYEES_REMOVE ="employeesRemove";
 	private ArrayList<Employee> participants;
 	private Room room;
 	private PropertyChangeSupport pcs;
@@ -29,17 +27,31 @@ public class Meeting extends Appointment implements Serializable
 
 	
 	public Meeting(){
-		pcs = new PropertyChangeSupport(this);
-		participants = new ArrayList<Employee>();
+		
+		this(new DateTime(),new DateTime(),"", "",new Employee(),new ArrayList<Employee>(),new Room());
+		
 	}
 	
 	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader,Room room){
-		super(start,end,title,description,leader);
-		this.room = room;
+		this(new DateTime(),new DateTime(),"", "",new Employee(),new ArrayList<Employee>(),new Room());
 		
+		
+	}
+	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader, ArrayList<Employee> participants ,Room room){
+		super(start,end,title,description,leader);
+		this.participants = participants;
+		this.room = room;
+		pcs = new PropertyChangeSupport(this);
 	}
 
 	
+	public void setParticipants(ArrayList<Employee> participants){
+		this.participants = participants;
+	}
+	
+	public ArrayList<Employee> getParticipants(){
+		return participants;
+	}
 	
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -47,33 +59,15 @@ public class Meeting extends Appointment implements Serializable
 		super.addPropertyChangeListener(listener);
 		
 	};
-	public void removeParticipant(Employee emp)
-	{
-		
-		participants.remove(emp);
-		pcs.firePropertyChange(PROPERTY_EMPLOYEES_REMOVE, null, emp);
-	}
 	
-	public void addParticipant(Employee emp)
-	{
-		pcs.firePropertyChange(PROPERTY_EMPLOYEES_ADD, null, emp);
-		participants.add(emp);
-		
-	}
-	
-
-	public ArrayList<Employee> getParticipants(){return participants;}
 	public Employee getParticipant(int index){return participants.get(index);}
-	
-
-	
 	public Room getRoom(){
 		return room;
 		}
 	public void setRoom(Room r){
 		pcs.firePropertyChange(PROPERTY_ROOM, this.room, r);
 		this.room=r;
-		System.out.println("setRoom" + room);
+		
 		
 	}
 	

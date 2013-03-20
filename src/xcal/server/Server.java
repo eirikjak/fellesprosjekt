@@ -23,6 +23,7 @@ import java.util.Vector;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.core.Settings;
+import xcal.server.query.DbConnection;
 import xcal.server.query.LocationQ;
 
 
@@ -45,6 +46,8 @@ public class Server
 		try
 		{
 			socket=new ServerSocket(Settings.port);//start listening on port
+			DbConnection connection=new DbConnection(Settings.db_host,Settings.db_user,Settings.db_pw);
+			connection.connect();
 		}
 		catch(IOException e)//exit if not succeeded
 		{
@@ -64,7 +67,8 @@ public class Server
 		try
 		{
 			Socket client=socket.accept();//wait for connection
-			clients.add(new ClientThread(client,size));
+			new ClientThread(client,size).run();
+			return true;
 		}
 		catch(IOException e)
 		{

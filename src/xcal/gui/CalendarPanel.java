@@ -289,9 +289,7 @@ public class CalendarPanel extends JPanel {
 				weekAppointments[i].clear();
 				week[i].setText(df.format(c) + month[monthNum-1]);
 				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
-				Object obj = client.sendObject(app, Status.TD_APP).getContent();
-				
-				
+				Object obj = client.sendObject(app, Status.TD_APP).getContent();		
 				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
 				cal = cal.plusDays(1);
 			}
@@ -304,8 +302,7 @@ public class CalendarPanel extends JPanel {
 				ArrayList<Appointment> day = result.get(i);
 				if(day != null){
 					for(Appointment app: day){
-						System.out.println(app.getFromTime());
-						weekAppointments[i].addElement(cellDateFormatter.print(app.getFromTime()));
+						weekAppointments[i].addElement(app);
 					}
 				}
 			}

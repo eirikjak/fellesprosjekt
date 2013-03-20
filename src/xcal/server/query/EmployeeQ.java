@@ -19,8 +19,8 @@ public class EmployeeQ
 	
 
 	public EmployeeQ(DbConnection connection) {
-		EmployeeQ.connection=connection;
-		// TODO Auto-generated constructor stub
+		System.out.println("constructor");
+		this.connection=connection;
 	}
 	
 	
@@ -91,6 +91,7 @@ public class EmployeeQ
 	public static Employee selectPersonWithEmail(String mail)
 	{
 		
+		System.out.println(connection);
 		synchronized (connection) {
 		String query="select * from Person where email='"+mail+"'";
  	   

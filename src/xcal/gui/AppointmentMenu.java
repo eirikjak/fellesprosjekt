@@ -537,11 +537,6 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			busyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-					
-					
-					
-					
-					System.out.println("hello");
 					if(model.validateFields()){
 						int notification = notificationMap.get(notificationBox.getSelectedItem());
 						DateTime startTime = model.getFromTime();

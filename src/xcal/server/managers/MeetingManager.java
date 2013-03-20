@@ -1,10 +1,20 @@
 package xcal.server.managers;
 
+import java.util.ArrayList;
+
 import xcal.client.Status;
 import xcal.client.Wrapper;
+import xcal.model.Appointment;
+import xcal.model.Employee;
+import xcal.model.Location;
 import xcal.model.Meeting;
+import xcal.model.Notification;
 import xcal.model.Room;
 import xcal.server.query.AppointmentsQ;
+import xcal.server.query.EmployeeQ;
+import xcal.server.query.LocationQ;
+import xcal.server.query.MeetingQ;
+import xcal.server.query.NotificationQ;
 import xcal.server.query.RoomQ;
 
 public class MeetingManager {
@@ -27,7 +37,52 @@ public class MeetingManager {
 	}
 	
 	private static Wrapper create(Meeting meeting){
-		return new Wrapper(Status.ERROR, null);
+		System.out.println("creating room");
+		Room room = RoomQ.selectRoom(meeting.getRoom().getID());
+		if(room == null){
+			return new Wrapper(Status.ERROR, null);
+		}
+		System.out.println(meeting);
+		
+		boolean error = false;
+		Meeting met  =  MeetingQ.createMeeting(meeting, room);
+		ArrayList<String> notificationOwners = new ArrayList<String>();
+		if(met != null){
+			
+			for(Employee emp: meeting.getParticipants()){
+				if(!emp.getEmail().equals(meeting.getLeader().getEmail())){
+					Employee dbEmp = EmployeeQ.selectPersonWithEmail(emp.getEmail());
+					if(dbEmp == null){
+						error = true;
+						break;
+					}
+					Notification notEmp = NotificationQ.createNotification(met, dbEmp);
+					if(notEmp == null){
+						error = true;
+						break;
+					}
+					notificationOwners.add(dbEmp.getEmail());
+				}else{
+					System.out.println("found leader!");
+				}
+			}
+			System.out.println(met);
+			Notification leaderNot = NotificationQ.createNotification(met);
+			
+			notificationOwners.add(met.getLeader().getEmail());
+			
+			if(error){
+				for(String email :notificationOwners){
+					NotificationQ.deleteNotification(email,met.getAppId());
+				}
+				return new Wrapper(Status.SUCCESS, null);
+			}
+			
+				return new Wrapper(Status.SUCCESS, null);
+			}
+			
+		return new Wrapper(Status.ERROR,null);
+		
 	}
 	
 	private static Wrapper update(Meeting meeting){

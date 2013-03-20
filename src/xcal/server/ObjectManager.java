@@ -14,6 +14,7 @@ import xcal.client.Status;
 import xcal.server.managers.AppointmentManager;
 import xcal.server.managers.AuthenticationManager;
 import xcal.server.managers.EmployeeManager;
+import xcal.server.managers.GroupManager;
 import xcal.server.managers.MeetingManager;
 import xcal.server.query.*;
 import xcal.model.*;
@@ -23,6 +24,8 @@ public class ObjectManager {
 	
 	public static Object manage(Object o){
 		
+		if(o == null)
+			return new Wrapper(Status.ERROR, null);
 		Wrapper w = (Wrapper) o;
 		Object content = w.getContent();
 		Status flag = w.getFlag();
@@ -46,6 +49,10 @@ public class ObjectManager {
 		else if(content instanceof Authentication){
 			Authentication auth=(Authentication)content;
 			return AuthenticationManager.handle(auth, flag);
+		}
+		else if(content instanceof Group){
+			Group group = (Group)content;
+			return GroupManager.handle(group, flag);
 		}
 		
 		return null;
