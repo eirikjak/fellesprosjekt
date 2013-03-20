@@ -2,6 +2,7 @@ package xcal.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -73,7 +74,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(0, 0, 495, 214);
+		tabbedPane.setBounds(0, 0, 510, 215);
 		add(tabbedPane);
 		
 		
@@ -81,7 +82,9 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		panel = new JPanel();
 		panel.setBorder(null);
 		tabbedPane.addTab("Employees", null, panel, null);
+		tabbedPane.setEnabledAt(0, true);
 		panel.setLayout(null);
+	
 		
 		personBussyLabel = new JXBusyLabel();
 		personBussyLabel.setBounds(78, 91, 26, 26);
@@ -141,8 +144,10 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		personListLeft.setCellRenderer((ListCellRenderer) new PersonListCellRenderer());
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(null);
 		panel_1.setLayout(null);
 		tabbedPane.addTab("Groups", null, panel_1, null);
+		tabbedPane.setEnabledAt(1, true);
 		
 		groupBussyLabel = new JXBusyLabel();
 		groupBussyLabel.setBounds(78, 91, 26, 26);
@@ -201,8 +206,8 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		groupListLeft.setCellRenderer((ListCellRenderer) new GroupListCellRenderer());
 		scrollPane_3.setViewportView(groupListLeft);
 		
-	//	updateGroupList();
-		//updatePersonList();
+		updateGroupList();
+		updatePersonList();
 		
 		
 		
@@ -335,6 +340,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 	public ParticipantSelectorModel getModel(){
 		return this.model;
 	}
+	
 	private class PersonListCellRenderer implements ListCellRenderer{
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 		

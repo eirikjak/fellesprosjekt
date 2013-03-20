@@ -182,7 +182,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		getContentPane().add(lblSted);
 		
 		description = new JTextArea();
-		description.setBounds(181, 219, 470, 127);
+		description.setBounds(181, 219, 491, 127);
 		getContentPane().add(description);
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
@@ -278,7 +278,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(172, 211, 489, 143);
+		panel_1.setBounds(172, 211, 509, 143);
 		getContentPane().add(panel_1);
 		
 		errorLabel = new JLabel("");
@@ -294,7 +294,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		getContentPane().add(roomBussyLabel);
 		
 		participantSelector = new ParticipantSelector();
-		participantSelector.setBounds(182, 369, 502, 219);
+		participantSelector.setBounds(171, 369, 511, 231);
 		getContentPane().add(participantSelector);
 		
 		submitBussyLabel = new JXBusyLabel();

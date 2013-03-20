@@ -129,7 +129,7 @@ public class MeetingPage extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBounds(213, 464, 250, 55);
-		if(client.getUser().equals(a.getLeader())){
+		if(client.getUser().getEmail().equals(a.getLeader().getEmail())){
 			contentPane.add(panel_1);
 			contentPane.add(panel_2);
 		}
