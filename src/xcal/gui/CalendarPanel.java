@@ -90,36 +90,102 @@ public class CalendarPanel extends JPanel {
 		        if (evt.getClickCount() == 2) {
 		            int index = list.locationToIndex(evt.getPoint());
 		            System.out.println(index);
-		            new MeetingPage();
+		            new MeetingPage((Appointment) mondayModel.get(index));
 		        } else if (evt.getClickCount() == 3) {   // Triple-click
 		            int index = list.locationToIndex(evt.getPoint());
 
 		        }
 		}});
-		/*monday.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent evt) {
+		
+		JList tuesday = new JList(tuesdayModel);
+		tuesday.setCellRenderer(new CalendarPanelRenderer());
+		tuesday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
 		        JList list = (JList)evt.getSource();
 		        if (evt.getClickCount() == 2) {
 		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) tuesdayModel.get(index));
 		        } else if (evt.getClickCount() == 3) {   // Triple-click
 		            int index = list.locationToIndex(evt.getPoint());
 
 		        }
-		    }
-		});*/
-		JList tuesday = new JList(tuesdayModel);
-		tuesday.setCellRenderer(new CalendarPanelRenderer());
+		}});
 
 		JList wednesday = new JList(wednesdayModel);
 		wednesday.setCellRenderer(new CalendarPanelRenderer());
+		wednesday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) wednesdayModel.get(index));
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
+		
 		JList thursday = new JList(thursdayModel);
 		thursday.setCellRenderer(new CalendarPanelRenderer());
+		thursday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) thursdayModel.get(index));
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
+		
 		JList friday = new JList(fridayModel);
 		friday.setCellRenderer(new CalendarPanelRenderer());
+		friday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) fridayModel.get(index));
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
+		
 		JList saturday = new JList(saturdayModel);
 		saturday.setCellRenderer(new CalendarPanelRenderer());
+		saturday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) saturdayModel.get(index));
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
+		
 		JList sunday = new JList(sundayModel);
 		sunday.setCellRenderer(new CalendarPanelRenderer());
+		sunday.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		            int index = list.locationToIndex(evt.getPoint());
+		            System.out.println(index);
+		            new MeetingPage((Appointment) sundayModel.get(index));
+		        } else if (evt.getClickCount() == 3) {   // Triple-click
+		            int index = list.locationToIndex(evt.getPoint());
+
+		        }
+		}});
 
 		//end for list appointments
 				

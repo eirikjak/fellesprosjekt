@@ -119,6 +119,7 @@ public class AppointmentsQ
 		  			   	//app.setName(result.getString("name"));
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
 		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
+		  			   	app.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
 		  			   	appList.add(app);
 		  		   }
 					else{
@@ -127,6 +128,7 @@ public class AppointmentsQ
 						meeting.setDescription(resultSet.getString("description"));
 						meeting.setFromTime(resultSet.getTimestamp("start_date"));
 						meeting.setToTime(resultSet.getTimestamp("end_date"));
+						meeting.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
 						appList.add(meeting);
 					}
 				}
