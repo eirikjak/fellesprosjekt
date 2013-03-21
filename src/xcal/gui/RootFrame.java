@@ -3,6 +3,9 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -10,12 +13,19 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import xcal.client.Client;
+import xcal.client.Status;
+import xcal.client.Wrapper;
+
 
 public class RootFrame {
 
 	private static ArrayList<JPanel> panels;
 	private static JFrame internalFrame;
 	private static JLayeredPane contentPane;
+
+	
+	
 	
 	public static void init(int width, int height){
 		
@@ -54,4 +64,10 @@ public class RootFrame {
 		contentPane.remove(panel);
 		internalFrame.pack();
 	}
+	
+	
+	
+
+	
+	
 }

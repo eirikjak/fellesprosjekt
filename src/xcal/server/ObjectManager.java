@@ -15,14 +15,16 @@ import xcal.server.managers.AppointmentManager;
 import xcal.server.managers.AuthenticationManager;
 import xcal.server.managers.EmployeeManager;
 import xcal.server.managers.GroupManager;
+import xcal.server.managers.InviteManager;
 import xcal.server.managers.MeetingManager;
+import xcal.server.managers.NotificationManager;
 import xcal.server.query.*;
 import xcal.model.*;
 
 public class ObjectManager {
 	
 	
-	public static Object manage(Object o){
+	public static Wrapper manage(Object o){
 		
 		if(o == null)
 			return new Wrapper(Status.ERROR, null);
@@ -54,7 +56,32 @@ public class ObjectManager {
 			Group group = (Group)content;
 			return GroupManager.handle(group, flag);
 		}
+		else if(content instanceof Invite){
+			Invite invite =(Invite)content;
+			//return InviteManager.handle(invite, flag);
+		}
 		
+		else if(content instanceof Notification)
+		{
+			Notification notification=(Notification)content;
+			return NotificationManager.handle(notification, flag);
+		}
+		else if(content instanceof Object []){
+			Meeting meet = (Meeting)((Object[])content)[0];
+			Employee emp = (Employee)((Object[])content)[1];
+			int i =0;
+			if(flag == Status.INVITE_ACCEPTED){
+				i = 1;
+			}
+			else if(flag == Status.INVITE_DECLINED){
+				i = 0;
+			}
+			else if(flag == Status.INVITE_NOANS){
+				i = -1;
+			}
+			MeetingQ.updateStatus(meet, i, emp);
+			return new Wrapper(Status.SUCCESS, null);
+		}
 		
 		return null;
 		

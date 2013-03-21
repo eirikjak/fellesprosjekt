@@ -201,24 +201,23 @@ public class AppointmentsQ
  		   result.next();
 
  		   
- 		/*   if(result.getString("room").isEmpty())//appointment doesn't contain room
- 		   {
+ 		   //if(result.getString("room").isEmpty())//appointment doesn't contain room
+ 		  // {
  			   Appointment app=new Appointment();
  			  //app.setLocation(result.getString("Location"));
- 			   app.setDescription(result.getString("description"));
- 			   //app.setName(result.getString("name"));
- 			   app.setFromTime(result.getTimestamp("start_date"));
- 			   app.setToTime(result.getTimestamp("end_date"));
+ 			   //app.setDescription(result.getString("description"));
+ 			   app.setTitle(result.getString("title"));
+ 			   //app.setFromTime(result.getTimestamp("start_date"));
+ 			  // app.setToTime(result.getTimestamp("end_date"));
  			   return app;
- 		   }
+ 		  // }
  		   
- 		   Appointment meeting=new Meeting();
+ 		  /* Appointment meeting=new Meeting();
  		   meeting.setDescription(result.getString("description"));
  		   meeting.setFromTime(result.getTimestamp("start_date"));
  		   meeting.setToTime(result.getTimestamp("end_date"));
  		   
  		   return meeting;  */
- 			   return null;
  		   
 
  	   } 

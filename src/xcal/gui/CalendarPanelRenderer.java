@@ -27,6 +27,7 @@ public class CalendarPanelRenderer implements ListCellRenderer {
 
 	private ImageIcon appointment = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
 	private ImageIcon meeting = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
+
 	
 	@Override
 	public Component getListCellRendererComponent(JList arg0, Object arg1,
@@ -46,7 +47,6 @@ public class CalendarPanelRenderer implements ListCellRenderer {
 			//area.setLineWrap( true );
 			//area.setWrapStyleWord( true );
 			if(a instanceof Meeting){
-				
 				l.setText("<HTML>" + df.format(date) +"-" + df.format(dateTo) +"<BR> Title: <BR>" + a.getTitle()+"</HTML>");
 				l.setIcon(meeting);
 				l.setAlignmentX(JLabel.LEFT);
@@ -61,6 +61,11 @@ public class CalendarPanelRenderer implements ListCellRenderer {
 				l.setIcon(appointment);
 				l.setAlignmentX(JLabel.LEFT);
 			}
+			/*else {
+				l.setText("<HTML>" + df.format(date) +"-" + df.format(dateTo) +"<BR> Title: " + a.getTitle()+"<BR>Descr: " + a.getDescription()+"</HTML>");
+				l.setIcon(appointmentIcon);
+				l.setAlignmentX(JLabel.LEFT);
+			}*/
 		}
 		
 		if(arg3){

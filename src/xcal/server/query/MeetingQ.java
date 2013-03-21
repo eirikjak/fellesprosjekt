@@ -1,17 +1,21 @@
 package xcal.server.query;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.Appointment;
+import xcal.model.Employee;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Room;
+import xcal.server.ClientThread;
 
 public class MeetingQ {
 
@@ -71,5 +75,57 @@ public class MeetingQ {
 			}
 			
 		}
+	}
+	
+	public static void updateStatus(Meeting meeting, int ans, Employee emp){
+		synchronized (connection) {
+			String query = "UPDATE Invites SET ans ="+ ans +" Where person = '"+ emp.getEmail()+"'";
+			Statement stat;
+			try {
+				stat = connection.getConnection().createStatement();
+				System.out.println(stat.executeUpdate(query));
+				System.out.println("Q executed");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static ArrayList[] getParticipants(Meeting meeting){
+		synchronized (connection) {
+			
+			ArrayList<Employee> empList = new ArrayList();
+			ArrayList<Integer> answerList = new ArrayList();
+			String query = "SELECT * FROM Invites INNER JOIN Appointment ON (app_id = id) Where (app_id = 1)";
+			Statement stat;
+			try {
+				stat = connection.getConnection().createStatement();
+				ResultSet result=stat.executeQuery(query);
+				Employee l = null;
+				while(result.next()){
+					l = EmployeeQ.selectPersonWithEmail(result.getString("leader"));
+					Employee e = EmployeeQ.selectPersonWithEmail(result.getString("person"));
+					if(!empList.contains(e)){
+						System.out.println("Legger til employee" + e);
+						empList.add(e);
+						answerList.add(result.getInt(3));
+					}	
+				}
+				
+				if(!empList.contains(l)){
+					System.out.println("legger til leder" + l);
+					empList.add(l);
+					answerList.add(1);
+				}
+				ArrayList[]response = {empList, answerList};
+				return response;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
 	}
 }

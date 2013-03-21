@@ -3,12 +3,17 @@
  * 
  * Runs on server, check every Settings.NOTIFICATION_INTERVAL if any notifications triggered
  * check if user that should recieve notification is logged on => send
+ * 
+ * 
+ * DON'T NEED THIS. MOVED TO CLIENT
  */
 
 package xcal.server;
 
 import java.util.Vector;
 
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.core.Settings;
 import xcal.model.Notification;
 import xcal.server.query.DbConnection;
@@ -55,8 +60,16 @@ public class NotifyThread extends Thread
 	private void sendNotification(ClientThread client,Notification notification)
 	{
 		//send notification to logged in user here
-		
 		//make sure to update db when successfully send notification
+		
+		if(client.sendObject(notification,Status.SEND_NOTIFICATION))
+		{
+			Wrapper response=client.recieveObject();
+			if(response.getFlag()==ACCEPT){}
+		}
+		
+		
+		
 	}
 	
 	

@@ -48,19 +48,36 @@ public class NotificationQ
 		return new Notification(app, app.getLeader());
 		
 	}
-	public static Invite deleteInvite (String email, int appId) throws SQLException{
+	public static Invite deleteInvite (Meeting meeting, Employee employee){
 		synchronized (connection) {
-			String query = "DELETE FROM Invites WHERE person ='" + email +"' + AND app_id = '" +appId + "'";
-			Statement stat = connection.getConnection().createStatement();
-			stat.execute(query);
+			String query = "DELETE FROM Invites WHERE person ='" +employee.getEmail() +"' + AND app_id = '" +meeting.getAppId() + "'";
+			Statement stat = null;
+			try {
+				stat = connection.getConnection().createStatement();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				stat.execute(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return null;
 			
 		}
 	}
-	public static Invite createInvite (Meeting meeting, Employee employee) throws SQLException{
+	public static Invite createInvite (Meeting meeting, Employee employee){
 		synchronized (connection) {
 			String query = "INSERT INTO Invites (app_id,person) VALUES('" + meeting.getAppId() + "'," + "'" + employee.getEmail()+ "')";
-			Statement stat = connection.getConnection().createStatement();
+			Statement stat = null;
+			try {
+				stat = connection.getConnection().createStatement();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				stat.execute(query);
 			} catch (SQLException e) {
@@ -101,6 +118,54 @@ public class NotificationQ
 			
 		}
 	}
+	
+	public static void deleteNotification(Employee employee, Appointment appointment)
+	{
+		synchronized (connection) 
+		{
+			try 
+			{
+				String query = "DELETE FROM Notification WHERE person ='" + employee.getEmail() +"' AND app_id = '" +appointment.getAppId() + "'";
+				Statement stat = connection.getConnection().createStatement();
+				stat.execute(query);
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	
+	
+	/**
+	 * updates notification time for given notification
+	 * 
+	 * @param notification - notification to change notificationtime for
+	 */
+	public static void updateNotification(Notification notification)
+	{
+		synchronized(connection)
+		{
+			try
+			{
+				String query="update Notification set notifiedAt='" +notification.getNotificationTime()+
+							"' where app_id='"+notification.getAppointment().getAppId()+"' and person='"+notification.getEmployee().getEmail()+"' ";
+				Statement stat = connection.getConnection().createStatement();
+				stat.execute(query);
+			}
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * check if any notifications need to be triggered
@@ -180,5 +245,52 @@ public class NotificationQ
 		}
  	   return null;
     }
+	
+	
+	/**
+	 * Get notification for specified employee
+	 * 
+	 * selects notifications that should be triggered for
+	 * specified person. 
+	 * 
+	 * @param e - employee object to get notifications for
+	 * @return - notification array for specified employee e
+	 */
+	public static Notification[] getNotificationPerson(Employee emp)
+	{
+		synchronized (connection)
+		{
+			String query="select * from Notification where NOW() >=  notifiedAt and person='"+emp.getEmail()+"'";
+			
+			try
+			{
+				Statement stat=connection.getConnection().createStatement();
+				ResultSet result=stat.executeQuery(query);
+				
+				result.last();
+				Notification[] notification=new Notification[result.getRow()];
+				result.beforeFirst();
+				
+				int size=0;
+				
+				while(result.next())
+				{
+					notification[size]=new Notification(AppointmentsQ.selectAppointment(result.getInt("app_id")),emp);
+					System.out.println("Title:" + notification[size].getAppointment().getTitle());
+					++size;
+					
+				}
+				
+				return notification;
+			}
+			catch (SQLException e) 
+		 	{
+				//couldn't get from db
+				e.printStackTrace();
+		 	}
+		}
+		
+		return null;
+	}
 
 }

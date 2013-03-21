@@ -1,11 +1,13 @@
 package xcal.server.managers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Employee;
+import xcal.model.Invite;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Notification;
@@ -22,7 +24,12 @@ public class MeetingManager {
 	public static Wrapper handle(Meeting meeting, Status flag){
 		switch(flag){
 		case CREATE:
-			return create(meeting);
+			try {
+				return create(meeting);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case UPDATE:
 			return update(meeting);
 		case DESTROY:
@@ -31,11 +38,20 @@ public class MeetingManager {
 			return getAvailableRooms(meeting);
 		case SELECT:
 			return select(meeting);
+		
+		case GET_PARTICIPANTS:
+			return getParticipants(meeting);
+			
+		case INVITE_ACCEPTED:
+			return updateStatus(meeting);
+			
 		}
+			
 		
 		return null;
 	}
 	
+/*
 	private static Wrapper create(Meeting meeting){
 		
 		Location loc = LocationQ.createLocation(meeting.getLocationName());
@@ -53,7 +69,9 @@ public class MeetingManager {
 			}
 		}
 		return new Wrapper(Status.ERROR,null);
-		/*
+		*/
+	private static Wrapper create(Meeting meeting) throws SQLException{
+
 		System.out.println("creating room");
 		Room room = RoomQ.selectRoom(meeting.getRoom().getID());
 		if(room == null){
@@ -70,6 +88,11 @@ public class MeetingManager {
 				if(!emp.getEmail().equals(meeting.getLeader().getEmail())){
 					Employee dbEmp = EmployeeQ.selectPersonWithEmail(emp.getEmail());
 					if(dbEmp == null){
+						error = true;
+						break;
+					}
+					Invite invited = NotificationQ.createInvite(met, dbEmp);
+					if(invited == null){
 						error = true;
 						break;
 					}
@@ -99,7 +122,7 @@ public class MeetingManager {
 			}
 			
 		return new Wrapper(Status.ERROR,null);
-	*/	
+	
 	}
 	
 	private static Wrapper update(Meeting meeting){
@@ -118,9 +141,24 @@ public class MeetingManager {
 			return new Wrapper(Status.ERROR, null);
 	}
 	
+	private static Wrapper getParticipants(Meeting meeting){
+		ArrayList[] partList = MeetingQ.getParticipants(meeting);
+		if(partList != null){
+			return new Wrapper(Status.SUCCESS, partList);
+		}
+		else{
+			return new Wrapper(Status.SUCCESS, partList);
+		}
+	}
+	
 	private static Wrapper select(Meeting meeting){
 		
 		return new Wrapper (Status.ERROR, null);
+	}
+	
+	private static Wrapper updateStatus(Meeting meeting){
+		MeetingQ.updateStatus(meeting, 1);
+		return new Wrapper(Status.SUCCESS, null);
 	}
 	
 }

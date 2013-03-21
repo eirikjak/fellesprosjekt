@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import xcal.client.Client;
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.gui.CalendarPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
@@ -28,6 +30,7 @@ import javax.swing.UIManager;
 public class Mainpage extends JPanel {
 
 	private Client client;
+	private Wrapper response;
 	/**
 	 * Create the panel.
 	 */
@@ -111,8 +114,10 @@ public class Mainpage extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
+				client.sendObject(client.getUser(), Status.LOGOUT);//send to server wishing to logout
 				System.exit(0);
+				
 			}
 		});
 		calendarPanel.setVisible(true);

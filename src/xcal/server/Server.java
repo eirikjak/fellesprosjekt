@@ -31,22 +31,23 @@ import xcal.server.query.LocationQ;
 public class Server
 {
 	private ServerSocket socket;
-	//private Socket clients;
+	//private Socket clients; 
 	
 	private Vector<ClientThread> clients;
 	private int size;
+	private DbConnection connection;
 	
 	private PrintWriter print;
 	
-	private NotifyThread notify;
+	
 	
 	public Server()
 	{
-		
+		clients=new Vector<ClientThread>();
 		try
 		{
 			socket=new ServerSocket(Settings.port);//start listening on port
-			DbConnection connection=new DbConnection(Settings.db_host,Settings.db_user,Settings.db_pw);
+			connection=new DbConnection(Settings.db_host,Settings.db_user,Settings.db_pw);
 			connection.connect();
 		}
 		catch(IOException e)//exit if not succeeded
@@ -56,6 +57,7 @@ public class Server
 			System.exit(-1);
 		}
 	}
+	
 	
 	private int getSize(){
 		return size;
@@ -67,7 +69,11 @@ public class Server
 		try
 		{
 			Socket client=socket.accept();//wait for connection
-			new ClientThread(client,size).run();
+			clients.add(size,new ClientThread(client,size));
+			clients.get(size).start();
+			//new Thread(new ClientThread(client,size)).start();
+			
+			++size;
 			return true;
 		}
 		catch(IOException e)
@@ -89,13 +95,23 @@ public class Server
 		
 	}
 	
+	private int getClientsConnected()
+	{
+		int number=0;
+		for(int i=0;i<clients.size();++i)
+			if(clients.get(i).isRunning())
+				number++;
+		return number;
+	}
+	
+	
 	private void disconnect() throws IOException
 	{
 		//clients.close();
 		print.close();
 	}
 	
-	public void startListening(){
+	/*public void startListening(){
 		Thread listeningThread = new Thread(){
 			
 			@Override
@@ -107,19 +123,40 @@ public class Server
 						System.out.println("client connected");
 					else
 						System.out.println("Failed acception client. Something may be very wrong.");
+					
+					System.out.println("number of clients connected: "+getClientsConnected());
 				}
 			}
 		};
 		listeningThread.start();
 		
+	}*/
+	
+	public void run()
+	{
+		while(true)
+		{
+			//System.out.println("number of clients connected: "+getClientsConnected());
+			if(acceptClient())
+			{
+				System.out.println("client connected");
+			}
+			else
+				System.out.println("couldn't connect");
+			System.out.println("TEST");
+		}
 	}
 	
-	public static void main(String args []) throws IOException
+	
+	public static void main(String args [])
 	{
 		//ObjectOutputStream test;
 		
 		Server server=new Server();
-		server.startListening();
+		server.run();
+		
+		
+		//server.startListening();
 		
 		
 	}

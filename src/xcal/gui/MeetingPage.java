@@ -3,9 +3,11 @@ package xcal.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -18,17 +20,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 
 import xcal.client.Client;
+import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.model.Appointment;
+import xcal.model.Employee;
 import xcal.model.Meeting;
 
 public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
 	private Client client = Client.getClient();
+	private Meeting m ;
+	private final DefaultListModel listAcceptedModel = new DefaultListModel();
+	private final DefaultListModel listDeclinedModel = new DefaultListModel();
+	private final DefaultListModel listNoAnswerModel = new DefaultListModel();
+	
 
 	/**
 	 * Launch the application.
@@ -53,6 +64,21 @@ public class MeetingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MeetingPage(Appointment a) {
+		
+		JList listAccepted = new JList(listAcceptedModel);
+		JList listDeclined = new JList(listDeclinedModel);
+		JList listNoAnswer = new JList(listNoAnswerModel);
+		if(a instanceof Meeting){
+			System.out.println("before worker");
+			m = (Meeting) a;
+			System.out.println(m);
+			
+			SwingWorker w = new getParticipantWorker();
+			w.execute();
+			System.out.println("after worker");
+			
+		}
+		
 		this.setVisible(true);
 		setTitle("Meeting: " + a.getTitle());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -184,6 +210,16 @@ public class MeetingPage extends JFrame {
 		JButton btnChangeStatus = new JButton("Change your status");
 		btnChangeStatus.setBounds(60, 447, 143, 35);
 		panel_3.add(btnChangeStatus);
+		btnChangeStatus.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ChangeStatusPage(m);
+				dispose();
+				
+			}
+			
+		});
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363620201_cog_edit.png")));
@@ -194,7 +230,7 @@ public class MeetingPage extends JFrame {
 		scrollPane.setBounds(30, 89, 168, 85);
 		panel_3.add(scrollPane);
 		
-		JList listAccepted = new JList();
+		
 		scrollPane.setViewportView(listAccepted);
 		listAccepted.setToolTipText("");
 		
@@ -202,14 +238,12 @@ public class MeetingPage extends JFrame {
 		scrollPane_1.setBounds(30, 207, 168, 85);
 		panel_3.add(scrollPane_1);
 		
-		JTextArea textAreaDeclined = new JTextArea();
-		scrollPane_1.setViewportView(textAreaDeclined);
+		scrollPane_1.setViewportView(listDeclined);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(30, 331, 168, 85);
 		panel_3.add(scrollPane_2);
 		
-		JList listNoAnswer = new JList();
 		scrollPane_2.setViewportView(listNoAnswer);
 		
 		JLabel lblNewLabel_10 = new JLabel("");
@@ -251,6 +285,48 @@ public class MeetingPage extends JFrame {
 		lblNewLabel_7.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/andrekalendere.png")));
 		lblNewLabel_7.setBounds(353, 22, 96, 84);
 		contentPane.add(lblNewLabel_7);
+		
+	}
+	
+	class getParticipantWorker extends SwingWorker{
+		ArrayList<Employee> empList = new ArrayList();
+		ArrayList<Integer> answList = new ArrayList();
+		
+		@Override
+		protected Object doInBackground() throws Exception {
+			
+			return empList;
+		}
+		
+		
+		protected void done(){
+			Employee emp = client.getUser();
+			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS).getContent();
+			ArrayList[] list = (ArrayList[]) obj;
+			empList = list[0];
+			answList = list[1];
+			for (int i=0; i<empList.size(); i++){
+				System.out.println(empList.get(i));
+				if(answList.get(i) == 0){
+					if(!listDeclinedModel.contains(empList.get(i))){
+						listDeclinedModel.addElement(empList.get(i));
+					}
+				}
+				if(answList.get(i) == 1){
+					if(!listAcceptedModel.contains(empList.get(i))){
+						listAcceptedModel.addElement(empList.get(i));
+					}
+				}
+				if(answList.get(i) == -1){
+					if(!listNoAnswerModel.contains(empList.get(i))){
+						listNoAnswerModel.addElement(empList.get(i));
+					}
+					
+				}
+			}
+			super.done();
+			System.out.println(empList);
+		}
 		
 	}
 	
