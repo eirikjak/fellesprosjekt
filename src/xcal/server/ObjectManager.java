@@ -66,6 +66,22 @@ public class ObjectManager {
 			Notification notification=(Notification)content;
 			return NotificationManager.handle(notification, flag);
 		}
+		else if(content instanceof Object []){
+			Meeting meet = (Meeting)((Object[])content)[0];
+			Employee emp = (Employee)((Object[])content)[1];
+			int i =0;
+			if(flag == Status.INVITE_ACCEPTED){
+				i = 1;
+			}
+			else if(flag == Status.INVITE_DECLINED){
+				i = 0;
+			}
+			else if(flag == Status.INVITE_NOANS){
+				i = -1;
+			}
+			MeetingQ.updateStatus(meet, i, emp);
+			return new Wrapper(Status.SUCCESS, null);
+		}
 		
 		return null;
 		

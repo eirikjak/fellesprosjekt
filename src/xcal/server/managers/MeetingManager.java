@@ -34,6 +34,7 @@ public class MeetingManager {
 			return update(meeting);
 		case DESTROY:
 			destroy(meeting);
+			break;
 		case GET_AVAILABLE_ROOMS:
 			return getAvailableRooms(meeting);
 		case SELECT:
@@ -41,6 +42,7 @@ public class MeetingManager {
 		
 		case GET_PARTICIPANTS:
 			return getParticipants(meeting);
+
 			
 		}
 			
@@ -48,7 +50,27 @@ public class MeetingManager {
 		return null;
 	}
 	
+/*
+	private static Wrapper create(Meeting meeting){
+		
+		Location loc = LocationQ.createLocation(meeting.getLocationName());
+		if(loc != null){
+			Meeting m = (Meeting) AppointmentsQ.createAppointment(meeting, loc);
+			if(m != null){
+				Notification not = NotificationQ.createNotification(m);
+				if(not != null){
+					return new Wrapper(Status.SUCCESS, null);
+				}else{
+					AppointmentsQ.deleteAppointment(m);
+				}
+			}else{
+				LocationQ.deleteLocation(loc);
+			}
+		}
+		return new Wrapper(Status.ERROR,null);
+		*/
 	private static Wrapper create(Meeting meeting) throws SQLException{
+
 		System.out.println("creating room");
 		Room room = RoomQ.selectRoom(meeting.getRoom().getID());
 		if(room == null){
@@ -99,7 +121,7 @@ public class MeetingManager {
 			}
 			
 		return new Wrapper(Status.ERROR,null);
-		
+	
 	}
 	
 	private static Wrapper update(Meeting meeting){
@@ -107,8 +129,10 @@ public class MeetingManager {
 	}
 	
 	private static Wrapper destroy(Meeting meeting){
-		
-		return new Wrapper(Status.ERROR, null);
+		//System.out.println(meeting);
+		AppointmentsQ.deleteAppointment(meeting);
+		//MeetingQ.deleteMeeting(meeting);
+		return new Wrapper(Status.SUCCESS, null);
 	}
 	private static Wrapper getAvailableRooms(Meeting meeting){
 		Room[] rooms = RoomQ.getAvailableRooms(meeting.getFromTime(), meeting.getToTime());
@@ -132,5 +156,6 @@ public class MeetingManager {
 		
 		return new Wrapper (Status.ERROR, null);
 	}
+
 	
 }

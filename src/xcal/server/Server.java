@@ -69,8 +69,7 @@ public class Server
 		try
 		{
 			Socket client=socket.accept();//wait for connection
-			clients.add(size
-					,new ClientThread(client,size));
+			clients.add(size,new ClientThread(client,size));
 			clients.get(size).start();
 			//new Thread(new ClientThread(client,size)).start();
 			

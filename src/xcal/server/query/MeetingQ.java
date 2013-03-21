@@ -15,6 +15,7 @@ import xcal.model.Employee;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Room;
+import xcal.server.ClientThread;
 
 public class MeetingQ {
 
@@ -62,12 +63,13 @@ public class MeetingQ {
 		return meeting;
 	}
 	public static void deleteMeeting(Meeting meeting){
-		
+		System.out.println(meeting.getAppId());
 		synchronized (connection) {
 			try {
-				String query = "DELETE FROM Appointment WHERE id='" + meeting.getAppId() +"'";
+				
+				String query = "DELETE FROM Appointment WHERE id=" + meeting.getAppId();
 				Statement stat = connection.getConnection().createStatement();
-				stat.execute(query);
+				stat.executeUpdate(query);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
@@ -76,33 +78,57 @@ public class MeetingQ {
 		}
 	}
 	
+
+	public static void updateStatus(Meeting meeting, int ans, Employee emp){
+		synchronized (connection) {
+			String query = "UPDATE Invites SET ans ="+ ans +" Where person = '"+ emp.getEmail()+"'";
+			Statement stat;
+			try {
+				stat = connection.getConnection().createStatement();
+				System.out.println(stat.executeUpdate(query));
+				System.out.println("Q executed");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+
 	public static ArrayList[] getParticipants(Meeting meeting){
 		synchronized (connection) {
 			
+			ArrayList<Employee> empList = new ArrayList();
 			ArrayList<Integer> answerList = new ArrayList();
+			String query = "SELECT * FROM Invites INNER JOIN Appointment ON (app_id = id) Where (app_id = 1)";
+/*
 			System.out.println("APP_ID"+meeting.getAppId());
 			//String query = "SELECT * FROM Invites, Appointment Where (app_id ='" + meeting.getAppId()+"') AND app_id ='"+meeting.getAppId()+"'";
 			String query="select * from Invites, Appointment where Invites.app_id='"+meeting.getAppId()+"' and Appointment.id='"+meeting.getAppId()+"'";
-			
+			*/
+
 			Statement stat;
 			try {
-				ArrayList<Employee> empList = new ArrayList();
 				stat = connection.getConnection().createStatement();
 				ResultSet result=stat.executeQuery(query);
-				
-				result.next();
-				
-				empList.add(EmployeeQ.selectPersonWithEmail(result.getString("leader")));
-				answerList.add(1);
-				result.beforeFirst();
+				Employee l = null;
+
 				while(result.next()){
+					l = EmployeeQ.selectPersonWithEmail(result.getString("leader"));
 					Employee e = EmployeeQ.selectPersonWithEmail(result.getString("person"));
 					if(!empList.contains(e)){
+						System.out.println("Legger til employee" + e);
 						empList.add(e);
 						answerList.add(result.getInt(3));
-					}
-					
+					}	
 				}
+				
+				if(!empList.contains(l)){
+					System.out.println("legger til leder" + l);
+					empList.add(l);
+					answerList.add(1);
+				}
+
 				ArrayList[]resList = {empList, answerList};
 
 				return resList;

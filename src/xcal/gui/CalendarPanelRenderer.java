@@ -26,7 +26,7 @@ import xcal.model.Meeting;
 public class CalendarPanelRenderer implements ListCellRenderer {
 
 	private ImageIcon appointment = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
-	private ImageIcon meeting = new ImageIcon(getClass().getResource("/images/1363749823_config-date.png"));
+	private ImageIcon meeting = new ImageIcon(getClass().getResource("/images/1363749865_stock_new-meeting.png"));
 
 	
 	@Override

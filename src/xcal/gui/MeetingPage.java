@@ -64,7 +64,7 @@ public class MeetingPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MeetingPage(Appointment a) {
+	public MeetingPage(final Appointment a) {
 		
 		
 		JList listAccepted = new JList(listAcceptedModel);
@@ -146,6 +146,21 @@ public class MeetingPage extends JFrame {
 		btnDelete.setBounds(64, 10, 87, 35);
 		panel_1.add(btnDelete);
 		btnDelete.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnDelete.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(a);
+				final Appointment app = a; 
+				System.out.println(app);
+				Object obj = client.sendObject(app, Status.DESTROY);
+				//System.out.println(((Wrapper) obj).getFlag());
+				dispose();
+				RootFrame.clearAll();
+				RootFrame.addPanel(new Mainpage());
+			}
+			
+		});
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(14, 11, 38, 35);
@@ -210,6 +225,16 @@ public class MeetingPage extends JFrame {
 		JButton btnChangeStatus = new JButton("Change your status");
 		btnChangeStatus.setBounds(60, 447, 143, 35);
 		panel_3.add(btnChangeStatus);
+		btnChangeStatus.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ChangeStatusPage(m);
+				dispose();
+				
+			}
+			
+		});
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setIcon(new ImageIcon(MeetingPage.class.getResource("/images/1363620201_cog_edit.png")));
@@ -289,9 +314,10 @@ public class MeetingPage extends JFrame {
 			return empList;
 		}
 		
-		@SuppressWarnings("unchecked")
+		
 		protected void done(){
 			Employee emp = client.getUser();
+
 			//System.out.println(emp + "HEHY");
 
 			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
@@ -323,7 +349,6 @@ public class MeetingPage extends JFrame {
 				}
 			}
 			
-		
 			super.done();
 		}
 		

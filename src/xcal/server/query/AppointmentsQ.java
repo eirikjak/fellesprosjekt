@@ -70,9 +70,9 @@ public class AppointmentsQ
 		
 		synchronized (connection) {
 			try {
-				String query = "DELETE FROM Appointment WHERE id='" + app.getAppId() +"'";
+				String query = "DELETE FROM Appointment WHERE id=" + app.getAppId() +"";
 				Statement stat = connection.getConnection().createStatement();
-				stat.execute(query);
+				stat.executeUpdate(query);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();

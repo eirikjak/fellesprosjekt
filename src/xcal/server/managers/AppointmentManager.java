@@ -66,7 +66,7 @@ public class AppointmentManager {
 	}
 	
 	private static Wrapper destroy(Appointment appointment){
-		AppointmentsQ.deleteEvent(appointment.getAppId());
+		AppointmentsQ.deleteAppointment(appointment);
 		return new Wrapper(Status.ERROR ,null);
 	}
 	
