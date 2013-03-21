@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.joda.time.format.DateTimeFormat;
@@ -100,7 +102,7 @@ public class MeetingQ {
 			
 			ArrayList<Employee> empList = new ArrayList();
 			ArrayList<Integer> answerList = new ArrayList();
-			String query = "SELECT * FROM Invites INNER JOIN Appointment ON (app_id = id) Where (app_id = 1)";
+			String query = "SELECT * FROM Invites INNER JOIN Appointment ON (app_id = id) Where (app_id = " +meeting.getAppId()+")";
 /*
 			System.out.println("APP_ID"+meeting.getAppId());
 			//String query = "SELECT * FROM Invites, Appointment Where (app_id ='" + meeting.getAppId()+"') AND app_id ='"+meeting.getAppId()+"'";
@@ -141,5 +143,40 @@ public class MeetingQ {
 			
 		}
 		return null;
+	}
+
+
+	public static void update(Meeting meeting) {
+		// TODO Auto-generated method stub
+		int id = meeting.getAppId();
+		Timestamp startDate = new Timestamp(meeting.getFromTime().getMillis());
+		Timestamp endDate = new Timestamp(meeting.getToTime().getMillis());
+		String descr = meeting.getDescription();
+		String email = meeting.getLeader().getEmail();
+		int roomid = meeting.getLocationID();
+		System.out.println("edit mode" + id);
+		
+		synchronized (connection) {
+   			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+   			Statement statement;
+   			System.out.println(id + "APPOINTMENT ID");
+   			String query = "UPDATE Appointment SET start_date='"+df.format(startDate)+"', end_date='"+df.format(endDate)+"', description='"+descr+"', leader='"+email+"',  room="+roomid +" WHERE id="+id+"";
+   			try {
+				statement = connection.getConnection().createStatement();
+				statement.executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		/*String sql = "UPDATE Appointment "+
+						"SET start_date='"+df.format(startDate)+"',"+
+						"end_date='"+df.format(endDate)+"',"+
+						"description='"+description+"',"+
+						"leader='"+email+"',"+
+						"place="+place+" "+
+						//"room='"+room+
+								"WHERE id= "+ AppointmentId;*/
+   			
+   		}
 	}
 }

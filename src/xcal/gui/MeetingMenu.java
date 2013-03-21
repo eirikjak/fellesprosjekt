@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,7 +79,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	private JLabel errorLabel ;
 	private Client client;
 	private Meeting model;
-	private JXBusyLabel rwoomBussyLabel ;
+	private JXBusyLabel roomBussyLabel ;
 	private ParticipantSelector participantSelector;
 	private JXBusyLabel submitBussyLabel;
 	private boolean editMode = false;
@@ -615,50 +616,94 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
 					model.setParticipants(participantSelector.getModel().getParticipantsAndGroups());
-					if(model.validateFields()){
-						System.out.println("save");
-						int notification = notificationMap.get(notificationBox.getSelectedItem());
+					if(!editMode){
+						if(model.validateFields()){
+							System.out.println("save");
+							int notification = notificationMap.get(notificationBox.getSelectedItem());
 						
-						DateTime startTime = model.getFromTime();
-						DateTime endTime = model.getToTime();
-						String title = model.getTitle();
-						String desc = model.getDescription();
-						Room room = model.getRoom();
-						System.out.println("helooo");
+							DateTime startTime = model.getFromTime();
+							DateTime endTime = model.getToTime();
+							String title = model.getTitle();
+							String desc = model.getDescription();
+							Room room = model.getRoom();
+							System.out.println("helooo");
 						
-						Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(),model.getParticipants(), room);
-						Notification notificationObj = new Notification(meeting,Client.getClient().getUser());
-						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-						meeting.setNotification(notificationObj);
-						
-						
-						System.out.println(meeting.getParticipants());
-						Wrapper response;
-						if(!editMode){
-							response = client.sendObject(meeting, Status.CREATE);
-						}
-						else{
-							response = client.sendObject(meeting, Status.UPDATE);
-						}
+							Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(),model.getParticipants(), room);
+							Notification notificationObj = new Notification(meeting,Client.getClient().getUser());
+							notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+							meeting.setNotification(notificationObj);
 						
 						
+							System.out.println(meeting.getParticipants());
+							Wrapper response = client.sendObject(meeting, Status.CREATE);
 						
-						if(response.getFlag() != Status.SUCCESS){
-							errorLabel.setText("Error on appointment creation ");
-							errorLabel.setVisible(true);
-							submitBussyLabel.setVisible(false);
-							submitBussyLabel.setBusy(false);
-						}else{
-							if(response.getFlag() == Status.SUCCESS){
-								Close();
+
+							if(response.getFlag() != Status.SUCCESS){
+								errorLabel.setText("Error on appointment creation ");
+								errorLabel.setVisible(true);
+								submitBussyLabel.setVisible(false);
+								submitBussyLabel.setBusy(false);
+							}else{
+								if(response.getFlag() == Status.SUCCESS){
+									Close();
+								}
 							}
-						}
+						
+						}else{
+							errorLabel.setText("One or more invalid fields");
+							errorLabel.setVisible(true);
+							
+						}}
+					else{
+						int app_id = model.getAppId();
+						Timestamp start = new Timestamp(model.getFromTime().getMillis());
+						Timestamp end = new Timestamp(model.getToTime().getMillis());
+						String descr = model.getDescription();
+						String email = model.getLeader().getEmail();
+						int place = model.getLocationID();
+						System.out.println("edit mode" + app_id);
+						
+						if(model.validateFields()){
+							System.out.println("save");
+							int notification = notificationMap.get(notificationBox.getSelectedItem());
+						
+							DateTime startTime = model.getFromTime();
+							DateTime endTime = model.getToTime();
+							String title = model.getTitle();
+							String desc = model.getDescription();
+							Room room = model.getRoom();
+							System.out.println("helooo");
+						
+							Meeting meeting = new Meeting(startTime, endTime ,title, desc, client.getUser(),model.getParticipants(), room);
+							meeting.setAppId(model.getAppId());
+							meeting.setParticipants(model.getParticipants());
+							Notification notificationObj = new Notification(meeting,Client.getClient().getUser());
+							notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+							meeting.setNotification(notificationObj);
+						
+						
+							System.out.println(meeting.getParticipants());
+							Wrapper response = client.sendObject(meeting, Status.UPDATE);
+						
+						
+						
+							if(response.getFlag() != Status.SUCCESS){
+								errorLabel.setText("Error on appointment creation ");
+								errorLabel.setVisible(true);
+								submitBussyLabel.setVisible(false);
+								submitBussyLabel.setBusy(false);
+							}else{
+								if(response.getFlag() == Status.SUCCESS){
+									Close();
+								}
+							}
 						
 						}else{
 							errorLabel.setText("One or more invalid fields");
 							errorLabel.setVisible(true);
 							
 						}
+					}
 						
 						return null;
 				}

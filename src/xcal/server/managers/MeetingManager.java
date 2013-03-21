@@ -125,7 +125,8 @@ public class MeetingManager {
 	}
 	
 	private static Wrapper update(Meeting meeting){
-		return new Wrapper(Status.ERROR, null);
+		MeetingQ.update(meeting);
+		return new Wrapper(Status.SUCCESS, null);
 	}
 	
 	private static Wrapper destroy(Meeting meeting){

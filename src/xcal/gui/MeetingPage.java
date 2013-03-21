@@ -72,7 +72,7 @@ public class MeetingPage extends JFrame {
 		JList listNoAnswer = new JList(listNoAnswerModel);
 		if(a instanceof Meeting){
 			m = (Meeting) a;
-			System.out.println(m);
+			//System.out.println(m.getAppId());
 			
 			SwingWorker w = new getParticipantWorker();
 			w.execute();
@@ -197,7 +197,11 @@ public class MeetingPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				if(m != null){
-					new MeetingMenu().setModel(m);
+					MeetingMenu meetM = new MeetingMenu();
+					meetM.setEditMode(true);
+					meetM.setModel(m);
+					
+					
 				}
 				else{
 					AppointmentMenu appM = new AppointmentMenu();
