@@ -39,6 +39,7 @@ public class Mainpage extends JPanel {
 		
 		
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Create new", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(25, 23, 232, 97);

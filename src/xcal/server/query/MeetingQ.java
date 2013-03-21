@@ -1,14 +1,17 @@
 package xcal.server.query;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import xcal.model.Appointment;
+import xcal.model.Employee;
 import xcal.model.Location;
 import xcal.model.Meeting;
 import xcal.model.Room;
@@ -71,5 +74,37 @@ public class MeetingQ {
 			}
 			
 		}
+	}
+	
+	public static ArrayList[] getParticipants(Meeting meeting){
+		ArrayList<Employee> empList = new ArrayList();
+		ArrayList<Integer> answerList = new ArrayList();
+		//connection.connection = Connection;
+		synchronized (connection) {
+			String query = "SELECT * FROM Invites, Appointment Where (app_id =" + meeting.getAppId()+") AND app_id = id";
+			Statement stat;
+			try {
+				stat = connection.getConnection().createStatement();
+				stat.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+				ResultSet result = stat.getGeneratedKeys();
+				while(result.next()){
+					Employee e = EmployeeQ.selectPersonWithEmail(result.getString(2));
+					if(!empList.contains(e)){
+						empList.add(e);
+						answerList.add(result.getInt(3));
+					}
+					empList.add(EmployeeQ.selectPersonWithEmail(result.getString(8)));
+					answerList.add(1);
+				}
+				
+				ArrayList[]resList = {empList, answerList};
+				return resList;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
 	}
 }

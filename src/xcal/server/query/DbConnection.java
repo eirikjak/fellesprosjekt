@@ -82,7 +82,7 @@ public class DbConnection {
 				new AppointmentsQ(this);
 				new NotificationQ(this);
 				new RoomQ(this);
-				new MeetingQ(this);
+				//new MeetingQ(this);
 				new GroupQ(this);
 				
 				return true;

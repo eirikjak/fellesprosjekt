@@ -17,6 +17,8 @@ public enum Status {
 	DECLINE,
 	TD_APP, 
 	CHECK_NOTIFICATION,
-	OK
+	PENDING,
+	GET_PARTICIPANTS
+
 
 }

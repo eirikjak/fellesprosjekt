@@ -2,6 +2,7 @@ package xcal.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -41,12 +42,12 @@ import javax.swing.JTabbedPane;
 
 public class ParticipantSelector extends JPanel implements PropertyChangeListener {
 
-	private JList<Employee> personListLeft;
-	private DefaultListModel<Employee> personListModelLeft;
-	private DefaultListModel<Employee> personListModelRight;
-	private DefaultListModel<Group> groupListModelLeft;
-	private DefaultListModel<Group> groupListModelRight;
-	private JList<Employee> personListRight;
+	private JList personListLeft;
+	private DefaultListModel personListModelLeft;
+	private DefaultListModel personListModelRight;
+	private DefaultListModel groupListModelLeft;
+	private DefaultListModel groupListModelRight;
+	private JList personListRight;
 	private Client client;
 	private ParticipantSelectorModel model;
 	private JPanel panel;
@@ -61,10 +62,10 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		setLayout(null);
 
-		personListModelRight = new DefaultListModel<Employee>();
-		personListModelLeft = new DefaultListModel<Employee>();
-		groupListModelLeft = new DefaultListModel<Group>();
-		groupListModelRight = new DefaultListModel<Group>();
+		personListModelRight = new DefaultListModel();
+		personListModelLeft =new DefaultListModel();
+		groupListModelLeft = new DefaultListModel();
+		groupListModelRight = new DefaultListModel();
 		
 		model = new ParticipantSelectorModel();
 		model.addPropertyChangeListener(this);
@@ -73,7 +74,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(0, 0, 495, 214);
+		tabbedPane.setBounds(0, 0, 510, 215);
 		add(tabbedPane);
 		
 		
@@ -81,7 +82,9 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		panel = new JPanel();
 		panel.setBorder(null);
 		tabbedPane.addTab("Employees", null, panel, null);
+		tabbedPane.setEnabledAt(0, true);
 		panel.setLayout(null);
+	
 		
 		personBussyLabel = new JXBusyLabel();
 		personBussyLabel.setBounds(78, 91, 26, 26);
@@ -97,7 +100,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(personListRight.getSelectedIndex() > -1){
-					model.removeEmployee(personListModelRight.get(personListRight.getSelectedIndex()));
+					model.removeEmployee((Employee) personListModelRight.get(personListRight.getSelectedIndex()));
 					personListModelRight.remove(personListRight.getSelectedIndex());
 				}
 				
@@ -119,7 +122,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(personListLeft.getSelectedIndex() > -1){
-					model.addEmployee(personListModelLeft.get(personListLeft.getSelectedIndex()));
+					model.addEmployee((Employee) personListModelLeft.get(personListLeft.getSelectedIndex()));
 					personListModelLeft.remove(personListLeft.getSelectedIndex());
 				}
 				
@@ -129,20 +132,22 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(287, 40, 185, 133);
 		panel.add(scrollPane_2);
-		personListRight = new JList<Employee>(personListModelRight);
+		personListRight = new JList(personListModelRight);
 		scrollPane_2.setViewportView(personListRight);
-		personListRight.setCellRenderer(new PersonListCellRenderer());
+		personListRight.setCellRenderer((ListCellRenderer) new PersonListCellRenderer());
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(4, 40, 185, 133);
 		panel.add(scrollPane_1);
-		personListLeft = new JList<Employee>(personListModelLeft);
+		personListLeft = new JList(personListModelLeft);
 		scrollPane_1.setViewportView(personListLeft);
-		personListLeft.setCellRenderer(new PersonListCellRenderer());
+		personListLeft.setCellRenderer((ListCellRenderer) new PersonListCellRenderer());
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(null);
 		panel_1.setLayout(null);
 		tabbedPane.addTab("Groups", null, panel_1, null);
+		tabbedPane.setEnabledAt(1, true);
 		
 		groupBussyLabel = new JXBusyLabel();
 		groupBussyLabel.setBounds(78, 91, 26, 26);
@@ -156,7 +161,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(groupListRight.getSelectedIndex() > -1){
-					model.removeGroup(groupListModelRight.get(groupListRight.getSelectedIndex()));
+					model.removeGroup((Group) groupListModelRight.get(groupListRight.getSelectedIndex()));
 					groupListModelRight.remove(groupListRight.getSelectedIndex());
 				}
 				
@@ -177,7 +182,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(groupListLeft.getSelectedIndex() > -1){
-					model.addGroup(groupListModelLeft.get(groupListLeft.getSelectedIndex()));
+					model.addGroup((Group) groupListModelLeft.get(groupListLeft.getSelectedIndex()));
 					groupListModelLeft.remove(groupListLeft.getSelectedIndex());
 				}
 				
@@ -190,7 +195,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		panel_1.add(scrollPane);
 		
 		groupListRight = new JList(groupListModelRight);
-		groupListRight.setCellRenderer(new GroupListCellRenderer());
+		groupListRight.setCellRenderer((ListCellRenderer) new GroupListCellRenderer());
 		scrollPane.setViewportView(groupListRight);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
@@ -198,7 +203,7 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		panel_1.add(scrollPane_3);
 		
 		groupListLeft = new JList(groupListModelLeft);
-		groupListLeft.setCellRenderer(new GroupListCellRenderer());
+		groupListLeft.setCellRenderer((ListCellRenderer) new GroupListCellRenderer());
 		scrollPane_3.setViewportView(groupListLeft);
 		
 		updateGroupList();
@@ -207,26 +212,26 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 		
 		
 	}
-	private void insertSorted(JList<Employee> list, Employee emp){
+	private void insertSorted(JList list, Employee emp){
 		for (int i = 0; i< list.getModel().getSize(); i++){
-			if(emp.getName().compareTo(list.getModel().getElementAt(i).getName()) <= 0){
-				((DefaultListModel<Employee>) list.getModel()).add(i, emp);
+			if(emp.getName().compareTo(((Employee) list.getModel().getElementAt(i)).getName()) <= 0){
+				((DefaultListModel) list.getModel()).add(i, emp);
 				return;
 			}
 		}
 		
-		((DefaultListModel<Employee>) list.getModel()).addElement(emp);
+		((DefaultListModel) list.getModel()).addElement(emp);
 	}
 	
-	private void insertSorted(JList<Group> list, Group group){
+	private void insertSorted(JList list, Group group){
 		for (int i = 0; i< list.getModel().getSize(); i++){
-			if(group.getName().compareTo(list.getModel().getElementAt(i).getName()) <= 0){
-				((DefaultListModel<Group>) list.getModel()).add(i, group);
+			if(group.getName().compareTo(((Group) list.getModel().getElementAt(i)).getName()) <= 0){
+				((DefaultListModel) list.getModel()).add(i, group);
 				return;
 			}
 		}
 		
-		((DefaultListModel<Group>) list.getModel()).addElement(group);
+		((DefaultListModel) list.getModel()).addElement(group);
 	}
 	
 	
@@ -335,26 +340,28 @@ public class ParticipantSelector extends JPanel implements PropertyChangeListene
 	public ParticipantSelectorModel getModel(){
 		return this.model;
 	}
-	private class PersonListCellRenderer implements ListCellRenderer<Employee>{
+	
+	private class PersonListCellRenderer implements ListCellRenderer{
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 		
 		@Override
-		public Component getListCellRendererComponent(JList<? extends Employee> list, Employee value, int index, boolean isSelected, boolean cellHasFocus) {
-			
+		public Component getListCellRendererComponent(JList list, Object value,int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			
-			label.setText(value.getName());
+			label.setText(((Employee)value).getName());
 			return label;
+			
 		}
 		
 	}
-	private class GroupListCellRenderer implements ListCellRenderer<Group>{
+	private class GroupListCellRenderer implements ListCellRenderer{
 		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 		
+		
 		@Override
-		public Component getListCellRendererComponent(JList<? extends Group> list, Group value, int index, boolean isSelected, boolean cellHasFocus) {
+		public Component getListCellRendererComponent(JList list, Object value,int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-			label.setText(value.getName());
+			label.setText(((Group)value).getName());
 			return label;
 		}
 		

@@ -182,7 +182,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		getContentPane().add(lblSted);
 		
 		description = new JTextArea();
-		description.setBounds(181, 219, 470, 127);
+		description.setBounds(181, 219, 491, 127);
 		getContentPane().add(description);
 		
 		JLabel lblBeskrivelse = new JLabel("Description:");
@@ -278,7 +278,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(172, 211, 489, 143);
+		panel_1.setBounds(172, 211, 509, 143);
 		getContentPane().add(panel_1);
 		
 		errorLabel = new JLabel("");
@@ -294,7 +294,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		getContentPane().add(roomBussyLabel);
 		
 		participantSelector = new ParticipantSelector();
-		participantSelector.setBounds(182, 369, 502, 219);
+		participantSelector.setBounds(171, 369, 511, 231);
 		getContentPane().add(participantSelector);
 		
 		submitBussyLabel = new JXBusyLabel();
@@ -314,7 +314,18 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	}
 	
 	public void setModel(Meeting model){
-		throw new RuntimeException("not implemented");
+		this.model.removePropertyChangeListener(this);
+		this.model = model;
+		this.model.addPropertyChangeListener(this);
+		
+		datePicker.setDate(model.getFromTime().toDate());
+		
+		startHour.setText(new Integer(model.getFromTime().getHourOfDay()).toString());
+		startMinute.setText((new Integer(model.getFromTime().getMinuteOfHour()).toString()));
+		endHour.setText(new Integer(model.getToTime().getHourOfDay()).toString());
+		endMinute.setText(new Integer(model.getToTime().getMinuteOfHour()).toString());
+		name.setText(model.getTitle());
+		description.setText(model.getDescription());
 	}
 	
 	private void addListeners(){
@@ -595,7 +606,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
-			//lukk vindu når ferdig
+			//lukk vindu nï¿½r ferdig
 			submitBussyLabel.setVisible(true);
 			submitBussyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){

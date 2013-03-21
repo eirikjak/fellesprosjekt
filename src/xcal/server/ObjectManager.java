@@ -15,6 +15,7 @@ import xcal.server.managers.AppointmentManager;
 import xcal.server.managers.AuthenticationManager;
 import xcal.server.managers.EmployeeManager;
 import xcal.server.managers.GroupManager;
+import xcal.server.managers.InviteManager;
 import xcal.server.managers.MeetingManager;
 import xcal.server.managers.NotificationManager;
 import xcal.server.query.*;
@@ -54,6 +55,10 @@ public class ObjectManager {
 		else if(content instanceof Group){
 			Group group = (Group)content;
 			return GroupManager.handle(group, flag);
+		}
+		else if(content instanceof Invite){
+			Invite invite =(Invite)content;
+			return InviteManager.handle(invite, flag);
 		}
 		
 		else if(content instanceof Notification)

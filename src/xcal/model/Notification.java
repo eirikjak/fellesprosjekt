@@ -29,6 +29,9 @@ public class Notification implements Serializable
 		this(a,e,DateTime.now());
 		
 	}
+	public Notification(){
+		
+	}
 	
 	
 	public void setNotificationTime(DateTime time){
@@ -38,6 +41,10 @@ public class Notification implements Serializable
 	public Employee getEmployee(){return emp;}
 	public DateTime getNotificationTime(){
 		return this.notification;
+	}
+	
+	public String toString(){
+		return "" + this.app;
 	}
 
 }
