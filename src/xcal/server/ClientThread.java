@@ -26,7 +26,7 @@ public class ClientThread extends Thread implements Runnable
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private int id;
-	private Employee person;	
+	private xcal.model.Employee person;	
 	private boolean running;
 	
 	public ClientThread(Socket client,int i)
@@ -103,10 +103,11 @@ public class ClientThread extends Thread implements Runnable
 	 * 
 	 * @return Wrapper - the wrapper object recieved
 	 */
-	public Wrapper recieveObject() throws ClassNotFoundException
+	public Wrapper recieveObject()
 	{
 		try
-		{	
+		{
+			
 			try//check if possible to recieve on socket
 			{
 			input=new ObjectInputStream(client.getInputStream());
@@ -114,11 +115,10 @@ public class ClientThread extends Thread implements Runnable
 			catch(SocketException e){disconnect();return null;}
 	
 	
-			
+			Wrapper recieve = (Wrapper) input.readObject();
+			return recieve;
 		}
-
-		catch( IOException e)
-
+		catch( IOException | ClassNotFoundException e)
 		{
 			e.printStackTrace();
 			this.
@@ -151,15 +151,8 @@ public class ClientThread extends Thread implements Runnable
 			{
 				
 	
-				Wrapper object;
-				try {
-					object = ObjectManager.manage(recieveObject());
-					sendObject(object);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				Wrapper object= ObjectManager.manage(recieveObject());
+				sendObject(object);
 				
 
 				
