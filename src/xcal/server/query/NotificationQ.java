@@ -276,7 +276,7 @@ public class NotificationQ
 				while(result.next())
 				{
 					notification[size]=new Notification(AppointmentsQ.selectAppointment(result.getInt("app_id")),emp);
-					System.out.println("Title:" + notification[size].getAppointment().getTitle());
+					//System.out.println("Title:" + notification[size].getAppointment().getTitle());
 					++size;
 					
 				}

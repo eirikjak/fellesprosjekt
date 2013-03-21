@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
 
 import xcal.client.Status;
@@ -55,7 +56,12 @@ public class ClientThread extends Thread implements Runnable
 		Wrapper send=new Wrapper(status,object);
 		try
 		{
-			output=new ObjectOutputStream(client.getOutputStream());
+			try//check if possible to recieve on socket
+			{
+				output=new ObjectOutputStream(client.getOutputStream());
+			}
+			catch(SocketException e){disconnect();return false;}
+			
 			output.writeObject(send);
 			output.flush();
 			return true;
@@ -76,7 +82,12 @@ public class ClientThread extends Thread implements Runnable
 		//Wrapper send=new Wrapper(status,object);
 		try
 		{
+			try//check if possible to recieve on socket
+			{
 			output=new ObjectOutputStream(client.getOutputStream());
+			}
+			catch(SocketException e){disconnect();return false;}
+			
 			output.writeObject(send);
 			output.flush();
 			return true;
@@ -92,23 +103,22 @@ public class ClientThread extends Thread implements Runnable
 	 * 
 	 * @return Wrapper - the wrapper object recieved
 	 */
-	public Wrapper recieveObject()
+	public Wrapper recieveObject() throws ClassNotFoundException
 	{
 		try
-		{
-			try {
-				input=new ObjectInputStream(client.getInputStream());
-				Wrapper recieve = (Wrapper) input.readObject();
-				return recieve;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		{	
+			try//check if possible to recieve on socket
+			{
+			input=new ObjectInputStream(client.getInputStream());
 			}
+			catch(SocketException e){disconnect();return null;}
 	
 	
 			
 		}
-		catch( ClassNotFoundException e )
+
+		catch( IOException e)
+
 		{
 			e.printStackTrace();
 			this.
@@ -121,7 +131,15 @@ public class ClientThread extends Thread implements Runnable
 	
 	public boolean isRunning(){return running;}
 	
-	
+	private void disconnect()
+	{
+		try {
+			client.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		running=false;
+	}
 	
 
 	public void run()
@@ -133,15 +151,15 @@ public class ClientThread extends Thread implements Runnable
 			{
 				
 	
-				Wrapper object= ObjectManager.manage(recieveObject());
-				
-				if(object.getFlag()==Status.LOGOUT)
-				{
-					running=false;
-					break;
+				Wrapper object;
+				try {
+					object = ObjectManager.manage(recieveObject());
+					sendObject(object);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
-				sendObject(object);
 				
 
 				

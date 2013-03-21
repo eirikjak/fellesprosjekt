@@ -115,7 +115,6 @@ public class Mainpage extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				client.sendObject(client.getUser(), Status.LOGOUT);//send to server wishing to logout
 				System.exit(0);
 				
 			}
@@ -152,7 +151,7 @@ public class Mainpage extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+		
 			new MeetingMenu();
 			
 		}

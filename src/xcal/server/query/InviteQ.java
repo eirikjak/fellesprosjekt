@@ -192,6 +192,39 @@ public class InviteQ
 		
 		
 	}
+	/**
+	 * get answer for specified user for specified appointment
+	 * must check if invite exist before using this function
+	 * 
+	 * @param app_id - appointment id
+	 * @param emp_email - email for user
+	 * @return - 1:accepted 0:rejected -1:haven't answered
+	 */
+	public static int checkAnswer(int app_id,String emp_email)
+	{
+		synchronized (connection) 
+		{
+			String query="select * from Invites where app_id='"+app_id+"' and person='"+emp_email+"'";
+			
+			try 
+			{
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result=stat.executeQuery(query);
+				
+				result.next();
+				
+				return result.getInt("ans");
+			
+				
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			return -1;
+		}
+	}
 	
 	
 	

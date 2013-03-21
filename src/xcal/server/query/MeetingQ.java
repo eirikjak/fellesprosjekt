@@ -77,6 +77,7 @@ public class MeetingQ {
 		}
 	}
 	
+
 	public static void updateStatus(Meeting meeting, int ans, Employee emp){
 		synchronized (connection) {
 			String query = "UPDATE Invites SET ans ="+ ans +" Where person = '"+ emp.getEmail()+"'";
@@ -92,17 +93,25 @@ public class MeetingQ {
 		}
 	}
 	
+
 	public static ArrayList[] getParticipants(Meeting meeting){
 		synchronized (connection) {
 			
 			ArrayList<Employee> empList = new ArrayList();
 			ArrayList<Integer> answerList = new ArrayList();
 			String query = "SELECT * FROM Invites INNER JOIN Appointment ON (app_id = id) Where (app_id = 1)";
+/*
+			System.out.println("APP_ID"+meeting.getAppId());
+			//String query = "SELECT * FROM Invites, Appointment Where (app_id ='" + meeting.getAppId()+"') AND app_id ='"+meeting.getAppId()+"'";
+			String query="select * from Invites, Appointment where Invites.app_id='"+meeting.getAppId()+"' and Appointment.id='"+meeting.getAppId()+"'";
+			*/
+
 			Statement stat;
 			try {
 				stat = connection.getConnection().createStatement();
 				ResultSet result=stat.executeQuery(query);
 				Employee l = null;
+
 				while(result.next()){
 					l = EmployeeQ.selectPersonWithEmail(result.getString("leader"));
 					Employee e = EmployeeQ.selectPersonWithEmail(result.getString("person"));
@@ -118,8 +127,12 @@ public class MeetingQ {
 					empList.add(l);
 					answerList.add(1);
 				}
-				ArrayList[]response = {empList, answerList};
-				return response;
+
+				ArrayList[]resList = {empList, answerList};
+
+				return resList;
+
+				//return empList;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

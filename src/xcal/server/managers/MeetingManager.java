@@ -41,9 +41,7 @@ public class MeetingManager {
 		
 		case GET_PARTICIPANTS:
 			return getParticipants(meeting);
-			
-		case INVITE_ACCEPTED:
-			return updateStatus(meeting);
+
 			
 		}
 			
@@ -155,10 +153,6 @@ public class MeetingManager {
 		
 		return new Wrapper (Status.ERROR, null);
 	}
-	
-	private static Wrapper updateStatus(Meeting meeting){
-		MeetingQ.updateStatus(meeting, 1);
-		return new Wrapper(Status.SUCCESS, null);
-	}
+
 	
 }

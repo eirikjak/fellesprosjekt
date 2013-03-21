@@ -30,11 +30,12 @@ import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Employee;
 import xcal.model.Meeting;
+import xcal.server.query.InviteQ;
 
 public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
-	private Client client = Client.getClient();
+	private Client client=Client.getClient();
 	private Meeting m ;
 	private final DefaultListModel listAcceptedModel = new DefaultListModel();
 	private final DefaultListModel listDeclinedModel = new DefaultListModel();
@@ -64,6 +65,7 @@ public class MeetingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MeetingPage(Appointment a) {
+		
 		
 		JList listAccepted = new JList(listAcceptedModel);
 		JList listDeclined = new JList(listDeclinedModel);
@@ -292,6 +294,7 @@ public class MeetingPage extends JFrame {
 		ArrayList<Employee> empList = new ArrayList();
 		ArrayList<Integer> answList = new ArrayList();
 		
+		
 		@Override
 		protected Object doInBackground() throws Exception {
 			
@@ -301,29 +304,45 @@ public class MeetingPage extends JFrame {
 		
 		protected void done(){
 			Employee emp = client.getUser();
-			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS).getContent();
-			ArrayList[] list = (ArrayList[]) obj;
-			empList = list[0];
-			answList = list[1];
-			for (int i=0; i<empList.size(); i++){
-				System.out.println(empList.get(i));
-				if(answList.get(i) == 0){
-					if(!listDeclinedModel.contains(empList.get(i))){
+
+			//System.out.println(emp + "HEHY");
+			System.out.println(m + "INSIDE WOREKR");
+			
+			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
+			//ArrayList[] list = (ArrayList[]) obj; 
+			System.out.println(((Wrapper) obj).getFlag());
+			
+			ArrayList[] list=(ArrayList[]) ((Wrapper)obj).getContent();
+			empList=list[0];
+			answList=list[1];
+			
+			//empList = (ArrayList[])((Wrapper) obj).getContent();
+			
+//			answList = list[1];
+			//System.out.println(answList);
+			System.out.println(empList + "klklksds");
+			
+			
+			
+			for(int i=0;i<empList.size();++i)
+			{
+	
+				switch(answList.get(i))
+				{
+					case 0:
 						listDeclinedModel.addElement(empList.get(i));
-					}
-				}
-				if(answList.get(i) == 1){
-					if(!listAcceptedModel.contains(empList.get(i))){
-						listAcceptedModel.addElement(empList.get(i));
-					}
-				}
-				if(answList.get(i) == -1){
-					if(!listNoAnswerModel.contains(empList.get(i))){
-						listNoAnswerModel.addElement(empList.get(i));
-					}
+					break;
 					
+					case 1:
+						listAcceptedModel.addElement(empList.get(i));
+					break;
+					
+					case -1:
+						listNoAnswerModel.addElement(empList.get(i));
+					break;
 				}
 			}
+			
 			super.done();
 			System.out.println(empList);
 		}

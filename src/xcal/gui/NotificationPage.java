@@ -54,7 +54,7 @@ public class NotificationPage extends JFrame {
 		notification=noti;
 		//if this is string type...
 		int appointment_hour=notification.getAppointment().getFromTime().getHourOfDay();
-		int appointment_min=notification.getAppointment().getFromTime().getMinuteOfDay();
+		int appointment_min=notification.getAppointment().getFromTime().getMinuteOfHour();
 				
 		int appointment_month=notification.getAppointment().getFromTime().getMonthOfYear();
 		int appointment_day=notification.getAppointment().getFromTime().getDayOfMonth();
@@ -65,7 +65,7 @@ public class NotificationPage extends JFrame {
 		
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 519, 310);
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("Panel.background"));
@@ -102,7 +102,7 @@ public class NotificationPage extends JFrame {
 		lblNewLabel_3.setBounds(72, 168, 81, 21);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel(appointment_day+"."+appointment_month+"-"+appointment_year);
+		JLabel lblNewLabel_4 = new JLabel(appointment_day+"."+appointment_month+"."+appointment_year);
 		lblNewLabel_4.setBounds(158, 170, 74, 16);
 		contentPane.add(lblNewLabel_4);
 		
