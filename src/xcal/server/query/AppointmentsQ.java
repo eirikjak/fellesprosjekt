@@ -205,7 +205,7 @@ public class AppointmentsQ
  		   result.next();
 
  		   
- 		   if(result.getString("room").equals(""))//appointment doesn't contain room
+ 		   if(result.getString("room")==null)//appointment doesn't contain room
  		   {
  			   System.out.println("APPOINTMENT");
  			   Appointment app=new Appointment();

@@ -83,7 +83,7 @@ public class MeetingPage extends JFrame {
 		
 		this.setVisible(true);
 		setTitle("Meeting: " + a.getTitle());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 749, 575);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -313,8 +313,11 @@ public class MeetingPage extends JFrame {
 			System.out.println(((Wrapper) obj).getFlag());
 			
 			ArrayList[] list=(ArrayList[]) ((Wrapper)obj).getContent();
-			empList=list[0];
-			answList=list[1];
+			
+			if(!list[0].isEmpty())
+				empList=list[0];
+			if(!list[1].isEmpty())
+				answList=list[1];
 			
 			//empList = (ArrayList[])((Wrapper) obj).getContent();
 			
@@ -344,7 +347,6 @@ public class MeetingPage extends JFrame {
 			}
 			
 			super.done();
-			System.out.println(empList);
 		}
 		
 	}
