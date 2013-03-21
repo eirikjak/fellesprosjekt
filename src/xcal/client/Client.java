@@ -49,8 +49,7 @@ public class Client
 		client = this;
 		
 		showCalendars=new Vector<Employee>();
-		
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 			
 		

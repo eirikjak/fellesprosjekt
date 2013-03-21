@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import xcal.client.Client;
-import xcal.client.InviteListener;
+//import xcal.client.InviteListener;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.gui.CalendarPanel;
@@ -128,7 +128,7 @@ public class Mainpage extends JPanel {
 		});
 		calendarPanel.setVisible(true);
 
-		new InviteListener();
+		//new InviteListener();
 	}
 	
 	
@@ -136,7 +136,7 @@ public class Mainpage extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			OtherCalendarsMenu menu=new OtherCalendarsMenu(calendarPanel);
+			new OtherCalendarsMenu();
 			
 			
 			

@@ -57,6 +57,8 @@ public class CalendarPanel extends JPanel {
 	private JLabel sundayDate = new JLabel();
 	//end labels for dates
 	
+	private SwingWorker worker;
+	
 	
 	
 	//Models
@@ -191,8 +193,8 @@ public class CalendarPanel extends JPanel {
 		//end for list appointments
 				
 		client = Client.getClient();
-		SwingWorker w = new Worker();
-		w.execute();
+		worker = new Worker();
+		worker.execute();
 		setLayout(null);
 		
 		
@@ -354,7 +356,12 @@ public class CalendarPanel extends JPanel {
 	
 	public void updateCalendar()
 	{
-		new CalendarPanel();
+		worker=new Worker();
+		//worker.doInBackground();
+		//worker=new Worker();
+		worker.execute();
+		//setLayout(null);
+		//System.out.println("update");
 	}
 	
 	
@@ -381,12 +388,11 @@ public class CalendarPanel extends JPanel {
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
 			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
 			
-			
+			System.out.println("HERE!!!!!!!!\n\n");
 			
 			/**************************************** HERE *****************************************************/
 			Vector<Employee> all_users=client.getCalendarUsers();
-			for(int j=0;j<all_users.size();++j)
-			{
+			
 
 				for (int i=0; i < 7; i++)
 				{
@@ -396,12 +402,17 @@ public class CalendarPanel extends JPanel {
 					int monthNum = Integer.valueOf(m.format(c));
 					weekAppointments[i].clear();
 					week[i].setText(df.format(c) + month[monthNum-1]);
+					
+					for(int j=0;j<all_users.size();++j)
+					{
+					
 					Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
 					Object obj = client.sendObject(app, Status.TD_APP).getContent();
 	
 					result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+					
+					}
 					cal = cal.plusDays(1);
-				}
 			}
 			return null;
 			
@@ -447,17 +458,26 @@ public class CalendarPanel extends JPanel {
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
 			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
 			
-			for (int i=0; i < 7; i++){
+			
+			Vector<Employee> all_users=client.getCalendarUsers();
+			
+			for (int i=0; i < 7; i++)
+			{
 				Date c = cal.toDate();
 				DateTime dtFrom = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),00,00,00);
 				DateTime dtTo = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),23,59,59);
 				int monthNum = Integer.valueOf(m.format(c));
 				weekAppointments[i].clear();
 				week[i].setText(df.format(c) + month[monthNum-1]);
-				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
+				for(int j=0;j<all_users.size();++j)
+				{
+				
+				Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
 				Object obj = client.sendObject(app, Status.TD_APP).getContent();
 
 				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+				
+				}
 				cal = cal.plusDays(1);
 			}
 			return null;
@@ -518,17 +538,28 @@ public class CalendarPanel extends JPanel {
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
 			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
 			
-			for (int i=0; i < 7; i++){
+			
+			Vector<Employee> all_users=client.getCalendarUsers();
+			
+
+			for (int i=0; i < 7; i++)
+			{
 				Date c = cal.toDate();
 				DateTime dtFrom = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),00,00,00);
 				DateTime dtTo = new DateTime(cal.getYear(),cal.getMonthOfYear(),cal.getDayOfMonth(),23,59,59);
 				int monthNum = Integer.valueOf(m.format(c));
 				weekAppointments[i].clear();
 				week[i].setText(df.format(c) + month[monthNum-1]);
-				Appointment app = new Appointment(dtFrom, dtTo,"","",client.getUser());
-				Object obj = client.sendObject(app, Status.TD_APP).getContent();
-
-				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+				
+				for(int j=0;j<all_users.size();++j)
+				{
+					
+					Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
+					Object obj = client.sendObject(app, Status.TD_APP).getContent();
+	
+					result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+					
+				}
 				cal = cal.plusDays(1);
 			}
 			return null;

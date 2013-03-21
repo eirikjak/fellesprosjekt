@@ -1,5 +1,6 @@
 package xcal.model;
 
-public class CalendarModel {
+public class CalendarModel 
+{
 
 }
