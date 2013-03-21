@@ -10,38 +10,40 @@ public class Invite implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4106531727169014891L;
-	private DateTime Invite;
-	private Appointment app;
+	private Meeting meeting;
 	private Employee emp;
+	private int answer = -1;
 	
-	public Invite(Appointment a, Employee e, DateTime notificationTime)
+	public Invite(Meeting a, Employee e)
 	{
-		app=a;
+		meeting=a;
 		emp=e;
-		this.Invite = notificationTime;
-		
-	}
-	public Invite(Appointment a, Employee e)
-	{
-		this(a,e,DateTime.now());
-		
-	}
-	public Invite(){
 		
 	}
 	
 	
-	public void setNotificationTime(DateTime time){
-		this.Invite = time;
+	public Invite(){};
+	public void setAnswer(int answer){
+		this.answer = answer;
 	}
-	public Appointment getAppointment(){return app;}
+	
+	public int getAnswer(){
+		return this.answer;
+	}
+	public Invite(Employee e){
+		this(new Meeting(), e);
+	}
+	
+	
+
+	public Meeting getMeeting(){return meeting;}
 	public Employee getEmployee(){return emp;}
-	public DateTime getNotificationTime(){
-		return this.Invite;
+	public void setEmployee(Employee employee){
+		this.emp = employee;
 	}
 	
 	public String toString(){
-		return "" + this.app;
+		return "" + this.meeting;
 	}
 
 }

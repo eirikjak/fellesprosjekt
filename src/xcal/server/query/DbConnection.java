@@ -85,6 +85,7 @@ public class DbConnection {
 				new RoomQ(this);
 				new MeetingQ(this);
 				new GroupQ(this);
+				new InviteQ(this);
 				return true;
 			}
 		} catch (Exception e) {
