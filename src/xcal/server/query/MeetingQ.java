@@ -76,7 +76,7 @@ public class MeetingQ {
 		}
 	}
 	
-	public static ArrayList<Employee> getParticipants(Meeting meeting){
+	public static ArrayList[] getParticipants(Meeting meeting){
 		synchronized (connection) {
 			
 			ArrayList<Integer> answerList = new ArrayList();
@@ -104,7 +104,10 @@ public class MeetingQ {
 					
 				}
 				ArrayList[]resList = {empList, answerList};
-				return empList;
+
+				return resList;
+
+				//return empList;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

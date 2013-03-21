@@ -9,5 +9,5 @@ public class Settings
 	public static String db_user="felles";
 	public static String db_pw="felles";
 	
-	public static final int NOTIFICATION_INTERVAL=60000; //1min
+	public static final int NOTIFICATION_INTERVAL=60000; //1min how often to check for notifications
 }

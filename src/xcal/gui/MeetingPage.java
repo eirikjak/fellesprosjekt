@@ -30,6 +30,7 @@ import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Employee;
 import xcal.model.Meeting;
+import xcal.server.query.InviteQ;
 
 public class MeetingPage extends JFrame {
 
@@ -299,11 +300,38 @@ public class MeetingPage extends JFrame {
 			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
 			//ArrayList[] list = (ArrayList[]) obj; 
 			System.out.println(((Wrapper) obj).getFlag());
-			empList = (ArrayList<Employee>)((Wrapper) obj).getContent();
+			
+			ArrayList[] list=(ArrayList[]) ((Wrapper)obj).getContent();
+			empList=list[0];
+			answList=list[1];
+			
+			//empList = (ArrayList[])((Wrapper) obj).getContent();
 			
 //			answList = list[1];
 			//System.out.println(answList);
 			System.out.println(empList + "klklksds");
+			
+			
+			
+			for(int i=0;i<empList.size();++i)
+			{
+	
+				switch(answList.get(i))
+				{
+					case 0:
+						listDeclinedModel.addElement(empList.get(i));
+					break;
+					
+					case 1:
+						listAcceptedModel.addElement(empList.get(i));
+					break;
+					
+					case -1:
+						listNoAnswerModel.addElement(empList.get(i));
+					break;
+				}
+			}
+			
 			/*for (int i=0; i<empList.size(); i++){
 				
 				if(answList.get(i) == 0){

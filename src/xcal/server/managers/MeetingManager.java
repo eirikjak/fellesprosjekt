@@ -119,7 +119,7 @@ public class MeetingManager {
 	}
 	
 	private static Wrapper getParticipants(Meeting meeting){
-		ArrayList<Employee> partList = MeetingQ.getParticipants(meeting);
+		ArrayList[] partList = MeetingQ.getParticipants(meeting);
 		if(partList != null){
 			return new Wrapper(Status.SUCCESS, partList);
 		}
