@@ -64,7 +64,7 @@ public class MeetingPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MeetingPage(Appointment a) {
+	public MeetingPage(final Appointment a) {
 		
 		
 		JList listAccepted = new JList(listAcceptedModel);
@@ -148,6 +148,21 @@ public class MeetingPage extends JFrame {
 		btnDelete.setBounds(64, 10, 87, 35);
 		panel_1.add(btnDelete);
 		btnDelete.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnDelete.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(a);
+				final Appointment app = a; 
+				System.out.println(app);
+				Object obj = client.sendObject(app, Status.DESTROY);
+				//System.out.println(((Wrapper) obj).getFlag());
+				dispose();
+				RootFrame.clearAll();
+				RootFrame.addPanel(new Mainpage());
+			}
+			
+		});
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(14, 11, 38, 35);

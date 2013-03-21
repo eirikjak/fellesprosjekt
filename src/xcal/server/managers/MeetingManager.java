@@ -34,6 +34,7 @@ public class MeetingManager {
 			return update(meeting);
 		case DESTROY:
 			destroy(meeting);
+			break;
 		case GET_AVAILABLE_ROOMS:
 			return getAvailableRooms(meeting);
 		case SELECT:
@@ -128,8 +129,10 @@ public class MeetingManager {
 	}
 	
 	private static Wrapper destroy(Meeting meeting){
-		
-		return new Wrapper(Status.ERROR, null);
+		//System.out.println(meeting);
+		AppointmentsQ.deleteAppointment(meeting);
+		//MeetingQ.deleteMeeting(meeting);
+		return new Wrapper(Status.SUCCESS, null);
 	}
 	private static Wrapper getAvailableRooms(Meeting meeting){
 		Room[] rooms = RoomQ.getAvailableRooms(meeting.getFromTime(), meeting.getToTime());

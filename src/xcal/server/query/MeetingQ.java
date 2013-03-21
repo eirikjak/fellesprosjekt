@@ -63,12 +63,13 @@ public class MeetingQ {
 		return meeting;
 	}
 	public static void deleteMeeting(Meeting meeting){
-		
+		System.out.println(meeting.getAppId());
 		synchronized (connection) {
 			try {
-				String query = "DELETE FROM Appointment WHERE id='" + meeting.getAppId() +"'";
+				
+				String query = "DELETE FROM Appointment WHERE id=" + meeting.getAppId();
 				Statement stat = connection.getConnection().createStatement();
-				stat.execute(query);
+				stat.executeUpdate(query);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
