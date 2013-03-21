@@ -120,11 +120,13 @@ public class AppointmentsQ
 		  			   	app.setLeader(l);
 		  			   	app.setFromTime(resultSet.getTimestamp("start_date"));
 		  			   	app.setToTime(resultSet.getTimestamp("end_date"));
+		  			   	app.setAppId(resultSet.getInt("id"));
 		  			   	app.setLocation(new Location(LocationQ.getPlaceName(Integer.valueOf(resultSet.getString("place"))),Integer.valueOf(resultSet.getString("place"))));
 		  			   	appList.add(app);
 		  		   }
 					else{
 						Appointment meeting=new Meeting();
+						meeting.setAppId(resultSet.getInt("id"));
 						meeting.setTitle(resultSet.getString("title"));
 						meeting.setDescription(resultSet.getString("description"));
 						Employee l = new Employee(resultSet.getString("name"), resultSet.getString("email"),"");
@@ -166,6 +168,7 @@ public class AppointmentsQ
   			   //app.setName(result.getString("name"));
   			   app.setFromTime(resultSet.getTimestamp("start_date"));
   			   app.setToTime(resultSet.getTimestamp("end_date"));
+  			   app.setAppId(resultSet.getInt("id"));
   			   return app;
   		   }
   		   
@@ -173,6 +176,7 @@ public class AppointmentsQ
   		   meeting.setDescription(resultSet.getString("description"));
   		   meeting.setFromTime(resultSet.getTimestamp("start_date"));
   		   meeting.setToTime(resultSet.getTimestamp("end_date"));
+  		   meeting.setAppId(resultSet.getInt("id"));
   		   
   		   return meeting;   		   
   		   

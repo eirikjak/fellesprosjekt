@@ -34,7 +34,7 @@ import xcal.model.Meeting;
 public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
-	private Client client = Client.getClient();
+	private Client client=Client.getClient();
 	private Meeting m ;
 	private final DefaultListModel listAcceptedModel = new DefaultListModel();
 	private final DefaultListModel listDeclinedModel = new DefaultListModel();
@@ -64,6 +64,7 @@ public class MeetingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MeetingPage(Appointment a) {
+		
 		
 		JList listAccepted = new JList(listAcceptedModel);
 		JList listDeclined = new JList(listDeclinedModel);
@@ -282,6 +283,7 @@ public class MeetingPage extends JFrame {
 		ArrayList<Employee> empList = new ArrayList();
 		ArrayList<Integer> answList = new ArrayList();
 		
+		
 		@Override
 		protected Object doInBackground() throws Exception {
 			
@@ -293,6 +295,7 @@ public class MeetingPage extends JFrame {
 			Employee emp = client.getUser();
 			//System.out.println(emp + "HEHY");
 			System.out.println(m + "INSIDE WOREKR");
+			
 			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
 			//ArrayList[] list = (ArrayList[]) obj; 
 			System.out.println(((Wrapper) obj).getFlag());

@@ -80,14 +80,21 @@ public class MeetingQ {
 		synchronized (connection) {
 			
 			ArrayList<Integer> answerList = new ArrayList();
-			String query = "SELECT * FROM Invites, Appointment Where (app_id =" + meeting.getAppId()+") AND app_id = id";
+			System.out.println("APP_ID"+meeting.getAppId());
+			//String query = "SELECT * FROM Invites, Appointment Where (app_id ='" + meeting.getAppId()+"') AND app_id ='"+meeting.getAppId()+"'";
+			String query="select * from Invites, Appointment where Invites.app_id='"+meeting.getAppId()+"' and Appointment.id='"+meeting.getAppId()+"'";
+			
 			Statement stat;
 			try {
 				ArrayList<Employee> empList = new ArrayList();
 				stat = connection.getConnection().createStatement();
 				ResultSet result=stat.executeQuery(query);
+				
+				result.next();
+				
 				empList.add(EmployeeQ.selectPersonWithEmail(result.getString("leader")));
 				answerList.add(1);
+				result.beforeFirst();
 				while(result.next()){
 					Employee e = EmployeeQ.selectPersonWithEmail(result.getString("person"));
 					if(!empList.contains(e)){
