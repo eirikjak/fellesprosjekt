@@ -58,7 +58,7 @@ public class ObjectManager {
 		}
 		else if(content instanceof Invite){
 			Invite invite =(Invite)content;
-			//return InviteManager.handle(invite, flag);
+			return InviteManager.handle(invite, flag);
 		}
 		
 		else if(content instanceof Notification)

@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.border.TitledBorder;
@@ -33,6 +34,11 @@ public class OtherCalendarsMenu extends JFrame {
 	private SwingWorker worker;
 	private final DefaultListModel model = new DefaultListModel();
 	private final DefaultListModel model1 = new DefaultListModel();
+	
+	public CalendarPanel calendar;
+	
+	private boolean add_done;
+	
 
 	/**
 	 * Launch the application.
@@ -41,7 +47,7 @@ public class OtherCalendarsMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OtherCalendarsMenu frame = new OtherCalendarsMenu();
+					OtherCalendarsMenu frame = new OtherCalendarsMenu(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,9 +60,9 @@ public class OtherCalendarsMenu extends JFrame {
 	 * Create the frame.
 	 */
 
-	public OtherCalendarsMenu() {
-		
-		
+	public OtherCalendarsMenu(final CalendarPanel calendar) {
+		this.calendar=calendar;
+		add_done=false;
 		setTitle("Add other calendars");
 		this.setVisible(true);
 	
@@ -95,15 +101,26 @@ public class OtherCalendarsMenu extends JFrame {
 		}
 		//System.out.println(empList);
 		
-		for (Employee em: empList){
-			if(!em.getEmail().equals(client.getUser().getEmail())){
-				model.addElement(em);
+		Vector<Employee> all_users=client.getCalendarUsers();
+		
+		
+		for(int i=0;i<empList.size();++i)
+		{
+			boolean found=false;
+			for(int j=0;j<all_users.size();++j)
+			{
+				if(empList.get(i).getEmail().equals(all_users.get(j).getEmail()))
+					found=true;
 			}
-			else{
-				model1.addElement(em);
-				System.out.println("added user");
-			}
+			if(found)
+				model1.addElement(empList.get(i));
+			else
+				model.addElement(empList.get(i));
 		}
+		
+		
+		
+	
 		System.out.println(model.contains(client.getUser()));
 
 		
@@ -149,9 +166,24 @@ public class OtherCalendarsMenu extends JFrame {
 		btnDone.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnDone.setBounds(44, 316, 117, 32);
 		contentPane.add(btnDone);
-		btnDone.addActionListener(new ActionListener() {
+		btnDone.addActionListener(new ActionListener() 
+		{
 			/*ENDRES TIL FUNKSJON SOM LEGGER TIL ANDRE KALENDRE I LISTA*/
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				for(int i=0;i<model1.size();++i)
+					client.addCalendarUser((Employee) model1.get(i));
+				
+				
+				calendar=new CalendarPanel();
+				
+				
+				//calendar.updateUI();
+				add_done=true;
+				//calendar.
+				//calendar=new CalendarPanel();
+				
+					//System.out.println(model1.get(i));
 				setVisible(false);
 				dispose();
 			}
@@ -186,6 +218,8 @@ public class OtherCalendarsMenu extends JFrame {
 		
 		
 	}
+	
+	public boolean isDone(){return add_done;}
 	
 	class NewWorker extends SwingWorker{
 

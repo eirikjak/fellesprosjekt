@@ -3,10 +3,15 @@ package xcal.server.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 
 import xcal.model.Appointment;
 import xcal.model.Employee;
+import xcal.model.Invite;
 import xcal.model.Meeting;
+import xcal.model.Room;
 
 public class InviteQ 
 {
@@ -174,13 +179,14 @@ public class InviteQ
 	{
 		synchronized (connection) 
 		{
-			String query = "update Invites set ans='"+answer+"' where app_id='"+app_id+"' and person='"+emp_email+"'";
 			
+			String query = "update Invites set ans='"+answer+"' where app_id='"+app_id+"' and person='"+emp_email+"'";
+			System.out.println(query);
 			
 			try 
 			{
 				Statement stat = connection.getConnection().createStatement();
-				stat.executeQuery(query);
+				stat.executeUpdate(query);
 				
 			} 
 			catch (SQLException e) 
@@ -226,6 +232,54 @@ public class InviteQ
 		}
 	}
 	
+	
+	public static ArrayList<Invite> getInvitesForPerson(Employee emp){
+		
+		synchronized (connection) 
+		{
+			String query =    
+					   "select  A.title, A.start_date as start, A.end_date as end,  A.description  , P.name, P.email, R.name as loc, R.id as r_id, R.capacity as r_capacity, A.id " + 
+					  " from  Appointment A, Room R, Person P " +        
+					    "where P.email = A.leader AND  R.id = A.room AND A.id in( " +
+					   "select I.app_id as id from Invites I, Person P where   "+      
+					   "	I.person = '" + emp.getEmail() + "' AND I.ans = -1      "+
+					    ")";
+			
+			try 
+			{
+				Statement stat = connection.getConnection().createStatement();
+				ResultSet result = stat.executeQuery(query);
+				ArrayList<Invite> invites = new ArrayList<Invite>();
+				while(result.next()){
+					String title = result.getString("title");
+					DateTime start = new DateTime(result.getTimestamp("start"));
+					DateTime end = new DateTime(result.getTimestamp("end"));
+					String description = result.getString("description");
+					String leader = result.getString("email");
+					String leaderName = result.getString("name");
+					String roomName = result.getString("loc");
+					int id = result.getInt("id");
+					int r_id = result.getInt("r_id");
+					int cap = result.getInt("r_capacity");
+					Meeting meeting = new Meeting(start, end, title, description, new Employee(leaderName, leader, ""), new Room(r_id, roomName, cap));
+					meeting.setAppId(id);
+					Invite invite = new Invite(meeting, meeting.getLeader());
+					invites.add(invite);
+					System.out.println(invite);
+				}
+				return invites;
+				
+				
+			}catch(SQLException e){
+				e.printStackTrace();
+				return null;
+			}
+			
+		}
+	
+
+
+	}
 	
 	
 }
