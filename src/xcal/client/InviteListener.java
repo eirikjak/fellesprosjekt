@@ -16,9 +16,8 @@ public class InviteListener {
 		
 		Timer timer = new Timer();
 		//check once a a minute
-		timer.schedule(new InviteTask(), 60*1000);
-		
-		new Timer().schedule(new InviteTask(), 100);
+		timer.scheduleAtFixedRate(new InviteTask(), 100, 60*1000);
+	
 	}
 	
 	private class InviteTask extends TimerTask{
