@@ -83,12 +83,12 @@ public class MeetingQ {
 
 	public static void updateStatus(Meeting meeting, int ans, Employee emp){
 		synchronized (connection) {
-			String query = "UPDATE Invites SET ans ="+ ans +" Where person = '"+ emp.getEmail()+"'";
+			String query = "UPDATE Invites SET ans ="+ ans +"  WHERE (person = '"+ emp.getEmail()+"')  AND (app_id = "+meeting.getAppId()+")";
 			Statement stat;
 			try {
 				stat = connection.getConnection().createStatement();
-				System.out.println(stat.executeUpdate(query));
-				System.out.println("Q executed");
+				
+				System.out.println("Q executed" + stat.executeUpdate(query));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

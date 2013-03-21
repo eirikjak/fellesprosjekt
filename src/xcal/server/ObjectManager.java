@@ -73,10 +73,10 @@ public class ObjectManager {
 			if(flag == Status.INVITE_ACCEPTED){
 				i = 1;
 			}
-			else if(flag == Status.INVITE_DECLINED){
+			if(flag == Status.INVITE_DECLINED){
 				i = 0;
 			}
-			else if(flag == Status.INVITE_NOANS){
+			if(flag == Status.INVITE_NOANS){
 				i = -1;
 			}
 			MeetingQ.updateStatus(meet, i, emp);
