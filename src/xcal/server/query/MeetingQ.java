@@ -76,7 +76,7 @@ public class MeetingQ {
 		}
 	}
 	
-	public static ArrayList[] getParticipants(Meeting meeting){
+	public static ArrayList getParticipants(Meeting meeting){
 		ArrayList<Employee> empList = new ArrayList();
 		ArrayList<Integer> answerList = new ArrayList();
 		//connection.connection = Connection;
@@ -96,9 +96,8 @@ public class MeetingQ {
 					empList.add(EmployeeQ.selectPersonWithEmail(result.getString(8)));
 					answerList.add(1);
 				}
-				
 				ArrayList[]resList = {empList, answerList};
-				return resList;
+				return empList;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

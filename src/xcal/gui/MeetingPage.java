@@ -63,14 +63,15 @@ public class MeetingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MeetingPage(Appointment a) {
+		SwingWorker w = new getParticipantWorker();
+		w.execute();
 		JList listAccepted = new JList(listAcceptedModel);
 		JList listDeclined = new JList(listDeclinedModel);
 		JList listNoAnswer = new JList(listNoAnswerModel);
 		if(a instanceof Meeting){
 			System.out.println("before worker");
 			m = (Meeting) a;
-			SwingWorker w = new getParticipantWorker();
-			w.execute();
+			System.out.println(m);
 			System.out.println("after worker");
 			
 		}
@@ -281,14 +282,19 @@ public class MeetingPage extends JFrame {
 		@Override
 		protected Object doInBackground() throws Exception {
 			Employee emp = client.getUser();
+			//System.out.println(emp + "HEHY");
 			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS).getContent();
 			ArrayList[] list = (ArrayList[]) obj; 
+			
 			empList = list[0];
+			
 			answList = list[1];
+			System.out.println(answList);
 			return list;
 		}
 		
 		protected void done(){
+			System.out.println(empList + "klklksds");
 			for (int i=0; i<empList.size(); i++){
 				
 				if(answList.get(i) == 0){
