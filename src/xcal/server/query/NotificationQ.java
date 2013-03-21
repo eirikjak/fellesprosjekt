@@ -125,7 +125,7 @@ public class NotificationQ
 		{
 			try 
 			{
-				String query = "DELETE FROM Notification WHERE person ='" + employee.getEmail() +"' + AND app_id = '" +appointment.getAppId() + "'";
+				String query = "DELETE FROM Notification WHERE person ='" + employee.getEmail() +"' AND app_id = '" +appointment.getAppId() + "'";
 				Statement stat = connection.getConnection().createStatement();
 				stat.execute(query);
 			} 
@@ -276,7 +276,9 @@ public class NotificationQ
 				while(result.next())
 				{
 					notification[size]=new Notification(AppointmentsQ.selectAppointment(result.getInt("app_id")),emp);
+					System.out.println("Title:" + notification[size].getAppointment().getTitle());
 					++size;
+					
 				}
 				
 				return notification;

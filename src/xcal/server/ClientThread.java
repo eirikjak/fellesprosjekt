@@ -15,21 +15,25 @@ import java.net.SocketException;
 
 import xcal.client.Status;
 import xcal.client.Wrapper;
-import xcal.core.ObjectCheck;
 import xcal.model.Employee;
+import xcal.server.query.DbConnection;
 
-public class ClientThread extends Thread
+public class ClientThread extends Thread implements Runnable
 {
+
 	private Socket client;
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private int id;
 	private xcal.model.Employee person;	
+	private boolean running;
+	
 	public ClientThread(Socket client,int i)
 	{
 		this.client=client;
 		person=new Employee(); 
 		id=i;
+		running=false;
 	}
 	
 	public Employee getUser(){return person;}//use for notifications, get which user is running thread to check if sendmsg is nec.
@@ -61,6 +65,26 @@ public class ClientThread extends Thread
 		return false;
 	}
 	
+	/**
+	 * wrapper to send to client
+	 * 
+	 * @param send - wrapper to send
+	 * @return - true if send was successful
+	 */
+	public boolean sendObject(Wrapper send)
+	{
+		//Wrapper send=new Wrapper(status,object);
+		try
+		{
+			output=new ObjectOutputStream(client.getOutputStream());
+			output.writeObject(send);
+			output.flush();
+			return true;
+		}
+		catch(IOException e){e.printStackTrace();}
+		
+		return false;
+	}
 	
 	/**
 	 * Object to recieve from client
@@ -73,27 +97,54 @@ public class ClientThread extends Thread
 		try
 		{
 			input=new ObjectInputStream(client.getInputStream());
-			Wrapper recieve=(Wrapper) input.readObject();
-			
+	
+	
+			Wrapper recieve = (Wrapper) input.readObject();
 			return recieve;
 		}
-		catch(ClassNotFoundException | IOException e){e.printStackTrace();}
+		catch( IOException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			this.
+
+			running=false;
+		}
 		
 		return null;
 	}
+	
+	public boolean isRunning(){return running;}
+	
+	
 	
 
 	public void run()
 	{
 		
-		
+			running=true;
 			System.out.println("Client nr "+id+" running");
-			while(!client.isClosed())
+			while(!client.isClosed() && running)
 			{
-				Object object= ObjectManager.manage(recieveObject());
-				System.out.println("recieved object");
-				//System.out.println(sendObject(object));
-				System.out.println("object sent");
+				
+	
+				Wrapper object= ObjectManager.manage(recieveObject());
+				
+				if(object.getFlag()==Status.LOGOUT)
+				{
+					running=false;
+					break;
+				}
+				
+				sendObject(object);
+				
+
+				
+				
+				//System.out.println("FLAG"+object.getFlag());
+				
+
+				//System.out.println("recieved object");
+				//System.out.println("object sent");
 			}
 		
 		

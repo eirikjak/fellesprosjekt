@@ -49,6 +49,8 @@ public class NotificationPage extends JFrame {
 	 * Create the frame.
 	 */
 	public NotificationPage(Notification noti) {
+		
+		this.setVisible(true);
 		notification=noti;
 		//if this is string type...
 		int appointment_hour=notification.getAppointment().getFromTime().getHourOfDay();
@@ -58,6 +60,8 @@ public class NotificationPage extends JFrame {
 		int appointment_day=notification.getAppointment().getFromTime().getDayOfMonth();
 		int appointment_year=notification.getAppointment().getFromTime().getYear();
 		//end string types
+		
+		
 		
 		
 		
@@ -79,7 +83,7 @@ public class NotificationPage extends JFrame {
 		lblNotification.setBounds(62, 57, 140, 27);
 		contentPane.add(lblNotification);
 		
-		JLabel lblNewLabel_1 = new JLabel("M\u00F8te tittel");
+		JLabel lblNewLabel_1 = new JLabel(noti.getAppointment().getTitle());
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(72, 110, 227, 30);
 		contentPane.add(lblNewLabel_1);

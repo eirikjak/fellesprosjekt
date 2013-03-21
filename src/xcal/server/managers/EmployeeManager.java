@@ -26,6 +26,10 @@ public class EmployeeManager {
 			
 		case CHECK_NOTIFICATION:
 			return checkedNotifications(employee);
+			
+		case LOGOUT:
+			System.out.println("LOGOUT");
+			return new Wrapper(Status.LOGOUT,null);
 		}
 		return null;	
 	}

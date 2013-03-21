@@ -128,9 +128,13 @@ public class Login extends JPanel {
 				if(!textField.getText().isEmpty() && !passwordField.getText().isEmpty())
 				{
 					
-					
+					System.out.println("check");
 					Authentication auth=new Authentication(textField.getText(),passwordField.getText());
 					response = client.sendObject(auth, Status.LOGIN);
+					
+					
+					
+					System.out.println("OBJECT RECIEVED"+response.getFlag());
 					if(response.getFlag() != Status.SUCCESS){
 						System.out.println("Wrong username/password");
 						errorLabel.setVisible(true);		
@@ -138,6 +142,7 @@ public class Login extends JPanel {
 					}
 					else
 					{
+						System.out.println("SUCCESS");
 						success = true;
 						
 					}
@@ -163,6 +168,7 @@ public class Login extends JPanel {
 					System.out.println("Welcome" + ((Employee)response.getContent()).getName());
 					
 					NotificationThread notifyThread=new NotificationThread();
+					notifyThread.start();
 					
 				}
 				

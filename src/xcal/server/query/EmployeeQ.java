@@ -7,12 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import xcal.model.*;
+import xcal.server.Server;
 
 
 public class EmployeeQ
 {
-	private static  DbConnection connection;
-	private static Statement statement = null;
+	
+
+	private static DbConnection connection;
+	
 	/*
 	 * EMPLOYEE CREATION / UPDATE  / DELETE / SELECT / CHECK PASSWORD
 	 */
@@ -33,7 +36,8 @@ public class EmployeeQ
 		
 		String sql = "INSERT INTO Person(email, password, name) VALUES("+mail+","+password+","+name+");";
 		try {
-			statement.executeUpdate(sql);
+			Statement stat = connection.getConnection().createStatement();
+			stat.executeUpdate(sql);
 			return new Employee(name, mail, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,7 +55,8 @@ public class EmployeeQ
 		synchronized (connection) {
 			String sql ="UPDATE `Person` SET `password`=["+password+"],`name`=["+name+"] WHERE email='"+mail+"';";
 			try {
-				statement.executeUpdate(sql);
+				Statement stat = connection.getConnection().createStatement();
+				stat.executeUpdate(sql);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -90,8 +95,9 @@ public class EmployeeQ
 	
 	public static Employee selectPersonWithEmail(String mail)
 	{
-		
+
 		System.out.println(connection);
+		
 		synchronized (connection) {
 		String query="select * from Person where email='"+mail+"'";
  	   
@@ -147,7 +153,8 @@ public class EmployeeQ
     		try {
 		
     	String sql = "SELECT * FROM Person WHERE email = '" + email + "'";
-    	ResultSet resultset = statement.executeQuery(sql);
+    	Statement stat = connection.getConnection().createStatement();
+    	ResultSet resultset = stat.executeQuery(sql);
 		
 		if(resultset.next())
 		return resultset.getString("password");

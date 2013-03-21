@@ -126,6 +126,16 @@ public class Client
 		new Client();
 	}
 	
+	public void close()
+	{
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static Client getClient(){
 		return client;
 	}

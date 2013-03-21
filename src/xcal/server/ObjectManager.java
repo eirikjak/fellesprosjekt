@@ -24,7 +24,7 @@ import xcal.model.*;
 public class ObjectManager {
 	
 	
-	public static Object manage(Object o){
+	public static Wrapper manage(Object o){
 		
 		if(o == null)
 			return new Wrapper(Status.ERROR, null);
@@ -58,7 +58,7 @@ public class ObjectManager {
 		}
 		else if(content instanceof Invite){
 			Invite invite =(Invite)content;
-			return InviteManager.handle(invite, flag);
+			//return InviteManager.handle(invite, flag);
 		}
 		
 		else if(content instanceof Notification)

@@ -73,6 +73,7 @@ public class DbConnection {
 	 */
 	public boolean connect() {
 		try {
+			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connection = DriverManager.getConnection(url, user, password);
 			statement = connection.createStatement();
@@ -84,7 +85,6 @@ public class DbConnection {
 				new RoomQ(this);
 				new MeetingQ(this);
 				new GroupQ(this);
-				
 				return true;
 			}
 		} catch (Exception e) {
