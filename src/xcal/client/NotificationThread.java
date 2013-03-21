@@ -27,7 +27,6 @@ public class NotificationThread extends Thread
 
 					for(int i=0;i<notifications.length;++i)//loop thru every notification
 					{
-						System.out.println("title"+notifications[i].getAppointment().getTitle());
 						new NotificationPage(notifications[i]);//to popup notification
 					}
 						

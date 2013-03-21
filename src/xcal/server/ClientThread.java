@@ -103,7 +103,7 @@ public class ClientThread extends Thread implements Runnable
 	 * 
 	 * @return Wrapper - the wrapper object recieved
 	 */
-	public Wrapper recieveObject() throws SocketTimeoutException
+	public Wrapper recieveObject()
 	{
 		try
 		{
@@ -151,22 +151,7 @@ public class ClientThread extends Thread implements Runnable
 			{
 				
 	
-				Wrapper object;
-				try {
-					object = ObjectManager.manage(recieveObject());
-				} catch (SocketTimeoutException e) {
-					System.out.println("close connection");
-					e.printStackTrace();
-					running=false;
-					break;
-				}
-				
-				if(object.getFlag()==Status.LOGOUT)
-				{
-					running=false;
-					break;
-				}
-				
+				Wrapper object= ObjectManager.manage(recieveObject());
 				sendObject(object);
 				
 

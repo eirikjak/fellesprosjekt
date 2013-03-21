@@ -201,16 +201,38 @@ public class AppointmentsQ
  		   result.next();
 
  		   
- 		   //if(result.getString("room").isEmpty())//appointment doesn't contain room
- 		  // {
+ 		   if(result.getString("room").equals(""))//appointment doesn't contain room
+ 		   {
+ 			   System.out.println("APPOINTMENT");
  			   Appointment app=new Appointment();
  			  //app.setLocation(result.getString("Location"));
  			   //app.setDescription(result.getString("description"));
+ 			   app.setAppId(result.getInt("id"));
  			   app.setTitle(result.getString("title"));
+ 			   app.setDescription(result.getString("description"));
+ 			   
+ 			   app.setFromTime(result.getTimestamp("start_date"));
+ 			   app.setToTime(result.getTimestamp("end_date"));
+ 			   app.setLocation(new Location(LocationQ.getPlaceName(result.getInt("place")),
+ 					   						result.getInt(("place"))));
+ 			   app.setLeader(EmployeeQ.selectPersonWithEmail(result.getString("leader")));
  			   //app.setFromTime(result.getTimestamp("start_date"));
  			  // app.setToTime(result.getTimestamp("end_date"));
  			   return app;
- 		  // }
+ 		   }
+ 		   
+ 		   Meeting meeting=new Meeting();
+ 		   meeting.setAppId(result.getInt("id"));
+ 		   meeting.setTitle(result.getString("title"));
+ 		   meeting.setDescription(result.getString("description"));
+ 		   
+ 		   meeting.setFromTime(result.getTimestamp("start_date"));
+ 		   meeting.setToTime(result.getTimestamp("end_date"));
+ 			   
+ 		   meeting.setLeader(EmployeeQ.selectPersonWithEmail(result.getString("leader")));
+ 		   meeting.setRoom(RoomQ.selectRoom(result.getInt("room")));
+ 		   
+ 		   return meeting;
  		   
  		  /* Appointment meeting=new Meeting();
  		   meeting.setDescription(result.getString("description"));
