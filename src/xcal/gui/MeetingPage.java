@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 
 import xcal.client.Client;
 import xcal.client.Status;
+import xcal.client.Wrapper;
 import xcal.model.Appointment;
 import xcal.model.Employee;
 import xcal.model.Meeting;
@@ -34,7 +35,7 @@ public class MeetingPage extends JFrame {
 
 	private JPanel contentPane;
 	private Client client = Client.getClient();
-	private Meeting m;
+	private Meeting m ;
 	private final DefaultListModel listAcceptedModel = new DefaultListModel();
 	private final DefaultListModel listDeclinedModel = new DefaultListModel();
 	private final DefaultListModel listNoAnswerModel = new DefaultListModel();
@@ -63,8 +64,7 @@ public class MeetingPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MeetingPage(Appointment a) {
-		SwingWorker w = new getParticipantWorker();
-		w.execute();
+		
 		JList listAccepted = new JList(listAcceptedModel);
 		JList listDeclined = new JList(listDeclinedModel);
 		JList listNoAnswer = new JList(listNoAnswerModel);
@@ -72,6 +72,9 @@ public class MeetingPage extends JFrame {
 			System.out.println("before worker");
 			m = (Meeting) a;
 			System.out.println(m);
+			
+			SwingWorker w = new getParticipantWorker();
+			w.execute();
 			System.out.println("after worker");
 			
 		}
@@ -281,21 +284,24 @@ public class MeetingPage extends JFrame {
 		
 		@Override
 		protected Object doInBackground() throws Exception {
-			Employee emp = client.getUser();
-			//System.out.println(emp + "HEHY");
-			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS).getContent();
-			ArrayList[] list = (ArrayList[]) obj; 
 			
-			empList = list[0];
-			
-			answList = list[1];
-			System.out.println(answList);
-			return list;
+			return empList;
 		}
 		
+		@SuppressWarnings("unchecked")
 		protected void done(){
+			Employee emp = client.getUser();
+			//System.out.println(emp + "HEHY");
+			System.out.println(m + "INSIDE WOREKR");
+			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
+			//ArrayList[] list = (ArrayList[]) obj; 
+			System.out.println(((Wrapper) obj).getFlag());
+			empList = (ArrayList<Employee>)((Wrapper) obj).getContent();
+			
+//			answList = list[1];
+			//System.out.println(answList);
 			System.out.println(empList + "klklksds");
-			for (int i=0; i<empList.size(); i++){
+			/*for (int i=0; i<empList.size(); i++){
 				
 				if(answList.get(i) == 0){
 					listDeclinedModel.addElement(empList.get(i));
@@ -306,7 +312,7 @@ public class MeetingPage extends JFrame {
 				else if(answList.get(i) == null){
 					listNoAnswerModel.addElement(empList.get(i));
 				}
-			}
+			}*/
 			super.done();
 			System.out.println(empList);
 		}

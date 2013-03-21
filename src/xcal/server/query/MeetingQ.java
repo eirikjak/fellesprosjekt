@@ -76,25 +76,25 @@ public class MeetingQ {
 		}
 	}
 	
-	public static ArrayList getParticipants(Meeting meeting){
-		ArrayList<Employee> empList = new ArrayList();
-		ArrayList<Integer> answerList = new ArrayList();
-		//connection.connection = Connection;
+	public static ArrayList<Employee> getParticipants(Meeting meeting){
 		synchronized (connection) {
+			
+			ArrayList<Integer> answerList = new ArrayList();
 			String query = "SELECT * FROM Invites, Appointment Where (app_id =" + meeting.getAppId()+") AND app_id = id";
 			Statement stat;
 			try {
+				ArrayList<Employee> empList = new ArrayList();
 				stat = connection.getConnection().createStatement();
-				stat.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-				ResultSet result = stat.getGeneratedKeys();
+				ResultSet result=stat.executeQuery(query);
+				empList.add(EmployeeQ.selectPersonWithEmail(result.getString("leader")));
+				answerList.add(1);
 				while(result.next()){
-					Employee e = EmployeeQ.selectPersonWithEmail(result.getString(2));
+					Employee e = EmployeeQ.selectPersonWithEmail(result.getString("person"));
 					if(!empList.contains(e)){
 						empList.add(e);
 						answerList.add(result.getInt(3));
 					}
-					empList.add(EmployeeQ.selectPersonWithEmail(result.getString(8)));
-					answerList.add(1);
+					
 				}
 				ArrayList[]resList = {empList, answerList};
 				return empList;
