@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 
+import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.core.ObjectCheck;
 import xcal.model.Employee;
@@ -35,44 +36,19 @@ public class ClientThread extends Thread
 	public int getID(){return id;}
 	
 	
-	/**
-	 * Object to recieve from client
-	 * 
-	 * 
-	 * @return Object - the object recieved
-	 */
-	public Object recieveObject() 
-	{
-		try
-		{
-			input=new ObjectInputStream(client.getInputStream());
-			Object o = input.readObject();
-			return o;
-		}
-		catch(ClassNotFoundException e){} 
-		catch (IOException e) {
-			
-			try {
-				client.close();
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-		
-		
-		return null;
-	}
+
+
 	
 	/**Object to send to client
 	 * 
 	 * 
-	 * @param send - object to send
+	 * @param object - object to send
+	 * @param status - status object has
 	 * @return boolean - if send was successful or not
 	 */	
-	public boolean sendObject(Object send)
+	public boolean sendObject(Object object, Status status)
 	{
-		//System.out.println(((Wrapper)send).getContent().toString());
+		Wrapper send=new Wrapper(status,object);
 		try
 		{
 			output=new ObjectOutputStream(client.getOutputStream());
@@ -80,14 +56,30 @@ public class ClientThread extends Thread
 			output.flush();
 			return true;
 		}
-		catch(IOException e){
-			try {
-				client.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
+		catch(IOException e){e.printStackTrace();}
+		
 		return false;
+	}
+	
+	
+	/**
+	 * Object to recieve from client
+	 * 
+	 * 
+	 * @return Wrapper - the wrapper object recieved
+	 */
+	public Wrapper recieveObject()
+	{
+		try
+		{
+			input=new ObjectInputStream(client.getInputStream());
+			Wrapper recieve=(Wrapper) input.readObject();
+			
+			return recieve;
+		}
+		catch(ClassNotFoundException | IOException e){e.printStackTrace();}
+		
+		return null;
 	}
 	
 
@@ -100,7 +92,7 @@ public class ClientThread extends Thread
 			{
 				Object object= ObjectManager.manage(recieveObject());
 				System.out.println("recieved object");
-				System.out.println(sendObject(object));
+				//System.out.println(sendObject(object));
 				System.out.println("object sent");
 			}
 		

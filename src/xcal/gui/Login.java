@@ -31,6 +31,7 @@ import javax.swing.border.TitledBorder;
 import org.jdesktop.swingx.JXBusyLabel;
 
 import xcal.client.Client;
+import xcal.client.NotificationThread;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.model.Authentication;
@@ -160,6 +161,9 @@ public class Login extends JPanel {
 					RootFrame.addPanel(new Mainpage());
 					System.out.println(response.getContent());
 					System.out.println("Welcome" + ((Employee)response.getContent()).getName());
+					
+					NotificationThread notifyThread=new NotificationThread();
+					
 				}
 				
 			}
