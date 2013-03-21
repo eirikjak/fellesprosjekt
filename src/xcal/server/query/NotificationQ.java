@@ -109,7 +109,7 @@ public class NotificationQ
 	public static void deleteNotification(String email, int appId){
 		synchronized (connection) {
 			try {
-				String query = "DELETE FROM Notification WHERE person ='" + email +"' + AND app_id = '" +appId + "'";
+				String query = "DELETE FROM Notification WHERE person ='" + email +"' AND app_id = '" +appId + "'";
 				Statement stat = connection.getConnection().createStatement();
 				stat.execute(query);
 			} catch (SQLException e) {

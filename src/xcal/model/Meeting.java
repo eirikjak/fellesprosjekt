@@ -33,7 +33,7 @@ public class Meeting extends Appointment implements Serializable
 	}
 	
 	public Meeting(DateTime start,DateTime end,String title,String description,Employee leader,Room room){
-		this(new DateTime(),new DateTime(),"", "",new Employee(),new ArrayList<Employee>(),new Room());
+		this(new DateTime(),new DateTime(),title, description ,leader,new ArrayList<Employee>(),room);
 		
 		
 	}
@@ -87,7 +87,6 @@ public class Meeting extends Appointment implements Serializable
 	
 	@Override
 	 public String toString(){
-		System.out.println("tostring");
          return "" + getFromTime() + " " + getToTime() + " " + getTitle() + " " + getDescription()+ " " + getLeader() + " " + room;
  }
 	
