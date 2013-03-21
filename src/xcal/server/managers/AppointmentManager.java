@@ -1,5 +1,8 @@
 package xcal.server.managers;
 
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 import org.joda.time.DateTime;
 
 import xcal.client.Status;
@@ -55,13 +58,20 @@ public class AppointmentManager {
 	private static Wrapper update(Appointment appointment){
 		
 		int app_id = appointment.getAppId();
-		DateTime start = appointment.getFromTime();
-		DateTime end = appointment.getToTime();
+		Timestamp start = new Timestamp(appointment.getFromTime().getMillis());
+		Timestamp end = new Timestamp(appointment.getToTime().getMillis());
 		String descr = appointment.getDescription();
 		String email = appointment.getLeader().getEmail();
 		int place = appointment.getLocationID();
 		
-		return new Wrapper(Status.ERROR, null);
+		
+		
+			System.out.println(appointment + "lKJSFKLSJFLKSJFLKJSFLK");
+			//System.out.println(String.valueOf(app_id) + start + end + descr + email + place);
+			AppointmentsQ.updateAppointment(app_id, start, end, descr, email,place);
+		
+		
+		return new Wrapper(Status.SUCCESS, null);
 		
 	}
 	

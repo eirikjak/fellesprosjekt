@@ -209,12 +209,9 @@ public class AppointmentsQ
  		   {
  			   System.out.println("APPOINTMENT");
  			   Appointment app=new Appointment();
- 			  //app.setLocation(result.getString("Location"));
- 			   //app.setDescription(result.getString("description"));
  			   app.setAppId(result.getInt("id"));
  			   app.setTitle(result.getString("title"));
  			   app.setDescription(result.getString("description"));
- 			   
  			   app.setFromTime(result.getTimestamp("start_date"));
  			   app.setToTime(result.getTimestamp("end_date"));
  			   app.setLocation(new Location(LocationQ.getPlaceName(result.getInt("place")),
@@ -258,17 +255,28 @@ public class AppointmentsQ
 	}
 	
 	
-   	public void updateAppointment(int AppointmentId, Timestamp startDate, Timestamp endDate, String description, String email,int place ) throws SQLException{
+   	public static void updateAppointment(int id, Timestamp startDate, Timestamp endDate, String description, String email,int place ) {
    		synchronized (connection) {
-		String sql = "UPDATE Appointment "+
-						"SET start_date='"+startDate+"',"+
-						"end_date='"+endDate+"',"+
+   			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+   			Statement statement;
+   			System.out.println(id + "APPOINTMENT ID");
+   			String query = "UPDATE Appointment SET start_date='"+df.format(startDate)+"', end_date='"+df.format(endDate)+"', description='"+description+"', leader='"+email+"',  place="+place +" WHERE id="+id+"";
+   			try {
+				statement = connection.getConnection().createStatement();
+				statement.executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		/*String sql = "UPDATE Appointment "+
+						"SET start_date='"+df.format(startDate)+"',"+
+						"end_date='"+df.format(endDate)+"',"+
 						"description='"+description+"',"+
 						"leader='"+email+"',"+
-						"place='"+place+"',"+
+						"place="+place+" "+
 						//"room='"+room+
-								"WHERE id= "+ AppointmentId;
-		statement.executeUpdate(sql);
+								"WHERE id= "+ AppointmentId;*/
+   			
    		}
    	}
 	

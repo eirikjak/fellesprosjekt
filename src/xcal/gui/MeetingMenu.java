@@ -81,6 +81,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	private JXBusyLabel roomBussyLabel ;
 	private ParticipantSelector participantSelector;
 	private JXBusyLabel submitBussyLabel;
+	private boolean editMode = false;
 	/**
 	 * Launch the application.
 	 */
@@ -327,7 +328,9 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 		name.setText(model.getTitle());
 		description.setText(model.getDescription());
 	}
-	
+	public void setEditMode(boolean b){
+		this.editMode = b;
+	}
 	private void addListeners(){
 		
 		startHour.addFocusListener(new FocusListener() {
@@ -630,7 +633,14 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 						
 						
 						System.out.println(meeting.getParticipants());
-						Wrapper response = client.sendObject(meeting, Status.CREATE);
+						Wrapper response;
+						if(!editMode){
+							response = client.sendObject(meeting, Status.CREATE);
+						}
+						else{
+							response = client.sendObject(meeting, Status.UPDATE);
+						}
+						
 						
 						
 						if(response.getFlag() != Status.SUCCESS){

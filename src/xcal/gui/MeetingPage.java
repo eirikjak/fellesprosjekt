@@ -129,6 +129,7 @@ public class MeetingPage extends JFrame {
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblDescription = new JLabel("Description:");
+		System.out.println(a.getAppId());
 		lblDescription.setFont(new Font("Helvetica", Font.BOLD, 14));
 		lblDescription.setBounds(41, 274, 158, 16);
 		getContentPane().add(lblDescription);
@@ -192,6 +193,26 @@ public class MeetingPage extends JFrame {
 		btnChangeAppointment.setBounds(65, 10, 171, 35);
 		panel_2.add(btnChangeAppointment);
 		btnChangeAppointment.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnChangeAppointment.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				if(m != null){
+					new MeetingMenu().setModel(m);
+				}
+				else{
+					AppointmentMenu appM = new AppointmentMenu();
+					appM.setEditMode(true);
+					appM.setModel(a);
+					
+					
+					
+				}
+				
+			}
+			
+		});
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));

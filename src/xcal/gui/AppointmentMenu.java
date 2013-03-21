@@ -55,6 +55,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -87,6 +88,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 	private JLabel errorLabel;
 	private JXBusyLabel busyLabel;
 	private Appointment model;
+	private boolean editMode = false;
 
 	
 	/**
@@ -349,6 +351,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			public void actionPerformed(ActionEvent e) {
 				model.setFromMinute(startMinute.getText());
 				
+				
 			}
 		});
 		
@@ -371,6 +374,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				model.setToHour(endHour.getText());
+				
 				
 			}
 		});
@@ -395,6 +399,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				model.setToMinute(endMinute.getText());
+				
 				
 			}
 		});
@@ -441,6 +446,7 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 			@Override
 			public void focusLost(FocusEvent e) {
 				model.setLocation(new Location(location.getText()));
+				
 				
 			}
 			
@@ -505,7 +511,9 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		
 		}
 	}
-	
+	public void setEditMode(boolean b){
+		this.editMode = b;
+	}
 	
 	
 	private void Close(){
@@ -535,40 +543,108 @@ public class AppointmentMenu extends JFrame implements PropertyChangeListener {
 		public void actionPerformed(ActionEvent e) {
 			//send stuff til server
 			//lukk vindu når ferdig
+			System.out.println("btnpressed");
 			busyLabel.setVisible(true);
 			busyLabel.setBusy(true);
 			SwingWorker<Void , Void> worker = new SwingWorker<Void, Void>(){
 				protected Void doInBackground() throws Exception {
-					if(model.validateFields()){
-						int notification = notificationMap.get(notificationBox.getSelectedItem());
-						DateTime startTime = model.getFromTime();
-						DateTime endTime = model.getToTime();
-						String title = model.getTitle();
-						String desc = model.getDescription();
-						String loc = model.getLocationName();
-						Appointment app = new Appointment(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
-						Notification notificationObj = new Notification(app,Client.getClient().getUser());
-						notificationObj.setNotificationTime(startTime.minusMinutes(notification));
-						app.setNotification(notificationObj);
-						Wrapper response = client.sendObject(app, Status.CREATE);
+					if(!editMode){
+						System.out.println("not edit mode");
+						if(model.validateFields()){
+							int notification = notificationMap.get(notificationBox.getSelectedItem());
+							DateTime startTime = model.getFromTime();
+							DateTime endTime = model.getToTime();
+							String title = model.getTitle();
+							String desc = model.getDescription();
+							String loc = model.getLocationName();
+							Appointment app = new Appointment(startTime, endTime ,title, desc, client.getUser(), new Location(loc));
+							Notification notificationObj = new Notification(app,Client.getClient().getUser());
+							notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+							app.setNotification(notificationObj);
+							Wrapper response = client.sendObject(app, Status.CREATE);
+
 						
-						if(response.getFlag() != Status.SUCCESS){
-							errorLabel.setText("Error on appointment creation ");
-							errorLabel.setVisible(true);
-						}else{
-							if(response.getFlag() == Status.SUCCESS){
-								Close();
+							if(response.getFlag() != Status.SUCCESS){
+								errorLabel.setText("Error on appointment creation ");
+								errorLabel.setVisible(true);
+							}else{
+								if(response.getFlag() == Status.SUCCESS){
+									Close();
+								}
 							}
 						}
-						}else{
+						else{
 							errorLabel.setText("One or more invalid fields");
 							errorLabel.setVisible(true);
 							busyLabel.setBusy(false);
 							busyLabel.setVisible(false);
 							
 						}
+					}
+					else{
+						int app_id = model.getAppId();
+						Timestamp start = new Timestamp(model.getFromTime().getMillis());
+						Timestamp end = new Timestamp(model.getToTime().getMillis());
+						String descr = model.getDescription();
+						String email = model.getLeader().getEmail();
+						int place = model.getLocationID();
+						System.out.println("edit mode" + app_id);
+						
+						//datePicker.setDate(model.getFromTime().toDate());
+						/*model.setDate(new DateTime(datePicker.getDate()));
+						int notificationint = notificationMap.get(notificationBox.getSelectedItem());
+						model.setNotification(new Notification(model, client.getUser(),model.getFromTime().minusMinutes(notificationint)));
+						model.setFromHour(startHour.getText());
+						model.setFromMinute(startMinute.getText());
+						model.setToHour(endHour.getText());
+						model.setToMinute(endMinute.getText());
+						model.setTitle(name.getText());
+						model.setLocation(new Location(location.getText()));
+						model.setDescription(description.getText());
+						model.setTitle(name.getText());*/
+						
+						System.out.println("edit mode" + app_id + start + end + descr + email + place);
+						
+						if(model.validateFields()){
+							System.out.println("edit mode" + app_id);
+							int notification = notificationMap.get(notificationBox.getSelectedItem());
+							DateTime startTime = model.getFromTime();
+							DateTime endTime = model.getToTime();
+							String title = model.getTitle();
+							String desc = model.getDescription();
+							String loc = model.getLocationName();
+							Location location = new Location(loc);
+							location.setID(model.getLocationID());
+							Appointment app = new Appointment(startTime, endTime ,title, desc, client.getUser(), location);
+							app.setAppId(model.getAppId());
+							
+							Notification notificationObj = new Notification(app,client.getUser());
+							notificationObj.setNotificationTime(startTime.minusMinutes(notification));
+							app.setNotification(notificationObj);
+							Wrapper response = client.sendObject(app, Status.UPDATE);
+
+						
+							if(response.getFlag() != Status.SUCCESS){
+								errorLabel.setText("Error on appointment creation ");
+								errorLabel.setVisible(true);
+							}else{
+								if(response.getFlag() == Status.SUCCESS){
+									Close();
+								}
+							}
+						}
+						else{
+							errorLabel.setText("One or more invalid fields");
+							errorLabel.setVisible(true);
+							busyLabel.setBusy(false);
+							busyLabel.setVisible(false);
+							
+						}
+						
+					}
 						return null;
 				}
+				
 
 			};
 			worker.execute();
