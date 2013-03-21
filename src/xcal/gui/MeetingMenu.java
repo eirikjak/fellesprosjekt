@@ -78,7 +78,7 @@ public class MeetingMenu extends JFrame implements PropertyChangeListener {
 	private JLabel errorLabel ;
 	private Client client;
 	private Meeting model;
-	private JXBusyLabel rwoomBussyLabel ;
+	private JXBusyLabel roomBussyLabel ;
 	private ParticipantSelector participantSelector;
 	private JXBusyLabel submitBussyLabel;
 	private boolean editMode = false;
