@@ -35,7 +35,7 @@ public class OtherCalendarsMenu extends JFrame {
 	private final DefaultListModel model = new DefaultListModel();
 	private final DefaultListModel model1 = new DefaultListModel();
 	
-
+	private final CalendarPanel calendar;
 	
 	private boolean add_done;
 	
@@ -47,7 +47,7 @@ public class OtherCalendarsMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OtherCalendarsMenu frame = new OtherCalendarsMenu();
+					OtherCalendarsMenu frame = new OtherCalendarsMenu(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,8 +60,9 @@ public class OtherCalendarsMenu extends JFrame {
 	 * Create the frame.
 	 */
 
-	public OtherCalendarsMenu() {
-
+	public OtherCalendarsMenu(final CalendarPanel calendar) {
+		
+		this.calendar=calendar;
 		add_done=false;
 		setTitle("Add other calendars");
 		this.setVisible(true);
@@ -174,7 +175,7 @@ public class OtherCalendarsMenu extends JFrame {
 				for(int i=0;i<model1.size();++i)
 					client.addCalendarUser((Employee) model1.get(i));
 				
-				
+				calendar.updateCalendar();
 				//calendar=new CalendarPanel();
 				//calendar.updateCalendar();
 				//calendar.
