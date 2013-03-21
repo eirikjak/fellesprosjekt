@@ -1,5 +1,7 @@
 package xcal.client;
 
+import javax.swing.SwingUtilities;
+
 import xcal.core.Settings;
 import xcal.gui.NotificationPage;
 import xcal.gui.RootFrame;
@@ -23,11 +25,21 @@ public class NotificationThread extends Thread
 				response=client.sendObject(person, Status.CHECK_NOTIFICATION);
 				if(response.getFlag()==Status.GET_ALL)
 				{
-					Notification[] notifications=(Notification[])response.getContent();
+					final Notification[] notifications=(Notification[])response.getContent();
 
 					for(int i=0;i<notifications.length;++i)//loop thru every notification
 					{
-						new NotificationPage(notifications[i]);//to popup notification
+						final int index = i;
+						SwingUtilities.invokeLater(new Runnable() {
+							
+							@Override
+							public void run() {
+								
+								new NotificationPage(notifications[index]);
+								
+							}
+						});
+						//to popup notification
 					}
 						
 				}
