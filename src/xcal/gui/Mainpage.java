@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.util.Vector;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JList;
@@ -24,6 +26,8 @@ import xcal.client.Client;
 import xcal.client.Status;
 import xcal.client.Wrapper;
 import xcal.gui.CalendarPanel;
+import xcal.model.Employee;
+
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
 
@@ -31,6 +35,8 @@ public class Mainpage extends JPanel {
 
 	private Client client;
 	private Wrapper response;
+	private CalendarPanel calendarPanel;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -88,7 +94,7 @@ public class Mainpage extends JPanel {
 		btnNewButton_1.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		btnNewButton_1.addActionListener(new OtherCalendarsListener());
 		
-		CalendarPanel calendarPanel = new CalendarPanel();		
+		calendarPanel = new CalendarPanel();		
 				
 		calendarPanel.setBounds(25, 155, 950, 500);
 		add(calendarPanel);
@@ -128,7 +134,24 @@ public class Mainpage extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new OtherCalendarsMenu();
+			OtherCalendarsMenu menu=new OtherCalendarsMenu(calendarPanel);
+			
+			
+			
+			//while(!menu.isDone()){System.out.println("not done");}
+			/*System.out.println("is done");
+			calendarPanel = new CalendarPanel();
+			calendarPanel.setBounds(25, 155, 950, 500);
+			add(calendarPanel);
+			calendarPanel.setLayout(null);
+				
+			calendarPanel.setVisible(true);*/
+			
+			
+			//Vector<Employee> calendar=client.getCalendarUsers();
+			
+			//for(int i=0;i<calendar.size();++i)
+			//	System.out.println(calendar.get(i).getName());
 			
 			
 		}

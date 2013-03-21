@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
@@ -36,6 +37,9 @@ public class Client
 	private static Client client;
 	private static Employee user;
 	
+	private Vector<Employee> showCalendars;
+	
+	
 	public Client()
 	{
 
@@ -43,6 +47,8 @@ public class Client
 		System.out.println(new DateTime(0,1,1,0,0));
 		connect();
 		client = this;
+		
+		showCalendars=new Vector<Employee>();
 		
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -87,7 +93,27 @@ public class Client
 	}
 	public void setUser(Employee user){
 		this.user = user;
+		addCalendarUser(this.user);
 	}
+	
+	
+	public void addCalendarUser(Employee user)
+	{
+		boolean found=false;
+		for(int i=0;i<showCalendars.size();++i)
+		{
+			if(showCalendars.get(i).getEmail()==user.getEmail())
+				found=true;
+		}
+		
+		if(!found)
+			showCalendars.add(user);
+	}
+	
+	public Vector<Employee> getCalendarUsers(){return showCalendars;}
+	
+	
+	
 	public synchronized Wrapper sendObject(Object o, Status s){
 		Wrapper sentObj = new Wrapper(s,o);
 		try {
