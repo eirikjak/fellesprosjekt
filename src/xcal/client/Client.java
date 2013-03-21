@@ -34,7 +34,7 @@ public class Client
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private static Client client;
-	private Employee user;
+	private static Employee user;
 	
 	public Client()
 	{
@@ -82,8 +82,8 @@ public class Client
 	 * @return boolean - if send was successful or not
 	 */
 	
-	public Employee getUser(){
-		return this.user;
+	public static Employee getUser(){
+		return user;
 	}
 	public void setUser(Employee user){
 		this.user = user;
