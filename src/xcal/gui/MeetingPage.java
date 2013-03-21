@@ -71,13 +71,11 @@ public class MeetingPage extends JFrame {
 		JList listDeclined = new JList(listDeclinedModel);
 		JList listNoAnswer = new JList(listNoAnswerModel);
 		if(a instanceof Meeting){
-			System.out.println("before worker");
 			m = (Meeting) a;
 			System.out.println(m);
 			
 			SwingWorker w = new getParticipantWorker();
 			w.execute();
-			System.out.println("after worker");
 			
 		}
 		
@@ -295,11 +293,8 @@ public class MeetingPage extends JFrame {
 		protected void done(){
 			Employee emp = client.getUser();
 			//System.out.println(emp + "HEHY");
-			System.out.println(m + "INSIDE WOREKR");
-			
+
 			Object obj = client.sendObject(m, Status.GET_PARTICIPANTS);
-			//ArrayList[] list = (ArrayList[]) obj; 
-			System.out.println(((Wrapper) obj).getFlag());
 			
 			ArrayList[] list=(ArrayList[]) ((Wrapper)obj).getContent();
 			
@@ -307,13 +302,6 @@ public class MeetingPage extends JFrame {
 				empList=list[0];
 			if(!list[1].isEmpty())
 				answList=list[1];
-			
-			//empList = (ArrayList[])((Wrapper) obj).getContent();
-			
-//			answList = list[1];
-			//System.out.println(answList);
-			System.out.println(empList + "klklksds");
-			
 			
 			
 			for(int i=0;i<empList.size();++i)
@@ -335,18 +323,7 @@ public class MeetingPage extends JFrame {
 				}
 			}
 			
-			/*for (int i=0; i<empList.size(); i++){
-				
-				if(answList.get(i) == 0){
-					listDeclinedModel.addElement(empList.get(i));
-				}
-				else if(answList.get(i) == 1){
-					listAcceptedModel.addElement(empList.get(i));
-				}
-				else if(answList.get(i) == null){
-					listNoAnswerModel.addElement(empList.get(i));
-				}
-			}*/
+		
 			super.done();
 		}
 		
