@@ -368,6 +368,11 @@ public class CalendarPanel extends JPanel {
 	class Worker extends SwingWorker<Void,Void>{
 
 		private ArrayList<ArrayList<Appointment>> result;
+		
+		
+		
+		private int result_size;
+		
 		@Override
 		protected Void doInBackground() throws Exception {
 			/*
@@ -386,14 +391,18 @@ public class CalendarPanel extends JPanel {
 
 			result = new ArrayList<ArrayList<Appointment>>();
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
-			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
+			result.add(4, null);result.add(5, null);result.add(6, null);
+
 			
-			System.out.println("HERE!!!!!!!!\n\n");
+			
+			
+			
 			
 			/**************************************** HERE *****************************************************/
 			Vector<Employee> all_users=client.getCalendarUsers();
+			System.out.println("SIZE"+all_users.size());
+				
 			
-
 				for (int i=0; i < 7; i++)
 				{
 					Date c = cal.toDate();
@@ -403,16 +412,20 @@ public class CalendarPanel extends JPanel {
 					weekAppointments[i].clear();
 					week[i].setText(df.format(c) + month[monthNum-1]);
 					
+					
 					for(int j=0;j<all_users.size();++j)
 					{
-					
+						
 					Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
 					Object obj = client.sendObject(app, Status.TD_APP).getContent();
-	
-					result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
 					
+
+					result.add(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+
 					}
+					
 					cal = cal.plusDays(1);
+
 			}
 			return null;
 			
@@ -420,15 +433,21 @@ public class CalendarPanel extends JPanel {
 		@Override
 		protected void done() {
 			DateTimeFormatter cellDateFormatter = DateTimeFormat.forPattern("Y-M-d H:m");
-			for(int i = 0; i < 7; i++){
-				ArrayList<Appointment> day = result.get(i);
-				if(day != null){
-					for(Appointment app: day){
-						weekAppointments[i].addElement(app);
-					}
-					
+			
+
+			for(int j=0;j<result.size();++j)
+			{
+
+				ArrayList<Appointment> day = result.get(j);
+		
+				if(day != null)
+				{
+					for(Appointment app:day)
+						weekAppointments[app.getFromTime().getDayOfWeek()-1].addElement(app);
+						
 				}
 			}
+			
 			super.done();
 		}
 		
@@ -456,7 +475,7 @@ public class CalendarPanel extends JPanel {
 
 			result = new ArrayList<ArrayList<Appointment>>();
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
-			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
+			result.add(4, null);result.add(5, null);result.add(6, null);
 			
 			
 			Vector<Employee> all_users=client.getCalendarUsers();
@@ -472,10 +491,11 @@ public class CalendarPanel extends JPanel {
 				for(int j=0;j<all_users.size();++j)
 				{
 				
-				Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
-				Object obj = client.sendObject(app, Status.TD_APP).getContent();
+					Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
+					Object obj = client.sendObject(app, Status.TD_APP).getContent();
+					
 
-				result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+					result.add(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
 				
 				}
 				cal = cal.plusDays(1);
@@ -485,14 +505,20 @@ public class CalendarPanel extends JPanel {
 		@Override
 		protected void done() {
 			DateTimeFormatter cellDateFormatter = DateTimeFormat.forPattern("Y-M-d H:m");
-			for(int i = 0; i < 7; i++){
-				ArrayList<Appointment> day = result.get(i);
-				if(day != null){
-					for(Appointment app: day){
-						weekAppointments[i].addElement(app);
-					}
+			
+			for(int j=0;j<result.size();++j)
+			{
+
+				ArrayList<Appointment> day = result.get(j);
+		
+				if(day != null)
+				{
+					for(Appointment app:day)
+						weekAppointments[app.getFromTime().getDayOfWeek()-1].addElement(app);
+						
 				}
 			}
+			
 			super.done();
 		}
 		/*
@@ -536,7 +562,7 @@ public class CalendarPanel extends JPanel {
 
 			result = new ArrayList<ArrayList<Appointment>>();
 			result.add(0, null);result.add(1, null);result.add(2, null);result.add(3, null);
-			result.add(4, null);result.add(5, null);result.add(6, null);result.add(7, null);
+			result.add(4, null);result.add(5, null);result.add(6, null);
 			
 			
 			Vector<Employee> all_users=client.getCalendarUsers();
@@ -556,8 +582,9 @@ public class CalendarPanel extends JPanel {
 					
 					Appointment app = new Appointment(dtFrom, dtTo,"","",all_users.get(j));
 					Object obj = client.sendObject(app, Status.TD_APP).getContent();
-	
-					result.set(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
+					
+
+					result.add(i, (ArrayList<Appointment>) ((ArrayList<Appointment>)obj).clone());
 					
 				}
 				cal = cal.plusDays(1);
@@ -567,12 +594,16 @@ public class CalendarPanel extends JPanel {
 		@Override
 		protected void done() {
 			DateTimeFormatter cellDateFormatter = DateTimeFormat.forPattern("Y-M-d H:m");
-			for(int i = 0; i < 7; i++){
-				ArrayList<Appointment> day = result.get(i);
-				if(day != null){
-					for(Appointment app: day){
-						weekAppointments[i].addElement(app);
-					}
+			
+			for(int j=0;j<result.size();++j)
+			{
+
+				ArrayList<Appointment> day = result.get(j);
+				if(day != null)
+				{
+					for(Appointment app:day)
+						weekAppointments[app.getFromTime().getDayOfWeek()-1].addElement(app);
+						
 				}
 			}
 			super.done();

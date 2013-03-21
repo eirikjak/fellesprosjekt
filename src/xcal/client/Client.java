@@ -110,7 +110,7 @@ public class Client
 	}
 	
 	public Vector<Employee> getCalendarUsers(){return showCalendars;}
-	
+	public void clearCalendarUsers(){showCalendars.clear();}
 	
 	
 	public synchronized Wrapper sendObject(Object o, Status s){

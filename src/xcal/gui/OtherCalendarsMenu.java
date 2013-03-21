@@ -172,6 +172,7 @@ public class OtherCalendarsMenu extends JFrame {
 			/*ENDRES TIL FUNKSJON SOM LEGGER TIL ANDRE KALENDRE I LISTA*/
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				client.clearCalendarUsers();//make sure no one is already added (if removed from list)
 				for(int i=0;i<model1.size();++i)
 					client.addCalendarUser((Employee) model1.get(i));
 				

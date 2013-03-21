@@ -82,7 +82,7 @@ public class AppointmentsQ
 	}
 	
 	public static ArrayList<Appointment> selectAppointmentsForPersonFromDate (DateTime startDate, DateTime endDate, String Email) {
-		ArrayList<Appointment> appList = new ArrayList();
+		ArrayList<Appointment> appList = new ArrayList<Appointment>();
 		Timestamp fromDate = new Timestamp(startDate.getMillis());
 		//System.out.println();
 		Timestamp toDate = new Timestamp(endDate.getMillis());
@@ -138,12 +138,13 @@ public class AppointmentsQ
 						appList.add(meeting);
 					}
 				}
+				return appList;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
-        	return appList;
+        	return null;
         	
   		   
   		     		   
